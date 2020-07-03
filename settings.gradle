@@ -1,0 +1,4 @@
+include ':adapter-anko'
+include ':adapter-core'
+include ':app'
+rootProject.name = "JuliveAdapter"

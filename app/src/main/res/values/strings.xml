@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">JuliveAdapter</string>
+    <string name="anko_list_adapter">Anko List Adapter</string>
+    <string name="array_list_adapter">Array List Adapter</string>
+    <string name="new_add">新增</string>
+    <string name="delete">删除</string>
+    <string name="update">更新</string>
+
+</resources>
