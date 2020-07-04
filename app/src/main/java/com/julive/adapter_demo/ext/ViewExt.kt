@@ -28,7 +28,7 @@ class CardButtonView : FrameLayout {
     }
 
     fun setText(text: String): CardButtonView {
-        cardText.text = text
+        card_text.text = text
         return this
     }
 
