@@ -13,9 +13,11 @@
 - 像堆积木一样，将页面的每个模块都做到了复用，跟Fragment可以说再见
 
 设计图
+
 ![Image](https://upload-images.jianshu.io/upload_images/2413316-122eacfd4d5240f8.png)
 
 复用逻辑图展示
+
 ![Image](https://user-gold-cdn.xitu.io/2020/7/4/173187f1b49efa88?w=960&amp;h=824&amp;f=png&amp;s=337346)
 
 # 规划
