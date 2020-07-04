@@ -11,8 +11,20 @@
 - 科学的分包处理，真正做到框架的各取所需（一般列表只需引用Adapter-core核心库即可）
 - 扩展Anko Layout版本，体验Anko Layout的魅力，并能获取高于XML加载至少3倍以上的效率提升
 - 像堆积木一样，将页面的每个模块都做到了复用，跟Fragment可以说再见
+
 设计图
 ![Image](https://upload-images.jianshu.io/upload_images/2413316-122eacfd4d5240f8.png)
+
+# 规划
+
+- ~~核心库Core的完善~~
+- ~~Anko扩展~~
+- FlexboxLayout 扩展
+- SortedList 扩展
+- paging 3 扩展
+- DiffUtil 扩展
+- DataBinding 扩展
+- 等等.. 未来有好的想法继续扩展
 
 # 环境需要
 
