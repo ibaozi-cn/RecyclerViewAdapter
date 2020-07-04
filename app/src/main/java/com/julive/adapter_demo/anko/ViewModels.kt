@@ -17,7 +17,7 @@ import org.jetbrains.anko.*
 data class ModelTest(var title: String, var subTitle: String)
 
 /**
- * ItemView
+ * AnkoItemView
  */
 class AnkoItemView() : AnkoComponent<ViewGroup> {
 
