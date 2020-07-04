@@ -63,9 +63,14 @@
 
 #### step2
 
-定义ViewModel
+定义ViewModel及Model
 
 ```
+/**
+ * Model
+ */
+data class ModelTest(var title: String, var subTitle: String)
+
 /**
  * ViewModel
  */
