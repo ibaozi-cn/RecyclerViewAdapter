@@ -16,7 +16,7 @@
 ![Image](https://upload-images.jianshu.io/upload_images/2413316-122eacfd4d5240f8.png)
 
 复用逻辑图展示
-![Image](https://upload-images.jianshu.io/upload_images/2413316-a3fcf01012389b38)
+![Image](https://upload-images.jianshu.io/upload_images/2413316-a3fcf01012389b38.png)
 
 # 规划
 
