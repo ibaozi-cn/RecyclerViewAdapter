@@ -47,7 +47,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="5dp"
-    android:id="@+id/cardItem"
     android:layout_margin="5dp">
 
     <LinearLayout
