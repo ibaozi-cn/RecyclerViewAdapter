@@ -20,6 +20,11 @@
 
 ![Image](https://user-gold-cdn.xitu.io/2020/7/4/173187f1b49efa88?w=960&amp;h=824&amp;f=png&amp;s=337346)
 
+- 将整个页面划分成N个ViewModel组成
+- 就像操作ArrayList一样做任意的添加和删除操作
+- 甚至可以动态的变更Layout样式，或者替换其他ViewModel
+- 组件的复用率大大提升
+
 # 规划
 
 - ~~核心库Core的完善~~
