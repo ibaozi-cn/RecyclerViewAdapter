@@ -20,7 +20,7 @@ public abstract class AnkoItemViewModel<M, AnkoView extends AnkoComponent<ViewGr
 
     @Override
     public int getItemViewType() {
-        return 1;
+        return ankoView.hashCode();
     }
 
     public void reBindView() {

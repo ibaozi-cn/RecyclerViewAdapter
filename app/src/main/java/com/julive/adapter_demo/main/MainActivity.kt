@@ -23,6 +23,22 @@ class MainActivity : AppCompatActivity() {
             startActivity<ArrayListActivity>()
         }
 
+        btn_sorted.setText("SortedListAdapter").apply {
+
+            setOnClickListener {
+
+            }
+
+        }
+
+        btn_paging.setText("PagingListAdapter").apply {
+
+            setOnClickListener {
+
+            }
+
+        }
+
     }
 
 }

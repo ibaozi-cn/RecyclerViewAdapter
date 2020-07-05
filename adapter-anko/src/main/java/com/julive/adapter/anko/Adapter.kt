@@ -2,7 +2,6 @@ package com.julive.adapter.anko
 
 import android.util.SparseArray
 import android.view.ViewGroup
-import com.julive.adapter.core.ArrayItemViewModel
 import com.julive.adapter.core.ObservableAdapter
 import org.jetbrains.anko.AnkoComponent
 

@@ -1,7 +1,5 @@
 package com.julive.adapter.observable
 
-
-
 interface ObservableList<T> : List<T> {
 
     fun addOnListChangedCallback(callback: OnListChangedCallback<out ObservableList<T>>)
@@ -21,13 +19,14 @@ interface ObservableList<T> : List<T> {
         abstract fun onItemRangeInserted(sender: T, positionStart: Int, itemCount: Int)
 
 
-        abstract fun onItemRangeMoved(sender: T, fromPosition: Int, toPosition: Int,
-                                      itemCount: Int)
+        abstract fun onItemRangeMoved(
+            sender: T, fromPosition: Int, toPosition: Int,
+            itemCount: Int
+        )
 
         abstract fun onItemRangeRemoved(sender: T, positionStart: Int, itemCount: Int)
     }
 }
-
 
 open class ObservableArrayList<T> : ArrayList<T>(), ObservableList<T> {
 

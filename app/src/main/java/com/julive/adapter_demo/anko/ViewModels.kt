@@ -2,11 +2,13 @@ package com.julive.adapter_demo.anko
 
 import android.annotation.SuppressLint
 import android.util.TypedValue
+import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.TextView
 import com.julive.adapter.anko.AnkoItemViewModel
 import com.julive.adapter.anko.AnkoListAdapter
+import com.julive.adapter.anko.AnkoViewHolder
 import com.julive.adapter_demo.R
 import com.julive.adapter_demo.ext.cardView
 import org.jetbrains.anko.*
@@ -19,10 +21,11 @@ data class ModelTest(var title: String, var subTitle: String)
 /**
  * AnkoItemView
  */
-class AnkoItemView() : AnkoComponent<ViewGroup> {
+class AnkoItemView(val itemClick: () -> Unit) : AnkoComponent<ViewGroup> {
 
     var tvTitle: TextView? = null
     var tvSubTitle: TextView? = null
+    var view: View? = null
 
     @SuppressLint("ResourceType")
     override fun createView(ui: AnkoContext<ViewGroup>) = with(ui) {
@@ -37,6 +40,10 @@ class AnkoItemView() : AnkoComponent<ViewGroup> {
             }
 
             verticalLayout {
+
+                setOnClickListener {
+                    itemClick()
+                }
 
                 val typedValue = TypedValue()
                 context.theme
@@ -65,7 +72,6 @@ class AnkoItemView() : AnkoComponent<ViewGroup> {
                 }.lparams(matchParent, wrapContent)
 
             }
-
         }
 
     }
@@ -79,18 +85,15 @@ class AnkoViewModelTest : AnkoItemViewModel<ModelTest, AnkoItemView>() {
     var index = 0
 
     override fun onBindView(adapter: AnkoListAdapter) {
-
         ankoView.tvTitle?.text = model.title
         ankoView.tvSubTitle?.text = model.subTitle
-
-        viewHolder.itemView.setOnClickListener {
-            model.title = "${index++}"
-            reBindView()
-        }
-
     }
 
     override fun onCreateView(): AnkoItemView {
-        return AnkoItemView()
+        return AnkoItemView{
+            model.title = "${index++}"
+            reBindView()
+        }
     }
+
 }
