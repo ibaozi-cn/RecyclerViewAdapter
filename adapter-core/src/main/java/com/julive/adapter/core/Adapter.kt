@@ -4,14 +4,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.julive.adapter.observable.ObservableArrayList
 import com.julive.adapter.observable.ObservableList.OnListChangedCallback
 
-abstract class ObservableAdapter<VM : ViewModel<*, *, *>, VH : RecyclerView.ViewHolder> : ListAdapter<VM, VH>(), MutableCollection<VM> {
+abstract class ObservableAdapter<VM : ViewModel<*, *, *>, VH : RecyclerView.ViewHolder> :
+    ListAdapter<VM, VH>() {
 
     private val observableDataList by lazy(LazyThreadSafetyMode.NONE) {
         ObservableArrayList<VM>()
     }
 
     init {
-
         observableDataList.addOnListChangedCallback(object :
             OnListChangedCallback<ObservableArrayList<VM>>() {
 
@@ -52,7 +52,6 @@ abstract class ObservableAdapter<VM : ViewModel<*, *, *>, VH : RecyclerView.View
                 notifyItemRangeRemoved(positionStart, itemCount)
             }
         })
-
     }
 
     public override fun getItem(position: Int): VM {
@@ -79,15 +78,15 @@ abstract class ObservableAdapter<VM : ViewModel<*, *, *>, VH : RecyclerView.View
         return observableDataList.iterator()
     }
 
-    fun add(index: Int, element: VM) {
+    override fun add(index: Int, element: VM) {
         observableDataList.add(index, element)
     }
 
-    fun removeAt(index: Int): VM {
+    override fun removeAt(index: Int): VM {
         return observableDataList.removeAt(index)
     }
 
-    open fun set(index: Int, element: VM): VM {
+    override fun set(index: Int, element: VM): VM {
         return observableDataList.set(index, element)
     }
 
@@ -120,6 +119,34 @@ abstract class ObservableAdapter<VM : ViewModel<*, *, *>, VH : RecyclerView.View
 
     fun getAll(): List<VM> {
         return observableDataList
+    }
+
+    override fun get(index: Int): VM {
+        return observableDataList[index]
+    }
+
+    override fun indexOf(element: VM): Int {
+        return observableDataList.indexOf(element)
+    }
+
+    override fun lastIndexOf(element: VM): Int {
+        return observableDataList.lastIndexOf(element)
+    }
+
+    override fun addAll(index: Int, elements: Collection<VM>): Boolean {
+        return observableDataList.addAll(index, elements)
+    }
+
+    override fun listIterator(): MutableListIterator<VM> {
+        return observableDataList.listIterator()
+    }
+
+    override fun subList(fromIndex: Int, toIndex: Int): MutableList<VM> {
+        return observableDataList.subList(fromIndex, toIndex)
+    }
+
+    override fun listIterator(index: Int): MutableListIterator<VM> {
+        return observableDataList.listIterator(index)
     }
 
 }

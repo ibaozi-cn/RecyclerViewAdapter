@@ -11,7 +11,13 @@ class ArrayListAdapter : ObservableAdapter<ArrayItemViewModel<*>, DefaultViewHol
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DefaultViewHolder {
         return DefaultViewHolder(
             LayoutInflater.from(parent.context).inflate(layouts[viewType], parent, false)
-        )
+        ).also { vh ->
+            vh.itemView.setOnClickListener {
+                val position = vh.adapterPosition
+                val item = getItem(position)
+                item.onItemClick?.invoke()
+            }
+        }
     }
 
     override fun getItemViewType(position: Int): Int {
