@@ -15,5 +15,3 @@ abstract class ArrayItemViewModel<M> : ViewModel<M, DefaultViewHolder, ArrayList
     }
 
 }
-//todo 自动排序版本，待实现
-abstract class SortedListViewModel<M : SortedModel>() : ViewModel<M, DefaultViewHolder, ArrayListAdapter>()

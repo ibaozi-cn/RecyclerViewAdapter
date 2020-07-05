@@ -20,13 +20,19 @@ android {
         release {
             minifyEnabled true
             zipAlignEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
+            zipAlignEnabled true
+            shrinkResources false
         }
     }
 }
 
 dependencies {
-    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation fileTree(dir: "libs", include: ["*.jar", '*.aar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.3.0'
     implementation 'androidx.appcompat:appcompat:1.1.0'
@@ -45,7 +51,6 @@ dependencies {
     implementation "org.jetbrains.anko:anko-sdk25-coroutines:$anko_version"
     implementation "org.jetbrains.anko:anko-appcompat-v7-coroutines:$anko_version"
 
-    api 'com.google.android:flexbox:2.0.1'
+    implementation 'com.google.android:flexbox:2.0.1'
     implementation 'androidx.cardview:cardview:1.0.0'
-
 }

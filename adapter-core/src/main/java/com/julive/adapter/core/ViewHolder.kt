@@ -7,7 +7,7 @@ import android.view.View
 import androidx.annotation.IdRes
 import androidx.recyclerview.widget.RecyclerView
 
-class DefaultViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
+open class DefaultViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
     /**
      * views缓存
      */

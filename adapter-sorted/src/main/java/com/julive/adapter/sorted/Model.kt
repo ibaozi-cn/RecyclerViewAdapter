@@ -1,4 +1,4 @@
-package com.julive.adapter.core
+package com.julive.adapter.sorted
 
 
 interface SortedModel {

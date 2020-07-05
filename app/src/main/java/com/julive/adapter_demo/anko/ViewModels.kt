@@ -7,8 +7,8 @@ import android.widget.FrameLayout
 import android.widget.TextView
 import com.julive.adapter.anko.AnkoItemViewModel
 import com.julive.adapter.anko.AnkoListAdapter
-import com.julive.adapter.anko.cardView
 import com.julive.adapter_demo.R
+import com.julive.adapter_demo.ext.cardView
 import org.jetbrains.anko.*
 
 /**
