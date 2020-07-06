@@ -41,6 +41,7 @@ dependencies {
 
     implementation project(path: ':adapter-anko')
     implementation project(path: ':adapter-core')
+    implementation project(path: ':adapter-sorted')
 
     // Anko Commons
     implementation "org.jetbrains.anko:anko-commons:$anko_version"

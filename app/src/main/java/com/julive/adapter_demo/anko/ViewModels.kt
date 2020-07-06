@@ -1,6 +1,7 @@
 package com.julive.adapter_demo.anko
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.util.TypedValue
 import android.view.View
 import android.view.ViewGroup
@@ -8,15 +9,11 @@ import android.widget.FrameLayout
 import android.widget.TextView
 import com.julive.adapter.anko.AnkoItemViewModel
 import com.julive.adapter.anko.AnkoListAdapter
-import com.julive.adapter.anko.AnkoViewHolder
+import com.julive.adapter_demo.ModelTest
 import com.julive.adapter_demo.R
 import com.julive.adapter_demo.ext.cardView
 import org.jetbrains.anko.*
 
-/**
- * Model
- */
-data class ModelTest(var title: String, var subTitle: String)
 
 /**
  * AnkoItemView
@@ -90,6 +87,7 @@ class AnkoViewModelTest : AnkoItemViewModel<ModelTest, AnkoItemView>() {
     }
 
     override fun onCreateView(): AnkoItemView {
+        Log.d("onCreateView","AnkoListAdapter================================================${index++}")
         return AnkoItemView{
             model.title = "${index++}"
             reBindView()

@@ -9,9 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.julive.adapter_demo.anko.AnkoLayoutActivity"/>
-        <activity android:name="com.julive.adapter_demo.core.ArrayListActivity" />
-        <activity android:name="com.julive.adapter_demo.main.MainActivity">
+        <activity android:name=".sorted.SortedActivity"></activity>
+        <activity android:name=".anko.AnkoLayoutActivity" />
+        <activity android:name=".core.ArrayListActivity" />
+        <activity android:name=".main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -6,6 +6,7 @@ import com.julive.adapter_demo.R
 import com.julive.adapter_demo.anko.AnkoLayoutActivity
 import com.julive.adapter_demo.core.ArrayListActivity
 import com.julive.adapter_demo.ext.startActivity
+import com.julive.adapter_demo.sorted.SortedActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -26,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         btn_sorted.setText("SortedListAdapter").apply {
 
             setOnClickListener {
-
+                startActivity<SortedActivity>()
             }
 
         }

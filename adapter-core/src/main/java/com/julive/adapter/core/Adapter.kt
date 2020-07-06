@@ -4,8 +4,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.julive.adapter.observable.ObservableArrayList
 import com.julive.adapter.observable.ObservableList.OnListChangedCallback
 
+/**
+ * ArrayList数据结构，所有特性跟随ArrayList
+ */
 abstract class ObservableAdapter<VM : ViewModel<*, *, *>, VH : RecyclerView.ViewHolder> :
-    ListAdapter<VM, VH>() {
+    ListAdapter<VM, VH>(), MutableCollection<VM> {
 
     private val observableDataList by lazy(LazyThreadSafetyMode.NONE) {
         ObservableArrayList<VM>()
@@ -78,15 +81,15 @@ abstract class ObservableAdapter<VM : ViewModel<*, *, *>, VH : RecyclerView.View
         return observableDataList.iterator()
     }
 
-    override fun add(index: Int, element: VM) {
+    fun add(index: Int, element: VM) {
         observableDataList.add(index, element)
     }
 
-    override fun removeAt(index: Int): VM {
+    fun removeAt(index: Int): VM {
         return observableDataList.removeAt(index)
     }
 
-    override fun set(index: Int, element: VM): VM {
+    open fun set(index: Int, element: VM): VM {
         return observableDataList.set(index, element)
     }
 
@@ -121,32 +124,47 @@ abstract class ObservableAdapter<VM : ViewModel<*, *, *>, VH : RecyclerView.View
         return observableDataList
     }
 
-    override fun get(index: Int): VM {
+    fun get(index: Int): VM {
         return observableDataList[index]
     }
 
-    override fun indexOf(element: VM): Int {
+    fun indexOf(element: VM): Int {
         return observableDataList.indexOf(element)
     }
 
-    override fun lastIndexOf(element: VM): Int {
+    fun lastIndexOf(element: VM): Int {
         return observableDataList.lastIndexOf(element)
     }
 
-    override fun addAll(index: Int, elements: Collection<VM>): Boolean {
+    fun addAll(index: Int, elements: Collection<VM>): Boolean {
         return observableDataList.addAll(index, elements)
     }
 
-    override fun listIterator(): MutableListIterator<VM> {
+    fun listIterator(): MutableListIterator<VM> {
         return observableDataList.listIterator()
     }
 
-    override fun subList(fromIndex: Int, toIndex: Int): MutableList<VM> {
+    fun subList(fromIndex: Int, toIndex: Int): MutableList<VM> {
         return observableDataList.subList(fromIndex, toIndex)
     }
 
-    override fun listIterator(index: Int): MutableListIterator<VM> {
+    fun listIterator(index: Int): MutableListIterator<VM> {
         return observableDataList.listIterator(index)
     }
+
+}
+
+/**
+ * ObservableAdapter扩展实现
+ */
+class ArrayListAdapter : ObservableAdapter<ArrayItemViewModel<*, *>, DefaultViewHolder>() {
+
+//    override fun set(index: Int, element: ArrayItemViewModel<*, *>): ArrayItemViewModel<*, *> {
+//        if (contains(element))
+//            element.onBindView(this)
+//        else
+//            return super.set(index, element)
+//        return element
+//    }
 
 }

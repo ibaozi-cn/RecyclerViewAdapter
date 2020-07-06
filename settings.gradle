@@ -1,5 +1,5 @@
-include ':adapter-binding'
 include ':adapter-sorted'
+include ':adapter-binding'
 include ':adapter-flex'
 include ':adapter-paging'
 include ':adapter-diff'

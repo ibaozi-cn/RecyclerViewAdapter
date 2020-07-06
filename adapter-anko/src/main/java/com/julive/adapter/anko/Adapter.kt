@@ -1,28 +1,9 @@
 package com.julive.adapter.anko
 
-import android.util.SparseArray
-import android.view.ViewGroup
+import com.julive.adapter.core.DefaultViewHolder
 import com.julive.adapter.core.ObservableAdapter
-import org.jetbrains.anko.AnkoComponent
 
-class AnkoListAdapter : ObservableAdapter<AnkoItemViewModel<*, *>, AnkoViewHolder<*>>() {
-
-    private val layoutsAnko: SparseArray<AnkoComponent<ViewGroup>> by lazy(LazyThreadSafetyMode.NONE) { SparseArray<AnkoComponent<ViewGroup>>() }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AnkoViewHolder<*> {
-        return AnkoViewHolder(layoutsAnko[viewType], parent)
-    }
-
-    override fun getItemViewType(position: Int): Int {
-        val item = getItem(position)
-        layoutsAnko.append(item.itemViewType, item.ankoView)
-        return item.itemViewType
-    }
-
-    override fun onBindViewHolder(holder: AnkoViewHolder<*>, position: Int) {
-        getItem(position).ankoView = holder.ankoView
-        super.onBindViewHolder(holder, position)
-    }
+class AnkoListAdapter : ObservableAdapter<AnkoItemViewModel<*, *>, DefaultViewHolder>() {
 
     override fun set(index: Int, element: AnkoItemViewModel<*, *>): AnkoItemViewModel<*, *> {
         if (contains(element))

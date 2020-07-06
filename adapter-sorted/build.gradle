@@ -16,10 +16,9 @@ android {
         consumerProguardFiles "consumer-rules.pro"
 
     }
-
     buildTypes {
         release {
-            zipAlignEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -27,6 +26,6 @@ android {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation project(path: ':adapter-core')
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    implementation project(path: ':adapter-core')
 }

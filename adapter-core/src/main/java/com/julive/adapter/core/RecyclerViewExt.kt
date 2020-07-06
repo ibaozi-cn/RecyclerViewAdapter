@@ -10,8 +10,3 @@ fun RecyclerView.bindListAdapter(
     this.layoutManager = layoutManager ?: LinearLayoutManager(context)
     this.adapter = listAdapter
 }
-
-
-fun RecyclerView.bindMergeAdapter(){
-
-}
