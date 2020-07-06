@@ -2,6 +2,7 @@ package com.julive.adapter_demo.core
 
 import android.util.Log
 import android.view.View
+import android.widget.TextView
 import com.julive.adapter.core.ArrayItemViewModel
 import com.julive.adapter.core.ArrayListAdapter
 import com.julive.adapter.core.DefaultViewHolder
@@ -18,10 +19,8 @@ class ArrayViewModelTest : ArrayItemViewModel<ModelTest, DefaultViewHolder>() {
     var index = 0
 
     override fun onBindView(adapter: ArrayListAdapter?) {
-        viewHolder.itemView.apply {
-            tv_title.text = model.title
-            tv_subTitle.text = model.subTitle
-        }
+        getView<TextView>(R.id.tv_title)?.text = model.title
+        getView<TextView>(R.id.tv_subTitle)?.text = model.subTitle
     }
 
     override fun getLayoutRes() = R.layout.item_test

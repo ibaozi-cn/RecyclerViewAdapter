@@ -1,6 +1,7 @@
 package com.julive.adapter_demo.sorted
 
 import android.view.View
+import android.widget.TextView
 import com.julive.adapter.core.DefaultViewHolder
 import com.julive.adapter.sorted.SortedItemViewModel
 import com.julive.adapter.sorted.SortedListAdapter
@@ -14,10 +15,8 @@ class SortedItemViewModelTest : SortedItemViewModel<SortedModelTest,DefaultViewH
     var index = 0
 
     override fun onBindView(adapter: SortedListAdapter) {
-        viewHolder.itemView.apply {
-            tv_title.text = model.title
-            tv_subTitle.text = model.subTitle
-        }
+        viewHolder.getView<TextView>(R.id.tv_title)?.text = model.title
+        viewHolder.getView<TextView>(R.id.tv_subTitle)?.text = model.subTitle
     }
 
     override fun getLayoutRes() = R.layout.item_test
