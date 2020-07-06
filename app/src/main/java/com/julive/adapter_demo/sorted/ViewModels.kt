@@ -7,8 +7,6 @@ import com.julive.adapter.sorted.SortedItemViewModel
 import com.julive.adapter.sorted.SortedListAdapter
 import com.julive.adapter_demo.R
 import com.julive.adapter_demo.SortedModelTest
-import kotlinx.android.synthetic.main.item_test.view.*
-
 
 class SortedItemViewModelTest : SortedItemViewModel<SortedModelTest,DefaultViewHolder>() {
 
