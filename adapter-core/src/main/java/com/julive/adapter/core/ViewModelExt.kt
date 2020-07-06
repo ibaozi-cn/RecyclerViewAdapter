@@ -10,5 +10,9 @@ abstract class ArrayItemViewModel<M, VH : DefaultViewHolder> :
         return viewHolder.getView<T>(id) as? T
     }
 
+    open fun reBindView() {
+        adapter.set(position, this)
+    }
+
 }
 

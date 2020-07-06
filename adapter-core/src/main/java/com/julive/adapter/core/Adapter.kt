@@ -157,14 +157,4 @@ abstract class ObservableAdapter<VM : ViewModel<*, *, *>, VH : RecyclerView.View
 /**
  * ObservableAdapter扩展实现
  */
-class ArrayListAdapter : ObservableAdapter<ArrayItemViewModel<*, *>, DefaultViewHolder>() {
-
-//    override fun set(index: Int, element: ArrayItemViewModel<*, *>): ArrayItemViewModel<*, *> {
-//        if (contains(element))
-//            element.onBindView(this)
-//        else
-//            return super.set(index, element)
-//        return element
-//    }
-
-}
+class ArrayListAdapter : ObservableAdapter<ArrayItemViewModel<*,*>, DefaultViewHolder>() {}

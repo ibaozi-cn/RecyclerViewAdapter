@@ -37,7 +37,7 @@ public abstract class ViewModel<M, VH extends RecyclerView.ViewHolder, Adapter> 
         return getViewHolder(createView(parent.getContext(), parent));
     }
 
-    private View createView(Context context, ViewGroup viewGroup) {
+    protected View createView(Context context, ViewGroup viewGroup) {
         return LayoutInflater.from(context).inflate(getLayoutRes(), viewGroup, false);
     }
 

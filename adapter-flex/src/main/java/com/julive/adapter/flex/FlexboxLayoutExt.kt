@@ -22,12 +22,11 @@ fun Context.flexboxLayoutManager(block: FlexboxLayoutManager.() -> Unit = {}): F
     return layoutManager
 }
 
-fun Context.flexboxLayoutManager(block: FlexboxLayout.() -> Unit = {}): FlexboxLayout {
+fun Context.flexboxLayout(block: FlexboxLayout.() -> Unit = {}): FlexboxLayout {
     val layoutManager = FlexboxLayout(this)
     layoutManager.block()
     return layoutManager
 }
-
 
 class SafeFlexboxLayoutManager : FlexboxLayoutManager {
 
@@ -35,7 +34,11 @@ class SafeFlexboxLayoutManager : FlexboxLayoutManager {
 
     constructor(context: Context, flexDirection: Int) : super(context, flexDirection)
 
-    constructor(context: Context, flexDirection: Int, flexWrap: Int) : super(context, flexDirection, flexWrap)
+    constructor(context: Context, flexDirection: Int, flexWrap: Int) : super(
+        context,
+        flexDirection,
+        flexWrap
+    )
 
     constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int, defStyleRes: Int) : super(
         context,
@@ -47,4 +50,5 @@ class SafeFlexboxLayoutManager : FlexboxLayoutManager {
     override fun generateLayoutParams(lp: ViewGroup.LayoutParams): RecyclerView.LayoutParams {
         return LayoutParams(lp)
     }
+
 }

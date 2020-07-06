@@ -1,5 +1,6 @@
 package com.julive.adapter.core;
 
+import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -8,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 public abstract class ListAdapter<VM extends ViewModel<?, ?, ?>, VH extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<VH> {
 
     public DefaultViewHolderFactoryCache<ViewHolderFactory<VH>> defaultViewHolderFactoryCache = new DefaultViewHolderFactoryCache<>();
+    public RecyclerView recyclerView;
 
     @Override
     public void onBindViewHolder(@NonNull VH holder, int position) {
@@ -62,9 +64,13 @@ public abstract class ListAdapter<VM extends ViewModel<?, ?, ?>, VH extends Recy
     }
 
     @Override
-    public void onDetachedFromRecyclerView(@NonNull RecyclerView recyclerView) {
+    public void onDetachedFromRecyclerView(@NonNull RecyclerView rv) {
         defaultViewHolderFactoryCache.clear();
-        super.onDetachedFromRecyclerView(recyclerView);
+        recyclerView = null;
     }
 
+    @Override
+    public void onAttachedToRecyclerView(@NonNull RecyclerView rv) {
+        recyclerView = rv;
+    }
 }
