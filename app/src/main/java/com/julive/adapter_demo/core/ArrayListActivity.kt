@@ -2,8 +2,14 @@ package com.julive.adapter_demo.core
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.julive.adapter.core.ArrayListAdapter
 import com.julive.adapter.core.bindListAdapter
+import com.julive.adapter.flex.flexboxLayoutMangerDefault
 import com.julive.adapter_demo.ModelTest
 import com.julive.adapter_demo.R
 import kotlinx.android.synthetic.main.activity_array_list.*
@@ -22,9 +28,10 @@ class ArrayListActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_array_list)
-        rv_list.bindListAdapter(mArrayListAdapter)
 
+        setContentView(R.layout.activity_array_list)
+
+        rv_list.bindListAdapter(mArrayListAdapter, flexboxLayoutMangerDefault { })
 
         // 新增一个
         new_add.setText("新增").setOnClickListener {
@@ -58,5 +65,30 @@ class ArrayListActivity : AppCompatActivity() {
 
         }
 
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        val inflater: MenuInflater = menuInflater
+        inflater.inflate(R.menu.main_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // Handle item selection
+        return when (item.itemId) {
+            R.id.action_ll -> {
+                rv_list.layoutManager = LinearLayoutManager(this)
+                true
+            }
+            R.id.action_flex -> {
+                rv_list.layoutManager = flexboxLayoutMangerDefault { }
+                true
+            }
+            R.id.action_grid -> {
+                rv_list.layoutManager = GridLayoutManager(this, 2)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 }

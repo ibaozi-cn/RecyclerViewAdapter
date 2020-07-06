@@ -23,7 +23,7 @@
 
 - ~~核心库Core的完善~~
 - ~~Anko扩展~~
-- FlexboxLayout 扩展
+- ~~FlexboxLayout 扩展~~
 - ~~SortedList 扩展~~
 - paging 3 扩展
 - DiffUtil 扩展

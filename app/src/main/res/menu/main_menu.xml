@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/action_ll"
+        android:title="Linear"
+        android:inputType="textCapWords"
+        android:imeOptions="actionSearch"
+        android:orderInCategory="80"
+        app:showAsAction="ifRoom|collapseActionView"/>
+
+    <item android:id="@+id/action_flex"
+        android:title="Flex"
+        android:orderInCategory="100"
+        app:showAsAction="always"/>
+
+    <item android:id="@+id/action_grid"
+        android:title="Grid"
+        android:orderInCategory="90"
+        app:showAsAction="ifRoom"/>
+
+</menu>

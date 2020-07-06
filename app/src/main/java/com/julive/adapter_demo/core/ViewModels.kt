@@ -9,6 +9,7 @@ import com.julive.adapter.core.DefaultViewHolder
 import com.julive.adapter_demo.ModelTest
 import com.julive.adapter_demo.R
 import kotlinx.android.synthetic.main.item_test.view.*
+import org.jetbrains.anko.dip
 import org.jetbrains.anko.toast
 
 /**
