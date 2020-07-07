@@ -31,7 +31,7 @@
 |  名字   | release aar size  | 其他   |
 |  ----  | ----  | ----  | 
 | Core | 28kb | 核心库目前包含ArrayListAdapter的实现 |
-| Anko | 8kb | anko扩展库包含ArrayListAdapter |
+| Anko | 8kb | 同样是ArrayListAdapter,由于做了高度的抽象，所以目前没有了AnkoListAdapter |
 | Sorted | 10kb | SortedList扩展实现 |
 | .. | .. | 待实现 |
 
