@@ -1,12 +1,16 @@
 package com.julive.adapter.core
 
 import android.util.SparseArray
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.IdRes
 import androidx.recyclerview.widget.RecyclerView
+import com.julive.adapter_core.R
 
-open class DefaultViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
+typealias ViewModelType = ViewModel<out Any, out DefaultViewHolder<*>, out ListAdapter<*, *>>
+
+abstract class DefaultViewHolder<Model>(val view: View) : RecyclerView.ViewHolder(view) {
     /**
      * views缓存
      */
@@ -26,22 +30,34 @@ open class DefaultViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
         return view as T
     }
 
+    abstract fun onBindViewHolder(
+        viewHolder: RecyclerView.ViewHolder,
+        item: Model,
+        payloads: List<Any>
+    )
+
+    abstract fun unBindViewHolder(viewHolder: RecyclerView.ViewHolder)
+
+    fun <Adapter : ListAdapter<*, *>> getAdapter(): Adapter? {
+        return this.itemView.getTag(R.id.list_adapter) as? Adapter
+    }
+
 }
 
 typealias GenericViewHolderFactory = ViewHolderFactory<out RecyclerView.ViewHolder>
 
 interface ViewHolderFactory<VH : RecyclerView.ViewHolder> {
-    fun getViewHolder(parent: ViewGroup): VH
+    fun getViewHolder(parent: ViewGroup, layoutInflater: LayoutInflater): VH
 }
 
 interface ViewHolderFactoryCache<VHF : GenericViewHolderFactory> {
-    fun register(type:Int,item:VHF):Boolean
-    operator fun get(type: Int):VHF
-    fun contains(type: Int):Boolean
+    fun register(type: Int, item: VHF): Boolean
+    operator fun get(type: Int): VHF
+    fun contains(type: Int): Boolean
     fun clear()
 }
 
-class DefaultViewHolderFactoryCache<VHF:GenericViewHolderFactory>:ViewHolderFactoryCache<VHF>{
+class DefaultViewHolderFactoryCache<VHF : GenericViewHolderFactory> : ViewHolderFactoryCache<VHF> {
 
     private val typeInstances = SparseArray<VHF>()
 
@@ -57,7 +73,7 @@ class DefaultViewHolderFactoryCache<VHF:GenericViewHolderFactory>:ViewHolderFact
         return typeInstances.get(type)
     }
 
-    override fun contains(type: Int)= typeInstances.indexOfKey(type) >= 0
+    override fun contains(type: Int) = typeInstances.indexOfKey(type) >= 0
 
     override fun clear() {
         typeInstances.clear()

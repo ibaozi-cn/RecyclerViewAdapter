@@ -3,9 +3,9 @@ package com.julive.adapter_demo.anko
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import com.julive.adapter.anko.AnkoListAdapter
 import com.julive.adapter_demo.R
 import com.julive.adapter.anko.recyclerView
+import com.julive.adapter.core.ArrayListAdapter
 import com.julive.adapter.core.bindListAdapter
 import com.julive.adapter_demo.ModelTest
 import kotlinx.android.synthetic.main.include_button_bottom.view.*
@@ -18,7 +18,7 @@ import kotlin.random.Random
 class AnkoLayoutActivity : AppCompatActivity() {
 
     private val mAnkoListAdapter by lazy {
-        AnkoListAdapter()
+        ArrayListAdapter()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -69,7 +69,7 @@ class AnkoLayoutActivity : AppCompatActivity() {
  * View
  *
  */
-class AnkoLayoutComponent(private val ankoListAdapter: AnkoListAdapter) : AnkoComponent<AnkoLayoutActivity> {
+class AnkoLayoutComponent(private val ankoListAdapter: ArrayListAdapter) : AnkoComponent<AnkoLayoutActivity> {
 
     override fun createView(ui: AnkoContext<AnkoLayoutActivity>) = with(ui) {
 

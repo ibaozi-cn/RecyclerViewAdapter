@@ -1,29 +1,27 @@
 package com.julive.adapter.core
 
-import androidx.recyclerview.widget.RecyclerView
 import com.julive.adapter.observable.ObservableArrayList
 import com.julive.adapter.observable.ObservableList.OnListChangedCallback
 
 /**
  * ArrayList数据结构，所有特性跟随ArrayList
  */
-abstract class ObservableAdapter<VM : ViewModel<*, *, *>, VH : RecyclerView.ViewHolder> :
-    ListAdapter<VM, VH>(), MutableCollection<VM> {
+open class ArrayListAdapter : ListAdapter<ViewModelType, DefaultViewHolder<*>>(), MutableCollection<ViewModelType> {
 
     private val observableDataList by lazy(LazyThreadSafetyMode.NONE) {
-        ObservableArrayList<VM>()
+        ObservableArrayList<ViewModelType>()
     }
 
     init {
         observableDataList.addOnListChangedCallback(object :
-            OnListChangedCallback<ObservableArrayList<VM>>() {
+            OnListChangedCallback<ObservableArrayList<ViewModelType>>() {
 
-            override fun onChanged(sender: ObservableArrayList<VM>) {
+            override fun onChanged(sender: ObservableArrayList<ViewModelType>) {
                 notifyDataSetChanged()
             }
 
             override fun onItemRangeChanged(
-                sender: ObservableArrayList<VM>,
+                sender: ObservableArrayList<ViewModelType>,
                 positionStart: Int,
                 itemCount: Int
             ) {
@@ -31,7 +29,7 @@ abstract class ObservableAdapter<VM : ViewModel<*, *, *>, VH : RecyclerView.View
             }
 
             override fun onItemRangeInserted(
-                sender: ObservableArrayList<VM>,
+                sender: ObservableArrayList<ViewModelType>,
                 positionStart: Int,
                 itemCount: Int
             ) {
@@ -39,7 +37,7 @@ abstract class ObservableAdapter<VM : ViewModel<*, *, *>, VH : RecyclerView.View
             }
 
             override fun onItemRangeMoved(
-                sender: ObservableArrayList<VM>,
+                sender: ObservableArrayList<ViewModelType>,
                 fromPosition: Int,
                 toPosition: Int,
                 itemCount: Int
@@ -48,7 +46,7 @@ abstract class ObservableAdapter<VM : ViewModel<*, *, *>, VH : RecyclerView.View
             }
 
             override fun onItemRangeRemoved(
-                sender: ObservableArrayList<VM>,
+                sender: ObservableArrayList<ViewModelType>,
                 positionStart: Int,
                 itemCount: Int
             ) {
@@ -57,7 +55,7 @@ abstract class ObservableAdapter<VM : ViewModel<*, *, *>, VH : RecyclerView.View
         })
     }
 
-    public override fun getItem(position: Int): VM {
+    public override fun getItem(position: Int): ViewModelType {
         return observableDataList[position]
     }
 
@@ -73,88 +71,60 @@ abstract class ObservableAdapter<VM : ViewModel<*, *, *>, VH : RecyclerView.View
         return observableDataList.isEmpty()
     }
 
-    override fun add(e: VM): Boolean {
+    override fun add(e: ViewModelType): Boolean {
         return observableDataList.add(e)
     }
 
-    override fun iterator(): MutableIterator<VM> {
+    override fun iterator(): MutableIterator<ViewModelType> {
         return observableDataList.iterator()
     }
 
-    fun add(index: Int, element: VM) {
+    fun add(index: Int, element: ViewModelType) {
         observableDataList.add(index, element)
     }
 
-    fun removeAt(index: Int): VM {
+    fun removeAt(index: Int): ViewModelType {
         return observableDataList.removeAt(index)
     }
 
-    open fun set(index: Int, element: VM): VM {
-        return observableDataList.set(index, element)
+    open fun set(index: Int, element: ViewModelType): ViewModelType {
+        observableDataList.set(index, element)
+        return element
     }
 
     override val size: Int
         get() = observableDataList.size
 
-    override fun contains(element: VM): Boolean {
+    override fun contains(element: ViewModelType): Boolean {
         return observableDataList.contains(element)
     }
 
-    override fun containsAll(elements: Collection<VM>): Boolean {
+    override fun containsAll(elements: Collection<ViewModelType>): Boolean {
         return observableDataList.containsAll(elements)
     }
 
-    override fun addAll(elements: Collection<VM>): Boolean {
+    override fun addAll(elements: Collection<ViewModelType>): Boolean {
         return observableDataList.addAll(elements)
     }
 
-    override fun remove(element: VM): Boolean {
+    override fun remove(element: ViewModelType): Boolean {
         return observableDataList.remove(element)
     }
 
-    override fun removeAll(elements: Collection<VM>): Boolean {
+    override fun removeAll(elements: Collection<ViewModelType>): Boolean {
         return observableDataList.removeAll(elements)
     }
 
-    override fun retainAll(elements: Collection<VM>): Boolean {
+    override fun retainAll(elements: Collection<ViewModelType>): Boolean {
         return observableDataList.retainAll(elements)
     }
 
-    fun getAll(): List<VM> {
+    fun getAll(): List<ViewModelType> {
         return observableDataList
     }
 
-    fun get(index: Int): VM {
-        return observableDataList[index]
-    }
-
-    fun indexOf(element: VM): Int {
+    fun indexOf(element: ViewModelType): Int {
         return observableDataList.indexOf(element)
     }
 
-    fun lastIndexOf(element: VM): Int {
-        return observableDataList.lastIndexOf(element)
-    }
-
-    fun addAll(index: Int, elements: Collection<VM>): Boolean {
-        return observableDataList.addAll(index, elements)
-    }
-
-    fun listIterator(): MutableListIterator<VM> {
-        return observableDataList.listIterator()
-    }
-
-    fun subList(fromIndex: Int, toIndex: Int): MutableList<VM> {
-        return observableDataList.subList(fromIndex, toIndex)
-    }
-
-    fun listIterator(index: Int): MutableListIterator<VM> {
-        return observableDataList.listIterator(index)
-    }
-
 }
-
-/**
- * ObservableAdapter扩展实现
- */
-class ArrayListAdapter : ObservableAdapter<ArrayItemViewModel<*,*>, DefaultViewHolder>() {}

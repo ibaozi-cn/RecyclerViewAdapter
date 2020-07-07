@@ -2,17 +2,24 @@ package com.julive.adapter.core
 
 import android.view.View
 import androidx.annotation.IdRes
+import androidx.recyclerview.widget.RecyclerView
 
-abstract class ArrayItemViewModel<M, VH : DefaultViewHolder> :
-    ViewModel<M, VH, ArrayListAdapter>() {
+abstract class ArrayItemViewModel<M> : ViewModel<M, DefaultViewHolder<M>, ArrayListAdapter>() {
 
     fun <T : View> getView(@IdRes id: Int): T? {
         return viewHolder.getView<T>(id) as? T
     }
 
-    open fun reBindView() {
-        adapter.set(position, this)
+    override fun unBindViewHolder(viewHolder: RecyclerView.ViewHolder?) {
+
     }
 
+    override fun onBindViewHolder(
+        viewHolder: RecyclerView.ViewHolder?,
+        model: M,
+        payloads: MutableList<Any>?
+    ) {
+
+    }
 }
 
