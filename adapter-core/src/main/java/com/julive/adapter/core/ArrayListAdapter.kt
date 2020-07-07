@@ -6,7 +6,7 @@ import com.julive.adapter.observable.ObservableList.OnListChangedCallback
 /**
  * ArrayList数据结构，所有特性跟随ArrayList
  */
-open class ArrayListAdapter : ListAdapter<ViewModelType, DefaultViewHolder<*>>(), MutableCollection<ViewModelType> {
+open class ArrayListAdapter : ListAdapter<ViewModelType, ViewHolderType>(), MutableCollection<ViewModelType> {
 
     private val observableDataList by lazy(LazyThreadSafetyMode.NONE) {
         ObservableArrayList<ViewModelType>()

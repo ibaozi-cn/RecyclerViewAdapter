@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public abstract class ViewModel<M, VH extends RecyclerView.ViewHolder, Adapter> implements ViewHolderFactory<VH>{
+public abstract class ViewModel<M, VH extends RecyclerView.ViewHolder, Adapter> implements ViewHolderFactory<VH> {
 
     private M model;
     private VH viewHolder;

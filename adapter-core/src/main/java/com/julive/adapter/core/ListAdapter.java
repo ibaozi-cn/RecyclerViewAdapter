@@ -23,9 +23,9 @@ public abstract class ListAdapter<VM extends ViewModel<?, ?, ?>, VH extends Recy
         item.setPosition(position);
         item.setAdapter(this);
         holder.itemView.setTag(R.id.list_adapter, this);
+        item.onBindViewHolder(holder, item.getModel(), payloads);
         if (holder instanceof DefaultViewHolder) {
             ((DefaultViewHolder) holder).onBindViewHolder(holder, item.getModel(), payloads);
-            item.onBindViewHolder(holder, item.getModel(), payloads);
             holder.itemView.setTag(R.id.list_adapter_item, item);
         }
     }

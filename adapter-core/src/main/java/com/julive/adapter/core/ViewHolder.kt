@@ -8,7 +8,9 @@ import androidx.annotation.IdRes
 import androidx.recyclerview.widget.RecyclerView
 import com.julive.adapter_core.R
 
-typealias ViewModelType = ViewModel<out Any, out DefaultViewHolder<*>, out ListAdapter<*, *>>
+typealias ViewModelType = ViewModel<out Any, out ViewHolderType, out ListAdapter<*, *>>
+
+typealias ViewHolderType = DefaultViewHolder<out Any>
 
 abstract class DefaultViewHolder<Model>(val view: View) : RecyclerView.ViewHolder(view) {
     /**
