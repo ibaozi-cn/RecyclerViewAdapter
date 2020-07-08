@@ -23,13 +23,13 @@ class AnkoLayoutActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        var index = 0
         AnkoLayoutComponent(mAnkoListAdapter).setContentView(this).apply {
 
             // 新增一个
             new_add.setText("新增").setOnClickListener {
                 mAnkoListAdapter.add(AnkoViewModelTest().apply {
-                    model = ModelTest("标题", "副标题")
+                    model = ModelTest("标题${++index}", "副标题")
                 })
             }
 
@@ -69,7 +69,8 @@ class AnkoLayoutActivity : AppCompatActivity() {
  * View
  *
  */
-class AnkoLayoutComponent(private val ankoListAdapter: ArrayListAdapter) : AnkoComponent<AnkoLayoutActivity> {
+class AnkoLayoutComponent(private val ankoListAdapter: ArrayListAdapter) :
+    AnkoComponent<AnkoLayoutActivity> {
 
     override fun createView(ui: AnkoContext<AnkoLayoutActivity>) = with(ui) {
 

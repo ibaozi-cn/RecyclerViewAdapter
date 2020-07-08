@@ -1,15 +1,26 @@
 package com.julive.adapter.core
 
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.julive.adapter.observable.ObservableArrayList
 import com.julive.adapter.observable.ObservableList.OnListChangedCallback
 
 /**
  * ArrayList数据结构，所有特性跟随ArrayList
  */
-open class ArrayListAdapter : ListAdapter<ViewModelType, ViewHolderType>(), MutableCollection<ViewModelType> {
+open class ArrayListAdapter : ListAdapter<ViewModelType, ViewHolderType>(),
+    MutableCollection<ViewModelType> {
 
     private val observableDataList by lazy(LazyThreadSafetyMode.NONE) {
         ObservableArrayList<ViewModelType>()
+    }
+
+    fun into(
+        recyclerView: RecyclerView,
+        layoutManager: RecyclerView.LayoutManager? = null
+    ) = apply {
+        recyclerView.layoutManager = layoutManager ?: LinearLayoutManager(recyclerView.context)
+        recyclerView.adapter = this
     }
 
     init {

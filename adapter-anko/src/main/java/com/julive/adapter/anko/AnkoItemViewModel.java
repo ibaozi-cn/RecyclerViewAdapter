@@ -13,8 +13,6 @@ import org.jetbrains.anko.AnkoComponent;
 import org.jetbrains.anko.AnkoContext;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.List;
-
 public abstract class AnkoItemViewModel<M, AnkoView extends AnkoComponent<ViewGroup>>
         extends ArrayItemViewModel<M> {
 
@@ -31,12 +29,7 @@ public abstract class AnkoItemViewModel<M, AnkoView extends AnkoComponent<ViewGr
 
     public DefaultViewHolder getViewHolder(View view) {
         return new DefaultViewHolder(view) {
-            @Override
-            public void unBindViewHolder(@NotNull RecyclerView.ViewHolder viewHolder) {
-            }
-            @Override
-            public void onBindViewHolder(@NotNull RecyclerView.ViewHolder viewHolder, Object item, @NotNull List payloads) {
-            }
+
         };
     }
 
@@ -47,11 +40,11 @@ public abstract class AnkoItemViewModel<M, AnkoView extends AnkoComponent<ViewGr
 
     @Override
     public int getItemViewType() {
-        return getPosition();
+        return this.hashCode();
     }
 
-    public AnkoView getAnkoView() {
-        return (AnkoView) getViewHolder().itemView.getTag(R.id.list_adapter_anko_view);
+    public AnkoView getAnkoView(RecyclerView.ViewHolder viewHolder) {
+        return (AnkoView) viewHolder.itemView.getTag(R.id.list_adapter_anko_view);
     }
 
 }

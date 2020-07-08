@@ -5,6 +5,7 @@ import android.os.Bundle
 import com.julive.adapter_demo.R
 import com.julive.adapter_demo.anko.AnkoLayoutActivity
 import com.julive.adapter_demo.core.ArrayListActivity
+import com.julive.adapter_demo.dsl.AdapterDslActivity
 import com.julive.adapter_demo.ext.startActivity
 import com.julive.adapter_demo.sorted.SortedActivity
 import kotlinx.android.synthetic.main.activity_main.*
@@ -36,6 +37,14 @@ class MainActivity : AppCompatActivity() {
 
             setOnClickListener {
 
+            }
+
+        }
+
+        btn_dsl.setText("ArrayListAdapter DSL").apply {
+
+            setOnClickListener {
+                startActivity<AdapterDslActivity>()
             }
 
         }

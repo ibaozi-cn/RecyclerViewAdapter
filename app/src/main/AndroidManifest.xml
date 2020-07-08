@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
+        <activity android:name=".dsl.AdapterDslActivity"></activity>
         <activity android:name=".sorted.SortedActivity" />
         <activity android:name=".anko.AnkoLayoutActivity" />
         <activity android:name=".core.ArrayListActivity" />

@@ -30,5 +30,10 @@
         android:layout_width="200dp"
         android:layout_height="150dp" />
 
+    <com.julive.adapter_demo.ext.CardButtonView
+        android:id="@+id/btn_dsl"
+        android:layout_width="160dp"
+        android:layout_height="150dp" />
+
 
 </com.google.android.flexbox.FlexboxLayout>

@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.julive.adapter.anko.AnkoItemViewModel
 import com.julive.adapter.core.ArrayListAdapter
+import com.julive.adapter.core.DefaultViewHolder
 import com.julive.adapter_demo.ModelTest
 import com.julive.adapter_demo.R
 import com.julive.adapter_demo.ext.cardView
@@ -19,11 +20,12 @@ import org.jetbrains.anko.*
 /**
  * AnkoItemView
  */
-class AnkoItemView(val itemClick: () -> Unit) : AnkoComponent<ViewGroup> {
+class AnkoItemView() : AnkoComponent<ViewGroup> {
 
     var tvTitle: TextView? = null
     var tvSubTitle: TextView? = null
     var view: View? = null
+    var itemClick: (() -> Unit)? =null
 
     @SuppressLint("ResourceType")
     override fun createView(ui: AnkoContext<ViewGroup>) = with(ui) {
@@ -40,7 +42,7 @@ class AnkoItemView(val itemClick: () -> Unit) : AnkoComponent<ViewGroup> {
             verticalLayout {
 
                 setOnClickListener {
-                    itemClick()
+                    itemClick?.invoke()
                 }
 
                 val typedValue = TypedValue()
@@ -83,26 +85,29 @@ class AnkoViewModelTest : AnkoItemViewModel<ModelTest, AnkoItemView>() {
     var index = 0
 
     override fun onCreateView(): AnkoItemView {
-        Log.d(
-            "onCreateView",
-            "AnkoListAdapter================================================${index++}"
-        )
-        return AnkoItemView {
-            model.title = "${index++}"
-            adapter.set(position, this)
-        }
+        return AnkoItemView()
     }
 
     override fun onBindViewHolder(
-        viewHolder: RecyclerView.ViewHolder?,
-        model: ModelTest?,
-        payloads: MutableList<Any>?
+        viewHolder: DefaultViewHolder<ModelTest>,
+        vm: ModelTest,
+        payloads: MutableList<Any>
     ) {
-        ankoView.tvTitle?.text = model?.title
-        ankoView.tvSubTitle?.text = model?.subTitle
-    }
+        getAnkoView(viewHolder).tvTitle?.text = vm.title
+        getAnkoView(viewHolder).tvSubTitle?.text = vm.subTitle
 
-    override fun unBindViewHolder(viewHolder: RecyclerView.ViewHolder?) {
+        getAnkoView(viewHolder).itemClick = {
+
+            Log.d("AnkoViewModelTest", "正确的model${model}")
+            Log.d("AnkoViewModelTest", "正确的model${vm}")
+
+            Log.d("AnkoViewModelTest", "adapter$adapter")
+            Log.d("AnkoViewModelTest", "viewHolder${viewHolder.adapterPosition}")
+
+            model.title = "点击更新"
+            adapter.set(viewHolder.adapterPosition,this)
+        }
+
     }
 
 }

@@ -8,8 +8,6 @@ import java.util.List;
 public abstract class ViewModel<M, VH extends RecyclerView.ViewHolder, Adapter> implements ViewHolderFactory<VH> {
 
     private M model;
-    private VH viewHolder;
-    private int position;
     private Adapter adapter;
 
     public int getItemViewType() {
@@ -19,9 +17,9 @@ public abstract class ViewModel<M, VH extends RecyclerView.ViewHolder, Adapter> 
     @LayoutRes
     public abstract int getLayoutRes();
 
-    public abstract void onBindViewHolder(RecyclerView.ViewHolder viewHolder, M model, List<Object> payloads);
+    public abstract void onBindViewHolder(VH viewHolder, M model, List<Object> payloads);
 
-    public abstract void unBindViewHolder(RecyclerView.ViewHolder viewHolder);
+    public abstract void unBindViewHolder(VH viewHolder);
 
     public M getModel() {
         return model;
@@ -29,22 +27,6 @@ public abstract class ViewModel<M, VH extends RecyclerView.ViewHolder, Adapter> 
 
     public void setModel(M model) {
         this.model = model;
-    }
-
-    public VH getViewHolder() {
-        return viewHolder;
-    }
-
-    public void setViewHolder(VH viewHolder) {
-        this.viewHolder = viewHolder;
-    }
-
-    public int getPosition() {
-        return position;
-    }
-
-    public void setPosition(int position) {
-        this.position = position;
     }
 
     public Adapter getAdapter() {
@@ -55,4 +37,11 @@ public abstract class ViewModel<M, VH extends RecyclerView.ViewHolder, Adapter> 
         this.adapter = adapter;
     }
 
+    @Override
+    public String toString() {
+        return "ViewModel{" +
+                "model=" + model +
+                ", adapter=" + adapter +
+                '}';
+    }
 }

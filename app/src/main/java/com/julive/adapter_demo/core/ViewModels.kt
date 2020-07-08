@@ -18,6 +18,15 @@ class ArrayViewModelTest : ArrayItemViewModel<ModelTest>() {
 
     override fun getLayoutRes() = R.layout.item_test
 
+    override fun onBindViewHolder(
+        viewHolder: DefaultViewHolder<ModelTest>,
+        model: ModelTest,
+        payloads: MutableList<Any>
+    ) {
+        viewHolder.getView<TextView>(R.id.tv_title)?.text = model.title
+        viewHolder.getView<TextView>(R.id.tv_subTitle)?.text = model.subTitle
+    }
+
     override fun getViewHolder(
         parent: ViewGroup,
         layoutInflater: LayoutInflater
@@ -37,19 +46,6 @@ class ArrayViewModelTest : ArrayItemViewModel<ModelTest>() {
                   getAdapter<ArrayListAdapter>()?.set(adapterPosition, item)
               }
             }
-
-            override fun onBindViewHolder(
-                viewHolder: RecyclerView.ViewHolder,
-                item: ModelTest,
-                payloads: List<Any>
-            ) {
-                getView<TextView>(R.id.tv_title)?.text = item.title
-                getView<TextView>(R.id.tv_subTitle)?.text = item.subTitle
-            }
-
-            override fun unBindViewHolder(viewHolder: RecyclerView.ViewHolder) {
-            }
         }
     }
-
 }

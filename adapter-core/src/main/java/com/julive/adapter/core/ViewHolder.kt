@@ -32,13 +32,9 @@ abstract class DefaultViewHolder<Model>(val view: View) : RecyclerView.ViewHolde
         return view as T
     }
 
-    abstract fun onBindViewHolder(
-        viewHolder: RecyclerView.ViewHolder,
-        item: Model,
-        payloads: List<Any>
-    )
+    fun unBindViewHolder(viewHolder: RecyclerView.ViewHolder) {
 
-    abstract fun unBindViewHolder(viewHolder: RecyclerView.ViewHolder)
+    }
 
     fun <Adapter : ListAdapter<*, *>> getAdapter(): Adapter? {
         return this.itemView.getTag(R.id.list_adapter) as? Adapter
