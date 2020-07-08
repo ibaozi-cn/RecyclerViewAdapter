@@ -2,7 +2,6 @@ package com.julive.adapter.sorted
 
 import androidx.recyclerview.widget.SortedList
 import androidx.recyclerview.widget.SortedListAdapterCallback
-import com.julive.adapter.core.DefaultViewHolder
 import com.julive.adapter.core.ListAdapter
 import com.julive.adapter.core.ViewHolderType
 

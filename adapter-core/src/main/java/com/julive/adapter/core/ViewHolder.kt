@@ -32,7 +32,7 @@ abstract class DefaultViewHolder<Model>(val view: View) : RecyclerView.ViewHolde
         return view as T
     }
 
-    fun unBindViewHolder(viewHolder: RecyclerView.ViewHolder) {
+    fun unBindViewHolder(viewHolder: DefaultViewHolder<Model>) {
 
     }
 

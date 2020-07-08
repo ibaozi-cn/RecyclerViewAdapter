@@ -15,14 +15,6 @@ open class ArrayListAdapter : ListAdapter<ViewModelType, ViewHolderType>(),
         ObservableArrayList<ViewModelType>()
     }
 
-    fun into(
-        recyclerView: RecyclerView,
-        layoutManager: RecyclerView.LayoutManager? = null
-    ) = apply {
-        recyclerView.layoutManager = layoutManager ?: LinearLayoutManager(recyclerView.context)
-        recyclerView.adapter = this
-    }
-
     init {
         observableDataList.addOnListChangedCallback(object :
             OnListChangedCallback<ObservableArrayList<ViewModelType>>() {

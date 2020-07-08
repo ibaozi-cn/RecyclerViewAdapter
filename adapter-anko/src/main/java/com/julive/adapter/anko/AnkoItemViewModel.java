@@ -28,9 +28,7 @@ public abstract class AnkoItemViewModel<M, AnkoView extends AnkoComponent<ViewGr
     }
 
     public DefaultViewHolder getViewHolder(View view) {
-        return new DefaultViewHolder(view) {
-
-        };
+        return new DefaultViewHolder(view) {};
     }
 
     @Override

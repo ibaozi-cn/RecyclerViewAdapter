@@ -28,19 +28,15 @@ class ArrayListActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        supportActionBar?.title = "ArrayListAdapter"
         setContentView(R.layout.activity_array_list)
-
         rv_list.bindListAdapter(mArrayListAdapter, flexboxLayoutMangerDefault { })
-
         // 新增一个
         new_add.setText("新增").setOnClickListener {
             mArrayListAdapter.add(ArrayViewModelTest().apply {
                 model = ModelTest("标题", "副标题")
             })
         }
-
-
         // 删除第一个
         delete.setText("删除").setOnClickListener {
             if (mArrayListAdapter.size > 0)
@@ -48,8 +44,6 @@ class ArrayListActivity : AppCompatActivity() {
             else
                 toast("请添加新用例后再试")
         }
-
-
         // 随机更新
         var updateSize = 0
         update.setText("更新").setOnClickListener {
@@ -62,9 +56,7 @@ class ArrayListActivity : AppCompatActivity() {
             } else {
                 toast("请添加新用例后再试")
             }
-
         }
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

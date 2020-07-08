@@ -7,4 +7,8 @@ import com.julive.adapter.core.ViewModel
 typealias SortedItemVMType = SortedItemViewModel<out SortedModel,out RecyclerView.ViewHolder>
 
 abstract class SortedItemViewModel<M : SortedModel, VH : RecyclerView.ViewHolder> :
-    ViewModel<M, VH, SortedListAdapter>()
+    ViewModel<M, VH, SortedListAdapter>(){
+    override fun unBindViewHolder(viewHolder: VH) {
+
+    }
+}

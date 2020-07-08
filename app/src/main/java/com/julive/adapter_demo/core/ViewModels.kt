@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.julive.adapter.core.ArrayItemViewModel
+import com.julive.adapter.core.ArrayItemViewModelDsl
 import com.julive.adapter.core.ArrayListAdapter
 import com.julive.adapter.core.DefaultViewHolder
 import com.julive.adapter_demo.ModelTest
@@ -14,38 +15,26 @@ import java.util.*
 /**
  * ViewModel
  */
-class ArrayViewModelTest : ArrayItemViewModel<ModelTest>() {
 
-    override fun getLayoutRes() = R.layout.item_test
+class ArrayViewModelTest : ArrayItemViewModelDsl<ModelTest>() {
 
-    override fun onBindViewHolder(
-        viewHolder: DefaultViewHolder<ModelTest>,
-        model: ModelTest,
-        payloads: MutableList<Any>
-    ) {
-        viewHolder.getView<TextView>(R.id.tv_title)?.text = model.title
-        viewHolder.getView<TextView>(R.id.tv_subTitle)?.text = model.subTitle
-    }
+    init {
 
-    override fun getViewHolder(
-        parent: ViewGroup,
-        layoutInflater: LayoutInflater
-    ): DefaultViewHolder<ModelTest> {
-        return object : DefaultViewHolder<ModelTest>(
-            layoutInflater.inflate(
-                layoutRes,
-                parent,
-                false
-            )
-        ) {
-            init {
-              itemView.setOnClickListener {
-                  val item =
-                      getAdapter<ArrayListAdapter>()?.getItem(adapterPosition) as ArrayViewModelTest
-                  item.model.title = "${Random().nextInt(100)}"
-                  getAdapter<ArrayListAdapter>()?.set(adapterPosition, item)
-              }
-            }
+        layoutId = R.layout.item_test
+
+        onBindViewHolder { viewHolder ->
+            viewHolder.getView<TextView>(R.id.tv_title)?.text = model.title
+            viewHolder.getView<TextView>(R.id.tv_subTitle)?.text = model.subTitle
         }
+
+        onItemClick { viewModel, viewHolder ->
+            val adapterPosition = viewHolder.adapterPosition
+            val item =
+                adapter?.getItem(adapterPosition) as ArrayViewModelTest
+            item.model.title = "${Random().nextInt(100)}"
+            adapter?.set(adapterPosition, item)
+        }
+
     }
+
 }

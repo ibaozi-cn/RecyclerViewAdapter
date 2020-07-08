@@ -7,9 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 abstract class ArrayItemViewModel<M> : ViewModel<M, DefaultViewHolder<M>, ArrayListAdapter>() {
 
-    override fun unBindViewHolder(viewHolder: DefaultViewHolder<M>) {
-
-    }
+    override fun unBindViewHolder(viewHolder: DefaultViewHolder<M>) {}
 
     override fun onBindViewHolder(
         viewHolder: DefaultViewHolder<M>,
@@ -21,11 +19,10 @@ abstract class ArrayItemViewModel<M> : ViewModel<M, DefaultViewHolder<M>, ArrayL
 }
 
 
-class ArrayItemViewModelDsl<M> : ArrayItemViewModel<M>() {
+open class ArrayItemViewModelDsl<M> : ArrayItemViewModel<M>() {
 
     var bindView: ((DefaultViewHolder<M>) -> Unit?)? = null
-    var itemClick: ((viewModel: ArrayItemViewModel<M>, viewHolder: DefaultViewHolder<M>) -> Unit?)? =
-        null
+    var itemClick: ((viewModel: ArrayItemViewModel<M>, viewHolder: DefaultViewHolder<M>) -> Unit?)? = null
 
     fun onBindViewHolder(f: (DefaultViewHolder<M>) -> Unit) {
         bindView = f

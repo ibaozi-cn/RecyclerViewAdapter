@@ -32,9 +32,9 @@
 
 |  名字   | release aar size  | 其他   |
 |  ----  | ----  | ----  | 
-| Core | 28kb | 核心库目前包含ArrayListAdapter的实现 |
-| Anko | 8kb | 同样是ArrayListAdapter,由于做了高度的抽象，所以目前没有了AnkoListAdapter |
-| Sorted | 10kb | SortedList扩展实现 |
+| Core | 34kb | 核心库目前包含ArrayListAdapter的实现 |
+| Anko | 9kb | 同样是ArrayListAdapter,由于做了高度的抽象，所以目前剔除AnkoListAdapter |
+| Sorted | 11kb | SortedList扩展实现 |
 | .. | .. | 待实现 |
 
 ## 环境需要
@@ -44,7 +44,10 @@
 - AndroidX
 抱歉目前按照最新的AndroidX适配的，如有其他需要请私聊我。
 
-## 怎么用？请看下面博客
+## 怎么用？详细请看下面博客 或者查看源码app的代码
+
+
+
 
 #### 博客
 [一个全新的RecyclerView Adapter框架源码开源](https://juejin.im/post/5f001c6b5188252e703ab676)

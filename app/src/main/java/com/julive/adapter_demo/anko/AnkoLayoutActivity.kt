@@ -23,17 +23,15 @@ class AnkoLayoutActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        supportActionBar?.title = "ArrayListAdapter"
         var index = 0
         AnkoLayoutComponent(mAnkoListAdapter).setContentView(this).apply {
-
             // 新增一个
             new_add.setText("新增").setOnClickListener {
                 mAnkoListAdapter.add(AnkoViewModelTest().apply {
                     model = ModelTest("标题${++index}", "副标题")
                 })
             }
-
-
             // 删除第一个
             delete.setText("删除").setOnClickListener {
                 if (mAnkoListAdapter.size > 0)
@@ -41,8 +39,6 @@ class AnkoLayoutActivity : AppCompatActivity() {
                 else
                     toast("请添加新用例后再试")
             }
-
-
             // 随机更新
             var updateSize = 0
             update.setText("更新").setOnClickListener {

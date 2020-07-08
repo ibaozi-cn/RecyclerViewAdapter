@@ -6,6 +6,7 @@ import android.util.Log
 import android.widget.TextView
 import com.julive.adapter.core.arrayItemViewModelDsl
 import com.julive.adapter.core.arrayListAdapter
+import com.julive.adapter.core.into
 import com.julive.adapter_demo.ModelTest
 import com.julive.adapter_demo.R
 import kotlinx.android.synthetic.main.activity_adapter_dsl.*
@@ -13,13 +14,11 @@ import kotlinx.android.synthetic.main.activity_adapter_dsl.*
 class AdapterDslActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        supportActionBar?.title = "ArrayListAdapter DSL"
         setContentView(R.layout.activity_adapter_dsl)
-
         arrayListAdapter {
-
             (0..10).map {
                 add(
-
                     arrayItemViewModelDsl<ModelTest> {
 
                         layoutId = if (it % 2 == 0) R.layout.item_test else R.layout.item_test_2
@@ -41,7 +40,7 @@ class AdapterDslActivity : AppCompatActivity() {
                             Log.d("arrayItemViewModel", "adapter$adapter")
                             Log.d("arrayItemViewModel", "viewHolder${vh.adapterPosition}")
                             vm.model.title = "测试更新"
-                            adapter.set(vh.adapterPosition,vm)
+                            adapter.set(vh.adapterPosition, vm)
                         }
                     }
                 )

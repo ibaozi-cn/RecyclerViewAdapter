@@ -9,6 +9,7 @@ import com.julive.adapter.sorted.SortedItemViewModel
 import com.julive.adapter.sorted.SortedListAdapter
 import com.julive.adapter_demo.R
 import com.julive.adapter_demo.SortedModelTest
+import kotlin.random.Random
 
 class SortedItemViewModelTest : SortedItemViewModel<SortedModelTest, DefaultViewHolder<SortedModelTest>>() {
 
@@ -29,20 +30,14 @@ class SortedItemViewModelTest : SortedItemViewModel<SortedModelTest, DefaultView
         viewHolder.getView<TextView>(R.id.tv_title)?.text = model.title
         viewHolder.getView<TextView>(R.id.tv_subTitle)?.text = model.subTitle
     }
-
-    override fun unBindViewHolder(viewHolder: DefaultViewHolder<SortedModelTest>?) {
-
-    }
-
 }
 
 class ItemViewHolder(view: View) : DefaultViewHolder<SortedModelTest>(view) {
-    var index = 0
     init {
         itemView.setOnClickListener {
             val item =
                 getAdapter<SortedListAdapter>()?.getItem(adapterPosition) as SortedItemViewModelTest
-            item.model.subTitle = "刷新自己${++index}"
+            item.model.subTitle = "刷新自己${Random.nextInt(100)}"
             getAdapter<SortedListAdapter>()?.updateItem(adapterPosition, item)
         }
     }

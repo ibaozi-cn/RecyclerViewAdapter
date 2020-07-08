@@ -66,7 +66,7 @@ public abstract class ListAdapter<VM extends ViewModel<?, ?, ?>, VH extends Recy
         if (obj instanceof ViewModel) {
             ((ViewModel) obj).unBindViewHolder(holder);
             if (holder instanceof DefaultViewHolder) {
-                ((DefaultViewHolder) holder).unBindViewHolder(holder);
+                ((DefaultViewHolder) holder).unBindViewHolder((DefaultViewHolder) holder);
                 holder.itemView.setTag(R.id.list_adapter_item, null);
                 holder.itemView.setTag(R.id.list_adapter, null);
             }
