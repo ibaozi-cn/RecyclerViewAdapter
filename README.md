@@ -11,6 +11,7 @@
 - ~~Anko扩展~~
 - ~~FlexboxLayout 扩展~~
 - ~~SortedList 扩展~~
+- ~~Kotlin DSL扩展支持~~
 - paging 3 扩展
 - DiffUtil 扩展
 - DataBinding 扩展
