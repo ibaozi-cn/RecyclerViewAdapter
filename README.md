@@ -12,7 +12,7 @@
 - ~~FlexboxLayout 扩展~~
 - ~~SortedList 扩展~~
 - ~~Kotlin DSL扩展支持~~
-- paging 3 扩展
+- ~~paging 3 扩展~~
 - DiffUtil 扩展
 - DataBinding 扩展
 - 等等.. 未来有好的想法继续扩展
@@ -32,10 +32,10 @@
 
 |  名字   | release aar size  | 其他   |
 |  ----  | ----  | ----  | 
-| Core | 34kb | 核心库目前包含ArrayListAdapter的实现 |
+| Core | 35kb | 核心库目前包含ArrayListAdapter的实现 |
 | Anko | 9kb | 同样是ArrayListAdapter,由于做了高度的抽象，所以目前剔除AnkoListAdapter |
-| Sorted | 11kb | SortedList扩展实现 |
-| .. | .. | 待实现 |
+| Sorted | 11kb | SortedListAdapter扩展实现 |
+| Paging | 14kb | PagingListAdapter扩展适配 |
 
 ## 环境需要
 
@@ -44,15 +44,59 @@
 - AndroidX
 抱歉目前按照最新的AndroidX适配的，如有其他需要请私聊我。
 
-## 怎么用？详细请看下面博客 或者查看源码app的代码
+## 怎么用？
 
+### 看一个最简单的例子 DSL的支持
 
+```
+class AdapterDslActivity : AppCompatActivity() {
+    
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
+        supportActionBar?.title = "ArrayListAdapter DSL"
 
-#### 博客
+        setContentView(R.layout.activity_adapter_dsl)
+
+        arrayListAdapter {
+            //循环添加ItemViewModel
+            (0..10).map {
+                add(
+                    // ItemViewModel 对象 函数中传入布局IdRes
+                    arrayItemViewModelDsl<ModelTest>(if (it % 2 == 0) R.layout.item_test else R.layout.item_test_2) {
+                        // Model 数据模型
+                        model = ModelTest("title$it", "subTitle$it")
+                        // 绑定数据
+                        onBindViewHolder { viewHolder ->
+                            viewHolder.getView<TextView>(R.id.tv_title)?.text = model?.title
+                            viewHolder.getView<TextView>(R.id.tv_subTitle)?.text = model?.subTitle
+                        }
+                        // 点击处理
+                        onItemClick { vm, vh ->
+                            //这里需要注意，为什么直接从该对象获取的Model是不正确的？因为ViewHolder的复用
+                            //导致click事件其实是在另外一个VM里触发的
+                            Log.d("arrayItemViewModel", "不正确的model${model}")
+                            Log.d("arrayItemViewModel", "正确的model${vm.model}")
+                            Log.d("arrayItemViewModel", "adapter$adapter")
+                            Log.d("arrayItemViewModel", "viewHolder${vh.adapterPosition}")
+                            //修改Model数据
+                            vm.model?.title = "测试更新"
+                            //用Adapter更新数据
+                            adapter?.set(vh.adapterPosition, vm)
+                        }
+                    }
+                )
+            }
+            // 绑定 RecyclerView
+            into(rv_list_dsl)
+        }
+    }
+}
+```
+
+#### 博客相关介绍
 [一个全新的RecyclerView Adapter框架源码开源](https://juejin.im/post/5f001c6b5188252e703ab676)
 [一个资深的Android是不是应该学会自己做一个超级的RecyclerView.Adapter](https://juejin.im/post/5ee640116fb9a047967349c7)
-
 
 ## 开发者
 
