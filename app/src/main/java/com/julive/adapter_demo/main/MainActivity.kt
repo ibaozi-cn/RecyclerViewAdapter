@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
             startActivity<SortedActivity>()
         }
 
-        btn_paging.setText("PagingListAdapter").setOnClickListener {
+        btn_paging.setText("Paging3Activity").setOnClickListener {
             startActivity<Paging3Activity>()
         }
 

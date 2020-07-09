@@ -16,6 +16,10 @@ import org.jetbrains.annotations.NotNull;
 public abstract class AnkoItemViewModel<M, AnkoView extends AnkoComponent<ViewGroup>>
         extends ArrayItemViewModel<M> {
 
+    public AnkoItemViewModel() {
+        super(0);
+    }
+
     public abstract AnkoView onCreateView();
 
     @NotNull
@@ -24,16 +28,7 @@ public abstract class AnkoItemViewModel<M, AnkoView extends AnkoComponent<ViewGr
         AnkoView ankoView = onCreateView();
         View view = ankoView.createView(AnkoContext.Companion.create(parent.getContext(), parent, false));
         view.setTag(R.id.list_adapter_anko_view, ankoView);
-        return getViewHolder(view);
-    }
-
-    public DefaultViewHolder getViewHolder(View view) {
-        return new DefaultViewHolder(view) {};
-    }
-
-    @Override
-    public int getLayoutRes() {
-        return 0;
+        return new DefaultViewHolder(view);
     }
 
     @Override

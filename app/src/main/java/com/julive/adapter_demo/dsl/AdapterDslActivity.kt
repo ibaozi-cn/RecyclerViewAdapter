@@ -19,15 +19,13 @@ class AdapterDslActivity : AppCompatActivity() {
         arrayListAdapter {
             (0..10).map {
                 add(
-                    arrayItemViewModelDsl<ModelTest> {
-
-                        layoutId = if (it % 2 == 0) R.layout.item_test else R.layout.item_test_2
+                    arrayItemViewModelDsl<ModelTest>(if (it % 2 == 0) R.layout.item_test else R.layout.item_test_2) {
 
                         model = ModelTest("title$it", "subTitle$it")
 
                         onBindViewHolder { viewHolder ->
-                            viewHolder.getView<TextView>(R.id.tv_title)?.text = model.title
-                            viewHolder.getView<TextView>(R.id.tv_subTitle)?.text = model.subTitle
+                            viewHolder.getView<TextView>(R.id.tv_title)?.text = model?.title
+                            viewHolder.getView<TextView>(R.id.tv_subTitle)?.text = model?.subTitle
                         }
 
                         onItemClick { vm, vh ->
@@ -39,8 +37,8 @@ class AdapterDslActivity : AppCompatActivity() {
 
                             Log.d("arrayItemViewModel", "adapter$adapter")
                             Log.d("arrayItemViewModel", "viewHolder${vh.adapterPosition}")
-                            vm.model.title = "测试更新"
-                            adapter.set(vh.adapterPosition, vm)
+                            vm.model?.title = "测试更新"
+                            adapter?.set(vh.adapterPosition, vm)
                         }
                     }
                 )

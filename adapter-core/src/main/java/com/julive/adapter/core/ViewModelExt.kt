@@ -2,65 +2,48 @@ package com.julive.adapter.core
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.annotation.IdRes
-import androidx.recyclerview.widget.RecyclerView
+import java.lang.Exception
 
-abstract class ArrayItemViewModel<M> : ViewModel<M, DefaultViewHolder<M>, ArrayListAdapter>() {
+typealias  DefaultViewModelType <M, Adapter> = ViewModel<M, DefaultViewHolder, Adapter>
+typealias  ArrayViewModelType <M> = DefaultItemViewModel<M, ArrayListAdapter>
 
-    override fun unBindViewHolder(viewHolder: DefaultViewHolder<M>) {}
+typealias BindView = (DefaultViewHolder) -> Unit
+typealias ItemClick <M> = (viewModel: ArrayItemViewModel<M>, viewHolder: DefaultViewHolder) -> Unit
 
-    override fun onBindViewHolder(
-        viewHolder: DefaultViewHolder<M>,
-        model: M,
-        payloads: MutableList<Any>
-    ) {
+abstract class DefaultItemViewModel<M, A : IAdapter<*>> : DefaultViewModelType<M, A> {
 
-    }
-}
+    override var adapter: A? = null
+    override var model: M? = null
+    private var bindView: BindView? = null
+    private var itemClick: ItemClick<M>? = null
 
-
-open class ArrayItemViewModelDsl<M> : ArrayItemViewModel<M>() {
-
-    var bindView: ((DefaultViewHolder<M>) -> Unit?)? = null
-    var itemClick: ((viewModel: ArrayItemViewModel<M>, viewHolder: DefaultViewHolder<M>) -> Unit?)? = null
-
-    fun onBindViewHolder(f: (DefaultViewHolder<M>) -> Unit) {
+    open fun onBindViewHolder(f: (DefaultViewHolder) -> Unit) {
         bindView = f
     }
 
-    fun onItemClick(f: (viewModel: ArrayItemViewModel<M>, viewHolder: DefaultViewHolder<M>) -> Unit) {
+    open fun onItemClick(f: (viewModel: ArrayItemViewModel<M>, viewHolder: DefaultViewHolder) -> Unit) {
         itemClick = f
-    }
-
-    @IdRes
-    var layoutId: Int = 0
-
-    override fun onBindViewHolder(
-        viewHolder: DefaultViewHolder<M>,
-        model: M,
-        payloads: MutableList<Any>
-    ) {
-        bindView?.invoke(viewHolder)
     }
 
     override fun getViewHolder(
         parent: ViewGroup,
         layoutInflater: LayoutInflater
-    ): DefaultViewHolder<M> {
-        return object : DefaultViewHolder<M>(layoutInflater.inflate(layoutRes, parent, false)) {
-            init {
-                itemView.setOnClickListener {
-                    itemClick?.invoke(
-                        adapter.getItem(adapterPosition) as @ParameterName(name = "viewModel") ArrayItemViewModel<M>,
-                        this
-                    )
-                }
+    ): DefaultViewHolder {
+        return DefaultViewHolder(layoutInflater.inflate(layoutRes, parent, false)).apply {
+            itemView.setOnClickListener {
+                itemClick?.invoke(
+                    adapter?.getItem(adapterPosition) as @ParameterName(name = "viewModel") ArrayItemViewModel<M>,
+                    this
+                )
             }
         }
     }
 
-    override fun getLayoutRes(): Int {
-        return layoutId
+    override fun bindVH(viewHolder: DefaultViewHolder, model: M, payloads: List<Any>) {
+        bindView?.invoke(viewHolder)
     }
 
+    override fun unBindVH(viewHolder: DefaultViewHolder) {}
 }
+
+open class ArrayItemViewModel<M>(override val layoutRes: Int) : ArrayViewModelType<M>()

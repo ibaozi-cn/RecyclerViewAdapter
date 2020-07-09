@@ -8,11 +8,8 @@ import androidx.annotation.IdRes
 import androidx.recyclerview.widget.RecyclerView
 import com.julive.adapter_core.R
 
-typealias ViewModelType = ViewModel<out Any, out ViewHolderType, out ListAdapter<*, *>>
 
-typealias ViewHolderType = DefaultViewHolder<out Any>
-
-abstract class DefaultViewHolder<Model>(val view: View) : RecyclerView.ViewHolder(view) {
+open class DefaultViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
     /**
      * views缓存
      */
@@ -30,10 +27,6 @@ abstract class DefaultViewHolder<Model>(val view: View) : RecyclerView.ViewHolde
             views.put(viewId, view)
         }
         return view as T
-    }
-
-    fun unBindViewHolder(viewHolder: DefaultViewHolder<Model>) {
-
     }
 
     fun <Adapter : ListAdapter<*, *>> getAdapter(): Adapter? {
@@ -56,9 +49,7 @@ interface ViewHolderFactoryCache<VHF : GenericViewHolderFactory> {
 }
 
 class DefaultViewHolderFactoryCache<VHF : GenericViewHolderFactory> : ViewHolderFactoryCache<VHF> {
-
     private val typeInstances = SparseArray<VHF>()
-
     override fun register(type: Int, item: VHF): Boolean {
         if (typeInstances.indexOfKey(type) < 0) {
             typeInstances.put(type, item)
@@ -72,10 +63,7 @@ class DefaultViewHolderFactoryCache<VHF : GenericViewHolderFactory> : ViewHolder
     }
 
     override fun contains(type: Int) = typeInstances.indexOfKey(type) >= 0
-
     override fun clear() {
         typeInstances.clear()
     }
-
-
 }

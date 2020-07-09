@@ -2,13 +2,13 @@ package com.julive.adapter.sorted
 
 import androidx.recyclerview.widget.SortedList
 import androidx.recyclerview.widget.SortedListAdapterCallback
+import com.julive.adapter.core.DefaultViewHolder
 import com.julive.adapter.core.ListAdapter
-import com.julive.adapter.core.ViewHolderType
 
 /**
  * SortedList数据结构的适配器，自动排序，二分查找
  */
-class SortedListAdapter : ListAdapter<SortedItemVMType, ViewHolderType>(),
+class SortedListAdapter : ListAdapter<SortedItemVMType, DefaultViewHolder>(),
     MutableCollection<SortedItemVMType> {
     private val sortedList by lazy {
         SortedList(
@@ -18,21 +18,21 @@ class SortedListAdapter : ListAdapter<SortedItemVMType, ViewHolderType>(),
                     item1: SortedItemVMType,
                     item2: SortedItemVMType
                 ): Boolean {
-                    return item1.model.isSameModelAs(item2.model)
+                    return item1.model?.isSameModelAs(item2.model)?:false
                 }
 
                 override fun compare(
                     o1: SortedItemVMType,
                     o2: SortedItemVMType
                 ): Int {
-                    return o1.model.compare(o2.model)
+                    return o1.model?.compare(o2.model)?:0
                 }
 
                 override fun areContentsTheSame(
                     oldItem: SortedItemVMType,
                     newItem: SortedItemVMType
                 ): Boolean {
-                    return oldItem.model.isContentTheSameAs(newItem.model)
+                    return oldItem.model?.isContentTheSameAs(newItem.model)?:false
                 }
             })
     }

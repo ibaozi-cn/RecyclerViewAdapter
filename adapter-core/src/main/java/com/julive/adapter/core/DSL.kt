@@ -7,9 +7,10 @@ fun arrayListAdapter(block: ArrayListAdapter.() -> Unit): ArrayListAdapter {
 }
 
 fun <M> arrayItemViewModelDsl(
-    init: ArrayItemViewModelDsl<M>.() -> Unit
-): ArrayItemViewModelDsl<M> {
-    return ArrayItemViewModelDsl<M>().apply {
+    layoutRes: Int,
+    init: ArrayItemViewModel<M>.() -> Unit
+): ArrayItemViewModel<M> {
+    return ArrayItemViewModel<M>(layoutRes).apply {
         init()
     }
 }

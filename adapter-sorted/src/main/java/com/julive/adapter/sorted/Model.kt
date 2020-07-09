@@ -11,19 +11,17 @@ abstract class SortedModel(
      */
     val uniqueId: String = "") {
 
-    fun <T : SortedModel> isSameModelAs(model: T): Boolean {
-        val bol = this.uniqueId == model.uniqueId
-        return bol
+    fun <T : SortedModel> isSameModelAs(model: T?): Boolean {
+        return uniqueId == model?.uniqueId
     }
 
-    fun <T : SortedModel> isContentTheSameAs(model: T): Boolean {
-        val bol =  this == model
-        return bol
+    fun <T : SortedModel> isContentTheSameAs(model: T?): Boolean {
+        return this == model
     }
 
-    fun <T : SortedModel> compare(t: T): Int {
-        if (this.sortId > t.sortId) return 1
-        if (this.sortId < t.sortId) return -1
+    fun <T : SortedModel> compare(t: T?): Int {
+        if (this.sortId > t?.sortId?:0) return 1
+        if (this.sortId < t?.sortId?:0) return -1
         return 0
     }
 

@@ -11,33 +11,32 @@ import com.julive.adapter_demo.R
 import com.julive.adapter_demo.SortedModelTest
 import kotlin.random.Random
 
-class SortedItemViewModelTest : SortedItemViewModel<SortedModelTest, DefaultViewHolder<SortedModelTest>>() {
+class SortedItemViewModelTest : SortedItemViewModel<SortedModelTest, DefaultViewHolder>() {
 
-    override fun getLayoutRes() = R.layout.item_test
+    init {
+        onBindViewHolder {viewHolder->
+            viewHolder.getView<TextView>(R.id.tv_title)?.text = model?.title
+            viewHolder.getView<TextView>(R.id.tv_subTitle)?.text = model?.subTitle
+        }
+    }
 
     override fun getViewHolder(
         parent: ViewGroup,
         layoutInflater: LayoutInflater
-    ): DefaultViewHolder<SortedModelTest> {
+    ): DefaultViewHolder {
         return ItemViewHolder(layoutInflater.inflate(layoutRes, parent, false))
     }
 
-    override fun onBindViewHolder(
-        viewHolder: DefaultViewHolder<SortedModelTest>,
-        model: SortedModelTest,
-        payloads: MutableList<Any>
-    ) {
-        viewHolder.getView<TextView>(R.id.tv_title)?.text = model.title
-        viewHolder.getView<TextView>(R.id.tv_subTitle)?.text = model.subTitle
-    }
+    override val layoutRes: Int
+        get() = R.layout.item_test
 }
 
-class ItemViewHolder(view: View) : DefaultViewHolder<SortedModelTest>(view) {
+class ItemViewHolder(view: View) : DefaultViewHolder(view) {
     init {
         itemView.setOnClickListener {
             val item =
                 getAdapter<SortedListAdapter>()?.getItem(adapterPosition) as SortedItemViewModelTest
-            item.model.subTitle = "刷新自己${Random.nextInt(100)}"
+            item.model?.subTitle = "刷新自己${Random.nextInt(100)}"
             getAdapter<SortedListAdapter>()?.updateItem(adapterPosition, item)
         }
     }

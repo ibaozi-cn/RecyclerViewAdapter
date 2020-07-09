@@ -11,7 +11,7 @@ fun RecyclerView.bindListAdapter(
     this.adapter = listAdapter
 }
 
-fun ListAdapter<ViewModelType, ViewHolderType>.into(
+fun ListAdapter<*, *>.into(
     recyclerView: RecyclerView,
     layoutManager: RecyclerView.LayoutManager? = null
 ) = apply {

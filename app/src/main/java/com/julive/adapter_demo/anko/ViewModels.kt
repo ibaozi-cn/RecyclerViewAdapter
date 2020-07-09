@@ -7,10 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.TextView
-import androidx.recyclerview.widget.RecyclerView
 import com.julive.adapter.anko.AnkoItemViewModel
-import com.julive.adapter.core.ArrayListAdapter
-import com.julive.adapter.core.DefaultViewHolder
 import com.julive.adapter_demo.ModelTest
 import com.julive.adapter_demo.R
 import com.julive.adapter_demo.ext.cardView
@@ -25,7 +22,7 @@ class AnkoItemView() : AnkoComponent<ViewGroup> {
     var tvTitle: TextView? = null
     var tvSubTitle: TextView? = null
     var view: View? = null
-    var itemClick: (() -> Unit)? =null
+    var itemClick: (() -> Unit)? = null
 
     @SuppressLint("ResourceType")
     override fun createView(ui: AnkoContext<ViewGroup>) = with(ui) {
@@ -81,33 +78,22 @@ class AnkoItemView() : AnkoComponent<ViewGroup> {
  * ViewModel
  */
 class AnkoViewModelTest : AnkoItemViewModel<ModelTest, AnkoItemView>() {
+    init {
+        onBindViewHolder { viewHolder ->
+            getAnkoView(viewHolder).tvTitle?.text = model?.title
+            getAnkoView(viewHolder).tvSubTitle?.text = model?.subTitle
+            getAnkoView(viewHolder).itemClick = {
+                Log.d("AnkoViewModelTest", "正确的model${model}")
+                Log.d("AnkoViewModelTest", "正确的model${model}")
 
-    var index = 0
-
+                Log.d("AnkoViewModelTest", "adapter$adapter")
+                Log.d("AnkoViewModelTest", "viewHolder${viewHolder.adapterPosition}")
+                model?.title = "点击更新"
+                adapter?.set(viewHolder.adapterPosition, this)
+            }
+        }
+    }
     override fun onCreateView(): AnkoItemView {
         return AnkoItemView()
     }
-
-    override fun onBindViewHolder(
-        viewHolder: DefaultViewHolder<ModelTest>,
-        vm: ModelTest,
-        payloads: MutableList<Any>
-    ) {
-        getAnkoView(viewHolder).tvTitle?.text = vm.title
-        getAnkoView(viewHolder).tvSubTitle?.text = vm.subTitle
-
-        getAnkoView(viewHolder).itemClick = {
-
-            Log.d("AnkoViewModelTest", "正确的model${model}")
-            Log.d("AnkoViewModelTest", "正确的model${vm}")
-
-            Log.d("AnkoViewModelTest", "adapter$adapter")
-            Log.d("AnkoViewModelTest", "viewHolder${viewHolder.adapterPosition}")
-
-            model.title = "点击更新"
-            adapter.set(viewHolder.adapterPosition,this)
-        }
-
-    }
-
 }
