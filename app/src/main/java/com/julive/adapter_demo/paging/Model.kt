@@ -4,12 +4,19 @@ import androidx.lifecycle.ViewModel
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingSource
-import com.julive.adapter.paging.ItemPageViewModel
+import com.julive.adapter.paging.PagingItemViewModel
 import com.julive.adapter.paging.PageModel
 import com.julive.adapter_demo.R
 import kotlinx.coroutines.delay
 
-class PagingModelTest(val title: String, override val uniqueId: String = title) : PageModel
+class PagingModelTest(val title: String) : PageModel {
+    override fun <T> isSameModelAs(model: T): Boolean {
+        return this == model
+    }
+    override fun <T> isContentTheSameAs(model: T): Boolean {
+        return this.title == (model as? PagingModelTest)?.title
+    }
+}
 
 class PagingViewModel : ViewModel() {
 
@@ -19,16 +26,16 @@ class PagingViewModel : ViewModel() {
             pagingSourceFactory = { MainSource() }).flow
     }
 
-    class MainSource : PagingSource<Int, ItemPageViewModel<*>>() {
-        override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ItemPageViewModel<*>> {
+    class MainSource : PagingSource<Int, PagingItemViewModel<*>>() {
+        override suspend fun load(params: LoadParams<Int>): LoadResult<Int, PagingItemViewModel<*>> {
             // 如果key是null，那就加载第0页的数据
             val page = params.key ?: 0
             // 每一页的数据长度
             val pageSize = params.loadSize
             return try {
                 delay(2000)
-                val data = mutableListOf<ItemPageViewModel<PagingModelTest>>()
-                val itemPageViewModel = ItemPageViewModel<PagingModelTest>().apply {
+                val data = mutableListOf<PagingItemViewModel<PagingModelTest>>()
+                val itemPageViewModel = PagingItemViewModel<PagingModelTest>().apply {
                     layoutRes = R.layout.item_test
                 }
                 itemPageViewModel.model = PagingModelTest("标题")

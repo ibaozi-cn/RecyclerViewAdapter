@@ -12,7 +12,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.Flow
 
-class PagingListAdapter : ListAdapter<ItemPageViewModel<*>, DefaultViewHolder>() {
+class PagingListAdapter : ListAdapter<PagingItemViewModel<*>, DefaultViewHolder>() {
 
     private val differ = AsyncPagingDataDiffer(
         diffCallback = DiffViewModelCallBack(),
@@ -21,15 +21,15 @@ class PagingListAdapter : ListAdapter<ItemPageViewModel<*>, DefaultViewHolder>()
         workerDispatcher = Dispatchers.Default
     )
 
-    override fun getItem(position: Int): ItemPageViewModel<*>? {
+    override fun getItem(position: Int): PagingItemViewModel<*>? {
         return differ.getItem(position)
     }
 
-    suspend fun submitData(pagingData: PagingData<ItemPageViewModel<*>>) {
+    suspend fun submitData(pagingData: PagingData<PagingItemViewModel<*>>) {
         differ.submitData(pagingData)
     }
 
-    fun submitData(lifecycle: Lifecycle, pagingData: PagingData<ItemPageViewModel<*>>) {
+    fun submitData(lifecycle: Lifecycle, pagingData: PagingData<PagingItemViewModel<*>>) {
         differ.submitData(lifecycle, pagingData)
     }
 
