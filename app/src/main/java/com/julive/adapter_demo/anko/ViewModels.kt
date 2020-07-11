@@ -8,9 +8,9 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.TextView
 import com.julive.adapter.anko.AnkoItemViewModel
-import com.julive.adapter_demo.ModelTest
 import com.julive.adapter_demo.R
 import com.julive.adapter_demo.ext.cardView
+import com.julive.adapter_demo.sorted.ModelTest
 import org.jetbrains.anko.*
 
 

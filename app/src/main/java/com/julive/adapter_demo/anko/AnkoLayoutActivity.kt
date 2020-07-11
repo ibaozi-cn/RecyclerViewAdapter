@@ -7,7 +7,7 @@ import com.julive.adapter_demo.R
 import com.julive.adapter.anko.recyclerView
 import com.julive.adapter.core.ArrayListAdapter
 import com.julive.adapter.core.bindListAdapter
-import com.julive.adapter_demo.ModelTest
+import com.julive.adapter_demo.sorted.ModelTest
 import kotlinx.android.synthetic.main.include_button_bottom.view.*
 import org.jetbrains.anko.*
 import kotlin.random.Random

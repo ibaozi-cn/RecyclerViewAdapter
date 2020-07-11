@@ -11,6 +11,7 @@ import com.julive.adapter.core.ListAdapter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.Flow
+import java.lang.Exception
 
 class PagingListAdapter : ListAdapter<PagingItemViewModel<*>, DefaultViewHolder>() {
 
@@ -95,6 +96,7 @@ class PagingListAdapter : ListAdapter<PagingItemViewModel<*>, DefaultViewHolder>
     fun removeDataRefreshListener(listener: (isEmpty: Boolean) -> Unit) {
         differ.removeDataRefreshListener(listener)
     }
+
 }
 
 class PagingLoadStateAdapter : LoadStateAdapter<DefaultViewHolder>() {

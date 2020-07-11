@@ -54,6 +54,7 @@ dependencies {
     implementation project(path: ':adapter-sorted')
     implementation project(path: ':adapter-flex')
     implementation project(path: ':adapter-paging')
+    implementation project(path: ':adapter-diff')
 
     // Anko Commons
     implementation "org.jetbrains.anko:anko-commons:$anko_version"

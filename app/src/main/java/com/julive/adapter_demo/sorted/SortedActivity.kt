@@ -11,7 +11,6 @@ import com.julive.adapter.core.bindListAdapter
 import com.julive.adapter.flex.flexboxLayoutMangerDefault
 import com.julive.adapter.sorted.SortedListAdapter
 import com.julive.adapter_demo.R
-import com.julive.adapter_demo.SortedModelTest
 import kotlinx.android.synthetic.main.activity_array_list.*
 import kotlinx.android.synthetic.main.include_button_bottom.*
 import kotlin.random.Random
@@ -60,7 +59,6 @@ class SortedActivity : AppCompatActivity() {
                 })
             }
         }
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

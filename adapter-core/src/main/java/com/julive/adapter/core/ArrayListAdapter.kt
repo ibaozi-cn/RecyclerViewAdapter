@@ -73,6 +73,9 @@ class ArrayListAdapter :
         return observableDataList.remove(element)
     }
 
+    /**
+     * 不会触发Adapter更新
+     */
     override fun removeAll(elements: Collection<ArrayViewModelType<*>>): Boolean {
         return observableDataList.removeAll(elements)
     }
@@ -87,6 +90,11 @@ class ArrayListAdapter :
 
     fun indexOf(element: ArrayViewModelType<*>): Int {
         return observableDataList.indexOf(element)
+    }
+
+     fun replayAll(list: List<*>) {
+        observableDataList.removeAll()
+        observableDataList.addAllOnly(list as List<ArrayViewModelType<*>>)
     }
 
 }

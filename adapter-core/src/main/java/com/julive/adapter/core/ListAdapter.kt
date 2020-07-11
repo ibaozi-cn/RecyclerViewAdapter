@@ -27,12 +27,15 @@ abstract class ListAdapter<VM : ViewModel<*,*,*>, VH : RecyclerView.ViewHolder> 
     }
 
     override fun onBindViewHolder(holder: VH, position: Int, payloads: MutableList<Any>) {
-        holder.itemView.setTag(R.id.list_adapter, this)
-        val item = getItem(position) as? ViewModel<Any, RecyclerView.ViewHolder, IAdapter<*>>
-        item?.let {
-            item.adapter = this
-            item.model?.let { it1 -> item.bindVH(holder, it1, payloads) }
-            holder.itemView.setTag(R.id.list_adapter_item, item)
+        if(position != RecyclerView.NO_POSITION){
+            // Do your binding here
+            holder.itemView.setTag(R.id.list_adapter, this)
+            val item = getItem(position) as? ViewModel<Any, RecyclerView.ViewHolder, IAdapter<*>>
+            item?.let {
+                item.adapter = this
+                item.model?.let { it1 -> item.bindVH(holder, it1, payloads) }
+                holder.itemView.setTag(R.id.list_adapter_item, item)
+            }
         }
     }
     override fun getItemViewType(position: Int): Int {

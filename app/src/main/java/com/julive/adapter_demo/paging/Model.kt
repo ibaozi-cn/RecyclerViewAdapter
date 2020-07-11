@@ -4,19 +4,12 @@ import androidx.lifecycle.ViewModel
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingSource
+import com.julive.adapter.core.SameModel
 import com.julive.adapter.paging.PagingItemViewModel
-import com.julive.adapter.paging.PageModel
 import com.julive.adapter_demo.R
 import kotlinx.coroutines.delay
 
-class PagingModelTest(val title: String) : PageModel {
-    override fun <T> isSameModelAs(model: T): Boolean {
-        return this == model
-    }
-    override fun <T> isContentTheSameAs(model: T): Boolean {
-        return this.title == (model as? PagingModelTest)?.title
-    }
-}
+class PagingModelTest(val title: String, override var uniqueId: String = title) : SameModel
 
 class PagingViewModel : ViewModel() {
 

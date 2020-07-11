@@ -1,28 +1,29 @@
-package com.julive.adapter_demo.dsl
+package com.julive.adapter_demo.diff
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
+import androidx.core.view.isVisible
 import com.julive.adapter.core.arrayItemViewModelDsl
 import com.julive.adapter.core.arrayListAdapter
 import com.julive.adapter.core.into
+import com.julive.adapter.diff.calculateDiff
 import com.julive.adapter_demo.R
 import com.julive.adapter_demo.sorted.ModelTest
-import kotlinx.android.synthetic.main.activity_adapter_dsl.*
+import kotlinx.android.synthetic.main.activity_diff.*
+import kotlinx.android.synthetic.main.include_button_bottom.*
 
-class AdapterDslActivity : AppCompatActivity() {
-
+class DiffActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_diff)
 
-        supportActionBar?.title = "ArrayListAdapter DSL"
+        supportActionBar?.title = "ArrayListAdapter Diff"
 
-        setContentView(R.layout.activity_adapter_dsl)
-
-        arrayListAdapter {
+        val adapter = arrayListAdapter {
             //循环添加ItemViewModel
-            (0..10).map {
+            (0..2).map {
                 add(
                     // ItemViewModel 对象 函数中传入布局IdRes
                     arrayItemViewModelDsl<ModelTest>(if (it % 2 == 0) R.layout.item_test else R.layout.item_test_2) {
@@ -32,6 +33,12 @@ class AdapterDslActivity : AppCompatActivity() {
                         onBindViewHolder { viewHolder ->
                             viewHolder.getView<TextView>(R.id.tv_title)?.text = model?.title
                             viewHolder.getView<TextView>(R.id.tv_subTitle)?.text = model?.subTitle
+                        }
+                        onBindViewHolder { vh, payload ->
+                            vh.getView<TextView>(R.id.tv_title)?.text =
+                                (payload as? ModelTest)?.title
+                            vh.getView<TextView>(R.id.tv_subTitle)?.text =
+                                (payload as? ModelTest)?.subTitle
                         }
                         // 点击处理
                         onItemClick { vm, vh ->
@@ -50,7 +57,35 @@ class AdapterDslActivity : AppCompatActivity() {
                 )
             }
             // 绑定 RecyclerView
-            into(rv_list_dsl)
+            into(rv_diff_list)
+        }
+        new_add.isVisible = false
+        delete.isVisible = false
+        update.setText("更新").setOnClickListener {
+            val list = buildDiffModelList()
+            adapter.calculateDiff(list)
         }
     }
 }
+
+fun buildDiffModelList() = (0..3).map {
+    // ItemViewModel 对象 函数中传入布局IdRes
+    // 布局和老数据正好相反，看看能不能直接替换更新
+    arrayItemViewModelDsl<ModelTest>(if (it % 2 == 0) R.layout.item_test else R.layout.item_test_2) {
+        // Model 数据模型
+        model = ModelTest("title$it", "Diff更新$it")
+        // 绑定数据
+        onBindViewHolder { viewHolder ->
+            viewHolder.getView<TextView>(R.id.tv_title)?.text = model?.title
+            viewHolder.getView<TextView>(R.id.tv_subTitle)?.text = model?.subTitle
+        }
+        onBindViewHolder { vh, payload ->
+            vh.getView<TextView>(R.id.tv_title)?.text =
+                (payload as? ModelTest)?.title
+            vh.getView<TextView>(R.id.tv_subTitle)?.text =
+                (payload as? ModelTest)?.subTitle
+        }
+    }
+}
+
+

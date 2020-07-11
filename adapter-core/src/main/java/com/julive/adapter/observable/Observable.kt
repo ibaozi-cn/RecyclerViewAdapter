@@ -61,6 +61,10 @@ open class ObservableArrayList<T> : ArrayList<T>(), ObservableList<T> {
         return added
     }
 
+     fun addAllOnly(collection: Collection<T>): Boolean {
+         return super.addAll(collection)
+    }
+
     override fun addAll(index: Int, collection: Collection<T>): Boolean {
         val added = super.addAll(index, collection)
         if (added) {
@@ -91,6 +95,10 @@ open class ObservableArrayList<T> : ArrayList<T>(), ObservableList<T> {
         return super.removeAt(index)
     }
 
+    fun removeAll() {
+        super.clear()
+    }
+
     override fun set(index: Int, element: T): T {
         val va = super.set(index, element)
         mListeners.notifyChanged(this, index, 1)
@@ -108,13 +116,6 @@ open class ObservableArrayList<T> : ArrayList<T>(), ObservableList<T> {
 
     private fun notifyRemove(start: Int, count: Int) {
         mListeners.notifyRemoved(this, start, count)
-    }
-
-    override fun removeAll(elements: Collection<T>): Boolean {
-        elements.forEach {
-            remove(it)
-        }
-        return super.removeAll(elements)
     }
 
 }

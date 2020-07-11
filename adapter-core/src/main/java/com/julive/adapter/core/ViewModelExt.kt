@@ -8,17 +8,24 @@ typealias  DefaultViewModelType <M, Adapter> = ViewModel<M, DefaultViewHolder, A
 typealias  ArrayViewModelType <M> = DefaultItemViewModel<M, ArrayListAdapter>
 
 typealias BindView = (DefaultViewHolder) -> Unit
+typealias BindViewPayload = (DefaultViewHolder, Any) -> Unit
 typealias ItemClick <M> = (viewModel: ArrayItemViewModel<M>, viewHolder: DefaultViewHolder) -> Unit
 
+@Suppress("UNCHECKED_CAST")
 abstract class DefaultItemViewModel<M, A : IAdapter<*>> : DefaultViewModelType<M, A> {
 
     override var adapter: A? = null
     override var model: M? = null
     private var bindView: BindView? = null
+    private var bindViewPayload: BindViewPayload? = null
     private var itemClick: ItemClick<M>? = null
 
     open fun onBindViewHolder(f: (DefaultViewHolder) -> Unit) {
         bindView = f
+    }
+
+    open fun onBindViewHolder(f: (DefaultViewHolder, Any) -> Unit) {
+        bindViewPayload = f
     }
 
     open fun onItemClick(f: (viewModel: ArrayItemViewModel<M>, viewHolder: DefaultViewHolder) -> Unit) {
@@ -40,7 +47,12 @@ abstract class DefaultItemViewModel<M, A : IAdapter<*>> : DefaultViewModelType<M
     }
 
     override fun bindVH(viewHolder: DefaultViewHolder, model: M, payloads: List<Any>) {
-        bindView?.invoke(viewHolder)
+        if (payloads.isNotEmpty()) {
+            this.model =  payloads[0] as M
+            bindViewPayload?.invoke(viewHolder, payloads[0])
+        }else{
+            bindView?.invoke(viewHolder)
+        }
     }
 
     override fun unBindVH(viewHolder: DefaultViewHolder) {}

@@ -4,6 +4,7 @@ import androidx.recyclerview.widget.SortedList
 import androidx.recyclerview.widget.SortedListAdapterCallback
 import com.julive.adapter.core.DefaultViewHolder
 import com.julive.adapter.core.ListAdapter
+import com.julive.adapter.core.SameModel
 
 /**
  * SortedList数据结构的适配器，自动排序，二分查找
@@ -18,22 +19,30 @@ class SortedListAdapter : ListAdapter<SortedItemVMType, DefaultViewHolder>(),
                     item1: SortedItemVMType,
                     item2: SortedItemVMType
                 ): Boolean {
-                    return item1.model?.isSameModelAs(item2.model)?:false
+                    return item1.model?.isSameModelAs(item2.model as SameModel) ?: false
                 }
 
                 override fun compare(
                     o1: SortedItemVMType,
                     o2: SortedItemVMType
                 ): Int {
-                    return o1.model?.compare(o2.model)?:0
+                    return o1.model?.compare(o2.model as SortedModel) ?: 0
                 }
 
                 override fun areContentsTheSame(
                     oldItem: SortedItemVMType,
                     newItem: SortedItemVMType
                 ): Boolean {
-                    return oldItem.model?.isContentTheSameAs(newItem.model)?:false
+                    return oldItem.model?.isContentTheSameAs(newItem.model as SameModel) ?: false
                 }
+
+                override fun getChangePayload(
+                    item1: SortedItemVMType,
+                    item2: SortedItemVMType?
+                ): Any? {
+                    return item1.model?.getChangePayload(item2?.model as SortedModel)
+                }
+
             })
     }
 
