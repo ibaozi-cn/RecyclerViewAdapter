@@ -48,6 +48,13 @@
 ## 如何依赖？
 
 ```
+allprojects {
+    repositories {
+        // 首先项目根目录的build.gradle文件中加入这一行 
+        maven { url 'https://jitpack.io' }
+    }
+}
+
 //核心库
 implementation com.github.ibaozi-cn.RecyclerViewAdapter:adapter-core:V1.0.0
 
