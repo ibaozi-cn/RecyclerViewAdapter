@@ -132,8 +132,12 @@ class AdapterDslActivity : AppCompatActivity() {
 ```
 
 #### 博客相关介绍
+
 [一个全新的RecyclerView Adapter框架源码开源](https://juejin.im/post/5f001c6b5188252e703ab676)
+
 [一个资深的Android是不是应该学会自己做一个超级的RecyclerView.Adapter](https://juejin.im/post/5ee640116fb9a047967349c7)
+
+[重学RecyclerView Adapter封装的深度思考和实现](https://juejin.im/post/5f09cbdce51d45349d6c1384)
 
 ## 开发者
 
