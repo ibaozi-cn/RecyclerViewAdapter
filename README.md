@@ -13,7 +13,7 @@
 - ~~SortedList 扩展~~
 - ~~Kotlin DSL扩展支持~~
 - ~~paging 3 扩展~~
-- DiffUtil 扩展
+- ~~DiffUtil 扩展~~
 - DataBinding 扩展
 - 等等.. 未来有好的想法继续扩展
 
