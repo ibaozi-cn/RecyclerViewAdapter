@@ -3,7 +3,12 @@
 重新定义RecyclerView Adapter的封装，追求既简单又实用，结合Kotlin的高级特性，优化代码书写方式，真正做到高内聚低耦合
 
 设计图
+
 ![Image](https://user-gold-cdn.xitu.io/2020/7/4/173187052f0c9ddf?w=1432&h=1098&f=png&s=132306)
+
+实现图
+
+![Image](https://user-gold-cdn.xitu.io/2020/7/12/173435b1b9267e6e?w=1432&h=1048&f=png&s=423709)
 
 ## 规划
 
