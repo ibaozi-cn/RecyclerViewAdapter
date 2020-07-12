@@ -33,8 +33,8 @@ class ArrayListAdapter :
         return observableDataList.isEmpty()
     }
 
-    override fun add(e: ArrayViewModelType<*>): Boolean {
-        return observableDataList.add(e)
+    override fun add(element: ArrayViewModelType<*>): Boolean {
+        return observableDataList.add(element)
     }
 
     override fun iterator(): MutableIterator<ArrayViewModelType<*>> {

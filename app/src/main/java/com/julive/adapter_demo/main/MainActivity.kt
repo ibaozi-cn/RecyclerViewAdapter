@@ -38,6 +38,7 @@ class MainActivity : AppCompatActivity() {
         btn_dsl.setText("AdapterDslActivity").setOnClickListener {
             startActivity<AdapterDslActivity>()
         }
+
         btn_diff.setText("DiffActivity").setOnClickListener {
             startActivity<DiffActivity>()
         }

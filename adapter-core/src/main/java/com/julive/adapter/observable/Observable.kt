@@ -52,9 +52,9 @@ open class ObservableArrayList<T> : ArrayList<T>(), ObservableList<T> {
         notifyAdd(index, 1)
     }
 
-    override fun addAll(collection: Collection<T>): Boolean {
+    override fun addAll(elements: Collection<T>): Boolean {
         val oldSize = size
-        val added = super.addAll(collection)
+        val added = super.addAll(elements)
         if (added) {
             notifyAdd(oldSize, size - oldSize)
         }
@@ -65,10 +65,10 @@ open class ObservableArrayList<T> : ArrayList<T>(), ObservableList<T> {
          return super.addAll(collection)
     }
 
-    override fun addAll(index: Int, collection: Collection<T>): Boolean {
-        val added = super.addAll(index, collection)
+    override fun addAll(index: Int, elements: Collection<T>): Boolean {
+        val added = super.addAll(index, elements)
         if (added) {
-            notifyAdd(index, collection.size)
+            notifyAdd(index, elements.size)
         }
         return added
     }

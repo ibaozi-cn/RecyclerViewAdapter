@@ -45,6 +45,27 @@
 |  SortedListAdapter | 排序超级容易 | 侵入性高，需要Model层继承实现，目前优化为接口，增加了可使用范围 | 任何需要排序的列表 | 
 |  PagingListAdapter | 自带加载状态，后台计算完成后通知刷新，加载效率高 | 侵入性高，需要Model层继承实现，学习成本高，掌握难度高 | 适合自动加载分页的列表 | 
 
+## 如何依赖？
+
+```
+//核心库
+implementation com.github.ibaozi-cn.RecyclerViewAdapter:adapter-core:V1.0.0
+
+//下面都是可选项
+
+//anko layout 扩展
+implementation com.github.ibaozi-cn.RecyclerViewAdapter:adapter-anko:V1.0.0
+//diffutil 扩展
+implementation com.github.ibaozi-cn.RecyclerViewAdapter:adapter-diff:V1.0.0
+//data binding扩展
+implementation com.github.ibaozi-cn.RecyclerViewAdapter:adapter-binding:V1.0.0
+// paging3 扩展
+implementation com.github.ibaozi-cn.RecyclerViewAdapter:adapter-paging:V1.0.0
+// sortedlist 扩展
+implementation com.github.ibaozi-cn.RecyclerViewAdapter:adapter-sorted:V1.0.0
+// flexbox 扩展
+implementation com.github.ibaozi-cn.RecyclerViewAdapter:adapter-flex:V1.0.0
+```
 
 ## 环境需要
 

@@ -13,11 +13,7 @@ abstract class ListAdapter<VM : ViewModel<*,*,*>, VH : RecyclerView.ViewHolder> 
     private val sparseArray = SparseArray<LayoutInflater>(1)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
-        val defaultViewHolder =
-            defaultViewHolderFactoryCache[viewType].getViewHolder(
-                parent,
-                sparseArray.get(0) ?: LayoutInflater.from(parent.context)
-            )
+        val defaultViewHolder = defaultViewHolderFactoryCache[viewType].getViewHolder(parent, sparseArray.get(0) ?: LayoutInflater.from(parent.context))
         defaultViewHolder.itemView.setTag(R.id.list_adapter, this)
         return defaultViewHolder
     }
@@ -62,6 +58,7 @@ abstract class ListAdapter<VM : ViewModel<*,*,*>, VH : RecyclerView.ViewHolder> 
     }
 
     override fun onDetachedFromRecyclerView(recyclerView: RecyclerView) {
+        defaultViewHolderFactoryCache.clear()
         sparseArray.clear()
     }
 }
