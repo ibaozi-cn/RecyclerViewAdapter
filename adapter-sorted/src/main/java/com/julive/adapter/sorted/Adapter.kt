@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.SortedListAdapterCallback
 import com.julive.adapter.core.DefaultViewHolder
 import com.julive.adapter.core.ListAdapter
 import com.julive.adapter.core.SameModel
+import java.util.logging.Handler
 
 /**
  * SortedList数据结构的适配器，自动排序，二分查找
@@ -113,7 +114,10 @@ class SortedListAdapter : ListAdapter<SortedItemVMType, DefaultViewHolder>(),
     }
 
     public fun updateItem(position: Int, element: SortedItemVMType) {
-        sortedList.updateItemAt(position, element)
+        sortedList.beginBatchedUpdates()
+        sortedList.removeItemAt(position)
+        sortedList.add(element)
+        sortedList.endBatchedUpdates()
     }
 
 }

@@ -6,18 +6,18 @@ import com.julive.adapter.observable.ObservableArrayList
  * ArrayList数据结构，所有特性跟随ArrayList
  */
 class ArrayListAdapter :
-    ListAdapter<ArrayViewModelType<*>, DefaultViewHolder>(),
-    MutableCollection<ArrayViewModelType<*>> {
+    ListAdapter<ViewModelType, DefaultViewHolder>(),
+    MutableCollection<ViewModelType> {
 
     private val observableDataList by lazy(LazyThreadSafetyMode.NONE) {
-        ObservableArrayList<ArrayViewModelType<*>>()
+        ObservableArrayList<ViewModelType>()
     }
 
     init {
         observableDataList.addOnListChangedCallback(OnItemListChangeCallback(this))
     }
 
-    override fun getItem(position: Int): ArrayViewModelType<*> {
+    override fun getItem(position: Int): ViewModelType {
         return observableDataList[position]
     }
 
@@ -33,23 +33,23 @@ class ArrayListAdapter :
         return observableDataList.isEmpty()
     }
 
-    override fun add(element: ArrayViewModelType<*>): Boolean {
+    override fun add(element: ViewModelType): Boolean {
         return observableDataList.add(element)
     }
 
-    override fun iterator(): MutableIterator<ArrayViewModelType<*>> {
+    override fun iterator(): MutableIterator<ViewModelType> {
         return observableDataList.iterator()
     }
 
-    fun add(index: Int, element: ArrayViewModelType<*>) {
+    fun add(index: Int, element: ViewModelType) {
         observableDataList.add(index, element)
     }
 
-    fun removeAt(index: Int): ArrayViewModelType<*> {
+    fun removeAt(index: Int): ViewModelType {
         return observableDataList.removeAt(index)
     }
 
-    fun set(index: Int, element: ArrayViewModelType<*>): ArrayViewModelType<*> {
+    fun set(index: Int, element: ViewModelType): ViewModelType {
         observableDataList[index] = element
         return element
     }
@@ -57,44 +57,44 @@ class ArrayListAdapter :
     override val size: Int
         get() = observableDataList.size
 
-    override fun contains(element: ArrayViewModelType<*>): Boolean {
+    override fun contains(element: ViewModelType): Boolean {
         return observableDataList.contains(element)
     }
 
-    override fun containsAll(elements: Collection<ArrayViewModelType<*>>): Boolean {
+    override fun containsAll(elements: Collection<ViewModelType>): Boolean {
         return observableDataList.containsAll(elements)
     }
 
-    override fun addAll(elements: Collection<ArrayViewModelType<*>>): Boolean {
+    override fun addAll(elements: Collection<ViewModelType>): Boolean {
         return observableDataList.addAll(elements)
     }
 
-    override fun remove(element: ArrayViewModelType<*>): Boolean {
+    override fun remove(element: ViewModelType): Boolean {
         return observableDataList.remove(element)
     }
 
     /**
      * 不会触发Adapter更新
      */
-    override fun removeAll(elements: Collection<ArrayViewModelType<*>>): Boolean {
+    override fun removeAll(elements: Collection<ViewModelType>): Boolean {
         return observableDataList.removeAll(elements)
     }
 
-    override fun retainAll(elements: Collection<ArrayViewModelType<*>>): Boolean {
+    override fun retainAll(elements: Collection<ViewModelType>): Boolean {
         return observableDataList.retainAll(elements)
     }
 
-    fun getAll(): List<ArrayViewModelType<*>> {
+    fun getAll(): List<ViewModelType> {
         return observableDataList
     }
 
-    fun indexOf(element: ArrayViewModelType<*>): Int {
+    fun indexOf(element: ViewModelType): Int {
         return observableDataList.indexOf(element)
     }
 
      fun replayAll(list: List<*>) {
         observableDataList.removeAll()
-        observableDataList.addAllOnly(list as List<ArrayViewModelType<*>>)
+        observableDataList.addAllOnly(list as List<ViewModelType>)
     }
 
 }

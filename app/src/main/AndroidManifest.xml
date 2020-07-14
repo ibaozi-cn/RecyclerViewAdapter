@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".diff.DiffActivity"></activity>
+        <activity android:name=".binding.DataBindingActivity"></activity>
+        <activity android:name=".diff.DiffActivity" />
         <activity android:name=".paging.Paging3Activity" />
         <activity android:name=".dsl.AdapterDslActivity" />
         <activity android:name=".sorted.SortedActivity" />

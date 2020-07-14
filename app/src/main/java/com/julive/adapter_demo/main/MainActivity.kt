@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.julive.adapter_demo.R
 import com.julive.adapter_demo.anko.AnkoLayoutActivity
+import com.julive.adapter_demo.binding.DataBindingActivity
 import com.julive.adapter_demo.core.ArrayListActivity
 import com.julive.adapter_demo.diff.DiffActivity
 import com.julive.adapter_demo.dsl.AdapterDslActivity
@@ -41,6 +42,10 @@ class MainActivity : AppCompatActivity() {
 
         btn_diff.setText("DiffActivity").setOnClickListener {
             startActivity<DiffActivity>()
+        }
+
+        btn_binding.setText("DataBindingActivity").setOnClickListener {
+            startActivity<DataBindingActivity>()
         }
 
     }

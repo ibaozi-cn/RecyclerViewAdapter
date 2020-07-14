@@ -17,7 +17,7 @@ import org.jetbrains.anko.*
 /**
  * AnkoItemView
  */
-class AnkoItemView() : AnkoComponent<ViewGroup> {
+class AnkoItemView : AnkoComponent<ViewGroup> {
 
     var tvTitle: TextView? = null
     var tvSubTitle: TextView? = null

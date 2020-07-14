@@ -42,7 +42,7 @@ data class SortedModelTest(
 /**
  *
  */
-class SortedItemViewModelTest : SortedItemViewModel<SortedModelTest, DefaultViewHolder>() {
+class SortedItemViewModelTest : SortedItemViewModel<SortedModelTest, DefaultViewHolder>(R.layout.item_test) {
 
     init {
         onBindViewHolder {viewHolder->
@@ -58,8 +58,6 @@ class SortedItemViewModelTest : SortedItemViewModel<SortedModelTest, DefaultView
         return ItemViewHolder(layoutInflater.inflate(layoutRes, parent, false))
     }
 
-    override val layoutRes: Int
-        get() = R.layout.item_test
 }
 
 class ItemViewHolder(view: View) : DefaultViewHolder(view) {

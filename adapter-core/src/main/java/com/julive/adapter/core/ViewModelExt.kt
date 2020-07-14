@@ -1,15 +1,16 @@
 package com.julive.adapter.core
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
-import java.lang.Exception
 
+typealias  ViewModelType = ViewModel<*,*,*>
 typealias  DefaultViewModelType <M, Adapter> = ViewModel<M, DefaultViewHolder, Adapter>
 typealias  ArrayViewModelType <M> = DefaultItemViewModel<M, ArrayListAdapter>
 
 typealias BindView = (DefaultViewHolder) -> Unit
 typealias BindViewPayload = (DefaultViewHolder, Any) -> Unit
-typealias ItemClick <M> = (viewModel: ArrayItemViewModel<M>, viewHolder: DefaultViewHolder) -> Unit
+typealias ItemClick <M> = (viewModel: DefaultViewModelType<M, *>, viewHolder: DefaultViewHolder) -> Unit
 
 @Suppress("UNCHECKED_CAST")
 abstract class DefaultItemViewModel<M, A : IAdapter<*>> : DefaultViewModelType<M, A> {
@@ -28,18 +29,24 @@ abstract class DefaultItemViewModel<M, A : IAdapter<*>> : DefaultViewModelType<M
         bindViewPayload = f
     }
 
-    open fun onItemClick(f: (viewModel: ArrayItemViewModel<M>, viewHolder: DefaultViewHolder) -> Unit) {
+    open fun onItemClick(f: (viewModel: DefaultViewModelType<M, *>, viewHolder: DefaultViewHolder) -> Unit) {
         itemClick = f
     }
+
+    abstract
+    fun getHolderItemView(
+        parent: ViewGroup,
+        layoutInflater: LayoutInflater
+    ): View
 
     override fun getViewHolder(
         parent: ViewGroup,
         layoutInflater: LayoutInflater
     ): DefaultViewHolder {
-        return DefaultViewHolder(layoutInflater.inflate(layoutRes, parent, false)).apply {
+        return DefaultViewHolder(getHolderItemView(parent, layoutInflater)).apply {
             itemView.setOnClickListener {
                 itemClick?.invoke(
-                    adapter?.getItem(adapterPosition) as @ParameterName(name = "viewModel") ArrayItemViewModel<M>,
+                    adapter?.getItem(adapterPosition) as @ParameterName(name = "viewModel") DefaultItemViewModel<M, *>,
                     this
                 )
             }
@@ -48,9 +55,9 @@ abstract class DefaultItemViewModel<M, A : IAdapter<*>> : DefaultViewModelType<M
 
     override fun bindVH(viewHolder: DefaultViewHolder, model: M, payloads: List<Any>) {
         if (payloads.isNotEmpty()) {
-            this.model =  payloads[0] as M
+            this.model = payloads[0] as M
             bindViewPayload?.invoke(viewHolder, payloads[0])
-        }else{
+        } else {
             bindView?.invoke(viewHolder)
         }
     }
@@ -58,4 +65,8 @@ abstract class DefaultItemViewModel<M, A : IAdapter<*>> : DefaultViewModelType<M
     override fun unBindVH(viewHolder: DefaultViewHolder) {}
 }
 
-open class ArrayItemViewModel<M>(override val layoutRes: Int) : ArrayViewModelType<M>()
+open class ArrayItemViewModel<M>(override val layoutRes: Int) : ArrayViewModelType<M>() {
+    override fun getHolderItemView(parent: ViewGroup, layoutInflater: LayoutInflater): View {
+        return layoutInflater.inflate(layoutRes, parent, false)
+    }
+}

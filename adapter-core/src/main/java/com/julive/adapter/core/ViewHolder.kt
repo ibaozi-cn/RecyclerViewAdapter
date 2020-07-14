@@ -33,7 +33,6 @@ open class DefaultViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
     fun <Adapter : ListAdapter<*, *>> getAdapter(): Adapter? {
         return this.itemView.getTag(R.id.list_adapter) as? Adapter
     }
-
 }
 
 typealias GenericViewHolderFactory = ViewHolderFactory<out RecyclerView.ViewHolder>

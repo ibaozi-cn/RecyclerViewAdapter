@@ -34,8 +34,13 @@
         android:id="@+id/btn_dsl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+
     <com.julive.adapter_demo.ext.CardButtonView
         android:id="@+id/btn_diff"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <com.julive.adapter_demo.ext.CardButtonView
+        android:id="@+id/btn_binding"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 

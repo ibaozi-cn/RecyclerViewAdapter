@@ -17,7 +17,7 @@ import kotlin.random.Random
  */
 class AnkoLayoutActivity : AppCompatActivity() {
 
-    private val mAnkoListAdapter by lazy {
+    private val arrayListAdapter by lazy {
         ArrayListAdapter()
     }
 
@@ -25,17 +25,17 @@ class AnkoLayoutActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         supportActionBar?.title = "ArrayListAdapter"
         var index = 0
-        AnkoLayoutComponent(mAnkoListAdapter).setContentView(this).apply {
+        AnkoLayoutComponent(arrayListAdapter).setContentView(this).apply {
             // 新增一个
             new_add.setText("新增").setOnClickListener {
-                mAnkoListAdapter.add(AnkoViewModelTest().apply {
+                arrayListAdapter.add(AnkoViewModelTest().apply {
                     model = ModelTest("标题${++index}", "副标题")
                 })
             }
             // 删除第一个
             delete.setText("删除").setOnClickListener {
-                if (mAnkoListAdapter.size > 0)
-                    mAnkoListAdapter.removeAt(0)
+                if (arrayListAdapter.size > 0)
+                    arrayListAdapter.removeAt(0)
                 else
                     toast("请添加新用例后再试")
             }
@@ -43,9 +43,9 @@ class AnkoLayoutActivity : AppCompatActivity() {
             var updateSize = 0
             update.setText("更新").setOnClickListener {
                 updateSize++
-                if (mAnkoListAdapter.size > 0) {
-                    val randomInt = Random.nextInt(0, mAnkoListAdapter.size)
-                    mAnkoListAdapter.set(randomInt, mAnkoListAdapter.getItem(randomInt).apply {
+                if (arrayListAdapter.size > 0) {
+                    val randomInt = Random.nextInt(0, arrayListAdapter.size)
+                    arrayListAdapter.set(randomInt, arrayListAdapter.getItem(randomInt).apply {
                         model.also {
                             it as ModelTest
                             it.title = "$updateSize"
@@ -65,8 +65,7 @@ class AnkoLayoutActivity : AppCompatActivity() {
  * View
  *
  */
-class AnkoLayoutComponent(private val ankoListAdapter: ArrayListAdapter) :
-    AnkoComponent<AnkoLayoutActivity> {
+class AnkoLayoutComponent(private val ankoListAdapter: ArrayListAdapter) : AnkoComponent<AnkoLayoutActivity> {
 
     override fun createView(ui: AnkoContext<AnkoLayoutActivity>) = with(ui) {
 
