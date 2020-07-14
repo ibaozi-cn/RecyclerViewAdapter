@@ -3,7 +3,18 @@
 重新定义RecyclerView Adapter的封装，追求既简单又实用，结合Kotlin的高级特性，优化代码书写方式，真正做到高内聚低耦合
 
 设计图
-![Image](https://user-gold-cdn.xitu.io/2020/7/4/173187052f0c9ddf?w=1432&h=1098&f=png&s=132306)
+
+![设计图](https://user-gold-cdn.xitu.io/2020/7/4/173187052f0c9ddf?w=1432&h=1098&f=png&s=132306)
+看不见图？
+点该链接
+https://user-gold-cdn.xitu.io/2020/7/4/173187052f0c9ddf?w=1432&h=1098&f=png&s=132306
+
+实现图
+
+![实现图](https://user-gold-cdn.xitu.io/2020/7/12/173435b1b9267e6e?w=1432&h=1048&f=png&s=423709)
+看不见图？
+点该链接
+https://user-gold-cdn.xitu.io/2020/7/12/173435b1b9267e6e?w=1432&h=1048&f=png&s=423709
 
 ## 规划
 
@@ -132,8 +143,12 @@ class AdapterDslActivity : AppCompatActivity() {
 ```
 
 #### 博客相关介绍
+
 [一个全新的RecyclerView Adapter框架源码开源](https://juejin.im/post/5f001c6b5188252e703ab676)
+
 [一个资深的Android是不是应该学会自己做一个超级的RecyclerView.Adapter](https://juejin.im/post/5ee640116fb9a047967349c7)
+
+[重学RecyclerView Adapter封装的深度思考和实现](https://juejin.im/post/5f09cbdce51d45349d6c1384)
 
 ## 开发者
 
