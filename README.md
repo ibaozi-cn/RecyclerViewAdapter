@@ -70,22 +70,22 @@ allprojects {
 }
 
 //核心库
-implementation com.github.ibaozi-cn.RecyclerViewAdapter:adapter-core:V1.0.0
+implementation com.github.ibaozi-cn.RecyclerViewAdapter:adapter-core:V1.0.1
 
 //下面都是可选项
 
 //anko layout 扩展
-implementation com.github.ibaozi-cn.RecyclerViewAdapter:adapter-anko:V1.0.0
+implementation com.github.ibaozi-cn.RecyclerViewAdapter:adapter-anko:V1.0.1
 //diffutil 扩展
-implementation com.github.ibaozi-cn.RecyclerViewAdapter:adapter-diff:V1.0.0
+implementation com.github.ibaozi-cn.RecyclerViewAdapter:adapter-diff:V1.0.1
 //data binding扩展
-implementation com.github.ibaozi-cn.RecyclerViewAdapter:adapter-binding:V1.0.0
+implementation com.github.ibaozi-cn.RecyclerViewAdapter:adapter-binding:V1.0.1
 // paging3 扩展
-implementation com.github.ibaozi-cn.RecyclerViewAdapter:adapter-paging:V1.0.0
+implementation com.github.ibaozi-cn.RecyclerViewAdapter:adapter-paging:V1.0.1
 // sortedlist 扩展
-implementation com.github.ibaozi-cn.RecyclerViewAdapter:adapter-sorted:V1.0.0
+implementation com.github.ibaozi-cn.RecyclerViewAdapter:adapter-sorted:V1.0.1
 // flexbox 扩展
-implementation com.github.ibaozi-cn.RecyclerViewAdapter:adapter-flex:V1.0.0
+implementation com.github.ibaozi-cn.RecyclerViewAdapter:adapter-flex:V1.0.1
 ```
 
 ## 环境需要
