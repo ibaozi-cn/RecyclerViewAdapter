@@ -25,7 +25,7 @@ https://user-gold-cdn.xitu.io/2020/7/12/173435b1b9267e6e?w=1432&h=1048&f=png&s=4
 - ~~Kotlin DSL扩展支持~~
 - ~~paging 3 扩展~~
 - ~~DiffUtil 扩展~~
-- DataBinding 扩展
+- ~~DataBinding 扩展~~
 - 等等.. 未来有好的想法继续扩展
 
 现在有ArrayListAdapter，SortedListAdapter、PagingAdapter，为啥这么设计呢？
@@ -43,10 +43,13 @@ https://user-gold-cdn.xitu.io/2020/7/12/173435b1b9267e6e?w=1432&h=1048&f=png&s=4
 
 |  名字   | release aar size  | 其他 |
 |  ----  | ----  | ----  | 
-| Core | 35kb | 核心库目前包含ArrayListAdapter的实现，最基础且最实用的扩展 |
-| Anko | 9kb | 同样是ArrayListAdapter,由于做了高度的抽象，所以目前剔除AnkoListAdapter，用ArrayListAdapter代替 |
+| Core | 37kb | 核心库目前包含ArrayListAdapter的实现，最基础且最实用的扩展 |
+| Anko | 8kb | 同样是ArrayListAdapter,由于做了高度的抽象，所以目前剔除AnkoListAdapter，用ArrayListAdapter代替 |
 | Sorted | 11kb | SortedListAdapter扩展实现 |
 | Paging | 14kb | PagingListAdapter扩展适配 |
+| DataBinding | 19kb | 适配DataBinding布局，适用任何Adapter |
+| Diff | 6kb | 适配DiffUtil，适用ArrayListAdapter |
+| FlexBox | 9kb | 适配FlexBox布局 |
 
 ## 各个Adapter的优势在哪，如何选择？
 
