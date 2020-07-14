@@ -7,7 +7,7 @@ import com.julive.adapter_demo.sorted.ModelTest
 import java.util.*
 
 class BindingItemViewModelTest :
-    BindingItemViewModel<ModelTest>(R.layout.item_binding_layout, BR.itemViewModel) {
+    BindingItemViewModel<ModelTest>(R.layout.item_binding_layout, BR.model) {
 
     init {
 

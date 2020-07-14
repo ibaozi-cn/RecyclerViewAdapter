@@ -4,7 +4,7 @@
 
     <data>
         <variable
-            name="itemViewModel"
+            name="model"
             type="com.julive.adapter_demo.sorted.ModelTest" />
     </data>
 
@@ -23,7 +23,7 @@
 
             <TextView
                 android:id="@+id/tv_title"
-                android:text="@{itemViewModel.title}"
+                android:text="@{model.title}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorPrimary"
@@ -31,7 +31,7 @@
 
             <TextView
                 android:id="@+id/tv_subTitle"
-                android:text="@{itemViewModel.subTitle}"
+                android:text="@{model.subTitle}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorAccent"
