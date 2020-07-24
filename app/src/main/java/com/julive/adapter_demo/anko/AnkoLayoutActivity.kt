@@ -58,9 +58,6 @@ class AnkoLayoutActivity : AppCompatActivity() {
             }
 
         }
-
-        arrayListAdapter.add(LayoutViewModel<ModelTest>(R.layout.item_binding_layout))
-
     }
 
 }
@@ -69,7 +66,8 @@ class AnkoLayoutActivity : AppCompatActivity() {
  * View
  *
  */
-class AnkoLayoutComponent(private val ankoListAdapter: ListAdapter) : AnkoComponent<AnkoLayoutActivity> {
+class AnkoLayoutComponent(private val ankoListAdapter: ListAdapter) :
+    AnkoComponent<AnkoLayoutActivity> {
 
     override fun createView(ui: AnkoContext<AnkoLayoutActivity>) = with(ui) {
 
@@ -82,9 +80,7 @@ class AnkoLayoutComponent(private val ankoListAdapter: ListAdapter) : AnkoCompon
             }
             // Anko 兼容 xml布局的加载
             include<View>(R.layout.include_button_bottom)
-
         }
-
     }
 
 }

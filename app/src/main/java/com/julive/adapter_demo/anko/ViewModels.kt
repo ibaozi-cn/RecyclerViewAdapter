@@ -22,7 +22,6 @@ class AnkoItemView : AnkoComponent<ViewGroup> {
     var tvTitle: TextView? = null
     var tvSubTitle: TextView? = null
     var view: View? = null
-    var itemClick: (() -> Unit)? = null
 
     @SuppressLint("ResourceType")
     override fun createView(ui: AnkoContext<ViewGroup>) = with(ui) {
@@ -37,10 +36,6 @@ class AnkoItemView : AnkoComponent<ViewGroup> {
             }
 
             verticalLayout {
-
-                setOnClickListener {
-                    itemClick?.invoke()
-                }
 
                 val typedValue = TypedValue()
                 context.theme
@@ -79,21 +74,23 @@ class AnkoItemView : AnkoComponent<ViewGroup> {
  */
 class AnkoViewModelTest : AnkoViewModel<ModelTest, AnkoItemView>() {
     init {
-        onBindViewHolder { viewHolder ->
-            getAnkoView(viewHolder).tvTitle?.text = model?.title
-            getAnkoView(viewHolder).tvSubTitle?.text = model?.subTitle
-            getAnkoView(viewHolder).itemClick = {
-                Log.d("AnkoViewModelTest", "正确的model${model}")
-                Log.d("AnkoViewModelTest", "正确的model${model}")
-
-                Log.d("AnkoViewModelTest", "adapter$adapter")
-                Log.d("AnkoViewModelTest", "viewHolder${viewHolder.adapterPosition}")
-                model?.title = "点击更新"
-                adapter?.set(viewHolder.adapterPosition, this)
-            }
+        onCreateView {
+            AnkoItemView()
         }
-    }
-    override fun onCreateView(): AnkoItemView {
-        return AnkoItemView()
+        onBindViewHolder { viewHolder ->
+            val ankoView = getAnkoView(viewHolder)
+            Log.d("AnkoViewModelTest", "ankoView=${ankoView}")
+            ankoView.tvTitle?.text = model?.title
+            ankoView.tvSubTitle?.text = model?.subTitle
+        }
+        onItemClick { viewModel, viewHolder ->
+//            Log.d("AnkoViewModelTest", "正确的model${model}")
+//            Log.d("AnkoViewModelTest", "正确的model${model}")
+//
+//            Log.d("AnkoViewModelTest", "adapter$adapter")
+//            Log.d("AnkoViewModelTest", "viewHolder${viewHolder.adapterPosition}")
+            viewModel.model?.title = "点击更新"
+            adapter?.set(viewHolder.adapterPosition, viewModel)
+        }
     }
 }
