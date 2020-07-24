@@ -1,11 +1,11 @@
 package com.julive.adapter.diff
 
 import androidx.recyclerview.widget.DiffUtil
-import com.julive.adapter.core.ArrayListAdapter
-import com.julive.adapter.core.DefaultItemViewModel
+import com.julive.adapter.core.ListAdapter
+import com.julive.adapter.core.DefaultViewModel
 import com.julive.adapter.core.SameModel
 
-typealias  ArrayViewModelDiffType = DefaultItemViewModel<out SameModel, ArrayListAdapter>
+typealias  ArrayViewModelDiffType = DefaultViewModel<out SameModel, ListAdapter>
 
 class ArrayListAdapterCallBack<VM : ArrayViewModelDiffType>(
     private val oldItems: List<VM>,

@@ -7,7 +7,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.julive.adapter.core.ArrayListAdapter
+import com.julive.adapter.core.ListAdapter
 import com.julive.adapter.core.bindListAdapter
 import com.julive.adapter.flex.flexboxLayoutMangerDefault
 import com.julive.adapter_demo.R
@@ -23,7 +23,7 @@ import kotlin.random.Random
 class ArrayListActivity : AppCompatActivity() {
 
     private val mArrayListAdapter by lazy {
-        ArrayListAdapter()
+        ListAdapter()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

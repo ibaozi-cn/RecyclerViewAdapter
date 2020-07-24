@@ -7,13 +7,12 @@ import androidx.paging.*
 import androidx.recyclerview.widget.AdapterListUpdateCallback
 import androidx.recyclerview.widget.ConcatAdapter
 import com.julive.adapter.core.DefaultViewHolder
-import com.julive.adapter.core.ListAdapter
+import com.julive.adapter.core.ViewHolderCacheAdapter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.Flow
-import java.lang.Exception
 
-class PagingListAdapter : ListAdapter<PagingItemViewModel<*>, DefaultViewHolder>() {
+class PagingListAdapter : ViewHolderCacheAdapter<PagingItemViewModel<*>, DefaultViewHolder>() {
 
     private val differ = AsyncPagingDataDiffer(
         diffCallback = DiffViewModelCallBack(),

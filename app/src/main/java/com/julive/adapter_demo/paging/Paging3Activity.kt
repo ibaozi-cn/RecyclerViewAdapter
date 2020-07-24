@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadState
+import androidx.paging.LoadStateAdapter
 import androidx.paging.PagingData
 import com.julive.adapter.core.bindListAdapter
 import com.julive.adapter.paging.PagingListAdapter
@@ -37,7 +38,8 @@ class Paging3Activity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_paging3)
-        rv_paging_list.bindListAdapter(pagingListAdapter)
+
+        rv_paging_list.bindListAdapter(pagingListAdapter.withLoadStateFooter(PagingLoadStateAdapter()))
 
         lifecycleScope.launch {
             viewModel.pager.collect {
@@ -47,7 +49,7 @@ class Paging3Activity : AppCompatActivity() {
 
         pagingListAdapter.addLoadStateListener { loadStates ->
             update.isVisible = loadStates.append is LoadState.Error
-            refresh_paging_layout.isRefreshing = loadStates.append is LoadState.Loading
+            refresh_paging_layout.isRefreshing = loadStates.refresh is LoadState.Loading
         }
 
         new_add.setText("新增")

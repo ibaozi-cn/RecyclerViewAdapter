@@ -4,16 +4,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
-typealias  ViewModelType = ViewModel<*,*,*>
+typealias  ViewModelType = ViewModel<*, *, *>
 typealias  DefaultViewModelType <M, Adapter> = ViewModel<M, DefaultViewHolder, Adapter>
-typealias  ArrayViewModelType <M> = DefaultItemViewModel<M, ArrayListAdapter>
 
 typealias BindView = (DefaultViewHolder) -> Unit
 typealias BindViewPayload = (DefaultViewHolder, Any) -> Unit
 typealias ItemClick <M> = (viewModel: DefaultViewModelType<M, *>, viewHolder: DefaultViewHolder) -> Unit
 
 @Suppress("UNCHECKED_CAST")
-abstract class DefaultItemViewModel<M, A : IAdapter<*>> : DefaultViewModelType<M, A> {
+abstract class DefaultViewModel<M, A : IAdapter<*>> : DefaultViewModelType<M, A> {
 
     override var adapter: A? = null
     override var model: M? = null
@@ -46,7 +45,7 @@ abstract class DefaultItemViewModel<M, A : IAdapter<*>> : DefaultViewModelType<M
         return DefaultViewHolder(getHolderItemView(parent, layoutInflater)).apply {
             itemView.setOnClickListener {
                 itemClick?.invoke(
-                    adapter?.getItem(adapterPosition) as @ParameterName(name = "viewModel") DefaultItemViewModel<M, *>,
+                    adapter?.getItem(adapterPosition) as @ParameterName(name = "viewModel") DefaultViewModel<M, *>,
                     this
                 )
             }
@@ -65,7 +64,7 @@ abstract class DefaultItemViewModel<M, A : IAdapter<*>> : DefaultViewModelType<M
     override fun unBindVH(viewHolder: DefaultViewHolder) {}
 }
 
-open class ArrayItemViewModel<M>(override val layoutRes: Int) : ArrayViewModelType<M>() {
+open class LayoutViewModel<M>(override val layoutRes: Int) : DefaultViewModel<M, ListAdapter>() {
     override fun getHolderItemView(parent: ViewGroup, layoutInflater: LayoutInflater): View {
         return layoutInflater.inflate(layoutRes, parent, false)
     }

@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.TextView
-import com.julive.adapter.anko.AnkoItemViewModel
+import com.julive.adapter.anko.AnkoViewModel
 import com.julive.adapter_demo.R
 import com.julive.adapter_demo.ext.cardView
 import com.julive.adapter_demo.sorted.ModelTest
@@ -77,7 +77,7 @@ class AnkoItemView : AnkoComponent<ViewGroup> {
 /**
  * ViewModel
  */
-class AnkoViewModelTest : AnkoItemViewModel<ModelTest, AnkoItemView>() {
+class AnkoViewModelTest : AnkoViewModel<ModelTest, AnkoItemView>() {
     init {
         onBindViewHolder { viewHolder ->
             getAnkoView(viewHolder).tvTitle?.text = model?.title

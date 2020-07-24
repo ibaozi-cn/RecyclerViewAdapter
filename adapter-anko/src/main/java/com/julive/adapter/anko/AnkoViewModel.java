@@ -5,16 +5,16 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.recyclerview.widget.RecyclerView;
-import com.julive.adapter.core.ArrayListAdapter;
-import com.julive.adapter.core.DefaultItemViewModel;
+import com.julive.adapter.core.ListAdapter;
+import com.julive.adapter.core.DefaultViewModel;
 import com.julive.adapter_anko.R;
 
 import org.jetbrains.anko.AnkoComponent;
 import org.jetbrains.anko.AnkoContext;
 import org.jetbrains.annotations.NotNull;
 
-public abstract class AnkoItemViewModel<M, AnkoView extends AnkoComponent<ViewGroup>>
-        extends DefaultItemViewModel<M, ArrayListAdapter> {
+public abstract class AnkoViewModel<M, AnkoView extends AnkoComponent<ViewGroup>>
+        extends DefaultViewModel<M, ListAdapter> {
 
     @Override
     public int getLayoutRes() {

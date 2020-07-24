@@ -1,16 +1,16 @@
 package com.julive.adapter.core
 
-fun arrayListAdapter(block: ArrayListAdapter.() -> Unit): ArrayListAdapter {
-    return ArrayListAdapter().apply {
+fun listAdapter(block: ListAdapter.() -> Unit): ListAdapter {
+    return ListAdapter().apply {
         block()
     }
 }
 
-fun <M> arrayItemViewModelDsl(
+fun <M> layoutViewModelDsl(
     layoutRes: Int,
-    init: ArrayItemViewModel<M>.() -> Unit
-): ArrayItemViewModel<M> {
-    return ArrayItemViewModel<M>(layoutRes).apply {
+    init: LayoutViewModel<M>.() -> Unit
+): LayoutViewModel<M> {
+    return LayoutViewModel<M>(layoutRes).apply {
         init()
     }
 }

@@ -5,8 +5,8 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
 import androidx.core.view.isVisible
-import com.julive.adapter.core.arrayItemViewModelDsl
-import com.julive.adapter.core.arrayListAdapter
+import com.julive.adapter.core.layoutViewModelDsl
+import com.julive.adapter.core.listAdapter
 import com.julive.adapter.core.into
 import com.julive.adapter.diff.calculateDiff
 import com.julive.adapter_demo.R
@@ -21,12 +21,12 @@ class DiffActivity : AppCompatActivity() {
 
         supportActionBar?.title = "ArrayListAdapter Diff"
 
-        val adapter = arrayListAdapter {
+        val adapter = listAdapter {
             //循环添加ItemViewModel
             (0..2).map {
                 add(
                     // ItemViewModel 对象 函数中传入布局IdRes
-                    arrayItemViewModelDsl<ModelTest>(if (it % 2 == 0) R.layout.item_test else R.layout.item_test_2) {
+                    layoutViewModelDsl<ModelTest>(if (it % 2 == 0) R.layout.item_test else R.layout.item_test_2) {
                         // Model 数据模型
                         model = ModelTest("title$it", "subTitle$it")
                         // 绑定数据
@@ -71,7 +71,7 @@ class DiffActivity : AppCompatActivity() {
 fun buildDiffModelList() = (0..3).map {
     // ItemViewModel 对象 函数中传入布局IdRes
     // 布局和老数据正好相反，看看能不能直接替换更新
-    arrayItemViewModelDsl<ModelTest>(if (it % 2 == 0) R.layout.item_test else R.layout.item_test_2) {
+    layoutViewModelDsl<ModelTest>(if (it % 2 == 0) R.layout.item_test else R.layout.item_test_2) {
         // Model 数据模型
         model = ModelTest("title$it", "Diff更新$it")
         // 绑定数据

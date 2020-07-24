@@ -6,12 +6,12 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
-import com.julive.adapter.core.ArrayListAdapter
-import com.julive.adapter.core.DefaultItemViewModel
+import com.julive.adapter.core.ListAdapter
+import com.julive.adapter.core.DefaultViewModel
 import com.julive.adapter.core.DefaultViewHolder
 
-open class BindingItemViewModel<M>(override val layoutRes: Int, private val variableId: Int) :
-    DefaultItemViewModel<M, ArrayListAdapter>() {
+open class BindingViewModel<M>(override val layoutRes: Int, private val variableId: Int) :
+    DefaultViewModel<M, ListAdapter>() {
 
     override fun getHolderItemView(parent: ViewGroup, layoutInflater: LayoutInflater): View {
         val binding = DataBindingUtil.inflate<ViewDataBinding>(

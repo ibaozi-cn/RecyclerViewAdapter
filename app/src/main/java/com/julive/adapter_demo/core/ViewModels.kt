@@ -1,7 +1,7 @@
 package com.julive.adapter_demo.core
 
 import android.widget.TextView
-import com.julive.adapter.core.ArrayItemViewModel
+import com.julive.adapter.core.LayoutViewModel
 import com.julive.adapter_demo.R
 import com.julive.adapter_demo.sorted.ModelTest
 import java.util.*
@@ -10,7 +10,7 @@ import java.util.*
  * ViewModel
  */
 
-class ArrayViewModelTest : ArrayItemViewModel<ModelTest>(R.layout.item_test) {
+class ArrayViewModelTest : LayoutViewModel<ModelTest>(R.layout.item_test) {
 
     init {
 

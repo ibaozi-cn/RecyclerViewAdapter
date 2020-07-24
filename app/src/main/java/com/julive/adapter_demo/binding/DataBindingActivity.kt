@@ -2,7 +2,7 @@ package com.julive.adapter_demo.binding
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.julive.adapter.core.ArrayListAdapter
+import com.julive.adapter.core.ListAdapter
 import com.julive.adapter.core.bindListAdapter
 import com.julive.adapter_demo.R
 import com.julive.adapter_demo.sorted.ModelTest
@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.activity_data_binding.*
 class DataBindingActivity : AppCompatActivity() {
 
     private val mArrayListAdapter by lazy {
-        ArrayListAdapter()
+        ListAdapter()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

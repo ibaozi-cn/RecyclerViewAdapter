@@ -4,8 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
-import com.julive.adapter.core.arrayItemViewModelDsl
-import com.julive.adapter.core.arrayListAdapter
+import com.julive.adapter.core.layoutViewModelDsl
+import com.julive.adapter.core.listAdapter
 import com.julive.adapter.core.into
 import com.julive.adapter_demo.R
 import com.julive.adapter_demo.sorted.ModelTest
@@ -20,12 +20,12 @@ class AdapterDslActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_adapter_dsl)
 
-        arrayListAdapter {
+        listAdapter {
             //循环添加ItemViewModel
             (0..10).map {
                 add(
                     // ItemViewModel 对象 函数中传入布局IdRes
-                    arrayItemViewModelDsl<ModelTest>(if (it % 2 == 0) R.layout.item_test else R.layout.item_test_2) {
+                    layoutViewModelDsl<ModelTest>(if (it % 2 == 0) R.layout.item_test else R.layout.item_test_2) {
                         // Model 数据模型
                         model = ModelTest("title$it", "subTitle$it")
                         // 绑定数据

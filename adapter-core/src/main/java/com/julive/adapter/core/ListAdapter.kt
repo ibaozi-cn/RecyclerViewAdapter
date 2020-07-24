@@ -1,64 +1,111 @@
 package com.julive.adapter.core
 
-import android.util.SparseArray
-import android.view.LayoutInflater
-import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
-import com.julive.adapter_core.R
-import java.util.*
 
-abstract class ListAdapter<VM : ViewModel<*,*,*>, VH : RecyclerView.ViewHolder> : RecyclerView.Adapter<VH>(), IAdapter<VM> {
+/**
+ * 抽象为List数据结构
+ */
+class ListAdapter :
+    ViewHolderCacheAdapter<ViewModelType, DefaultViewHolder>(),
+    MutableCollection<ViewModelType> {
+    /**
+     * 默认ArrayList数据结构
+     */
+    var dataList = mutableListOf<ViewModelType>()
 
-    private val defaultViewHolderFactoryCache = DefaultViewHolderFactoryCache<ViewHolderFactory<VH>>()
-    private val sparseArray = SparseArray<LayoutInflater>(1)
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
-        val defaultViewHolder = defaultViewHolderFactoryCache[viewType].getViewHolder(parent, sparseArray.get(0) ?: LayoutInflater.from(parent.context))
-        defaultViewHolder.itemView.setTag(R.id.list_adapter, this)
-        return defaultViewHolder
+    override fun getItem(position: Int): ViewModelType {
+        return dataList[position]
     }
 
-    override fun onBindViewHolder(holder: VH, position: Int) {
-        onBindViewHolder(holder, position, Collections.emptyList())
+    override fun getItemCount(): Int {
+        return dataList.size
     }
 
-    override fun onBindViewHolder(holder: VH, position: Int, payloads: MutableList<Any>) {
-        if(position != RecyclerView.NO_POSITION){
-            // Do your binding here
-            holder.itemView.setTag(R.id.list_adapter, this)
-            val item = getItem(position) as? ViewModel<Any, RecyclerView.ViewHolder, IAdapter<*>>
-            item?.let {
-                item.adapter = this
-                item.model?.let { it1 -> item.bindVH(holder, it1, payloads) }
-                holder.itemView.setTag(R.id.list_adapter_item, item)
-            }
+    override fun clear() {
+        val oldSize = size
+        dataList.clear()
+        if (oldSize != 0) {
+            notifyItemRangeRemoved(0, oldSize)
         }
     }
-    override fun getItemViewType(position: Int): Int {
-        val item = getItem(position) ?: return 0
-        val type = item.itemViewType
-        if (!defaultViewHolderFactoryCache.contains(type)) {
-            item as ViewHolderFactory<VH>
-            defaultViewHolderFactoryCache.register(type, item)
+
+    override fun isEmpty(): Boolean {
+        return dataList.isEmpty()
+    }
+
+    override fun add(element: ViewModelType): Boolean {
+        val result = dataList.add(element)
+        notifyItemRangeInserted(size - 1, 1)
+        return result
+    }
+
+    override fun iterator(): MutableIterator<ViewModelType> {
+        return dataList.iterator()
+    }
+
+    fun add(index: Int, element: ViewModelType) {
+        dataList.add(index, element)
+        notifyItemRangeInserted(index, 1)
+    }
+
+    fun removeAt(index: Int): ViewModelType {
+        val vm = dataList.removeAt(index)
+        notifyItemRemoved(index)
+        return vm
+    }
+
+    fun set(index: Int, element: ViewModelType): ViewModelType {
+        dataList[index] = element
+        notifyItemChanged(index)
+        return element
+    }
+
+    override val size: Int
+        get() = dataList.size
+
+    override fun contains(element: ViewModelType): Boolean {
+        return dataList.contains(element)
+    }
+
+    override fun containsAll(elements: Collection<ViewModelType>): Boolean {
+        return dataList.containsAll(elements)
+    }
+
+    override fun addAll(elements: Collection<ViewModelType>): Boolean {
+        val oldSize = size
+        val added = dataList.addAll(elements)
+        if(added){
+            notifyItemRangeInserted(oldSize, size - oldSize)
         }
-        return type
+        return added
     }
 
-    override fun onViewRecycled(holder: VH) {
-        (holder.itemView.getTag(R.id.list_adapter_item) as ViewModel<*, VH, *>).apply {
-            unBindVH(holder)
+    override fun remove(element: ViewModelType): Boolean {
+        val index = indexOf(element)
+        if (index >= 0) {
+            removeAt(index)
+            return true
         }
-        holder.itemView.setTag(R.id.list_adapter_item, null)
-        holder.itemView.setTag(R.id.list_adapter, null)
+        return false
     }
 
-    override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
-        val context = recyclerView.context
-        sparseArray.append(0, LayoutInflater.from(context))
+    /**
+     * 不会触发Adapter更新
+     */
+    override fun removeAll(elements: Collection<ViewModelType>): Boolean {
+        return dataList.removeAll(elements)
     }
 
-    override fun onDetachedFromRecyclerView(recyclerView: RecyclerView) {
-        defaultViewHolderFactoryCache.clear()
-        sparseArray.clear()
+    override fun retainAll(elements: Collection<ViewModelType>): Boolean {
+        return dataList.retainAll(elements)
     }
+
+    fun getAll(): List<ViewModelType> {
+        return dataList
+    }
+
+    fun replayAll(list: List<ViewModelType>) {
+        dataList.clear()
+        dataList.addAll(list)
+    }
+
 }

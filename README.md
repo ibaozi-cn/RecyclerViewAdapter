@@ -28,7 +28,7 @@ https://user-gold-cdn.xitu.io/2020/7/12/173435b1b9267e6e?w=1432&h=1048&f=png&s=4
 - ~~DataBinding 扩展~~
 - 等等.. 未来有好的想法继续扩展
 
-现在有ArrayListAdapter，SortedListAdapter、PagingAdapter，为啥这么设计呢？
+现在有ListAdapter，SortedListAdapter、PagingAdapter，为啥这么设计呢？
 
 * 第一、原则上我根本不会去设计一款超级庞大的Adapter支持各种功能，单一职责需要贯穿始终
 * 第二、保持各个Lib的特点，可以根据业务的不同自由选择，最大程度的减少包体积，真正体现了没有最好最全，只有最合适的思想
@@ -43,19 +43,19 @@ https://user-gold-cdn.xitu.io/2020/7/12/173435b1b9267e6e?w=1432&h=1048&f=png&s=4
 
 |  名字   | release aar size  | 其他 |
 |  ----  | ----  | ----  | 
-| Core | 37kb | 核心库目前包含ArrayListAdapter的实现，最基础且最实用的扩展 |
-| Anko | 8kb | 同样是ArrayListAdapter,由于做了高度的抽象，所以目前剔除AnkoListAdapter，用ArrayListAdapter代替 |
+| Core | 25kb | 核心库目前包含ListAdapter的实现，最基础且最实用的扩展 |
+| Anko | 8kb | 同样是ListAdapter |
 | Sorted | 11kb | SortedListAdapter扩展实现 |
 | Paging | 14kb | PagingListAdapter扩展适配 |
 | DataBinding | 19kb | 适配DataBinding布局，适用任何Adapter |
-| Diff | 6kb | 适配DiffUtil，适用ArrayListAdapter |
+| Diff | 6kb | 适配DiffUtil，目前适用ListAdapter |
 | FlexBox | 9kb | 适配FlexBox布局 |
 
 ## 各个Adapter的优势在哪，如何选择？
 
 |  名字   | 优势 | 劣势 | 适合做什么 |
 |  ----  | ----  | ----  | ----  | 
-|  ArrayListAdapter | 简单实用，易扩展，ViewHolder复用率高，DSL支持写法优美 | 对于需要排序的列表处理麻烦性能低 | 不考虑排序的一般列表 | 
+|  ListAdapter | 简单实用，易扩展，ViewHolder复用率高，DSL支持写法优美 | 对于需要排序的列表处理麻烦性能低 | 不考虑排序的一般列表 | 
 |  SortedListAdapter | 排序超级容易 | 侵入性高，需要Model层继承实现，目前优化为接口，增加了可使用范围 | 任何需要排序的列表 | 
 |  PagingListAdapter | 自带加载状态，后台计算完成后通知刷新，加载效率高 | 侵入性高，需要Model层继承实现，学习成本高，掌握难度高 | 适合自动加载分页的列表 | 
 
@@ -70,22 +70,22 @@ allprojects {
 }
 
 //核心库
-implementation com.github.ibaozi-cn.RecyclerViewAdapter:adapter-core:V1.0.1
+implementation com.github.ibaozi-cn.RecyclerViewAdapter:adapter-core:V1.0.2
 
 //下面都是可选项
 
 //anko layout 扩展
-implementation com.github.ibaozi-cn.RecyclerViewAdapter:adapter-anko:V1.0.1
+implementation com.github.ibaozi-cn.RecyclerViewAdapter:adapter-anko:V1.0.2
 //diffutil 扩展
-implementation com.github.ibaozi-cn.RecyclerViewAdapter:adapter-diff:V1.0.1
+implementation com.github.ibaozi-cn.RecyclerViewAdapter:adapter-diff:V1.0.2
 //data binding扩展
-implementation com.github.ibaozi-cn.RecyclerViewAdapter:adapter-binding:V1.0.1
+implementation com.github.ibaozi-cn.RecyclerViewAdapter:adapter-binding:V1.0.2
 // paging3 扩展
-implementation com.github.ibaozi-cn.RecyclerViewAdapter:adapter-paging:V1.0.1
+implementation com.github.ibaozi-cn.RecyclerViewAdapter:adapter-paging:V1.0.2
 // sortedlist 扩展
-implementation com.github.ibaozi-cn.RecyclerViewAdapter:adapter-sorted:V1.0.1
+implementation com.github.ibaozi-cn.RecyclerViewAdapter:adapter-sorted:V1.0.2
 // flexbox 扩展
-implementation com.github.ibaozi-cn.RecyclerViewAdapter:adapter-flex:V1.0.1
+implementation com.github.ibaozi-cn.RecyclerViewAdapter:adapter-flex:V1.0.2
 ```
 
 ## 环境需要

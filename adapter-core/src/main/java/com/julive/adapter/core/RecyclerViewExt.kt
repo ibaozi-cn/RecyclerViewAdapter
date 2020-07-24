@@ -4,14 +4,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 fun RecyclerView.bindListAdapter(
-    listAdapter: ListAdapter<*, *>,
+    listAdapter: RecyclerView.Adapter<*>,
     layoutManager: RecyclerView.LayoutManager? = null
 ) {
     this.layoutManager = layoutManager ?: LinearLayoutManager(context)
     this.adapter = listAdapter
 }
 
-fun ListAdapter<*, *>.into(
+fun ViewHolderCacheAdapter<*, *>.into(
     recyclerView: RecyclerView,
     layoutManager: RecyclerView.LayoutManager? = null
 ) = apply {

@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="refresh">正在刷新</string>
+    <string name="refresh">正在加载</string>
 </resources>
