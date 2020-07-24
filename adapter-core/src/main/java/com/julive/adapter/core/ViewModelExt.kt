@@ -8,7 +8,7 @@ typealias  ViewModelType = ViewModel<*, *>
 typealias  DefaultViewModelType<M> = ViewModel<M, DefaultViewHolder>
 
 typealias BindView = (DefaultViewHolder) -> Unit
-typealias BindViewPayload = (DefaultViewHolder, Any) -> Unit
+typealias BindViewPayload<M> = (DefaultViewHolder, M) -> Unit
 typealias ItemClick <M> = (viewModel: DefaultViewModelType<M>, viewHolder: DefaultViewHolder) -> Unit
 
 @Suppress("UNCHECKED_CAST")
@@ -17,14 +17,14 @@ abstract class DefaultViewModel<M> : DefaultViewModelType<M> {
     override var adapter: IAdapter<ViewModelType>? = null
     override var model: M? = null
     private var bindView: BindView? = null
-    private var bindViewPayload: BindViewPayload? = null
+    private var bindViewPayload: BindViewPayload<M>? = null
     private var itemClick: ItemClick<M>? = null
 
     open fun onBindViewHolder(f: (DefaultViewHolder) -> Unit) {
         bindView = f
     }
 
-    open fun onBindViewHolder(f: (DefaultViewHolder, Any) -> Unit) {
+    open fun onBindViewHolder(f: (DefaultViewHolder, M) -> Unit) {
         bindViewPayload = f
     }
 
@@ -55,7 +55,7 @@ abstract class DefaultViewModel<M> : DefaultViewModelType<M> {
     override fun bindVH(viewHolder: DefaultViewHolder, model: M, payloads: List<Any>) {
         if (payloads.isNotEmpty()) {
             this.model = payloads[0] as M
-            bindViewPayload?.invoke(viewHolder, payloads[0])
+            bindViewPayload?.invoke(viewHolder, this.model!!)
         } else {
             bindView?.invoke(viewHolder)
         }
