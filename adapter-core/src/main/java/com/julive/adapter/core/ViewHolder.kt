@@ -8,7 +8,6 @@ import androidx.annotation.IdRes
 import androidx.recyclerview.widget.RecyclerView
 import com.julive.adapter_core.R
 
-
 @Suppress("UNCHECKED_CAST")
 open class DefaultViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
     /**

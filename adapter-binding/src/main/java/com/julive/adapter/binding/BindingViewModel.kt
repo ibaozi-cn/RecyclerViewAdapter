@@ -11,7 +11,7 @@ import com.julive.adapter.core.DefaultViewModel
 import com.julive.adapter.core.DefaultViewHolder
 
 open class BindingViewModel<M>(override val layoutRes: Int, private val variableId: Int) :
-    DefaultViewModel<M, ListAdapter>() {
+    DefaultViewModel<M>() {
 
     override fun getHolderItemView(parent: ViewGroup, layoutInflater: LayoutInflater): View {
         val binding = DataBindingUtil.inflate<ViewDataBinding>(

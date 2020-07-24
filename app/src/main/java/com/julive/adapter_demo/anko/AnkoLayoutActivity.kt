@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import com.julive.adapter_demo.R
 import com.julive.adapter.anko.recyclerView
+import com.julive.adapter.core.LayoutViewModel
 import com.julive.adapter.core.ListAdapter
 import com.julive.adapter.core.bindListAdapter
 import com.julive.adapter_demo.sorted.ModelTest
@@ -57,6 +58,9 @@ class AnkoLayoutActivity : AppCompatActivity() {
             }
 
         }
+
+        arrayListAdapter.add(LayoutViewModel<ModelTest>(R.layout.item_binding_layout))
+
     }
 
 }

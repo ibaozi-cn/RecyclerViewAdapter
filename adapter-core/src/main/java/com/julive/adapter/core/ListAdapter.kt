@@ -47,16 +47,14 @@ class ListAdapter :
         notifyItemRangeInserted(index, 1)
     }
 
-    fun removeAt(index: Int): ViewModelType {
+    override fun removeAt(index: Int) {
         val vm = dataList.removeAt(index)
         notifyItemRemoved(index)
-        return vm
     }
 
-    fun set(index: Int, element: ViewModelType): ViewModelType {
+    override fun set(index: Int, element: ViewModelType) {
         dataList[index] = element
         notifyItemChanged(index)
-        return element
     }
 
     override val size: Int
@@ -73,7 +71,7 @@ class ListAdapter :
     override fun addAll(elements: Collection<ViewModelType>): Boolean {
         val oldSize = size
         val added = dataList.addAll(elements)
-        if(added){
+        if (added) {
             notifyItemRangeInserted(oldSize, size - oldSize)
         }
         return added

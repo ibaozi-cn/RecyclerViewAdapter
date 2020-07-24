@@ -6,13 +6,12 @@ import androidx.lifecycle.Lifecycle
 import androidx.paging.*
 import androidx.recyclerview.widget.AdapterListUpdateCallback
 import androidx.recyclerview.widget.ConcatAdapter
-import com.julive.adapter.core.DefaultViewHolder
-import com.julive.adapter.core.ViewHolderCacheAdapter
+import com.julive.adapter.core.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.Flow
 
-class PagingListAdapter : ViewHolderCacheAdapter<PagingItemViewModel<*>, DefaultViewHolder>() {
+class PagingListAdapter : ViewHolderCacheAdapter<ViewModelType, DefaultViewHolder>() {
 
     private val differ = AsyncPagingDataDiffer(
         diffCallback = DiffViewModelCallBack(),
@@ -21,15 +20,15 @@ class PagingListAdapter : ViewHolderCacheAdapter<PagingItemViewModel<*>, Default
         workerDispatcher = Dispatchers.Default
     )
 
-    override fun getItem(position: Int): PagingItemViewModel<*>? {
+    override fun getItem(position: Int): ViewModelType? {
         return differ.getItem(position)
     }
 
-    suspend fun submitData(pagingData: PagingData<PagingItemViewModel<*>>) {
-        differ.submitData(pagingData)
+    suspend fun submitData(pagingData: PagingData<*>) {
+        differ.submitData(pagingData as PagingData<ViewModelType>)
     }
 
-    fun submitData(lifecycle: Lifecycle, pagingData: PagingData<PagingItemViewModel<*>>) {
+    fun submitData(lifecycle: Lifecycle, pagingData: PagingData<ViewModelType>) {
         differ.submitData(lifecycle, pagingData)
     }
 
@@ -94,6 +93,23 @@ class PagingListAdapter : ViewHolderCacheAdapter<PagingItemViewModel<*>, Default
     @ExperimentalPagingApi
     fun removeDataRefreshListener(listener: (isEmpty: Boolean) -> Unit) {
         differ.removeDataRefreshListener(listener)
+    }
+
+    override fun add(vm: ViewModelType): Boolean {
+        return false
+    }
+
+    override fun set(index: Int, vm: ViewModelType) {
+    }
+
+    override fun remove(vm: ViewModelType): Boolean {
+        return false
+    }
+
+    override fun removeAt(index: Int) {
+    }
+
+    override fun clear() {
     }
 
 }

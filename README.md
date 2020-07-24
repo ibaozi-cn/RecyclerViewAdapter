@@ -33,10 +33,10 @@ https://user-gold-cdn.xitu.io/2020/7/24/1737e393a1218f05?w=960&h=720&f=png&s=201
 |  名字   | release aar size  | 其他 |
 |  ----  | ----  | ----  | 
 | Core | 25kb | 核心库目前包含ListAdapter的实现，最基础且最实用的扩展 |
-| Anko | 8kb | 同样是ListAdapter |
-| Sorted | 11kb | SortedListAdapter扩展实现 |
-| Paging | 14kb | PagingListAdapter扩展适配 |
-| DataBinding | 19kb | 适配DataBinding布局，适用任何Adapter |
+| Anko | 8kb | 适用本项目所有Adapter扩展 |
+| DataBinding | 19kb | 适配DataBinding布局，适用本项目所有Adapter扩展 |
+| Sorted | 10kb | SortedListAdapter扩展实现 |
+| Paging | 13kb | PagingListAdapter扩展适配 |
 | Diff | 6kb | 适配DiffUtil，目前适用ListAdapter |
 | FlexBox | 9kb | 适配FlexBox布局 |
 
@@ -45,7 +45,7 @@ https://user-gold-cdn.xitu.io/2020/7/24/1737e393a1218f05?w=960&h=720&f=png&s=201
 |  名字   | 优势 | 劣势 | 适合做什么 |
 |  ----  | ----  | ----  | ----  | 
 |  ListAdapter | 简单实用，易扩展，ViewHolder复用率高，DSL支持写法优美 | 对于需要排序的列表处理麻烦性能低 | 不考虑排序的一般列表 | 
-|  SortedListAdapter | 排序超级容易 | 侵入性高，需要Model层继承实现，目前优化为接口，增加了可使用范围 | 任何需要排序的列表 | 
+|  SortedListAdapter | 排序超级容易 | 侵入性高，需要继承SortedModel实现Model层，目前优化为接口，增加了可使用范围 | 任何需要排序的列表 | 
 |  PagingListAdapter | 自带加载状态，后台计算完成后通知刷新，加载效率高 | 侵入性高，需要Model层继承实现，学习成本高，掌握难度高 | 适合自动加载分页的列表 | 
 
 ## 如何依赖？

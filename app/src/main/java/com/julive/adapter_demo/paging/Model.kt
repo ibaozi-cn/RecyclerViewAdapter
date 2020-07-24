@@ -4,12 +4,13 @@ import androidx.lifecycle.ViewModel
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingSource
+import com.julive.adapter.core.LayoutViewModel
 import com.julive.adapter.core.SameModel
-import com.julive.adapter.paging.PagingItemViewModel
 import com.julive.adapter_demo.R
 import kotlinx.coroutines.delay
 
 class PagingModelTest(val title: String, override var uniqueId: String = title) : SameModel
+
 
 class PagingViewModel : ViewModel() {
 
@@ -19,18 +20,16 @@ class PagingViewModel : ViewModel() {
             pagingSourceFactory = { MainSource() }).flow
     }
 
-    class MainSource : PagingSource<Int, PagingItemViewModel<*>>() {
-        override suspend fun load(params: LoadParams<Int>): LoadResult<Int, PagingItemViewModel<*>> {
+    class MainSource : PagingSource<Int, LayoutViewModel<PagingModelTest>>() {
+        override suspend fun load(params: LoadParams<Int>): LoadResult<Int, LayoutViewModel<PagingModelTest>> {
             // 如果key是null，那就加载第0页的数据
             val page = params.key ?: 0
             // 每一页的数据长度
             val pageSize = params.loadSize
             return try {
                 delay(2000)
-                val data = mutableListOf<PagingItemViewModel<PagingModelTest>>()
-                val itemPageViewModel = PagingItemViewModel<PagingModelTest>().apply {
-                    layoutRes = R.layout.item_test
-                }
+                val data = mutableListOf<LayoutViewModel<PagingModelTest>>()
+                val itemPageViewModel = LayoutViewModel<PagingModelTest>(R.layout.item_test)
                 itemPageViewModel.model = PagingModelTest("标题")
                 data.add(itemPageViewModel)
                 data.add(itemPageViewModel)

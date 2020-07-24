@@ -5,8 +5,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.julive.adapter.core.DefaultViewHolder
+import com.julive.adapter.core.LayoutViewModel
 import com.julive.adapter.core.SameModel
-import com.julive.adapter.sorted.SortedItemViewModel
 import com.julive.adapter.sorted.SortedListAdapter
 import com.julive.adapter.sorted.SortedModel
 import com.julive.adapter_demo.R
@@ -17,10 +17,11 @@ import kotlin.random.Random
  *
  * // 扩展DiffModel  兼容DiffUtil
  */
-data class ModelTest(var title: String, var subTitle: String):SameModel{
+data class ModelTest(var title: String, var subTitle: String) : SameModel {
     override fun <T : SameModel> getChangePayload(newItem: T): Any? {
         return null
     }
+
     override var uniqueId: String = title
 }
 
@@ -39,13 +40,14 @@ data class SortedModelTest(
         return 0
     }
 }
+
 /**
  *
  */
-class SortedItemViewModelTest : SortedItemViewModel<SortedModelTest, DefaultViewHolder>(R.layout.item_test) {
+class SortedItemViewModelTest : LayoutViewModel<SortedModelTest>(R.layout.item_test) {
 
     init {
-        onBindViewHolder {viewHolder->
+        onBindViewHolder { viewHolder ->
             viewHolder.getView<TextView>(R.id.tv_title)?.text = model?.title
             viewHolder.getView<TextView>(R.id.tv_subTitle)?.text = model?.subTitle
         }
@@ -66,7 +68,7 @@ class ItemViewHolder(view: View) : DefaultViewHolder(view) {
             val item =
                 getAdapter<SortedListAdapter>()?.getItem(adapterPosition) as SortedItemViewModelTest
             item.model?.subTitle = "刷新自己${Random.nextInt(100)}"
-            getAdapter<SortedListAdapter>()?.updateItem(adapterPosition, item)
+            getAdapter<SortedListAdapter>()?.set(adapterPosition, item)
         }
     }
 }

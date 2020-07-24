@@ -5,7 +5,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.recyclerview.widget.RecyclerView;
-import com.julive.adapter.core.ListAdapter;
 import com.julive.adapter.core.DefaultViewModel;
 import com.julive.adapter_anko.R;
 
@@ -14,7 +13,7 @@ import org.jetbrains.anko.AnkoContext;
 import org.jetbrains.annotations.NotNull;
 
 public abstract class AnkoViewModel<M, AnkoView extends AnkoComponent<ViewGroup>>
-        extends DefaultViewModel<M, ListAdapter> {
+        extends DefaultViewModel<M> {
 
     @Override
     public int getLayoutRes() {

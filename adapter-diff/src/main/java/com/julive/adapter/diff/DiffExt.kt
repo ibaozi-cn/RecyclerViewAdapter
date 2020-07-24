@@ -4,11 +4,11 @@ import androidx.recyclerview.widget.DiffUtil
 import com.julive.adapter.core.ListAdapter
 
 fun ListAdapter.calculateDiff(
-    newItems: List<ArrayViewModelDiffType>
+    newItems: List<ViewModelDiffType>
 ) {
     val result = DiffUtil.calculateDiff(
         ArrayListAdapterCallBack(
-            oldItems = getAll() as List<ArrayViewModelDiffType>,
+            oldItems = getAll() as List<ViewModelDiffType>,
             newItems = newItems
         )
     )

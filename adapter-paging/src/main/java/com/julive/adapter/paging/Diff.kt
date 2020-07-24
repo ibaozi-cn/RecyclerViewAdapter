@@ -3,26 +3,23 @@ package com.julive.adapter.paging
 
 import androidx.recyclerview.widget.DiffUtil.ItemCallback
 import com.julive.adapter.core.SameModel
+import com.julive.adapter.core.ViewModelType
 
-class DiffViewModelCallBack : ItemCallback<PagingItemViewModelType>() {
+class DiffViewModelCallBack : ItemCallback<ViewModelType>() {
     override fun areItemsTheSame(
-        oldItem: PagingItemViewModelType,
-        newItem: PagingItemViewModelType
+        oldItem: ViewModelType,
+        newItem: ViewModelType
     ): Boolean {
-        return oldItem.model?.isSameModelAs(newItem.model as SameModel) ?: false
+        return (oldItem.model as? SameModel)?.isSameModelAs(newItem.model as SameModel) ?: false
     }
     override fun areContentsTheSame(
-        oldItem: PagingItemViewModelType,
-        newItem: PagingItemViewModelType
+        oldItem: ViewModelType,
+        newItem: ViewModelType
     ): Boolean {
-        return oldItem.model?.isContentTheSameAs(newItem.model as SameModel) ?: false
+        return (oldItem.model as? SameModel)?.isContentTheSameAs(newItem.model as SameModel) ?: false
     }
 
-    override fun getChangePayload(
-        oldItem: PagingItemViewModelType,
-        newItem: PagingItemViewModelType
-    ): Any? {
-        return oldItem.model?.getChangePayload(newItem.model as SameModel)
+    override fun getChangePayload(oldItem: ViewModelType, newItem: ViewModelType): Any? {
+        return (oldItem.model as? SameModel)?.getChangePayload(oldItem.model as SameModel)
     }
-
 }

@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.julive.adapter_core.R
 import java.util.*
 
-abstract class ViewHolderCacheAdapter<VM : ViewModel<*,*,*>, VH : RecyclerView.ViewHolder> : RecyclerView.Adapter<VH>(), IAdapter<VM> {
+abstract class ViewHolderCacheAdapter<VM : ViewModelType, VH : RecyclerView.ViewHolder> : RecyclerView.Adapter<VH>(), IAdapter<VM> {
 
     private val defaultViewHolderFactoryCache = DefaultViewHolderFactoryCache<ViewHolderFactory<VH>>()
     private val sparseArray = SparseArray<LayoutInflater>(1)
@@ -26,9 +26,9 @@ abstract class ViewHolderCacheAdapter<VM : ViewModel<*,*,*>, VH : RecyclerView.V
         if(position != RecyclerView.NO_POSITION){
             // Do your binding here
             holder.itemView.setTag(R.id.list_adapter, this)
-            val item = getItem(position) as? ViewModel<Any, RecyclerView.ViewHolder, IAdapter<*>>
+            val item = getItem(position) as? ViewModel<Any, RecyclerView.ViewHolder>
             item?.let {
-                item.adapter = this
+                item.adapter = this as? IAdapter<ViewModelType>
                 item.model?.let { it1 -> item.bindVH(holder, it1, payloads) }
                 holder.itemView.setTag(R.id.list_adapter_item, item)
             }
@@ -45,7 +45,7 @@ abstract class ViewHolderCacheAdapter<VM : ViewModel<*,*,*>, VH : RecyclerView.V
     }
 
     override fun onViewRecycled(holder: VH) {
-        (holder.itemView.getTag(R.id.list_adapter_item) as ViewModel<*, VH, *>).apply {
+        (holder.itemView.getTag(R.id.list_adapter_item) as ViewModel<*, VH>).apply {
             unBindVH(holder)
         }
         holder.itemView.setTag(R.id.list_adapter_item, null)
