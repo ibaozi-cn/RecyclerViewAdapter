@@ -48,6 +48,22 @@ https://user-gold-cdn.xitu.io/2020/7/24/1737e393a1218f05?w=960&h=720&f=png&s=201
 |  SortedListAdapter | 排序超级容易 | 侵入性高，需要继承SortedModel实现Model层，目前优化为接口，增加了可使用范围 | 任何需要排序的列表 | 
 |  PagingListAdapter | 自带加载状态，后台计算完成后通知刷新，加载效率高 | 侵入性高，需要Model层继承实现，学习成本高，掌握难度高 | 适合自动加载分页的列表 | 
 
+## 各个ViewModel
+
+适用范围
+|  名字   | ListAdapter | SortedListAdapter | PagingListAdapter | 
+|  ----  | ----  | ----  | ----  | 
+|  LayoutViewModel  | 支持  | 支持  | 支持  | 
+|  AnkoViewModel  | 支持  | 支持  | 支持  | 
+|  BindingViewModel  | 支持  | 支持  | 支持  | 
+
+如何选择
+|  名字   | 功能 | 优势 | 其他 | 
+|  ----  | ----  | ----  | ----  | 
+|  LayoutViewModel  | 加载XML布局  | 灵活，易懂，易用 |  | 
+|  AnkoViewModel  | 加载Anko Layout  | 免去XML加载，布局加载效率提升明显 | 目前官方不维护，需要自己扩展 | 
+|  BindingViewModel  | 加载DataBinding布局  | 省去绑定View的过程，代码逻辑简洁 |  | 
+
 ## 如何依赖？
 
 ```
@@ -145,6 +161,7 @@ class AdapterDslActivity : AppCompatActivity() {
                          }
                      )
                      add(
+                        //BindingViewModel对象
                          bindingViewModelDsl<ModelTest>(R.layout.item_binding_layout, BR.model) {
                              model = ModelTest("title", "bindingViewModelDsl")
                              onItemClick { viewModel, viewHolder ->
