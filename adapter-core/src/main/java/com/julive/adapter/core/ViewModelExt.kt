@@ -14,7 +14,6 @@ typealias ItemClick <M> = (viewModel: DefaultViewModelType<M>, viewHolder: Defau
 @Suppress("UNCHECKED_CAST")
 abstract class DefaultViewModel<M> : DefaultViewModelType<M> {
 
-    override var adapter: IAdapter<ViewModelType>? = null
     override var model: M? = null
     private var bindView: BindView? = null
     private var bindViewPayload: BindViewPayload<M>? = null
@@ -45,7 +44,7 @@ abstract class DefaultViewModel<M> : DefaultViewModelType<M> {
         return DefaultViewHolder(getHolderItemView(parent, layoutInflater)).apply {
             itemView.setOnClickListener {
                 itemClick?.invoke(
-                    adapter?.getItem(adapterPosition) as @ParameterName(name = "viewModel") DefaultViewModel<M>,
+                    getAdapter<IAdapter<*>>()?.getItem(adapterPosition) as @ParameterName(name = "viewModel") DefaultViewModel<M>,
                     this
                 )
             }

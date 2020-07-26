@@ -12,25 +12,25 @@ import java.lang.IllegalArgumentException
 
 open class AnkoViewModel<M, AnkoView : AnkoComponent<ViewGroup>> : DefaultViewModel<M>() {
 
-    private var view: AnkoView? = null
+    private var view: ()->AnkoView? = {null}
 
     open fun onCreateView(v: () -> AnkoView) {
-        view = v()
+        view = v
     }
 
     override fun getHolderItemView(
         parent: ViewGroup,
         layoutInflater: LayoutInflater
     ): View {
-        if (view == null) throw IllegalArgumentException("ankoView can not be null")
-        val view = view!!.createView(
+        val ankoView = view() ?: throw IllegalArgumentException("ankoView can not be null")
+        val view = ankoView.createView(
             create(
                 parent.context,
                 parent,
                 false
             )
         )
-        view.setTag(R.id.list_adapter_anko_view, this.view)
+        view.setTag(R.id.list_adapter_anko_view, ankoView)
         return view
     }
 

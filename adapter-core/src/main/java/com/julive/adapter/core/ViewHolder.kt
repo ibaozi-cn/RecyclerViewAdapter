@@ -29,8 +29,8 @@ open class DefaultViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
         return view as T
     }
 
-    fun <Adapter : ViewHolderCacheAdapter<*, *>> getAdapter(): Adapter? {
-        return this.itemView.getTag(R.id.list_adapter) as? Adapter
+    fun <Adapter : IAdapter<*>> getAdapter(): Adapter? {
+        return this.itemView.getTag(R.id.adapter) as? Adapter
     }
 }
 

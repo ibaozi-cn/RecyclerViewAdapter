@@ -32,8 +32,8 @@ class SortedListAdapter :
         return sortedList.size() == 0
     }
 
-    override fun add(element: ViewModelType): Boolean {
-        return sortedList.add(element) > -1
+    override fun add(vm: ViewModelType): Boolean {
+        return sortedList.add(vm) > -1
     }
 
     override fun addAll(elements: Collection<ViewModelType>): Boolean {
@@ -53,8 +53,8 @@ class SortedListAdapter :
         throw com.julive.adapter.sorted.SortedException()
     }
 
-    override fun remove(element: ViewModelType): Boolean {
-        return sortedList.remove(element)
+    override fun remove(vm: ViewModelType): Boolean {
+        return sortedList.remove(vm)
     }
 
     override fun removeAll(elements: Collection<ViewModelType>): Boolean {
@@ -78,11 +78,11 @@ class SortedListAdapter :
         return sortedList.get(position) as ViewModelType
     }
 
-    override fun set(index: Int, vm: ViewModelType) {
+    fun set(index: Int, vm: ViewModelType) {
         sortedList.updateItemAt(index, vm)
     }
 
-    override fun removeAt(index: Int) {
+    fun removeAt(index: Int) {
         if (index < sortedList.size() && index > -1)
             sortedList.removeItemAt(index)
     }

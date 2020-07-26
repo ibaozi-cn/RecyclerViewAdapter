@@ -94,24 +94,6 @@ class PagingListAdapter : ViewHolderCacheAdapter<ViewModelType, DefaultViewHolde
     fun removeDataRefreshListener(listener: (isEmpty: Boolean) -> Unit) {
         differ.removeDataRefreshListener(listener)
     }
-
-    override fun add(vm: ViewModelType): Boolean {
-        return false
-    }
-
-    override fun set(index: Int, vm: ViewModelType) {
-    }
-
-    override fun remove(vm: ViewModelType): Boolean {
-        return false
-    }
-
-    override fun removeAt(index: Int) {
-    }
-
-    override fun clear() {
-    }
-
 }
 
 class PagingLoadStateAdapter : LoadStateAdapter<DefaultViewHolder>() {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <item type="id" name="list_adapter_item" />
-    <item type="id" name="list_adapter" />
+    <item type="id" name="adapter_item" />
+    <item type="id" name="adapter" />
 </resources>

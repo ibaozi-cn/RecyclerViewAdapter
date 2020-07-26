@@ -5,7 +5,7 @@ package com.julive.adapter.core
  * 抽象为List数据结构
  */
 class ListAdapter :
-    ViewHolderCacheAdapter<ViewModelType, DefaultViewHolder>(),
+    ViewHolderCacheAdapter<ViewModelType, DefaultViewHolder>(), IListAdapter<ViewModelType>,
     MutableCollection<ViewModelType> {
     /**
      * 默认ArrayList数据结构
@@ -52,9 +52,14 @@ class ListAdapter :
         notifyItemRemoved(index)
     }
 
-    override fun set(index: Int, element: ViewModelType) {
-        dataList[index] = element
+    override fun set(index: Int, vm: ViewModelType) {
+        dataList[index] = vm
         notifyItemChanged(index)
+    }
+
+    override fun updatePayload(index: Int, vm: ViewModelType) {
+        dataList[index] = vm
+        notifyItemChanged(index, vm.model)
     }
 
     override val size: Int

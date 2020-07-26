@@ -6,6 +6,7 @@ import android.util.Log
 import android.widget.TextView
 import com.julive.adapter.anko.ankoViewModelDsl
 import com.julive.adapter.binding.bindingViewModelDsl
+import com.julive.adapter.core.ListAdapter
 import com.julive.adapter.core.layoutViewModelDsl
 import com.julive.adapter.core.listAdapter
 import com.julive.adapter.core.into
@@ -42,12 +43,12 @@ class AdapterDslActivity : AppCompatActivity() {
                         //导致click事件其实是在另外一个VM里触发的
                         Log.d("arrayItemViewModel", "不正确的model${model}")
                         Log.d("arrayItemViewModel", "正确的model${vm.model}")
-                        Log.d("arrayItemViewModel", "adapter$adapter")
+                        Log.d("arrayItemViewModel", "adapter${vh.getAdapter<ListAdapter>()}")
                         Log.d("arrayItemViewModel", "viewHolder${vh.adapterPosition}")
                         //修改Model数据
                         vm.model?.title = "测试更新"
                         //用Adapter更新数据
-                        adapter?.set(vh.adapterPosition, vm)
+                        vh.getAdapter<ListAdapter>()?.set(vh.adapterPosition, vm)
                     }
                 }
             )
@@ -66,7 +67,7 @@ class AdapterDslActivity : AppCompatActivity() {
                     }
                     onItemClick { viewModel, viewHolder ->
                         viewModel.model?.title = "点击更新"
-                        adapter?.set(viewHolder.adapterPosition, viewModel)
+                        viewHolder.getAdapter<ListAdapter>()?.set(viewHolder.adapterPosition, viewModel)
                     }
                 }
             )
@@ -76,7 +77,7 @@ class AdapterDslActivity : AppCompatActivity() {
                     onItemClick { viewModel, viewHolder ->
                         val adapterPosition = viewHolder.adapterPosition
                         viewModel.model?.title = "${Random().nextInt(100)}"
-                        adapter?.set(adapterPosition, viewModel)
+                        viewHolder.getAdapter<ListAdapter>()?.set(adapterPosition, viewModel)
                     }
                 }
             )

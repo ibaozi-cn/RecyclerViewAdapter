@@ -2,6 +2,7 @@ package com.julive.adapter_demo.core
 
 import android.widget.TextView
 import com.julive.adapter.core.LayoutViewModel
+import com.julive.adapter.core.ListAdapter
 import com.julive.adapter_demo.R
 import com.julive.adapter_demo.sorted.ModelTest
 import java.util.*
@@ -22,9 +23,9 @@ class ArrayViewModelTest : LayoutViewModel<ModelTest>(R.layout.item_test) {
         onItemClick { _, viewHolder ->
             val adapterPosition = viewHolder.adapterPosition
             val item =
-                adapter?.getItem(adapterPosition) as ArrayViewModelTest
+                viewHolder.getAdapter<ListAdapter>()?.getItem(adapterPosition) as ArrayViewModelTest
             item.model?.title = "${Random().nextInt(100)}"
-            adapter?.set(adapterPosition, item)
+            viewHolder.getAdapter<ListAdapter>()?.set(adapterPosition, item)
         }
 
     }

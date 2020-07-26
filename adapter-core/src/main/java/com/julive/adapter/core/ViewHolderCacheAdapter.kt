@@ -14,7 +14,7 @@ abstract class ViewHolderCacheAdapter<VM : ViewModelType, VH : RecyclerView.View
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
         val defaultViewHolder = defaultViewHolderFactoryCache[viewType].getViewHolder(parent, sparseArray.get(0) ?: LayoutInflater.from(parent.context))
-        defaultViewHolder.itemView.setTag(R.id.list_adapter, this)
+        defaultViewHolder.itemView.setTag(R.id.adapter, this)
         return defaultViewHolder
     }
 
@@ -25,12 +25,11 @@ abstract class ViewHolderCacheAdapter<VM : ViewModelType, VH : RecyclerView.View
     override fun onBindViewHolder(holder: VH, position: Int, payloads: MutableList<Any>) {
         if(position != RecyclerView.NO_POSITION){
             // Do your binding here
-            holder.itemView.setTag(R.id.list_adapter, this)
+            holder.itemView.setTag(R.id.adapter, this)
             val item = getItem(position) as? ViewModel<Any, RecyclerView.ViewHolder>
             item?.let {
-                item.adapter = this as? IAdapter<ViewModelType>
                 item.model?.let { it1 -> item.bindVH(holder, it1, payloads) }
-                holder.itemView.setTag(R.id.list_adapter_item, item)
+                holder.itemView.setTag(R.id.adapter_item, item)
             }
         }
     }
@@ -45,11 +44,11 @@ abstract class ViewHolderCacheAdapter<VM : ViewModelType, VH : RecyclerView.View
     }
 
     override fun onViewRecycled(holder: VH) {
-        (holder.itemView.getTag(R.id.list_adapter_item) as ViewModel<*, VH>).apply {
+        (holder.itemView.getTag(R.id.adapter_item) as ViewModel<*, VH>).apply {
             unBindVH(holder)
         }
-        holder.itemView.setTag(R.id.list_adapter_item, null)
-        holder.itemView.setTag(R.id.list_adapter, null)
+        holder.itemView.setTag(R.id.adapter_item, null)
+        holder.itemView.setTag(R.id.adapter, null)
     }
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {

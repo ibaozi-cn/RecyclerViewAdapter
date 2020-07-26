@@ -8,10 +8,12 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.TextView
 import com.julive.adapter.anko.AnkoViewModel
+import com.julive.adapter.core.ListAdapter
 import com.julive.adapter_demo.R
 import com.julive.adapter_demo.ext.cardView
 import com.julive.adapter_demo.sorted.ModelTest
 import org.jetbrains.anko.*
+import kotlin.random.Random
 
 
 /**
@@ -89,8 +91,8 @@ class AnkoViewModelTest : AnkoViewModel<ModelTest, AnkoItemView>() {
 //
 //            Log.d("AnkoViewModelTest", "adapter$adapter")
 //            Log.d("AnkoViewModelTest", "viewHolder${viewHolder.adapterPosition}")
-            viewModel.model?.title = "点击更新"
-            adapter?.set(viewHolder.adapterPosition, viewModel)
+            viewModel.model?.title = "${Random.nextInt(1000,10000)}"
+            viewHolder.getAdapter<ListAdapter>()?.set(viewHolder.adapterPosition, viewModel)
         }
     }
 }

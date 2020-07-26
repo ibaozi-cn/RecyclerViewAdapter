@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.RecyclerView
 interface ViewModel<M, VH : RecyclerView.ViewHolder> :
     ViewHolderFactory<VH> {
     var model: M?
-    var adapter: IAdapter<ViewModelType>?
     val itemViewType: Int
         get() = layoutRes
 

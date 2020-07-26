@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
 import androidx.core.view.isVisible
+import com.julive.adapter.core.ListAdapter
 import com.julive.adapter.core.layoutViewModelDsl
 import com.julive.adapter.core.listAdapter
 import com.julive.adapter.core.into
@@ -46,12 +47,12 @@ class DiffActivity : AppCompatActivity() {
                             //导致click事件其实是在另外一个VM里触发的
                             Log.d("arrayItemViewModel", "不正确的model${model}")
                             Log.d("arrayItemViewModel", "正确的model${vm.model}")
-                            Log.d("arrayItemViewModel", "adapter$adapter")
+                            Log.d("arrayItemViewModel", "adapter${vh.getAdapter<ListAdapter>()}")
                             Log.d("arrayItemViewModel", "viewHolder${vh.adapterPosition}")
                             //修改Model数据
                             vm.model?.title = "测试更新"
                             //用Adapter更新数据
-                            adapter?.set(vh.adapterPosition, vm)
+                            vh.getAdapter<ListAdapter>()?.set(vh.adapterPosition, vm)
                         }
                     }
                 )
