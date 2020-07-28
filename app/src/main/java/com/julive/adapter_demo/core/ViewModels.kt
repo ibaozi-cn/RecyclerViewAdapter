@@ -15,17 +15,16 @@ class ArrayViewModelTest : LayoutViewModel<ModelTest>(R.layout.item_test) {
 
     init {
 
-        onBindViewHolder { viewHolder ->
-            viewHolder.getView<TextView>(R.id.tv_title)?.text = model?.title
-            viewHolder.getView<TextView>(R.id.tv_subTitle)?.text = model?.subTitle
+        onBindViewHolder { _ ->
+            getView<TextView>(R.id.tv_title)?.text = model?.title
+            getView<TextView>(R.id.tv_subTitle)?.text = model?.subTitle
         }
 
-        onItemClick { _, viewHolder ->
-            val adapterPosition = viewHolder.adapterPosition
+        onItemClick { _ ->
             val item =
-                viewHolder.getAdapter<ListAdapter>()?.getItem(adapterPosition) as ArrayViewModelTest
+                getAdapter<ListAdapter>()?.getItem(adapterPosition) as ArrayViewModelTest
             item.model?.title = "${Random().nextInt(100)}"
-            viewHolder.getAdapter<ListAdapter>()?.set(adapterPosition, item)
+            getAdapter<ListAdapter>()?.set(adapterPosition, item)
         }
 
     }

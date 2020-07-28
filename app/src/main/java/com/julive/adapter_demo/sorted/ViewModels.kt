@@ -47,9 +47,9 @@ data class SortedModelTest(
 class SortedItemViewModelTest : LayoutViewModel<SortedModelTest>(R.layout.item_test) {
 
     init {
-        onBindViewHolder { viewHolder ->
-            viewHolder.getView<TextView>(R.id.tv_title)?.text = model?.title
-            viewHolder.getView<TextView>(R.id.tv_subTitle)?.text = model?.subTitle
+        onBindViewHolder { _ ->
+            getView<TextView>(R.id.tv_title)?.text = model?.title
+            getView<TextView>(R.id.tv_subTitle)?.text = model?.subTitle
         }
     }
 

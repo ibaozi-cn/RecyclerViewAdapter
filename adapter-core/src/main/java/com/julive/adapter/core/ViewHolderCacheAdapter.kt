@@ -19,7 +19,6 @@ abstract class ViewHolderCacheAdapter<VM : ViewModelType, VH : RecyclerView.View
     }
 
     override fun onBindViewHolder(holder: VH, position: Int) {
-        onBindViewHolder(holder, position, Collections.emptyList())
     }
 
     override fun onBindViewHolder(holder: VH, position: Int, payloads: MutableList<Any>) {

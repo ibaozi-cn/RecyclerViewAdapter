@@ -79,20 +79,15 @@ class AnkoViewModelTest : AnkoViewModel<ModelTest, AnkoItemView>() {
         onCreateView {
             AnkoItemView()
         }
-        onBindViewHolder { viewHolder ->
-            val ankoView = getAnkoView(viewHolder)
+        onBindViewHolder { _ ->
+            val ankoView = getAnkoView(this)
             Log.d("AnkoViewModelTest", "ankoView=${ankoView}")
             ankoView.tvTitle?.text = model?.title
             ankoView.tvSubTitle?.text = model?.subTitle
         }
-        onItemClick { viewModel, viewHolder ->
-//            Log.d("AnkoViewModelTest", "正确的model${model}")
-//            Log.d("AnkoViewModelTest", "正确的model${model}")
-//
-//            Log.d("AnkoViewModelTest", "adapter$adapter")
-//            Log.d("AnkoViewModelTest", "viewHolder${viewHolder.adapterPosition}")
+        onItemClick { viewModel ->
             viewModel.model?.title = "${Random.nextInt(1000,10000)}"
-            viewHolder.getAdapter<ListAdapter>()?.set(viewHolder.adapterPosition, viewModel)
+            getAdapter<ListAdapter>()?.set(adapterPosition, viewModel)
         }
     }
 }

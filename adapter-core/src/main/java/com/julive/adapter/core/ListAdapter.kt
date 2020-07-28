@@ -10,7 +10,7 @@ class ListAdapter :
     /**
      * 默认ArrayList数据结构
      */
-    var dataList = mutableListOf<ViewModelType>()
+    private var dataList = mutableListOf<ViewModelType>()
 
     override fun getItem(position: Int): ViewModelType {
         return dataList[position]
@@ -32,8 +32,8 @@ class ListAdapter :
         return dataList.isEmpty()
     }
 
-    override fun add(element: ViewModelType): Boolean {
-        val result = dataList.add(element)
+    override fun add(vm: ViewModelType): Boolean {
+        val result = dataList.add(vm)
         notifyItemRangeInserted(size - 1, 1)
         return result
     }
@@ -82,8 +82,8 @@ class ListAdapter :
         return added
     }
 
-    override fun remove(element: ViewModelType): Boolean {
-        val index = indexOf(element)
+    override fun remove(vm: ViewModelType): Boolean {
+        val index = indexOf(vm)
         if (index >= 0) {
             removeAt(index)
             return true

@@ -31,28 +31,22 @@ class DiffActivity : AppCompatActivity() {
                         // Model 数据模型
                         model = ModelTest("title$it", "subTitle$it")
                         // 绑定数据
-                        onBindViewHolder { viewHolder ->
-                            viewHolder.getView<TextView>(R.id.tv_title)?.text = model?.title
-                            viewHolder.getView<TextView>(R.id.tv_subTitle)?.text = model?.subTitle
-                        }
-                        onBindViewHolder { vh, payload ->
-                            vh.getView<TextView>(R.id.tv_title)?.text =
-                                (payload as? ModelTest)?.title
-                            vh.getView<TextView>(R.id.tv_subTitle)?.text =
-                                (payload as? ModelTest)?.subTitle
+                        onBindViewHolder { m ->
+                            getView<TextView>(R.id.tv_title)?.text = model?.title
+                            getView<TextView>(R.id.tv_subTitle)?.text = model?.subTitle
                         }
                         // 点击处理
-                        onItemClick { vm, vh ->
+                        onItemClick { vm ->
                             //这里需要注意，为什么直接从该对象获取的Model是不正确的？因为ViewHolder的复用
                             //导致click事件其实是在另外一个VM里触发的
                             Log.d("arrayItemViewModel", "不正确的model${model}")
                             Log.d("arrayItemViewModel", "正确的model${vm.model}")
-                            Log.d("arrayItemViewModel", "adapter${vh.getAdapter<ListAdapter>()}")
-                            Log.d("arrayItemViewModel", "viewHolder${vh.adapterPosition}")
+                            Log.d("arrayItemViewModel", "adapter${getAdapter<ListAdapter>()}")
+                            Log.d("arrayItemViewModel", "viewHolder${adapterPosition}")
                             //修改Model数据
                             vm.model?.title = "测试更新"
                             //用Adapter更新数据
-                            vh.getAdapter<ListAdapter>()?.set(vh.adapterPosition, vm)
+                            getAdapter<ListAdapter>()?.set(adapterPosition, vm)
                         }
                     }
                 )
@@ -76,15 +70,9 @@ fun buildDiffModelList() = (0..3).map {
         // Model 数据模型
         model = ModelTest("title$it", "Diff更新$it")
         // 绑定数据
-        onBindViewHolder { viewHolder ->
-            viewHolder.getView<TextView>(R.id.tv_title)?.text = model?.title
-            viewHolder.getView<TextView>(R.id.tv_subTitle)?.text = model?.subTitle
-        }
-        onBindViewHolder { vh, payload ->
-            vh.getView<TextView>(R.id.tv_title)?.text =
-                (payload as? ModelTest)?.title
-            vh.getView<TextView>(R.id.tv_subTitle)?.text =
-                (payload as? ModelTest)?.subTitle
+        onBindViewHolder { payload ->
+            getView<TextView>(R.id.tv_title)?.text = model?.title
+            getView<TextView>(R.id.tv_subTitle)?.text = model?.subTitle
         }
     }
 }
