@@ -73,7 +73,7 @@ allprojects {
         maven { url 'https://jitpack.io' }
     }
 }
-def adapterVersion = 'v1.0.4'
+def adapterVersion = 'v1.0.5'
 
 //核心库
 implementation "com.github.ibaozi-cn.RecyclerViewAdapter:adapter-core:$adapterVersion"
