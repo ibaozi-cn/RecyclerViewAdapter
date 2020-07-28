@@ -73,24 +73,25 @@ allprojects {
         maven { url 'https://jitpack.io' }
     }
 }
+def adapterVersion = 'v1.0.4'
 
 //核心库
-implementation 'com.github.ibaozi-cn.RecyclerViewAdapter:adapter-core:V1.0.2'
+implementation "com.github.ibaozi-cn.RecyclerViewAdapter:adapter-core:$adapterVersion"
 
 //下面都是可选项
 
 //anko layout 扩展
-implementation 'com.github.ibaozi-cn.RecyclerViewAdapter:adapter-anko:V1.0.2'
+implementation "com.github.ibaozi-cn.RecyclerViewAdapter:adapter-anko:$adapterVersion"
 //diffutil 扩展
-implementation 'com.github.ibaozi-cn.RecyclerViewAdapter:adapter-diff:V1.0.2'
+implementation "com.github.ibaozi-cn.RecyclerViewAdapter:adapter-diff:$adapterVersion"
 //data binding扩展
-implementation 'com.github.ibaozi-cn.RecyclerViewAdapter:adapter-binding:V1.0.2'
+implementation "com.github.ibaozi-cn.RecyclerViewAdapter:adapter-binding:$adapterVersion"
 // paging3 扩展
-implementation 'com.github.ibaozi-cn.RecyclerViewAdapter:adapter-paging:V1.0.2'
+implementation "com.github.ibaozi-cn.RecyclerViewAdapter:adapter-paging:$adapterVersion"
 // sortedlist 扩展
-implementation 'com.github.ibaozi-cn.RecyclerViewAdapter:adapter-sorted:V1.0.2'
+implementation "com.github.ibaozi-cn.RecyclerViewAdapter:adapter-sorted:$adapterVersion"
 // flexbox 扩展
-implementation 'com.github.ibaozi-cn.RecyclerViewAdapter:adapter-flex:V1.0.2'
+implementation "com.github.ibaozi-cn.RecyclerViewAdapter:adapter-flex:$adapterVersion"
 ```
 
 ## 环境需要
