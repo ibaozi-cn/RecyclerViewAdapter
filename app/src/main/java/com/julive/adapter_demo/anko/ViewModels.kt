@@ -85,8 +85,9 @@ class AnkoViewModelTest : AnkoViewModel<ModelTest, AnkoItemView>() {
             ankoView.tvTitle?.text = model?.title
             ankoView.tvSubTitle?.text = model?.subTitle
         }
-        onCreateViewHolder { viewModel ->
+        onCreateViewHolder {
             itemView.setOnClickListener {
+                val viewModel = getAdapter<ListAdapter>()?.getItem(adapterPosition) as AnkoViewModelTest
                 viewModel.model?.title = "${Random.nextInt(1000, 10000)}"
                 getAdapter<ListAdapter>()?.set(adapterPosition, viewModel)
             }

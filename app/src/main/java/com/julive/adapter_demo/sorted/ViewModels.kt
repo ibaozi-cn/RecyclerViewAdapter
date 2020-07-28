@@ -45,14 +45,15 @@ data class SortedModelTest(
  *
  */
 class SortedItemViewModelTest : LayoutViewModel<SortedModelTest>(R.layout.item_test) {
-
     init {
         onBindViewHolder { _ ->
             getView<TextView>(R.id.tv_title)?.text = model?.title
             getView<TextView>(R.id.tv_subTitle)?.text = model?.subTitle
         }
-        onCreateViewHolder { vm ->
+        onCreateViewHolder {
             itemView.setOnClickListener {
+                val vm =
+                    getAdapter<SortedListAdapter>()?.getItem(adapterPosition) as SortedItemViewModelTest
                 vm.model?.subTitle = "刷新自己${Random.nextInt(100)}"
                 getAdapter<SortedListAdapter>()?.set(adapterPosition, vm)
             }

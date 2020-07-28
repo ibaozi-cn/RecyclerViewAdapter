@@ -4,15 +4,15 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
+import com.julive.adapter.anko.AnkoViewModel
 import com.julive.adapter.anko.ankoViewModelDsl
+import com.julive.adapter.binding.BindingViewModel
 import com.julive.adapter.binding.bindingViewModelDsl
-import com.julive.adapter.core.ListAdapter
-import com.julive.adapter.core.layoutViewModelDsl
-import com.julive.adapter.core.listAdapter
-import com.julive.adapter.core.into
+import com.julive.adapter.core.*
 import com.julive.adapter_demo.BR
 import com.julive.adapter_demo.R
 import com.julive.adapter_demo.anko.AnkoItemView
+import com.julive.adapter_demo.core.ArrayViewModelTest
 import com.julive.adapter_demo.sorted.ModelTest
 import kotlinx.android.synthetic.main.activity_adapter_dsl.*
 import java.util.*
@@ -38,14 +38,16 @@ class AdapterDslActivity : AppCompatActivity() {
                         getView<TextView>(R.id.tv_subTitle)?.text = model?.subTitle
                     }
                     // 点击处理
-                    onCreateViewHolder { vm ->
-                        //这里需要注意，为什么直接从该对象获取的Model是不正确的？因为ViewHolder的复用
-                        //导致click事件其实是在另外一个VM里触发的
-                        Log.d("arrayItemViewModel", "不正确的model${model}")
-                        Log.d("arrayItemViewModel", "正确的model${vm.model}")
-                        Log.d("arrayItemViewModel", "adapter${getAdapter<ListAdapter>()}")
-                        Log.d("arrayItemViewModel", "viewHolder${adapterPosition}")
+                    onCreateViewHolder {
                         itemView.setOnClickListener {
+                            val vm =
+                                getAdapter<ListAdapter>()?.getItem(adapterPosition) as LayoutViewModel<ModelTest>
+                            //这里需要注意，为什么直接从该对象获取的Model是不正确的？因为ViewHolder的复用
+                            //导致click事件其实是在另外一个VM里触发的
+                            Log.d("arrayItemViewModel", "不正确的model${model}")
+                            Log.d("arrayItemViewModel", "正确的model${vm.model}")
+                            Log.d("arrayItemViewModel", "adapter${getAdapter<ListAdapter>()}")
+                            Log.d("arrayItemViewModel", "viewHolder${adapterPosition}")
                             //修改Model数据
                             vm.model?.title = "测试更新"
                             //用Adapter更新数据
@@ -67,8 +69,10 @@ class AdapterDslActivity : AppCompatActivity() {
                         ankoView.tvTitle?.text = model?.title
                         ankoView.tvSubTitle?.text = model?.subTitle
                     }
-                    onCreateViewHolder { viewModel ->
+                    onCreateViewHolder {
                         itemView.setOnClickListener {
+                            val viewModel =
+                                getAdapter<ListAdapter>()?.getItem(adapterPosition) as AnkoViewModel<ModelTest, AnkoItemView>
                             viewModel.model?.title = "点击更新"
                             getAdapter<ListAdapter>()?.set(adapterPosition, viewModel)
                         }
@@ -78,8 +82,10 @@ class AdapterDslActivity : AppCompatActivity() {
             add(
                 bindingViewModelDsl<ModelTest>(R.layout.item_binding_layout, BR.model) {
                     model = ModelTest("title", "bindingViewModelDsl")
-                    onCreateViewHolder { viewModel ->
+                    onCreateViewHolder {
                         itemView.setOnClickListener {
+                            val viewModel =
+                                getAdapter<ListAdapter>()?.getItem(adapterPosition) as BindingViewModel<ModelTest>
                             viewModel.model?.title = "${Random().nextInt(100)}"
                             getAdapter<ListAdapter>()?.set(adapterPosition, viewModel)
                         }

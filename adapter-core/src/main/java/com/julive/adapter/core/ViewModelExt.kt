@@ -9,17 +9,17 @@ typealias  DefaultViewModelType<M> = ViewModel<M, DefaultViewHolder>
 
 typealias BindView = DefaultViewHolder.(payloads: List<Any>) -> Unit
 typealias UnBindView = DefaultViewHolder.() -> Unit
-typealias InitView <M> = DefaultViewHolder.(viewModel: DefaultViewModelType<M>) -> Unit
+typealias InitView = DefaultViewHolder.() -> Unit
 
 @Suppress("UNCHECKED_CAST")
 abstract class DefaultViewModel<M> : DefaultViewModelType<M> {
 
     override var model: M? = null
-    private var initView: InitView<M>? = null
+    private var initView: InitView? = null
     private var bindView: BindView? = null
     private var unBindView: UnBindView? = null
 
-    open fun onCreateViewHolder(f: DefaultViewHolder.(viewModel: DefaultViewModelType<M>) -> Unit) {
+    open fun onCreateViewHolder(f: DefaultViewHolder.() -> Unit) {
         initView = f
     }
 
@@ -42,10 +42,7 @@ abstract class DefaultViewModel<M> : DefaultViewModelType<M> {
         layoutInflater: LayoutInflater
     ): DefaultViewHolder {
         return DefaultViewHolder(getHolderItemView(parent, layoutInflater)).apply {
-            initView?.invoke(
-                this,
-                getAdapter<IAdapter<*>>()?.getItem(adapterPosition) as @ParameterName(name = "viewModel") DefaultViewModel<M>
-            )
+            initView?.invoke(this)
         }
     }
 
