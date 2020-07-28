@@ -45,10 +45,12 @@ class AdapterDslActivity : AppCompatActivity() {
                         Log.d("arrayItemViewModel", "正确的model${vm.model}")
                         Log.d("arrayItemViewModel", "adapter${getAdapter<ListAdapter>()}")
                         Log.d("arrayItemViewModel", "viewHolder${adapterPosition}")
-                        //修改Model数据
-                        vm.model?.title = "测试更新"
-                        //用Adapter更新数据
-                        getAdapter<ListAdapter>()?.set(adapterPosition, vm)
+                        itemView.setOnClickListener {
+                            //修改Model数据
+                            vm.model?.title = "测试更新"
+                            //用Adapter更新数据
+                            getAdapter<ListAdapter>()?.set(adapterPosition, vm)
+                        }
                     }
                 }
             )
@@ -66,8 +68,10 @@ class AdapterDslActivity : AppCompatActivity() {
                         ankoView.tvSubTitle?.text = model?.subTitle
                     }
                     onCreateViewHolder { viewModel ->
-                        viewModel.model?.title = "点击更新"
-                        getAdapter<ListAdapter>()?.set(adapterPosition, viewModel)
+                        itemView.setOnClickListener {
+                            viewModel.model?.title = "点击更新"
+                            getAdapter<ListAdapter>()?.set(adapterPosition, viewModel)
+                        }
                     }
                 }
             )
@@ -75,8 +79,10 @@ class AdapterDslActivity : AppCompatActivity() {
                 bindingViewModelDsl<ModelTest>(R.layout.item_binding_layout, BR.model) {
                     model = ModelTest("title", "bindingViewModelDsl")
                     onCreateViewHolder { viewModel ->
-                        viewModel.model?.title = "${Random().nextInt(100)}"
-                        getAdapter<ListAdapter>()?.set(adapterPosition, viewModel)
+                        itemView.setOnClickListener {
+                            viewModel.model?.title = "${Random().nextInt(100)}"
+                            getAdapter<ListAdapter>()?.set(adapterPosition, viewModel)
+                        }
                     }
                 }
             )

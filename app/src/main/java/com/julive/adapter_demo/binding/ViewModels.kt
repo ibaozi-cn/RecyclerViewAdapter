@@ -9,14 +9,12 @@ import java.util.*
 
 class BindingItemViewModelTest :
     BindingViewModel<ModelTest>(R.layout.item_binding_layout, BR.model) {
-
     init {
-
         onCreateViewHolder { viewModel ->
-            viewModel.model?.title = "${Random().nextInt(100)}"
-            getAdapter<ListAdapter>()?.set(adapterPosition, viewModel)
+            itemView.setOnClickListener {
+                viewModel.model?.title = "${Random().nextInt(100)}"
+                getAdapter<ListAdapter>()?.set(adapterPosition, viewModel)
+            }
         }
-
     }
-
 }

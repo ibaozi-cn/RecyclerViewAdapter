@@ -21,8 +21,10 @@ class ArrayViewModelTest : LayoutViewModel<ModelTest>(R.layout.item_test) {
         }
 
         onCreateViewHolder { vm ->
-            vm.model?.title = "${Random().nextInt(100)}"
-            getAdapter<ListAdapter>()?.set(adapterPosition, vm)
+            itemView.setOnClickListener {
+                vm.model?.title = "${Random().nextInt(100)}"
+                getAdapter<ListAdapter>()?.set(adapterPosition, vm)
+            }
         }
 
     }
