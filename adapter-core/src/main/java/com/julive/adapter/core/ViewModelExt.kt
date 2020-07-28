@@ -7,7 +7,7 @@ import android.view.ViewGroup
 typealias  ViewModelType = ViewModel<*, *>
 typealias  DefaultViewModelType<M> = ViewModel<M, DefaultViewHolder>
 
-typealias BindView<M> = DefaultViewHolder.(M) -> Unit
+typealias BindView = DefaultViewHolder.(payloads:List<Any>) -> Unit
 typealias UnBindView = DefaultViewHolder.() -> Unit
 typealias ItemClick <M> = DefaultViewHolder.(viewModel: DefaultViewModelType<M>) -> Unit
 typealias InitView = DefaultViewHolder.() -> Unit
@@ -17,7 +17,7 @@ abstract class DefaultViewModel<M> : DefaultViewModelType<M> {
 
     override var model: M? = null
     private var initView: InitView? = null
-    private var bindView: BindView<M?>? = null
+    private var bindView: BindView? = null
     private var unBindView: UnBindView? = null
     private var itemClick: ItemClick<M>? = null
 
@@ -25,7 +25,7 @@ abstract class DefaultViewModel<M> : DefaultViewModelType<M> {
         initView = f
     }
 
-    open fun onBindViewHolder(f: DefaultViewHolder.(M?) -> Unit) {
+    open fun onBindViewHolder(f: DefaultViewHolder.(payloads:List<Any>) -> Unit) {
         bindView = f
     }
 
@@ -59,13 +59,7 @@ abstract class DefaultViewModel<M> : DefaultViewModelType<M> {
     }
 
     override fun bindVH(viewHolder: DefaultViewHolder, model: M, payloads: List<Any>) {
-        if (!payloads.isNullOrEmpty()) {
-            val m = payloads[0] as? M
-            m?.let {
-                this.model = m
-            }
-        }
-        bindView?.invoke(viewHolder, this.model)
+        bindView?.invoke(viewHolder, payloads)
     }
 
     override fun unBindVH(viewHolder: DefaultViewHolder) {
