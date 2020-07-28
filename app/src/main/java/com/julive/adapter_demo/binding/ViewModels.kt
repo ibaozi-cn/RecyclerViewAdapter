@@ -12,7 +12,7 @@ class BindingItemViewModelTest :
 
     init {
 
-        onItemClick { viewModel ->
+        onCreateViewHolder { viewModel ->
             viewModel.model?.title = "${Random().nextInt(100)}"
             getAdapter<ListAdapter>()?.set(adapterPosition, viewModel)
         }

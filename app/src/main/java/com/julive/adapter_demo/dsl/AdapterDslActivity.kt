@@ -38,7 +38,7 @@ class AdapterDslActivity : AppCompatActivity() {
                         getView<TextView>(R.id.tv_subTitle)?.text = model?.subTitle
                     }
                     // 点击处理
-                    onItemClick { vm ->
+                    onCreateViewHolder { vm ->
                         //这里需要注意，为什么直接从该对象获取的Model是不正确的？因为ViewHolder的复用
                         //导致click事件其实是在另外一个VM里触发的
                         Log.d("arrayItemViewModel", "不正确的model${model}")
@@ -65,7 +65,7 @@ class AdapterDslActivity : AppCompatActivity() {
                         ankoView.tvTitle?.text = model?.title
                         ankoView.tvSubTitle?.text = model?.subTitle
                     }
-                    onItemClick { viewModel ->
+                    onCreateViewHolder { viewModel ->
                         viewModel.model?.title = "点击更新"
                         getAdapter<ListAdapter>()?.set(adapterPosition, viewModel)
                     }
@@ -74,7 +74,7 @@ class AdapterDslActivity : AppCompatActivity() {
             add(
                 bindingViewModelDsl<ModelTest>(R.layout.item_binding_layout, BR.model) {
                     model = ModelTest("title", "bindingViewModelDsl")
-                    onItemClick { viewModel ->
+                    onCreateViewHolder { viewModel ->
                         viewModel.model?.title = "${Random().nextInt(100)}"
                         getAdapter<ListAdapter>()?.set(adapterPosition, viewModel)
                     }

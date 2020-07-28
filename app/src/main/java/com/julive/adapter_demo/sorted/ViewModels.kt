@@ -51,24 +51,11 @@ class SortedItemViewModelTest : LayoutViewModel<SortedModelTest>(R.layout.item_t
             getView<TextView>(R.id.tv_title)?.text = model?.title
             getView<TextView>(R.id.tv_subTitle)?.text = model?.subTitle
         }
-    }
-
-    override fun getViewHolder(
-        parent: ViewGroup,
-        layoutInflater: LayoutInflater
-    ): DefaultViewHolder {
-        return ItemViewHolder(layoutInflater.inflate(layoutRes, parent, false))
-    }
-
-}
-
-class ItemViewHolder(view: View) : DefaultViewHolder(view) {
-    init {
-        itemView.setOnClickListener {
-            val item =
-                getAdapter<SortedListAdapter>()?.getItem(adapterPosition) as SortedItemViewModelTest
-            item.model?.subTitle = "刷新自己${Random.nextInt(100)}"
-            getAdapter<SortedListAdapter>()?.set(adapterPosition, item)
+        onCreateViewHolder { vm ->
+            itemView.setOnClickListener {
+                vm.model?.subTitle = "刷新自己${Random.nextInt(100)}"
+                getAdapter<SortedListAdapter>()?.set(adapterPosition, vm)
+            }
         }
     }
 }
