@@ -73,6 +73,7 @@ allprojects {
         maven { url 'https://jitpack.io' }
     }
 }
+
 def adapterVersion = 'v1.1.0'
 
 //核心库
