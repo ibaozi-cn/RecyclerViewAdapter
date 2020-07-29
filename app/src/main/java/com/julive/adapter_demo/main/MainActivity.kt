@@ -10,6 +10,7 @@ import com.julive.adapter_demo.diff.DiffActivity
 import com.julive.adapter_demo.dsl.AdapterDslActivity
 import com.julive.adapter_demo.ext.startActivity
 import com.julive.adapter_demo.paging.Paging3Activity
+import com.julive.adapter_demo.selectable.SelectableActivity
 import com.julive.adapter_demo.sorted.SortedActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -46,6 +47,10 @@ class MainActivity : AppCompatActivity() {
 
         btn_binding.setText("DataBindingActivity").setOnClickListener {
             startActivity<DataBindingActivity>()
+        }
+
+        btn_selectable.setText("SelectableActivity").setOnClickListener {
+            startActivity<SelectableActivity>()
         }
 
     }

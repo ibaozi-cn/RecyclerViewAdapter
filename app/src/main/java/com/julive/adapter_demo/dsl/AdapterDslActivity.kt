@@ -40,16 +40,15 @@ class AdapterDslActivity : AppCompatActivity() {
                     // 点击处理
                     onCreateViewHolder {
                         itemView.setOnClickListener {
-                            val vm =
-                                getAdapter<ListAdapter>()?.getItem(adapterPosition) as LayoutViewModel<ModelTest>
+                            val vm = getViewModel<LayoutViewModel<ModelTest>>()
                             //这里需要注意，为什么直接从该对象获取的Model是不正确的？因为ViewHolder的复用
                             //导致click事件其实是在另外一个VM里触发的
                             Log.d("arrayItemViewModel", "不正确的model${model}")
-                            Log.d("arrayItemViewModel", "正确的model${vm.model}")
+                            Log.d("arrayItemViewModel", "正确的model${vm?.model}")
                             Log.d("arrayItemViewModel", "adapter${getAdapter<ListAdapter>()}")
                             Log.d("arrayItemViewModel", "viewHolder${adapterPosition}")
                             //修改Model数据
-                            vm.model?.title = "测试更新"
+                            vm?.model?.title = "测试更新"
                             //用Adapter更新数据
                             getAdapter<ListAdapter>()?.set(adapterPosition, vm)
                         }

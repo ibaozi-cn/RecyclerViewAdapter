@@ -1,3 +1,4 @@
+include ':adapter-selectable'
 include ':adapter-sorted'
 include ':adapter-binding'
 include ':adapter-flex'

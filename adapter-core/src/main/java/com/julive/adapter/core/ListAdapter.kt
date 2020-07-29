@@ -52,9 +52,11 @@ class ListAdapter :
         notifyItemRemoved(index)
     }
 
-    override fun set(index: Int, vm: ViewModelType) {
-        dataList[index] = vm
-        notifyItemChanged(index)
+    override fun set(index: Int, vm: ViewModelType?) {
+        if (vm != null) {
+            dataList[index] = vm
+            notifyItemChanged(index)
+        }
     }
 
     override fun updatePayload(index: Int, vm: ViewModelType) {
