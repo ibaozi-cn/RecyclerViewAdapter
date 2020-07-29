@@ -1,10 +1,41 @@
 package com.julive.adapter.selectable
 
+import android.util.SparseArray
 import android.util.SparseBooleanArray
 import com.julive.adapter.core.IAdapter
 
 private val IAdapter<*>.selectedItems by lazy {
     SparseBooleanArray()
+}
+
+private val IAdapter<*>.selectConfig by lazy {
+    SparseArray<Any>().apply {
+        append(0, true) // is Multi Selectable
+        append(1, Int.MAX_VALUE) // Selectable Max Size Default Int.Max
+    }
+}
+
+var IAdapter<*>.isMultiSelect
+    get() = selectConfig[0] as Boolean
+    private set(value) {}
+
+var IAdapter<*>.selectedMaxSize: Int
+    get() = selectConfig[1] as Int
+    private set(value) {}
+
+var IAdapter<*>.selectedCount: Int
+    get() = selectedItems.size()
+    private set(value) {}
+
+fun IAdapter<*>.setMultiSelectable(enable: Boolean) {
+    selectConfig.setValueAt(0, enable)
+    if (!enable && selectedCount > 1) {
+        clearSelection()
+    }
+}
+
+fun IAdapter<*>.setSelectableMaxSize(size: Int) {
+    selectConfig.setValueAt(1, size)
 }
 
 fun IAdapter<*>.getSelectedItems(): List<Int> {
@@ -17,8 +48,6 @@ fun IAdapter<*>.getSelectedItems(): List<Int> {
 
 fun IAdapter<*>.isSelected(position: Int) = getSelectedItems().contains(position)
 
-fun IAdapter<*>.selectedCount() = selectedItems.size()
-
 fun IAdapter<*>.clearSelection() {
     val selection = getSelectedItems()
     selectedItems.clear()
@@ -27,7 +56,15 @@ fun IAdapter<*>.clearSelection() {
     }
 }
 
-fun IAdapter<*>.toggleSelection(position: Int) {
+fun IAdapter<*>.toggleSelection(position: Int, isMaxSelect: ((Boolean) -> Unit)? = null) {
+    if (selectedCount >= selectedMaxSize && !selectedItems.get(position, false)) {
+        isMaxSelect?.invoke(true)
+        return
+    }
+    isMaxSelect?.invoke(false)
+    if (!isMultiSelect) {
+        clearSelection()
+    }
     if (selectedItems.get(position, false)) {
         selectedItems.delete(position)
     } else {
