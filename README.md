@@ -39,6 +39,7 @@ https://user-gold-cdn.xitu.io/2020/7/24/1737e393a1218f05?w=960&h=720&f=png&s=201
 | Paging | 12kb | PagingListAdapter扩展适配 |
 | Diff | 6kb | 适配DiffUtil，目前适用ListAdapter |
 | FlexBox | 9kb | 适配FlexBox布局 |
+| Selectable | 8kb | 动态扩展单选、多选、最大可选项功能 |
 
 ## 各个Adapter的优势在哪，如何选择？
 
