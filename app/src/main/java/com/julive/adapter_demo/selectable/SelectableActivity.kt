@@ -43,9 +43,6 @@ class SelectableActivity : AppCompatActivity() {
                             }
                             Log.d("isMultiSelectable", "isMultiSelectable$isMultiSelect")
                         }
-                        itemView.setOnLongClickListener {
-                            true
-                        }
                     }
                 })
             }

@@ -63,6 +63,7 @@ dependencies {
     implementation project(path: ':adapter-diff')
     implementation project(path: ':adapter-binding')
     implementation project(path: ':adapter-selectable')
+    implementation project(path: ':adapter-expandable')
 
     // Anko Commons
     implementation "org.jetbrains.anko:anko-commons:$anko_version"

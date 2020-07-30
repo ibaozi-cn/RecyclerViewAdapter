@@ -8,6 +8,7 @@ import com.julive.adapter_demo.binding.DataBindingActivity
 import com.julive.adapter_demo.core.ArrayListActivity
 import com.julive.adapter_demo.diff.DiffActivity
 import com.julive.adapter_demo.dsl.AdapterDslActivity
+import com.julive.adapter_demo.expandable.ExpandableActivity
 import com.julive.adapter_demo.ext.startActivity
 import com.julive.adapter_demo.paging.Paging3Activity
 import com.julive.adapter_demo.selectable.SelectableActivity
@@ -51,6 +52,10 @@ class MainActivity : AppCompatActivity() {
 
         btn_selectable.setText("SelectableActivity").setOnClickListener {
             startActivity<SelectableActivity>()
+        }
+
+        btn_expandable.setText("ExpandableActivity").setOnClickListener {
+            startActivity<ExpandableActivity>()
         }
 
     }

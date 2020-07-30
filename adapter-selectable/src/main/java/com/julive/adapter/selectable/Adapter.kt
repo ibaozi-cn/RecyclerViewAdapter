@@ -70,5 +70,5 @@ fun IAdapter<*>.toggleSelection(position: Int, isMaxSelect: ((Boolean) -> Unit)?
     } else {
         selectedItems.put(position, true)
     }
-    notifyItemChanged(position);
+    notifyItemChanged(position)
 }
