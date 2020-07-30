@@ -1,3 +1,5 @@
+include ':adapter-expandable'
+include ':adapter-ui'
 include ':adapter-selectable'
 include ':adapter-sorted'
 include ':adapter-binding'
