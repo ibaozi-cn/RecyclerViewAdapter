@@ -1,5 +1,5 @@
 ## RecyclerViewAdapter
-
+It has been written **100% in Kotlin**. ❤️
 重新定义RecyclerView Adapter的封装，追求既简单又实用，结合Kotlin的高级特性，优化代码书写方式，真正做到高内聚低耦合
 
 设计图
