@@ -27,7 +27,7 @@ https://user-gold-cdn.xitu.io/2020/7/24/1737e393a1218f05?w=960&h=720&f=png&s=201
 - ~~DiffUtil 扩展~~
 - ~~DataBinding 扩展~~
 - ~~可选择Selectable 扩展~~
-- 展开expandable 扩展
+- 可展开expandable 扩展
 - UI扩展：空布局、滚动底部或头部回调、获取可见项等
 - 等等.. 未来有好的想法继续扩展
 
