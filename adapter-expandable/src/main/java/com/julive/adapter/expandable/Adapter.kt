@@ -30,8 +30,9 @@ fun IAdapter<*>.setMultiExpandable(enable: Boolean) {
 }
 
 fun IAdapter<*>.getExpandedItems(): List<Int> {
-    val items: MutableList<Int> = ArrayList(expandedItems.size())
-    for (i in 0 until expandedItems.size()) {
+    val size = expandedItems.size()
+    val items: MutableList<Int> = ArrayList(size)
+    for (i in 0 until size) {
         items.add(expandedItems.keyAt(i))
     }
     return items

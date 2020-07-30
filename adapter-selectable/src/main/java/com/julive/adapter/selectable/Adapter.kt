@@ -39,8 +39,9 @@ fun IAdapter<*>.setSelectableMaxSize(size: Int) {
 }
 
 fun IAdapter<*>.getSelectedItems(): List<Int> {
-    val items: MutableList<Int> = ArrayList(selectedItems.size())
-    for (i in 0 until selectedItems.size()) {
+    val itemSize = selectedItems.size()
+    val items: MutableList<Int> = ArrayList(itemSize)
+    for (i in 0 until itemSize) {
         items.add(selectedItems.keyAt(i))
     }
     return items
@@ -57,7 +58,8 @@ fun IAdapter<*>.clearSelection() {
 }
 
 fun IAdapter<*>.toggleSelection(position: Int, isMaxSelect: ((Boolean) -> Unit)? = null) {
-    if (selectedCount >= selectedMaxSize && !selectedItems.get(position, false)) {
+    val isSelect = selectedItems.get(position, false)
+    if (selectedCount >= selectedMaxSize && !isSelect) {
         isMaxSelect?.invoke(true)
         return
     }
@@ -65,7 +67,7 @@ fun IAdapter<*>.toggleSelection(position: Int, isMaxSelect: ((Boolean) -> Unit)?
     if (!isMultiSelect) {
         clearSelection()
     }
-    if (selectedItems.get(position, false)) {
+    if (isSelect) {
         selectedItems.delete(position)
     } else {
         selectedItems.put(position, true)
