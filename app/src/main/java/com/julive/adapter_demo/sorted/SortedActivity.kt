@@ -55,30 +55,4 @@ class SortedActivity : AppCompatActivity() {
             }
         }
     }
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        val inflater: MenuInflater = menuInflater
-        inflater.inflate(R.menu.main_menu, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle item selection
-        return when (item.itemId) {
-            R.id.action_ll -> {
-                rv_list.layoutManager = LinearLayoutManager(this)
-                true
-            }
-            R.id.action_flex -> {
-                rv_list.layoutManager = flexboxLayoutMangerDefault { }
-                true
-            }
-            R.id.action_grid -> {
-                rv_list.layoutManager = GridLayoutManager(this, 2)
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
-
 }

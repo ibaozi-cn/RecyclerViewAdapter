@@ -4,19 +4,22 @@
 
     <item android:id="@+id/action_ll"
         android:title="Linear"
-        android:inputType="textCapWords"
-        android:imeOptions="actionSearch"
-        android:orderInCategory="80"
-        app:showAsAction="ifRoom|collapseActionView"/>
-
-    <item android:id="@+id/action_flex"
-        android:title="Flex"
         android:orderInCategory="100"
-        app:showAsAction="always"/>
+        app:showAsAction="ifRoom|collapseActionView"/>
 
     <item android:id="@+id/action_grid"
         android:title="Grid"
-        android:orderInCategory="90"
+        android:orderInCategory="100"
         app:showAsAction="ifRoom"/>
+
+    <item android:id="@+id/action_staggered"
+        android:title="Staggered"
+        android:orderInCategory="90"
+        app:showAsAction="always"/>
+
+    <item android:id="@+id/action_flex"
+        android:title="Flex"
+        android:orderInCategory="80"
+        app:showAsAction="always"/>
 
 </menu>

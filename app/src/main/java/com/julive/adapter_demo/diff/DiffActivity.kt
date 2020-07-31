@@ -17,8 +17,7 @@ class DiffActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_diff)
-
-        supportActionBar?.title = "ArrayListAdapter Diff"
+        supportActionBar?.title = "ListAdapter Diff"
 
         val adapter = listAdapter {
             //循环添加ItemViewModel

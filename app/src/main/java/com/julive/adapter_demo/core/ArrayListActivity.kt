@@ -1,12 +1,13 @@
 package com.julive.adapter_demo.core
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.julive.adapter.core.ListAdapter
 import com.julive.adapter.core.bindListAdapter
 import com.julive.adapter.flex.flexboxLayoutMangerDefault
@@ -28,13 +29,13 @@ class ArrayListActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        supportActionBar?.title = "ArrayListAdapter"
+        supportActionBar?.title = "ListAdapter"
         setContentView(R.layout.activity_array_list)
         rv_list.bindListAdapter(mArrayListAdapter, flexboxLayoutMangerDefault { })
         // 新增一个
         new_add.setText("新增").setOnClickListener {
             mArrayListAdapter.add(ArrayViewModelTest().apply {
-                model = ModelTest("标题", "副标题")
+                model = ModelTest("标题", if (Random.nextInt(2) == 1) "副标题副标题副标题副标题副标题" else "副标题")
             })
         }
         // 删除第一个
@@ -73,7 +74,14 @@ class ArrayListActivity : AppCompatActivity() {
                 true
             }
             R.id.action_flex -> {
-                rv_list.layoutManager = flexboxLayoutMangerDefault { }
+//                rv_list.layoutManager = flexboxLayoutMangerDefault{}
+                true
+            }
+            R.id.action_staggered -> {
+                rv_list.layoutManager = StaggeredGridLayoutManager(
+                    2,
+                    StaggeredGridLayoutManager.VERTICAL
+                )
                 true
             }
             R.id.action_grid -> {

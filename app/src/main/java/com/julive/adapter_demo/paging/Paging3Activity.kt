@@ -33,6 +33,7 @@ class Paging3Activity : AppCompatActivity() {
     @ExperimentalPagingApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        supportActionBar?.title = "PagingListAdapter"
         setContentView(R.layout.activity_paging3)
 
         rv_paging_list.bindListAdapter(pagingListAdapter.withLoadStateFooter(PagingLoadStateAdapter()))

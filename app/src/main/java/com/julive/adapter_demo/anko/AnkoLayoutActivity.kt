@@ -24,7 +24,7 @@ class AnkoLayoutActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        supportActionBar?.title = "ArrayListAdapter"
+        supportActionBar?.title = "ListAdapter"
         var index = 0
         AnkoLayoutComponent(arrayListAdapter).setContentView(this).apply {
             // 新增一个

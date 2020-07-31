@@ -12,7 +12,7 @@ import java.util.*
  * ViewModel
  */
 
-class ArrayViewModelTest : LayoutViewModel<ModelTest>(R.layout.item_test) {
+class ArrayViewModelTest : LayoutViewModel<ModelTest>(R.layout.item_test_2) {
 
     init {
 

@@ -17,6 +17,7 @@ class DataBindingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_data_binding)
+        supportActionBar?.title = "ListAdapter"
 
         rv_binding_list.bindListAdapter(mArrayListAdapter)
 

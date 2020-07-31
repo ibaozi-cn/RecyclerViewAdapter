@@ -35,4 +35,8 @@ open class BindingViewModel<M>(override val layoutRes: Int, private val variable
         getBinding(viewHolder).executePendingBindings()
     }
 
+    override fun unBindVH(viewHolder: DefaultViewHolder) {
+        super.unBindVH(viewHolder)
+        getBinding(viewHolder).unbind()
+    }
 }

@@ -21,9 +21,7 @@ class AdapterDslActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        supportActionBar?.title = "ArrayListAdapter DSL"
-
+        supportActionBar?.title = "ListAdapter DSL"
         setContentView(R.layout.activity_adapter_dsl)
 
         listAdapter {

@@ -19,6 +19,7 @@ import java.util.*
 class SelectableActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        supportActionBar?.title = "ListAdapter"
         setContentView(R.layout.activity_selectable)
         val adapter = listAdapter {
             (0..10).forEach { _ ->
