@@ -5,9 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
 import androidx.core.view.isVisible
-import com.julive.adapter.core.into
-import com.julive.adapter.core.layoutViewModelDsl
-import com.julive.adapter.core.listAdapter
+import com.julive.adapter.core.*
 import com.julive.adapter.selectable.*
 import com.julive.adapter_demo.R
 import com.julive.adapter_demo.sorted.ModelTest
@@ -23,37 +21,37 @@ class SelectableActivity : AppCompatActivity() {
         setContentView(R.layout.activity_selectable)
         val adapter = listAdapter {
             (0..10).forEach { _ ->
-                add(layoutViewModelDsl<ModelTest>(R.layout.item_test) {
-                    model = ModelTest("title", "subTitle")
-                    onBindViewHolder {
-                        getView<TextView>(R.id.tv_title)?.text = model?.title
-                        getView<TextView>(R.id.tv_subTitle)?.text = model?.subTitle
-                        val isSelect = isSelected(adapterPosition)
-                        if (isSelect) {
-                            itemView.setBackgroundResource(R.color.cardview_dark_background)
-                        } else {
-                            itemView.setBackgroundResource(R.color.cardview_light_background)
+                add(
+                    layoutViewModelDsl<ModelTest>(
+                        R.layout.item_test
+                    ) {
+                        onBindViewHolder { model, _ ->
+                            getView<TextView>(R.id.tv_title)?.text = model.title
+                            getView<TextView>(R.id.tv_subTitle)?.text = model.subTitle
+                            val isSelect = isSelected(adapterPosition)
+                            if (isSelect) {
+                                itemView.setBackgroundResource(R.color.cardview_dark_background)
+                            } else {
+                                itemView.setBackgroundResource(R.color.cardview_light_background)
+                            }
                         }
-                    }
-                    onCreateViewHolder {
                         itemView.setOnClickListener {
-                            toggleSelection(adapterPosition){
-                                if(it){
+                            toggleSelection(adapterPosition) {
+                                if (it) {
                                     longToast("可选项已达到最大值")
                                 }
                             }
                             Log.d("isMultiSelectable", "isMultiSelectable$isMultiSelect")
                         }
-                    }
-                })
+                    })
             }
             into(rv_list_selectable)
         }
 
         new_add.setText("切换单选").setOnClickListener {
-            if(!adapter.isMultiSelect){
+            if (!adapter.isMultiSelect) {
                 new_add.setText("切换单选")
-            }else{
+            } else {
                 new_add.setText("切换多选")
             }
             adapter.setMultiSelectable(!adapter.isMultiSelect)

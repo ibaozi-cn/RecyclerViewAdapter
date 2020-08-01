@@ -24,29 +24,27 @@ class DiffActivity : AppCompatActivity() {
             (0..2).map {
                 add(
                     // ItemViewModel 对象 函数中传入布局IdRes
-                    layoutViewModelDsl<ModelTest>(if (it % 2 == 0) R.layout.item_test else R.layout.item_test_2) {
-                        // Model 数据模型
-                        model = ModelTest("title$it", "subTitle$it")
-                        // 绑定数据
-                        onBindViewHolder { m ->
-                            getView<TextView>(R.id.tv_title)?.text = model?.title
-                            getView<TextView>(R.id.tv_subTitle)?.text = model?.subTitle
+                    layoutViewModelDsl<ModelTest>(
+                        if (it % 2 == 0) R.layout.item_test else R.layout.item_test_2
+                    ) {
+
+                        onBindViewHolder { model, payloads ->
+                            getView<TextView>(R.id.tv_title)?.text = model.title
+                            getView<TextView>(R.id.tv_subTitle)?.text = model.subTitle
                         }
+
                         // 点击处理
-                        onCreateViewHolder {
-                            itemView.setOnClickListener {
-                                val vm = getAdapter<ListAdapter>()?.getItem(adapterPosition) as LayoutViewModel<ModelTest>
-                                //这里需要注意，为什么直接从该对象获取的Model是不正确的？因为ViewHolder的复用
-                                //导致click事件其实是在另外一个VM里触发的
-                                Log.d("arrayItemViewModel", "不正确的model${model}")
-                                Log.d("arrayItemViewModel", "正确的model${vm.model}")
-                                Log.d("arrayItemViewModel", "adapter${getAdapter<ListAdapter>()}")
-                                Log.d("arrayItemViewModel", "viewHolder${adapterPosition}")
-                                //修改Model数据
-                                vm.model?.title = "测试更新"
-                                //用Adapter更新数据
-                                getAdapter<ListAdapter>()?.set(adapterPosition, vm)
-                            }
+                        itemView.setOnClickListener {
+                            val vm =
+                                getAdapter<ListAdapter>()?.getItem(adapterPosition) as LayoutViewModel<ModelTest>
+                            //这里需要注意，为什么直接从该对象获取的Model是不正确的？因为ViewHolder的复用
+                            //导致click事件其实是在另外一个VM里触发的
+                            Log.d("arrayItemViewModel", "adapter${getAdapter<ListAdapter>()}")
+                            Log.d("arrayItemViewModel", "viewHolder${adapterPosition}")
+                            //修改Model数据
+                            getModel<ModelTest>()?.title = "测试更新"
+                            //用Adapter更新数据
+                            getAdapter<ListAdapter>()?.set(adapterPosition, vm)
                         }
                     }
                 )
@@ -58,7 +56,7 @@ class DiffActivity : AppCompatActivity() {
         delete.isVisible = false
         update.setText("更新").setOnClickListener {
             val list = buildDiffModelList()
-            adapter.calculateDiff(list)
+//            adapter.calculateDiff(list)
         }
     }
 }
@@ -66,13 +64,13 @@ class DiffActivity : AppCompatActivity() {
 fun buildDiffModelList() = (0..3).map {
     // ItemViewModel 对象 函数中传入布局IdRes
     // 布局和老数据正好相反，看看能不能直接替换更新
-    layoutViewModelDsl<ModelTest>(if (it % 2 == 0) R.layout.item_test else R.layout.item_test_2) {
-        // Model 数据模型
-        model = ModelTest("title$it", "Diff更新$it")
+    layoutViewModelDsl<ModelTest>(
+        if (it % 2 == 0) R.layout.item_test else R.layout.item_test_2
+    ) {
         // 绑定数据
-        onBindViewHolder { payload ->
-            getView<TextView>(R.id.tv_title)?.text = model?.title
-            getView<TextView>(R.id.tv_subTitle)?.text = model?.subTitle
+        onBindViewHolder { model, _ ->
+            getView<TextView>(R.id.tv_title)?.text = model.title
+            getView<TextView>(R.id.tv_subTitle)?.text = model.subTitle
         }
     }
 }

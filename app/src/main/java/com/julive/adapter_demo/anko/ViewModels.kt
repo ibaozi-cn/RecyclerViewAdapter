@@ -8,7 +8,9 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.TextView
 import com.julive.adapter.anko.AnkoViewModel
+import com.julive.adapter.anko.getAnkoView
 import com.julive.adapter.core.ListAdapter
+import com.julive.adapter.core.getAdapter
 import com.julive.adapter_demo.R
 import com.julive.adapter_demo.ext.cardView
 import com.julive.adapter_demo.sorted.ModelTest
@@ -74,20 +76,16 @@ class AnkoItemView : AnkoComponent<ViewGroup> {
 /**
  * ViewModel
  */
-class AnkoViewModelTest : AnkoViewModel<ModelTest, AnkoItemView>() {
+class AnkoViewModelTest : AnkoViewModel<ModelTest>() {
     init {
+        model = ModelTest("1", "2")
         onCreateView {
             AnkoItemView()
         }
-        onBindViewHolder { _ ->
-            val ankoView = getAnkoView(this)
-            Log.d("AnkoViewModelTest", "ankoView=${ankoView}")
-            ankoView.tvTitle?.text = model?.title
-            ankoView.tvSubTitle?.text = model?.subTitle
-        }
         onCreateViewHolder {
             itemView.setOnClickListener {
-                val viewModel = getAdapter<ListAdapter>()?.getItem(adapterPosition) as AnkoViewModelTest
+                val viewModel =
+                    getAdapter<ListAdapter>()?.getItem(adapterPosition) as AnkoViewModelTest
                 viewModel.model?.title = "${Random.nextInt(1000, 10000)}"
                 getAdapter<ListAdapter>()?.set(adapterPosition, viewModel)
             }

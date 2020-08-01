@@ -6,17 +6,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.IdRes
 import androidx.recyclerview.widget.RecyclerView
-import com.julive.adapter_core.R
+
+typealias BindView<M> = DefaultViewHolder<M>.(M, payloads: List<Any>) -> Unit
+typealias UnBindView<M> = DefaultViewHolder<M>.() -> Unit
+typealias InitView<M> = DefaultViewHolder<M>.() -> Unit
 
 @Suppress("UNCHECKED_CAST")
-open class DefaultViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
-    /**
-     * views缓存
-     */
-    private val views: SparseArray<View> = SparseArray()
+open class DefaultViewHolder<M>(open val view: View) : RecyclerView.ViewHolder(view),
+    Subscriber<DefaultViewHolder<M>> {
 
-    fun <T : View> getView(@IdRes viewId: Int): T? {
-        return retrieveView(viewId)
+    private val views by lazy {
+        SparseArray<View>()
     }
 
     private fun <T : View> retrieveView(@IdRes viewId: Int): T? {
@@ -26,15 +26,37 @@ open class DefaultViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
             if (view == null) return null
             views.put(viewId, view)
         }
-        return view as T
+        return view as? T
     }
 
-    fun <Adapter : IAdapter<*>> getAdapter(): Adapter? {
-        return this.itemView.getTag(R.id.adapter) as? Adapter
+    fun <T : View> getView(@IdRes viewId: Int): T? {
+        return retrieveView(viewId)
     }
 
-    fun <VM:ViewModelType> getViewModel():VM?{
-        return this.itemView.getTag(R.id.adapter_item) as? VM
+    private var bindView: BindView<M>? = null
+    private var unBindView: UnBindView<M>? = null
+
+    fun onBindViewHolder(f: DefaultViewHolder<M>.(M, payloads: List<Any>) -> Unit) {
+        bindView = f
+    }
+
+    fun onUnBindViewHolder(f: DefaultViewHolder<M>.() -> Unit) {
+        unBindView = f
+    }
+
+    override fun onBindViewHolder(
+        viewHolder: DefaultViewHolder<M>,
+        position: Int,
+        payloads: List<Any>
+    ) {
+        val m = viewHolder.getModel<M>()
+        m?.let {
+            bindView?.invoke(viewHolder, it, payloads)
+        }
+    }
+
+    override fun unBindViewHolder(viewHolder: DefaultViewHolder<M>, position: Int) {
+        unBindView?.invoke(viewHolder)
     }
 
 }

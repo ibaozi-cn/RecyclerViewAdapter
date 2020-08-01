@@ -2,9 +2,9 @@ package com.julive.adapter_demo.binding
 
 import com.julive.adapter.binding.BindingViewModel
 import com.julive.adapter.core.ListAdapter
+import com.julive.adapter.core.getAdapter
 import com.julive.adapter_demo.BR
 import com.julive.adapter_demo.R
-import com.julive.adapter_demo.anko.AnkoViewModelTest
 import com.julive.adapter_demo.sorted.ModelTest
 import java.util.*
 
@@ -14,7 +14,7 @@ class BindingItemViewModelTest :
         onCreateViewHolder {
             itemView.setOnClickListener {
                 val viewModel = getAdapter<ListAdapter>()?.getItem(adapterPosition) as BindingItemViewModelTest
-                viewModel.model?.title = "${Random().nextInt(100)}"
+                model?.title = "${Random().nextInt(100)}"
                 getAdapter<ListAdapter>()?.set(adapterPosition, viewModel)
             }
         }

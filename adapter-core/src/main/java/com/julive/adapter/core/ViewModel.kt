@@ -8,14 +8,6 @@ interface ViewModel<M, VH : RecyclerView.ViewHolder> :
     var model: M?
     val itemViewType: Int
         get() = layoutRes
-
     @get:LayoutRes
     val layoutRes: Int
-    fun bindVH(
-        viewHolder: VH,
-        model: M,
-        payloads: List<Any>
-    )
-
-    fun unBindVH(viewHolder: VH)
 }

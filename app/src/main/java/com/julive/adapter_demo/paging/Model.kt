@@ -29,10 +29,9 @@ class PagingViewModel : ViewModel() {
             return try {
                 delay(2000)
                 val data = mutableListOf<LayoutViewModel<PagingModelTest>>()
-                val itemPageViewModel = LayoutViewModel<PagingModelTest>(R.layout.item_test)
-                itemPageViewModel.model = PagingModelTest("标题")
-                data.add(itemPageViewModel)
-                data.add(itemPageViewModel)
+//                val itemPageViewModel = LayoutViewModel<PagingModelTest>(R.layout.item_test, PagingModelTest("标题"))
+//                data.add(itemPageViewModel)
+//                data.add(itemPageViewModel)
                 LoadResult.Page(
                     data = data,
                     prevKey = if (page == 0) null else page - 1,

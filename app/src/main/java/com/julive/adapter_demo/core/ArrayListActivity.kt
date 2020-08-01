@@ -9,8 +9,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.julive.adapter.core.ListAdapter
-import com.julive.adapter.core.bindListAdapter
-import com.julive.adapter.flex.flexboxLayoutMangerDefault
+import com.julive.adapter.core.into
 import com.julive.adapter_demo.R
 import com.julive.adapter_demo.sorted.ModelTest
 import kotlinx.android.synthetic.main.activity_array_list.*
@@ -31,11 +30,11 @@ class ArrayListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         supportActionBar?.title = "ListAdapter"
         setContentView(R.layout.activity_array_list)
-        rv_list.bindListAdapter(mArrayListAdapter, flexboxLayoutMangerDefault { })
+        mArrayListAdapter.into(rv_list)
         // 新增一个
         new_add.setText("新增").setOnClickListener {
-            mArrayListAdapter.add(ArrayViewModelTest().apply {
-                model = ModelTest("标题", if (Random.nextInt(2) == 1) "副标题副标题副标题副标题副标题" else "副标题")
+            mArrayListAdapter.add(createViewModel().apply {
+                model = ModelTest("title", "subtitle")
             })
         }
         // 删除第一个
@@ -51,9 +50,7 @@ class ArrayListActivity : AppCompatActivity() {
             updateSize++
             if (mArrayListAdapter.size > 0) {
                 val randomInt = Random.nextInt(0, mArrayListAdapter.size)
-                mArrayListAdapter.set(randomInt, ArrayViewModelTest().apply {
-                    model = ModelTest("标题$updateSize", "副标题$updateSize")
-                })
+                mArrayListAdapter.set(randomInt, createViewModel())
             } else {
                 toast("请添加新用例后再试")
             }

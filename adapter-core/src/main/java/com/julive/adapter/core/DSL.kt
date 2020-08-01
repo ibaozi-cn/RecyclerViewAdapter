@@ -8,9 +8,11 @@ fun listAdapter(block: ListAdapter.() -> Unit): ListAdapter {
 
 fun <M> layoutViewModelDsl(
     layoutRes: Int,
-    init: LayoutViewModel<M>.() -> Unit
+    init: DefaultViewHolder<M>.() -> Unit
 ): LayoutViewModel<M> {
     return LayoutViewModel<M>(layoutRes).apply {
-        init()
+        onCreateViewHolder {
+            init(this)
+        }
     }
 }

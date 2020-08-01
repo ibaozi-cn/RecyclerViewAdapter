@@ -1,15 +1,8 @@
 package com.julive.adapter.core
 
-
-/**
- * 抽象为List数据结构
- */
-class ListAdapter :
-    ViewHolderCacheAdapter<ViewModelType, DefaultViewHolder>(), IListAdapter<ViewModelType>,
+class ListAdapter : ViewHolderCacheAdapter<ViewModelType, DefaultViewHolder<*>>(), IListAdapter<ViewModelType>,
     MutableCollection<ViewModelType> {
-    /**
-     * 默认ArrayList数据结构
-     */
+
     private var dataList = mutableListOf<ViewModelType>()
 
     override fun getItem(position: Int): ViewModelType {
@@ -57,11 +50,6 @@ class ListAdapter :
             dataList[index] = vm
             notifyItemChanged(index)
         }
-    }
-
-    override fun updatePayload(index: Int, vm: ViewModelType) {
-        dataList[index] = vm
-        notifyItemChanged(index, vm.model)
     }
 
     override val size: Int

@@ -1,34 +1,25 @@
 package com.julive.adapter_demo.core
 
 import android.widget.TextView
-import com.julive.adapter.core.LayoutViewModel
-import com.julive.adapter.core.ListAdapter
+import com.julive.adapter.core.*
 import com.julive.adapter_demo.R
-import com.julive.adapter_demo.binding.BindingItemViewModelTest
 import com.julive.adapter_demo.sorted.ModelTest
 import java.util.*
 
-/**
- * ViewModel
- */
+fun createViewModel() = layoutViewModelDsl<ModelTest>(R.layout.item_test_2) {
 
-class ArrayViewModelTest : LayoutViewModel<ModelTest>(R.layout.item_test_2) {
+    val tvTitle = getView<TextView>(R.id.tv_title)
+    val tvSubtitle = getView<TextView>(R.id.tv_subTitle)
 
-    init {
+    itemView.setOnClickListener {
+        val vm = getAdapter<ListAdapter>()?.getItem(adapterPosition)
+        getModel<ModelTest>()?.title = "${Random().nextInt(100)}"
+        getAdapter<ListAdapter>()?.set(adapterPosition, vm)
+    }
 
-        onBindViewHolder { _ ->
-            getView<TextView>(R.id.tv_title)?.text = model?.title
-            getView<TextView>(R.id.tv_subTitle)?.text = model?.subTitle
-        }
-
-        onCreateViewHolder {
-            itemView.setOnClickListener {
-                val vm = getAdapter<ListAdapter>()?.getItem(adapterPosition) as ArrayViewModelTest
-                vm.model?.title = "${Random().nextInt(100)}"
-                getAdapter<ListAdapter>()?.set(adapterPosition, vm)
-            }
-        }
-
+    onBindViewHolder { model, _ ->
+        getView<TextView>(R.id.tv_title)?.text = model.title
+        getView<TextView>(R.id.tv_subTitle)?.text = model.subTitle
     }
 
 }

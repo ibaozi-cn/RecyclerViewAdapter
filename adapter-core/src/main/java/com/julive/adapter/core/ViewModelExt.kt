@@ -5,30 +5,16 @@ import android.view.View
 import android.view.ViewGroup
 
 typealias  ViewModelType = ViewModel<*, *>
-typealias  DefaultViewModelType<M> = ViewModel<M, DefaultViewHolder>
-
-typealias BindView = DefaultViewHolder.(payloads: List<Any>) -> Unit
-typealias UnBindView = DefaultViewHolder.() -> Unit
-typealias InitView = DefaultViewHolder.() -> Unit
+typealias  DefaultViewModelType<M> = ViewModel<M, DefaultViewHolder<M>>
 
 @Suppress("UNCHECKED_CAST")
-abstract class DefaultViewModel<M> : DefaultViewModelType<M> {
+abstract class DefaultViewModel<M> : DefaultViewModelType<M>, Subscriber<DefaultViewHolder<M>> {
 
+    private var initView: InitView<M>? = null
     override var model: M? = null
-    private var initView: InitView? = null
-    private var bindView: BindView? = null
-    private var unBindView: UnBindView? = null
 
-    open fun onCreateViewHolder(f: DefaultViewHolder.() -> Unit) {
+    fun onCreateViewHolder(f: DefaultViewHolder<M>.() -> Unit) {
         initView = f
-    }
-
-    open fun onBindViewHolder(f: DefaultViewHolder.(payloads: List<Any>) -> Unit) {
-        bindView = f
-    }
-
-    open fun onUnBindViewHolder(f: DefaultViewHolder.() -> Unit) {
-        unBindView = f
     }
 
     abstract
@@ -37,25 +23,32 @@ abstract class DefaultViewModel<M> : DefaultViewModelType<M> {
         layoutInflater: LayoutInflater
     ): View
 
+    override fun onBindViewHolder(
+        viewHolder: DefaultViewHolder<M>,
+        position: Int,
+        payloads: List<Any>
+    ) {
+
+    }
+
+    override fun unBindViewHolder(viewHolder: DefaultViewHolder<M>, position: Int) {
+    }
+
     override fun getViewHolder(
         parent: ViewGroup,
         layoutInflater: LayoutInflater
-    ): DefaultViewHolder {
-        return DefaultViewHolder(getHolderItemView(parent, layoutInflater)).apply {
-            initView?.invoke(this)
+    ): DefaultViewHolder<M> {
+        return object : DefaultViewHolder<M>(getHolderItemView(parent, layoutInflater)) {
+            init {
+                initView?.invoke(this)
+            }
         }
     }
 
-    override fun bindVH(viewHolder: DefaultViewHolder, model: M, payloads: List<Any>) {
-        bindView?.invoke(viewHolder, payloads)
-    }
-
-    override fun unBindVH(viewHolder: DefaultViewHolder) {
-        unBindView?.invoke(viewHolder)
-    }
 }
 
-open class LayoutViewModel<M>(override val layoutRes: Int) : DefaultViewModel<M>() {
+open class LayoutViewModel<M>(override val layoutRes: Int) :
+    DefaultViewModel<M>() {
     override fun getHolderItemView(parent: ViewGroup, layoutInflater: LayoutInflater): View {
         return layoutInflater.inflate(layoutRes, parent, false)
     }

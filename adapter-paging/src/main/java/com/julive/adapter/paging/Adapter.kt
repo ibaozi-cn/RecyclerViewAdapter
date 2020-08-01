@@ -11,7 +11,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.Flow
 
-class PagingListAdapter : ViewHolderCacheAdapter<ViewModelType, DefaultViewHolder>() {
+class PagingListAdapter : ViewHolderCacheAdapter<ViewModelType, DefaultViewHolder<*>>() {
 
     private val differ = AsyncPagingDataDiffer(
         diffCallback = DiffViewModelCallBack(),
@@ -96,14 +96,14 @@ class PagingListAdapter : ViewHolderCacheAdapter<ViewModelType, DefaultViewHolde
     }
 }
 
-class PagingLoadStateAdapter : LoadStateAdapter<DefaultViewHolder>() {
+class PagingLoadStateAdapter : LoadStateAdapter<DefaultViewHolder<*>>() {
 
-    override fun onBindViewHolder(holder: DefaultViewHolder, loadState: LoadState) {
+    override fun onBindViewHolder(holder: DefaultViewHolder<*>, loadState: LoadState) {
 
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, loadState: LoadState): DefaultViewHolder {
-        return DefaultViewHolder(
+    override fun onCreateViewHolder(parent: ViewGroup, loadState: LoadState): DefaultViewHolder<*> {
+        return DefaultViewHolder<Any>(
             LayoutInflater.from(parent.context).inflate(R.layout.layout_load_state, parent, false)
         )
     }

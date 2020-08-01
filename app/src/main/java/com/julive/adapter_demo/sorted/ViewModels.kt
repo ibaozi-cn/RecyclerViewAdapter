@@ -4,9 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import com.julive.adapter.core.DefaultViewHolder
-import com.julive.adapter.core.LayoutViewModel
-import com.julive.adapter.core.SameModel
+import com.julive.adapter.core.*
 import com.julive.adapter.sorted.SortedListAdapter
 import com.julive.adapter.sorted.SortedModel
 import com.julive.adapter_demo.R
@@ -41,22 +39,16 @@ data class SortedModelTest(
     }
 }
 
-/**
- *
- */
-class SortedItemViewModelTest : LayoutViewModel<SortedModelTest>(R.layout.item_test) {
-    init {
-        onBindViewHolder { _ ->
-            getView<TextView>(R.id.tv_title)?.text = model?.title
-            getView<TextView>(R.id.tv_subTitle)?.text = model?.subTitle
+val SortedItemViewModelTest =
+    layoutViewModelDsl<SortedModelTest>(R.layout.item_test) {
+        onBindViewHolder { model, _ ->
+            getView<TextView>(R.id.tv_title)?.text = model.title
+            getView<TextView>(R.id.tv_subTitle)?.text = model.subTitle
         }
-        onCreateViewHolder {
-            itemView.setOnClickListener {
-                val vm =
-                    getAdapter<SortedListAdapter>()?.getItem(adapterPosition) as SortedItemViewModelTest
-                vm.model?.subTitle = "刷新自己${Random.nextInt(100)}"
-                getAdapter<SortedListAdapter>()?.set(adapterPosition, vm)
-            }
+        itemView.setOnClickListener {
+            val vm =
+                getAdapter<SortedListAdapter>()?.getItem(adapterPosition)
+            getModel<SortedModelTest>()?.subTitle = "刷新自己${Random.nextInt(100)}"
+            vm?.let { it1 -> getAdapter<SortedListAdapter>()?.set(adapterPosition, it1) }
         }
     }
-}

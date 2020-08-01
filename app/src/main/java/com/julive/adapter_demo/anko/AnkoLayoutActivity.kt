@@ -5,9 +5,8 @@ import android.os.Bundle
 import android.view.View
 import com.julive.adapter_demo.R
 import com.julive.adapter.anko.recyclerView
-import com.julive.adapter.core.LayoutViewModel
 import com.julive.adapter.core.ListAdapter
-import com.julive.adapter.core.bindListAdapter
+import com.julive.adapter.core.into
 import com.julive.adapter_demo.sorted.ModelTest
 import kotlinx.android.synthetic.main.include_button_bottom.view.*
 import org.jetbrains.anko.*
@@ -72,12 +71,12 @@ class AnkoLayoutComponent(private val ankoListAdapter: ListAdapter) :
     override fun createView(ui: AnkoContext<AnkoLayoutActivity>) = with(ui) {
 
         verticalLayout {
+            val recyclerView = recyclerView {
 
-            recyclerView {
-                bindListAdapter(ankoListAdapter)
             }.lparams(matchParent) {
                 weight = 1F
             }
+            ankoListAdapter.into(recyclerView)
             // Anko 兼容 xml布局的加载
             include<View>(R.layout.include_button_bottom)
         }

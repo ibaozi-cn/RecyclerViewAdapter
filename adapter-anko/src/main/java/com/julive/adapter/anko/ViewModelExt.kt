@@ -3,26 +3,25 @@ package com.julive.adapter.anko
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
 import com.julive.adapter.core.DefaultViewModel
 import com.julive.adapter_anko.R
 import org.jetbrains.anko.AnkoComponent
 import org.jetbrains.anko.AnkoContext.Companion.create
 import java.lang.IllegalArgumentException
 
-open class AnkoViewModel<M, AnkoView : AnkoComponent<ViewGroup>> : DefaultViewModel<M>() {
+open class AnkoViewModel<M> : DefaultViewModel<M>() {
 
-    private var view: ()->AnkoView? = {null}
+    private var ankoView: () -> AnkoComponent<ViewGroup>? = { null }
 
-    open fun onCreateView(v: () -> AnkoView) {
-        view = v
+    open fun onCreateView(v: () -> AnkoComponent<ViewGroup>) {
+        ankoView = v
     }
 
     override fun getHolderItemView(
         parent: ViewGroup,
         layoutInflater: LayoutInflater
     ): View {
-        val ankoView = view() ?: throw IllegalArgumentException("ankoView can not be null")
+        val ankoView = ankoView() ?: throw IllegalArgumentException("ankoView can not be null")
         val view = ankoView.createView(
             create(
                 parent.context,
@@ -34,15 +33,11 @@ open class AnkoViewModel<M, AnkoView : AnkoComponent<ViewGroup>> : DefaultViewMo
         return view
     }
 
-    fun getAnkoView(viewHolder: RecyclerView.ViewHolder): AnkoView {
-        return viewHolder.itemView.getTag(R.id.list_adapter_anko_view) as AnkoView
-    }
-
     override val layoutRes: Int
         get() = 0
 
     override val itemViewType: Int
-        get() = view.hashCode()
+        get() = ankoView.hashCode()
 
 }
 

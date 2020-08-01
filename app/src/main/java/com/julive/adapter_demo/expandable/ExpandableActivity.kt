@@ -4,9 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
 import androidx.core.view.isVisible
-import com.julive.adapter.core.into
-import com.julive.adapter.core.layoutViewModelDsl
-import com.julive.adapter.core.listAdapter
+import com.julive.adapter.core.*
 import com.julive.adapter.expandable.isExpanded
 import com.julive.adapter.expandable.isMultiExpand
 import com.julive.adapter.expandable.setMultiExpandable
@@ -24,27 +22,28 @@ class ExpandableActivity : AppCompatActivity() {
         setContentView(R.layout.activity_expandable)
         val adapter = listAdapter {
             (0..10).forEach { _ ->
-                add(layoutViewModelDsl<ModelTest>(R.layout.item_test_2) {
-                    model = ModelTest("title", "subTitle")
-                    onBindViewHolder {
-                        getView<TextView>(R.id.tv_title)?.text = model?.title
-                        getView<TextView>(R.id.tv_subTitle)?.text = model?.subTitle
-                        getView<TextView>(R.id.tv_subTitle)?.isVisible = isExpanded(adapterPosition)
-                    }
-                    onCreateViewHolder {
+                add(
+                    layoutViewModelDsl<ModelTest>(
+                        R.layout.item_test_2
+                    ) {
+                        onBindViewHolder { model, payloads ->
+                            getView<TextView>(R.id.tv_title)?.text = model.title
+                            getView<TextView>(R.id.tv_subTitle)?.text = model.subTitle
+                            getView<TextView>(R.id.tv_subTitle)?.isVisible =
+                                isExpanded(adapterPosition)
+                        }
                         itemView.setOnClickListener {
                             toggleExpand(adapterPosition)
                         }
-                    }
-                })
+                    })
             }
             into(rv_list_expandable)
         }
 
         new_add.setText("切换单开").setOnClickListener {
-            if(!adapter.isMultiExpand){
+            if (!adapter.isMultiExpand) {
                 new_add.setText("切换单开")
-            }else{
+            } else {
                 new_add.setText("切换多开")
             }
             adapter.setMultiExpandable(!adapter.isMultiExpand)
