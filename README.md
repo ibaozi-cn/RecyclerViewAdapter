@@ -27,23 +27,24 @@ https://user-gold-cdn.xitu.io/2020/7/24/1737e393a1218f05?w=960&h=720&f=png&s=201
 - ~~DiffUtil 扩展~~
 - ~~DataBinding 扩展~~
 - ~~可选择Selectable 扩展~~
-- 可展开expandable 扩展
-- UI扩展：空布局、滚动底部或头部回调、获取可见项等
+- ~~可展开expandable 扩展~~
+- ~~UI扩展：空布局~~、滚动底部或头部回调、获取可见项等
 - 等等.. 未来有好的想法继续扩展
 
 ## 库大小
 
 |  名字   | release aar size  | 其他 |
 |  ----  | ----  | ----  | 
-| Core | 26kb | 核心库目前包含ListAdapter的实现，最基础且最实用的扩展 |
-| Anko | 11kb | 适用本项目所有Adapter扩展 |
+| Core | 28kb | 核心库目前包含ListAdapter的实现，最基础且最实用的扩展 |
+| Anko | 13kb | 适用本项目所有Adapter扩展 |
 | DataBinding | 20kb | 适配DataBinding布局，适用本项目所有Adapter扩展 |
 | Sorted | 10kb | SortedListAdapter扩展实现 |
-| Paging | 12kb | PagingListAdapter扩展适配 |
+| Paging | 13kb | PagingListAdapter扩展适配 |
 | Diff | 6kb | 适配DiffUtil，目前适用ListAdapter |
 | FlexBox | 9kb | 适配FlexBox布局 |
 | Selectable | 8kb | 动态扩展单选、多选、最大可选项功能 |
-| Expandable | 7kb | 动态扩展可展开功能，支持仅单展开或多展开配置 |
+| Expandable | 8kb | 动态扩展可展开功能，支持仅单展开或多展开配置 |
+| UI | 20kb | 扩展空布局 |
 
 ## 各个Adapter的优势在哪，如何选择？
 
@@ -79,7 +80,7 @@ allprojects {
     }
 }
 
-def adapterVersion = 'v1.1.0'
+def adapterVersion = 'v1.2.0'
 
 //核心库
 implementation "com.github.ibaozi-cn.RecyclerViewAdapter:adapter-core:$adapterVersion"
@@ -113,82 +114,66 @@ implementation "com.github.ibaozi-cn.RecyclerViewAdapter:adapter-flex:$adapterVe
 
 ```
 class AdapterDslActivity : AppCompatActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        supportActionBar?.title = "ArrayListAdapter DSL"
-
+        supportActionBar?.title = "ListAdapter DSL"
         setContentView(R.layout.activity_adapter_dsl)
-
         listAdapter {
-            add(
-                // LayoutViewModel 对象 函数中传入布局IdRes
-                layoutViewModelDsl<ModelTest>(R.layout.item_test_2) {
-                    // Model 数据模型
-                    model = ModelTest("title", "layoutViewModelDsl")
-                    // 绑定数据
-                    onBindViewHolder { _ ->
-                        getView<TextView>(R.id.tv_title)?.text = model?.title
-                        getView<TextView>(R.id.tv_subTitle)?.text = model?.subTitle
-                    }
-                    // 点击处理
-                    onCreateViewHolder {
-                        itemView.setOnClickListener {
-                            val vm =
-                                getAdapter<ListAdapter>()?.getItem(adapterPosition) as LayoutViewModel<ModelTest>
-                            //这里需要注意，为什么直接从该对象获取的Model是不正确的？因为ViewHolder的复用
-                            //导致click事件其实是在另外一个VM里触发的
-                            Log.d("arrayItemViewModel", "不正确的model${model}")
-                            Log.d("arrayItemViewModel", "正确的model${vm.model}")
-                            Log.d("arrayItemViewModel", "adapter${getAdapter<ListAdapter>()}")
-                            Log.d("arrayItemViewModel", "viewHolder${adapterPosition}")
-                            //修改Model数据
-                            vm.model?.title = "测试更新"
-                            //用Adapter更新数据
-                            getAdapter<ListAdapter>()?.set(adapterPosition, vm)
-                        }
-                    }
-                }
-            )
-            add(
-                //AnkoViewModel对象
-                ankoViewModelDsl<ModelTest, AnkoItemView> {
-                    model = ModelTest("title", "ankoViewModelDsl")
-                    onCreateView {
-                        AnkoItemView()
-                    }
-                    onBindViewHolder { _ ->
-                        val ankoView = getAnkoView(this)
-                        Log.d("AnkoViewModelTest", "ankoView=${ankoView}")
-                        ankoView.tvTitle?.text = model?.title
-                        ankoView.tvSubTitle?.text = model?.subTitle
-                    }
-                    onCreateViewHolder {
-                        itemView.setOnClickListener {
-                            val viewModel =
-                                getAdapter<ListAdapter>()?.getItem(adapterPosition) as AnkoViewModel<ModelTest, AnkoItemView>
-                            viewModel.model?.title = "点击更新"
-                            getAdapter<ListAdapter>()?.set(adapterPosition, viewModel)
-                        }
-                    }
-                }
-            )
-            add(
-                bindingViewModelDsl<ModelTest>(R.layout.item_binding_layout, BR.model) {
-                    model = ModelTest("title", "bindingViewModelDsl")
-                    onCreateViewHolder {
-                        itemView.setOnClickListener {
-                            val viewModel =
-                                getAdapter<ListAdapter>()?.getItem(adapterPosition) as BindingViewModel<ModelTest>
-                            viewModel.model?.title = "${Random().nextInt(100)}"
-                            getAdapter<ListAdapter>()?.set(adapterPosition, viewModel)
-                        }
-                    }
-                }
-            )
+            addAll(createViewModelList(3))
+            addAll(createAnkoViewModelList(3))
+            addAll(createBindingViewModelList(3))
             // 绑定 RecyclerView
             into(rv_list_dsl)
+        }
+    }
+}
+fun createViewModelList(max: Int = 10) = (0..max).map { _ ->
+    layoutViewModelDsl(R.layout.item_test, ModelTest("title", "subTitle")) {
+        onBindViewHolder {
+            val model = getModel<ModelTest>()
+            getView<TextView>(R.id.tv_title).text = model?.title
+            getView<TextView>(R.id.tv_subTitle).text = model?.subTitle
+        }
+        itemView.setOnClickListener {
+            val vm = getViewModel<LayoutViewModel<ModelTest>>()
+            //修改Model数据
+            vm?.model?.title = "测试更新${Random.nextInt(10000)}"
+            //用Adapter更新数据
+            getAdapter<ListAdapter>()?.set(adapterPosition, vm)
+        }
+    }
+}
+
+fun createAnkoViewModelList(max: Int = 10) = (0..max).map { _ ->
+    //AnkoViewModel对象
+    ankoViewModelDsl(
+        ModelTest("title", "ankoViewModelDsl"),
+        { AnkoItemView() }
+    ) {
+        onBindViewHolder { _ ->
+            val model = getModel<ModelTest>()
+            val ankoView = getAnkoView<AnkoItemView>()
+            ankoView?.tvTitle?.text = model?.title
+            ankoView?.tvSubTitle?.text = model?.subTitle
+        }
+        itemView.setOnClickListener {
+            val viewModel = getViewModel<AnkoViewModel<ModelTest, AnkoItemView>>()
+            viewModel?.model?.title = "点击更新${Random.nextInt(10000)}"
+            getAdapter<ListAdapter>()?.set(adapterPosition, viewModel)
+        }
+    }
+}
+
+fun createBindingViewModelList(max: Int = 10) = (0..max).map {
+    bindingViewModelDsl(
+        R.layout.item_binding_layout,
+        BR.model,
+        ModelTest("title", "bindingViewModelDsl")
+    ) {
+        itemView.setOnClickListener {
+            val viewModel = getViewModel<BindingViewModel<ModelTest>>()
+            viewModel?.model?.title = "${java.util.Random().nextInt(100)}"
+            getAdapter<ListAdapter>()?.set(adapterPosition, viewModel)
         }
     }
 }

@@ -12,8 +12,8 @@ buildscript {
 //    ext.recyclerview_version = "1.2.0-alpha03"
     ext.recyclerview_version = "1.1.0"
     // library config
-    ext.adapter_version = "1.1.0"
-    ext.adapter_version_code = 10
+    ext.adapter_version = "1.2.0"
+    ext.adapter_version_code = 12
 
     repositories {
         google()
