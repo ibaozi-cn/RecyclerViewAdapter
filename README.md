@@ -99,6 +99,13 @@ implementation "com.github.ibaozi-cn.RecyclerViewAdapter:adapter-paging:$adapter
 implementation "com.github.ibaozi-cn.RecyclerViewAdapter:adapter-sorted:$adapterVersion"
 // flexbox 扩展
 implementation "com.github.ibaozi-cn.RecyclerViewAdapter:adapter-flex:$adapterVersion"
+// UI 扩展
+implementation "com.github.ibaozi-cn.RecyclerViewAdapter:adapter-ui:$adapterVersion"
+// Selectable 扩展
+implementation "com.github.ibaozi-cn.RecyclerViewAdapter:adapter-selectable:$adapterVersion"
+// Expandable 扩展
+implementation "com.github.ibaozi-cn.RecyclerViewAdapter:adapter-expandable:$adapterVersion"
+
 ```
 
 ## 环境需要
