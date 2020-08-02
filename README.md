@@ -11,10 +11,10 @@ https://user-gold-cdn.xitu.io/2020/7/4/173187052f0c9ddf?w=1432&h=1098&f=png&s=13
 
 实现图
 
-![实现图](https://user-gold-cdn.xitu.io/2020/7/24/1737e393a1218f05?w=960&h=720&f=png&s=201077)
+![实现图](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d7c6aa9fb9ba4356865c9f1087ba8116~tplv-k3u1fbpfcp-zoom-1.image)
 看不见图？
 点该链接
-https://user-gold-cdn.xitu.io/2020/7/24/1737e393a1218f05?w=960&h=720&f=png&s=201077
+https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d7c6aa9fb9ba4356865c9f1087ba8116~tplv-k3u1fbpfcp-zoom-1.image
 
 ## 规划
 
@@ -188,11 +188,13 @@ fun createBindingViewModelList(max: Int = 10) = (0..max).map {
 
 #### 博客相关介绍
 
-[一个全新的RecyclerView Adapter框架源码开源](https://juejin.im/post/5f001c6b5188252e703ab676)
+- 最新 [后现在化RecyclerView Adapter稳定版本终于来了](https://juejin.im/post/6856283564649283597)
 
-[一个资深的Android是不是应该学会自己做一个超级的RecyclerView.Adapter](https://juejin.im/post/5ee640116fb9a047967349c7)
+- [重学RecyclerView Adapter封装的深度思考和实现](https://juejin.im/post/5f09cbdce51d45349d6c1384)
 
-[重学RecyclerView Adapter封装的深度思考和实现](https://juejin.im/post/5f09cbdce51d45349d6c1384)
+- [一个全新的RecyclerView Adapter框架源码开源](https://juejin.im/post/5f001c6b5188252e703ab676)
+
+- [一个资深的Android是不是应该学会自己做一个超级的RecyclerView.Adapter](https://juejin.im/post/5ee640116fb9a047967349c7)
 
 ## 开发者
 
