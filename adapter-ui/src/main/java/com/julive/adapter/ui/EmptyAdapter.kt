@@ -20,23 +20,22 @@ class DefaultEmptyViewModel : LayoutViewModel<EmptyState>(R.layout.item_empty_la
         val text = viewHolder.getView<TextView>(R.id.item_empty_text) as TextView
         val progress = viewHolder.getView<ProgressBar>(R.id.item_empty_progress) as ProgressBar
         when (model) {
-            is EmptyState.NotLoading -> {
+            EmptyState.NotLoading -> {
                 text.visibility = View.VISIBLE
                 progress.visibility = View.INVISIBLE
                 text.text = "数据为空，点我加载"
             }
-            is EmptyState.Loading -> {
+            EmptyState.Loading -> {
                 text.visibility = View.INVISIBLE
                 progress.visibility = View.VISIBLE
                 text.text = "加载中"
             }
-            is EmptyState.Loaded -> {
+            EmptyState.Loaded -> {
                 text.visibility = View.VISIBLE
                 progress.visibility = View.INVISIBLE
                 text.text = "加载成功"
             }
-            is EmptyState.Error -> {
-                model as EmptyState.Error
+            EmptyState.Error -> {
                 text.visibility = View.VISIBLE
                 progress.visibility = View.INVISIBLE
                 text.text = "加载失败，点我重试"
@@ -87,7 +86,7 @@ open class EmptyAdapter(
         return if (displayEmptyView(emptyState)) {
             viewModel.getViewHolder(parent, LayoutInflater.from(parent.context)).apply {
                 itemView.setOnClickListener {
-                    if (emptyState is EmptyState.NotLoading || emptyState is EmptyState.Error) {
+                    if (emptyState == EmptyState.NotLoading || emptyState == EmptyState.Error) {
                         emptyState = EmptyState.Loading
                         Handler().postDelayed({
                             emptyState = EmptyState.Loaded
@@ -113,14 +112,11 @@ open class EmptyAdapter(
     }
 
     open fun displayEmptyView(emptyState: EmptyState): Boolean {
-        return emptyState is EmptyState.Loading || emptyState is EmptyState.Error || emptyState is EmptyState.NotLoading
+        return emptyState == EmptyState.Loading || emptyState == EmptyState.Error || emptyState == EmptyState.NotLoading
     }
 
 }
 
-sealed class EmptyState {
-    object NotLoading : EmptyState()
-    object Loading : EmptyState()
-    object Loaded : EmptyState()
-    class Error(val error: Throwable? = null) : EmptyState()
+enum class EmptyState {
+    NotLoading, Loading, Loaded, Error
 }

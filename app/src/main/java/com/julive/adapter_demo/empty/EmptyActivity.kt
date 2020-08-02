@@ -34,7 +34,7 @@ class EmptyActivity : AppCompatActivity() {
             },2000)
         }
         btn_right.setText("加载失败").setOnClickListener {
-            emptyAdapter.emptyState = EmptyState.Error(Exception("网络异常，加载失败，点我重试"))
+            emptyAdapter.emptyState = EmptyState.Error
         }
     }
 }
