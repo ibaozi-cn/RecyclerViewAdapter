@@ -5,17 +5,13 @@ import android.os.Bundle
 import android.view.View
 import com.julive.adapter_demo.R
 import com.julive.adapter.anko.recyclerView
-import com.julive.adapter.core.LayoutViewModel
 import com.julive.adapter.core.ListAdapter
-import com.julive.adapter.core.bindListAdapter
+import com.julive.adapter.core.into
 import com.julive.adapter_demo.sorted.ModelTest
 import kotlinx.android.synthetic.main.include_button_bottom.view.*
 import org.jetbrains.anko.*
 import kotlin.random.Random
 
-/**
- * Activity
- */
 class AnkoLayoutActivity : AppCompatActivity() {
 
     private val arrayListAdapter by lazy {
@@ -28,13 +24,13 @@ class AnkoLayoutActivity : AppCompatActivity() {
         var index = 0
         AnkoLayoutComponent(arrayListAdapter).setContentView(this).apply {
             // 新增一个
-            new_add.setText("新增").setOnClickListener {
+            btn_left.setText("新增").setOnClickListener {
                 arrayListAdapter.add(AnkoViewModelTest().apply {
                     model = ModelTest("标题${++index}", "副标题")
                 })
             }
             // 删除第一个
-            delete.setText("删除").setOnClickListener {
+            btn_middle.setText("删除").setOnClickListener {
                 if (arrayListAdapter.size > 0)
                     arrayListAdapter.removeAt(0)
                 else
@@ -42,7 +38,7 @@ class AnkoLayoutActivity : AppCompatActivity() {
             }
             // 随机更新
             var updateSize = 0
-            update.setText("更新").setOnClickListener {
+            btn_right.setText("更新").setOnClickListener {
                 updateSize++
                 if (arrayListAdapter.size > 0) {
                     val randomInt = Random.nextInt(0, arrayListAdapter.size)
@@ -62,21 +58,18 @@ class AnkoLayoutActivity : AppCompatActivity() {
 
 }
 
-/**
- * View
- *
- */
-class AnkoLayoutComponent(private val ankoListAdapter: ListAdapter) :
-    AnkoComponent<AnkoLayoutActivity> {
+class AnkoLayoutComponent(private val ankoListAdapter: ListAdapter) : AnkoComponent<AnkoLayoutActivity> {
 
     override fun createView(ui: AnkoContext<AnkoLayoutActivity>) = with(ui) {
 
         verticalLayout {
 
             recyclerView {
-                bindListAdapter(ankoListAdapter)
+
             }.lparams(matchParent) {
                 weight = 1F
+            }.also {
+                ankoListAdapter.into(it)
             }
             // Anko 兼容 xml布局的加载
             include<View>(R.layout.include_button_bottom)

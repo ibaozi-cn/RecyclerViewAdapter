@@ -4,11 +4,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.databinding.DataBindingUtil.getBinding
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
-import com.julive.adapter.core.ListAdapter
-import com.julive.adapter.core.DefaultViewModel
 import com.julive.adapter.core.DefaultViewHolder
+import com.julive.adapter.core.DefaultViewModel
 
 open class BindingViewModel<M>(override val layoutRes: Int, private val variableId: Int) :
     DefaultViewModel<M>() {
@@ -25,18 +25,13 @@ open class BindingViewModel<M>(override val layoutRes: Int, private val variable
         return view
     }
 
-    private fun getBinding(viewHolder: RecyclerView.ViewHolder): ViewDataBinding {
-        return viewHolder.itemView.getTag(R.id.list_adapter_binding) as ViewDataBinding
-    }
-
-    override fun bindVH(viewHolder: DefaultViewHolder, model: M, payloads: List<Any>) {
-        super.bindVH(viewHolder, model, payloads)
-        getBinding(viewHolder).setVariable(variableId, model)
-        getBinding(viewHolder).executePendingBindings()
+    override fun bindVH(viewHolder: DefaultViewHolder, payloads: List<Any>) {
+        viewHolder.getBinding().setVariable(variableId, model)
+        viewHolder.getBinding().executePendingBindings()
     }
 
     override fun unBindVH(viewHolder: DefaultViewHolder) {
-        super.unBindVH(viewHolder)
-        getBinding(viewHolder).unbind()
+        viewHolder.getBinding().unbind()
     }
+
 }

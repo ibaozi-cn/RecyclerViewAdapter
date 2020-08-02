@@ -8,37 +8,6 @@ import androidx.annotation.IdRes
 import androidx.recyclerview.widget.RecyclerView
 import com.julive.adapter_core.R
 
-@Suppress("UNCHECKED_CAST")
-open class DefaultViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
-    /**
-     * views缓存
-     */
-    private val views: SparseArray<View> = SparseArray()
-
-    fun <T : View> getView(@IdRes viewId: Int): T? {
-        return retrieveView(viewId)
-    }
-
-    private fun <T : View> retrieveView(@IdRes viewId: Int): T? {
-        var view = views[viewId]
-        if (view == null) {
-            view = itemView.findViewById(viewId)
-            if (view == null) return null
-            views.put(viewId, view)
-        }
-        return view as T
-    }
-
-    fun <Adapter : IAdapter<*>> getAdapter(): Adapter? {
-        return this.itemView.getTag(R.id.adapter) as? Adapter
-    }
-
-    fun <VM:ViewModelType> getViewModel():VM?{
-        return this.itemView.getTag(R.id.adapter_item) as? VM
-    }
-
-}
-
 typealias GenericViewHolderFactory = ViewHolderFactory<out RecyclerView.ViewHolder>
 
 interface ViewHolderFactory<VH : RecyclerView.ViewHolder> {

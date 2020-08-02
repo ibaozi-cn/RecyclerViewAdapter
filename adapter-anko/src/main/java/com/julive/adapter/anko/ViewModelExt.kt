@@ -34,10 +34,6 @@ open class AnkoViewModel<M, AnkoView : AnkoComponent<ViewGroup>> : DefaultViewMo
         return view
     }
 
-    fun getAnkoView(viewHolder: RecyclerView.ViewHolder): AnkoView {
-        return viewHolder.itemView.getTag(R.id.list_adapter_anko_view) as AnkoView
-    }
-
     override val layoutRes: Int
         get() = 0
 

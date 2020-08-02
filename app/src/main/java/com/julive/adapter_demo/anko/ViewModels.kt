@@ -7,8 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import com.julive.adapter.anko.AnkoViewModel
+import com.julive.adapter.anko.getAnkoView
+import com.julive.adapter.core.DefaultViewHolder
 import com.julive.adapter.core.ListAdapter
+import com.julive.adapter.core.getAdapter
 import com.julive.adapter_demo.R
 import com.julive.adapter_demo.ext.cardView
 import com.julive.adapter_demo.sorted.ModelTest
@@ -16,9 +20,6 @@ import org.jetbrains.anko.*
 import kotlin.random.Random
 
 
-/**
- * AnkoItemView
- */
 class AnkoItemView : AnkoComponent<ViewGroup> {
 
     var tvTitle: TextView? = null
@@ -71,19 +72,10 @@ class AnkoItemView : AnkoComponent<ViewGroup> {
     }
 }
 
-/**
- * ViewModel
- */
 class AnkoViewModelTest : AnkoViewModel<ModelTest, AnkoItemView>() {
     init {
         onCreateView {
             AnkoItemView()
-        }
-        onBindViewHolder { _ ->
-            val ankoView = getAnkoView(this)
-            Log.d("AnkoViewModelTest", "ankoView=${ankoView}")
-            ankoView.tvTitle?.text = model?.title
-            ankoView.tvSubTitle?.text = model?.subTitle
         }
         onCreateViewHolder {
             itemView.setOnClickListener {
@@ -92,5 +84,11 @@ class AnkoViewModelTest : AnkoViewModel<ModelTest, AnkoItemView>() {
                 getAdapter<ListAdapter>()?.set(adapterPosition, viewModel)
             }
         }
+    }
+    override fun bindVH(viewHolder: DefaultViewHolder, payloads: List<Any>) {
+        val ankoView = viewHolder.getAnkoView<AnkoItemView>()
+        Log.d("AnkoViewModelTest", "ankoView=${ankoView}")
+        ankoView?.tvTitle?.text = model?.title
+        ankoView?.tvSubTitle?.text = model?.subTitle
     }
 }

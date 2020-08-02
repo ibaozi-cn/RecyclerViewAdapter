@@ -6,12 +6,13 @@ import androidx.lifecycle.Lifecycle
 import androidx.paging.*
 import androidx.recyclerview.widget.AdapterListUpdateCallback
 import androidx.recyclerview.widget.ConcatAdapter
+import androidx.recyclerview.widget.RecyclerView
 import com.julive.adapter.core.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.Flow
 
-class PagingListAdapter : ViewHolderCacheAdapter<ViewModelType, DefaultViewHolder>() {
+class PagingListAdapter : ViewHolderCacheAdapter<ViewModelType, RecyclerView.ViewHolder>() {
 
     private val differ = AsyncPagingDataDiffer(
         diffCallback = DiffViewModelCallBack(),
@@ -96,15 +97,20 @@ class PagingListAdapter : ViewHolderCacheAdapter<ViewModelType, DefaultViewHolde
     }
 }
 
-class PagingLoadStateAdapter : LoadStateAdapter<DefaultViewHolder>() {
+class PagingLoadStateAdapter : LoadStateAdapter<RecyclerView.ViewHolder>() {
 
-    override fun onBindViewHolder(holder: DefaultViewHolder, loadState: LoadState) {
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, loadState: LoadState) {
 
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, loadState: LoadState): DefaultViewHolder {
-        return DefaultViewHolder(
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        loadState: LoadState
+    ): RecyclerView.ViewHolder {
+        return object : RecyclerView.ViewHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.layout_load_state, parent, false)
-        )
+        ) {
+
+        }
     }
 }

@@ -9,8 +9,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.julive.adapter.core.ListAdapter
-import com.julive.adapter.core.bindListAdapter
-import com.julive.adapter.flex.flexboxLayoutMangerDefault
+import com.julive.adapter.core.into
 import com.julive.adapter_demo.R
 import com.julive.adapter_demo.sorted.ModelTest
 import kotlinx.android.synthetic.main.activity_array_list.*
@@ -18,9 +17,6 @@ import kotlinx.android.synthetic.main.include_button_bottom.*
 import org.jetbrains.anko.toast
 import kotlin.random.Random
 
-/**
- * Activity
- */
 class ArrayListActivity : AppCompatActivity() {
 
     private val mArrayListAdapter by lazy {
@@ -31,15 +27,15 @@ class ArrayListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         supportActionBar?.title = "ListAdapter"
         setContentView(R.layout.activity_array_list)
-        rv_list.bindListAdapter(mArrayListAdapter, flexboxLayoutMangerDefault { })
+        mArrayListAdapter.into(rv_list)
         // 新增一个
-        new_add.setText("新增").setOnClickListener {
+        btn_left.setText("新增").setOnClickListener {
             mArrayListAdapter.add(ArrayViewModelTest().apply {
                 model = ModelTest("标题", if (Random.nextInt(2) == 1) "副标题副标题副标题副标题副标题" else "副标题")
             })
         }
         // 删除第一个
-        delete.setText("删除").setOnClickListener {
+        btn_middle.setText("删除").setOnClickListener {
             if (mArrayListAdapter.size > 0)
                 mArrayListAdapter.removeAt(0)
             else
@@ -47,7 +43,7 @@ class ArrayListActivity : AppCompatActivity() {
         }
         // 随机更新
         var updateSize = 0
-        update.setText("更新").setOnClickListener {
+        btn_right.setText("更新").setOnClickListener {
             updateSize++
             if (mArrayListAdapter.size > 0) {
                 val randomInt = Random.nextInt(0, mArrayListAdapter.size)

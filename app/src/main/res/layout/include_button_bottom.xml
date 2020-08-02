@@ -5,19 +5,19 @@
     android:orientation="horizontal">
 
     <com.julive.adapter_demo.ext.CardButtonView
-        android:id="@+id/new_add"
+        android:id="@+id/btn_left"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1" />
 
     <com.julive.adapter_demo.ext.CardButtonView
-        android:id="@+id/delete"
+        android:id="@+id/btn_middle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1" />
 
     <com.julive.adapter_demo.ext.CardButtonView
-        android:id="@+id/update"
+        android:id="@+id/btn_right"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1" />

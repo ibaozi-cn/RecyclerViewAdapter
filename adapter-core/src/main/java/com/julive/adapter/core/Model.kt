@@ -8,9 +8,6 @@ interface SameModel {
     fun <T : SameModel> isContentTheSameAs(model: T): Boolean {
         return this == model
     }
-    /**
-     * RecyclerView ItemView中更小局部的刷新
-     */
     fun <T : SameModel> getChangePayload(newItem: T): Any? = null
 }
 

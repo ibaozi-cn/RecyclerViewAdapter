@@ -1,5 +1,6 @@
 package com.julive.adapter.sorted
 
+import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SortedList
 import com.julive.adapter.core.*
 
@@ -7,7 +8,7 @@ import com.julive.adapter.core.*
  * SortedList数据结构的适配器，自动排序，二分查找
  */
 class SortedListAdapter :
-    ViewHolderCacheAdapter<ViewModelType, DefaultViewHolder>(),
+    ViewHolderCacheAdapter<ViewModelType, RecyclerView.ViewHolder>(),
     MutableCollection<ViewModelType> {
 
     private val sortedList by lazy {

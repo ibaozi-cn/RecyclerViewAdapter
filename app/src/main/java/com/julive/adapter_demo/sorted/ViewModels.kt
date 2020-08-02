@@ -1,12 +1,7 @@
 package com.julive.adapter_demo.sorted
 
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.TextView
-import com.julive.adapter.core.DefaultViewHolder
-import com.julive.adapter.core.LayoutViewModel
-import com.julive.adapter.core.SameModel
+import com.julive.adapter.core.*
 import com.julive.adapter.sorted.SortedListAdapter
 import com.julive.adapter.sorted.SortedModel
 import com.julive.adapter_demo.R
@@ -14,7 +9,6 @@ import kotlin.random.Random
 
 /**
  * Model
- *
  * // 扩展DiffModel  兼容DiffUtil
  */
 data class ModelTest(var title: String, var subTitle: String) : SameModel {
@@ -41,15 +35,8 @@ data class SortedModelTest(
     }
 }
 
-/**
- *
- */
 class SortedItemViewModelTest : LayoutViewModel<SortedModelTest>(R.layout.item_test) {
     init {
-        onBindViewHolder { _ ->
-            getView<TextView>(R.id.tv_title)?.text = model?.title
-            getView<TextView>(R.id.tv_subTitle)?.text = model?.subTitle
-        }
         onCreateViewHolder {
             itemView.setOnClickListener {
                 val vm =
@@ -58,5 +45,9 @@ class SortedItemViewModelTest : LayoutViewModel<SortedModelTest>(R.layout.item_t
                 getAdapter<SortedListAdapter>()?.set(adapterPosition, vm)
             }
         }
+    }
+    override fun bindVH(viewHolder: DefaultViewHolder, payloads: List<Any>) {
+        viewHolder.getView<TextView>(R.id.tv_title)?.text = model?.title
+        viewHolder.getView<TextView>(R.id.tv_subTitle)?.text = model?.subTitle
     }
 }

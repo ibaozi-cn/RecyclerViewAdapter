@@ -52,6 +52,10 @@
         android:id="@+id/btn_expandable"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+    <com.julive.adapter_demo.ext.CardButtonView
+        android:id="@+id/btn_empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 
 </com.google.android.flexbox.FlexboxLayout>

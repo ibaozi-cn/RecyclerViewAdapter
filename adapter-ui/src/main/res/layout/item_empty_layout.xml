@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/item_empty_text"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="数据为空，点我重试" />
+
+    <ProgressBar
+        android:id="@+id/item_empty_progress"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="invisible"
+        android:layout_height="wrap_content"/>
+
+</FrameLayout>

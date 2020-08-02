@@ -1,15 +1,9 @@
 package com.julive.adapter.core
 
+import androidx.recyclerview.widget.RecyclerView
 
-/**
- * 抽象为List数据结构
- */
-class ListAdapter :
-    ViewHolderCacheAdapter<ViewModelType, DefaultViewHolder>(), IListAdapter<ViewModelType>,
-    MutableCollection<ViewModelType> {
-    /**
-     * 默认ArrayList数据结构
-     */
+class ListAdapter : ViewHolderCacheAdapter<ViewModelType, RecyclerView.ViewHolder>(), IListAdapter<ViewModelType>, MutableCollection<ViewModelType> {
+
     private var dataList = mutableListOf<ViewModelType>()
 
     override fun getItem(position: Int): ViewModelType {
