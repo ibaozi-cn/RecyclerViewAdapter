@@ -65,6 +65,7 @@ dependencies {
     implementation project(path: ':adapter-selectable')
     implementation project(path: ':adapter-expandable')
     implementation project(path: ':adapter-ui')
+    implementation project(path: ':adapter-animators')
 
     // Anko Commons
     implementation "org.jetbrains.anko:anko-commons:$anko_version"
