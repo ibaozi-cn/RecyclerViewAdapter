@@ -3,6 +3,7 @@ package com.julive.adapter_demo.anko
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.recyclerview.widget.DefaultItemAnimator
 import com.julive.adapter_demo.R
 import com.julive.adapter.anko.recyclerView
 import com.julive.adapter.core.ListAdapter
@@ -31,7 +32,7 @@ class AnkoLayoutActivity : AppCompatActivity() {
             }
             // 删除第一个
             btn_middle.setText("删除").setOnClickListener {
-                if (arrayListAdapter.size > 0)
+                if (arrayListAdapter.itemCount > 0)
                     arrayListAdapter.removeAt(0)
                 else
                     toast("请添加新用例后再试")
@@ -40,8 +41,8 @@ class AnkoLayoutActivity : AppCompatActivity() {
             var updateSize = 0
             btn_right.setText("更新").setOnClickListener {
                 updateSize++
-                if (arrayListAdapter.size > 0) {
-                    val randomInt = Random.nextInt(0, arrayListAdapter.size)
+                if (arrayListAdapter.itemCount > 0) {
+                    val randomInt = Random.nextInt(0, arrayListAdapter.itemCount)
                     arrayListAdapter.set(randomInt, arrayListAdapter.getItem(randomInt).apply {
                         model.also {
                             it as ModelTest
@@ -52,10 +53,8 @@ class AnkoLayoutActivity : AppCompatActivity() {
                     toast("请添加新用例后再试")
                 }
             }
-
         }
     }
-
 }
 
 class AnkoLayoutComponent(private val ankoListAdapter: ListAdapter) : AnkoComponent<AnkoLayoutActivity> {
@@ -65,7 +64,7 @@ class AnkoLayoutComponent(private val ankoListAdapter: ListAdapter) : AnkoCompon
         verticalLayout {
 
             recyclerView {
-
+                itemAnimator = DefaultItemAnimator()
             }.lparams(matchParent) {
                 weight = 1F
             }.also {

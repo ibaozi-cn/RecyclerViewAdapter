@@ -36,7 +36,7 @@ class ArrayListActivity : AppCompatActivity() {
         }
         // 删除第一个
         btn_middle.setText("删除").setOnClickListener {
-            if (mArrayListAdapter.size > 0)
+            if (mArrayListAdapter.itemCount > 0)
                 mArrayListAdapter.removeAt(0)
             else
                 toast("请添加新用例后再试")
@@ -45,8 +45,8 @@ class ArrayListActivity : AppCompatActivity() {
         var updateSize = 0
         btn_right.setText("更新").setOnClickListener {
             updateSize++
-            if (mArrayListAdapter.size > 0) {
-                val randomInt = Random.nextInt(0, mArrayListAdapter.size)
+            if (mArrayListAdapter.itemCount > 0) {
+                val randomInt = Random.nextInt(0, mArrayListAdapter.itemCount)
                 mArrayListAdapter.set(randomInt, ArrayViewModelTest().apply {
                     model = ModelTest("标题$updateSize", "副标题$updateSize")
                 })

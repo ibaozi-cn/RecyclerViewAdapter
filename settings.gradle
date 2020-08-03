@@ -1,3 +1,4 @@
+include ':adapter-animators'
 include ':adapter-expandable'
 include ':adapter-ui'
 include ':adapter-selectable'

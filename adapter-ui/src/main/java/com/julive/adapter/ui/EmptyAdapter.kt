@@ -11,14 +11,13 @@ import com.julive.adapter.core.*
 import com.julive.adapter.ui.common.WrapAdapter
 
 class DefaultEmptyViewModel : LayoutViewModel<EmptyState>(R.layout.item_empty_layout) {
-
     init {
         model = EmptyState.NotLoading
     }
 
     override fun bindVH(viewHolder: DefaultViewHolder, payloads: List<Any>) {
-        val text = viewHolder.getView<TextView>(R.id.item_empty_text) as TextView
-        val progress = viewHolder.getView<ProgressBar>(R.id.item_empty_progress) as ProgressBar
+        val text = viewHolder.getView<TextView>(R.id.item_empty_text)
+        val progress = viewHolder.getView<ProgressBar>(R.id.item_empty_progress)
         when (model) {
             EmptyState.NotLoading -> {
                 text.visibility = View.VISIBLE
@@ -46,7 +45,7 @@ class DefaultEmptyViewModel : LayoutViewModel<EmptyState>(R.layout.item_empty_la
 
 open class EmptyAdapter(
     mWrappedAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>,
-    private val viewModel: DefaultViewModelType<EmptyState> = DefaultEmptyViewModel()
+    private val viewModel: ViewModel<EmptyState, DefaultViewHolder> = DefaultEmptyViewModel()
 ) : WrapAdapter<RecyclerView.ViewHolder>(mWrappedAdapter) {
 
     var emptyState: EmptyState = EmptyState.NotLoading

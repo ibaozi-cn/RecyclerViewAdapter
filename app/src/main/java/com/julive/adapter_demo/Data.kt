@@ -11,8 +11,8 @@ import com.julive.adapter_demo.anko.AnkoItemView
 import com.julive.adapter_demo.sorted.ModelTest
 import kotlin.random.Random
 
-fun createViewModelList(max: Int = 10) = (0..max).map { _ ->
-    layoutViewModelDsl(R.layout.item_test, ModelTest("title", "subTitle")) {
+fun createViewModelList(max: Int = 10, subTitle: String = "subTitle") = (0..max).map { _ ->
+    layoutViewModelDsl(R.layout.item_test, ModelTest("title", subTitle)) {
         val titleText = getView<TextView>(R.id.tv_title)
         val subTitleText = getView<TextView>(R.id.tv_subTitle)
         itemView.setOnClickListener {
@@ -48,7 +48,11 @@ fun createAnkoViewModelList(max: Int = 10) = (0..max).map { _ ->
 }
 
 fun createBindingViewModelList(max: Int = 10) = (0..max).map {
-    bindingViewModelDsl(R.layout.item_binding_layout, BR.model, ModelTest("title", "bindingViewModelDsl")) {
+    bindingViewModelDsl(
+        R.layout.item_binding_layout,
+        BR.model,
+        ModelTest("title", "bindingViewModelDsl")
+    ) {
         itemView.setOnClickListener {
             val viewModel = getViewModel<BindingViewModel<ModelTest>>()
             viewModel?.model?.title = "${java.util.Random().nextInt(100)}"

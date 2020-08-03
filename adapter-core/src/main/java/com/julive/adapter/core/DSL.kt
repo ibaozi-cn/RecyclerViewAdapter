@@ -1,5 +1,6 @@
 package com.julive.adapter.core
 
+
 fun listAdapter(block: ListAdapter.() -> Unit): ListAdapter {
     return ListAdapter().apply {
         block()

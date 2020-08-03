@@ -2,9 +2,9 @@ package com.julive.adapter.core
 
 import androidx.recyclerview.widget.RecyclerView
 
-class ListAdapter : ViewHolderCacheAdapter<ViewModelType, RecyclerView.ViewHolder>(), IListAdapter<ViewModelType>, MutableCollection<ViewModelType> {
+class ListAdapter : ViewHolderCacheAdapter<ViewModelType, RecyclerView.ViewHolder>(), IListAdapter<ViewModelType> {
 
-    private var dataList = mutableListOf<ViewModelType>()
+    var dataList = mutableListOf<ViewModelType>()
 
     override fun getItem(position: Int): ViewModelType {
         return dataList[position]
@@ -15,28 +15,20 @@ class ListAdapter : ViewHolderCacheAdapter<ViewModelType, RecyclerView.ViewHolde
     }
 
     override fun clear() {
-        val oldSize = size
+        val oldSize = itemCount
         dataList.clear()
         if (oldSize != 0) {
             notifyItemRangeRemoved(0, oldSize)
         }
     }
 
-    override fun isEmpty(): Boolean {
-        return dataList.isEmpty()
-    }
-
     override fun add(vm: ViewModelType): Boolean {
         val result = dataList.add(vm)
-        notifyItemRangeInserted(size - 1, 1)
+        notifyItemRangeInserted(itemCount - 1, 1)
         return result
     }
 
-    override fun iterator(): MutableIterator<ViewModelType> {
-        return dataList.iterator()
-    }
-
-    fun add(index: Int, element: ViewModelType) {
+    override fun add(index: Int, element: ViewModelType) {
         dataList.add(index, element)
         notifyItemRangeInserted(index, 1)
     }
@@ -58,48 +50,22 @@ class ListAdapter : ViewHolderCacheAdapter<ViewModelType, RecyclerView.ViewHolde
         notifyItemChanged(index, vm.model)
     }
 
-    override val size: Int
-        get() = dataList.size
-
-    override fun contains(element: ViewModelType): Boolean {
-        return dataList.contains(element)
-    }
-
-    override fun containsAll(elements: Collection<ViewModelType>): Boolean {
-        return dataList.containsAll(elements)
-    }
-
     override fun addAll(elements: Collection<ViewModelType>): Boolean {
-        val oldSize = size
+        val oldSize = itemCount
         val added = dataList.addAll(elements)
         if (added) {
-            notifyItemRangeInserted(oldSize, size - oldSize)
+            notifyItemRangeInserted(oldSize, itemCount - oldSize)
         }
         return added
     }
 
     override fun remove(vm: ViewModelType): Boolean {
-        val index = indexOf(vm)
+        val index = dataList.indexOf(vm)
         if (index >= 0) {
             removeAt(index)
             return true
         }
         return false
-    }
-
-    /**
-     * 不会触发Adapter更新
-     */
-    override fun removeAll(elements: Collection<ViewModelType>): Boolean {
-        return dataList.removeAll(elements)
-    }
-
-    override fun retainAll(elements: Collection<ViewModelType>): Boolean {
-        return dataList.retainAll(elements)
-    }
-
-    fun getAll(): List<ViewModelType> {
-        return dataList
     }
 
     fun replayAll(list: List<ViewModelType>) {

@@ -16,7 +16,6 @@ class ArrayViewModelTest : LayoutViewModel<ModelTest>(R.layout.item_test_2) {
             }
         }
     }
-
     override fun bindVH(viewHolder: DefaultViewHolder, payloads: List<Any>) {
         viewHolder.getView<TextView>(R.id.tv_title).text = model?.title
         viewHolder.getView<TextView>(R.id.tv_subTitle).text = model?.subTitle

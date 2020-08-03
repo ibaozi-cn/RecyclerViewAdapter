@@ -15,7 +15,6 @@ data class ModelTest(var title: String, var subTitle: String) : SameModel {
     override fun <T : SameModel> getChangePayload(newItem: T): Any? {
         return null
     }
-
     override var uniqueId: String = title
 }
 

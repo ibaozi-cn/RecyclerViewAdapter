@@ -28,34 +28,27 @@ class AnkoItemView : AnkoComponent<ViewGroup> {
 
     @SuppressLint("ResourceType")
     override fun createView(ui: AnkoContext<ViewGroup>) = with(ui) {
-
         cardView {
-
             layoutParams = FrameLayout.LayoutParams(
                 FrameLayout.LayoutParams.MATCH_PARENT,
                 FrameLayout.LayoutParams.WRAP_CONTENT
             ).apply {
                 margin = dip(5)
             }
-
             verticalLayout {
-
                 val typedValue = TypedValue()
                 context.theme
                     .resolveAttribute(android.R.attr.selectableItemBackground, typedValue, true)
                 val attribute = intArrayOf(android.R.attr.selectableItemBackground)
                 val typedArray =
                     context.theme.obtainStyledAttributes(typedValue.resourceId, attribute)
-
                 background = typedArray.getDrawable(0)
-
                 layoutParams = FrameLayout.LayoutParams(
                     FrameLayout.LayoutParams.MATCH_PARENT,
                     FrameLayout.LayoutParams.WRAP_CONTENT
                 ).apply {
                     padding = dip(10)
                 }
-
                 tvTitle = textView {
                     textSize = px2dip(60)
                     textColorResource = R.color.colorPrimary
@@ -65,10 +58,8 @@ class AnkoItemView : AnkoComponent<ViewGroup> {
                     textSize = px2dip(45)
                     textColorResource = R.color.colorAccent
                 }.lparams(matchParent, wrapContent)
-
             }
         }
-
     }
 }
 

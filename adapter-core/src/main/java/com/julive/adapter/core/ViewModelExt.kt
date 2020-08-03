@@ -5,17 +5,14 @@ import android.view.View
 import android.view.ViewGroup
 
 typealias ViewModelType = ViewModel<*, *>
-typealias DefaultViewModelType<M> = ViewModel<M, DefaultViewHolder>
 
-
-@Suppress("UNCHECKED_CAST")
-abstract class DefaultViewModel<M> : DefaultViewModelType<M> {
+abstract class DefaultViewModel<M> : ViewModel<M, DefaultViewHolder> {
 
     override var model: M? = null
     private var initView: InitView? = null
 
     open fun onCreateViewHolder(f: DefaultViewHolder.() -> Unit) {
-        initView = f as InitView
+        initView = f
     }
 
     abstract
@@ -24,11 +21,13 @@ abstract class DefaultViewModel<M> : DefaultViewModelType<M> {
         layoutInflater: LayoutInflater
     ): View
 
+    open fun getViewHolder(v: View) = DefaultViewHolder(v)
+
     override fun getViewHolder(
         parent: ViewGroup,
         layoutInflater: LayoutInflater
     ): DefaultViewHolder {
-        return DefaultViewHolder(getHolderItemView(parent, layoutInflater)).apply {
+        return getViewHolder(getHolderItemView(parent, layoutInflater)).apply {
             initView?.invoke(this)
         }
     }

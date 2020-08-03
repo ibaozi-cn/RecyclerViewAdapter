@@ -21,20 +21,20 @@ fun <T : View> RecyclerView.ViewHolder.getView(@IdRes viewId: Int): T {
     return itemView.findViewById(viewId) as T
 }
 
-typealias BindView = RecyclerView.ViewHolder.(payloads: List<Any>) -> Unit
-typealias UnBindView = RecyclerView.ViewHolder.() -> Unit
-typealias InitView = RecyclerView.ViewHolder.() -> Unit
+typealias BindView = DefaultViewHolder.(payloads: List<Any>) -> Unit
+typealias UnBindView = DefaultViewHolder.() -> Unit
+typealias InitView = DefaultViewHolder.() -> Unit
 
-class DefaultViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), Subscriber {
+open class DefaultViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), Subscriber {
 
     private var bindView: BindView? = null
     private var unBindView: UnBindView? = null
 
-    fun onBindViewHolder(f: RecyclerView.ViewHolder.(payloads: List<Any>) -> Unit) {
+    fun onBindViewHolder(f: DefaultViewHolder.(payloads: List<Any>) -> Unit) {
         bindView = f
     }
 
-    fun onUnBindViewHolder(f: RecyclerView.ViewHolder.() -> Unit) {
+    fun onUnBindViewHolder(f: DefaultViewHolder.() -> Unit) {
         unBindView = f
     }
 
