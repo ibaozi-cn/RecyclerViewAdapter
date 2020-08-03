@@ -3,7 +3,6 @@ package com.julive.adapter.core
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
 
 typealias ViewModelType = ViewModel<*, *>
 typealias DefaultViewModelType<M> = ViewModel<M, DefaultViewHolder>

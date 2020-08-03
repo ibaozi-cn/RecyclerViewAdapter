@@ -10,5 +10,3 @@ interface SameModel {
     }
     fun <T : SameModel> getChangePayload(newItem: T): Any? = null
 }
-
-

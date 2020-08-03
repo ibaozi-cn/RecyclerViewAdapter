@@ -13,11 +13,8 @@ import kotlin.random.Random
 
 fun createViewModelList(max: Int = 10) = (0..max).map { _ ->
     layoutViewModelDsl(R.layout.item_test, ModelTest("title", "subTitle")) {
-        onBindViewHolder {
-            val model = getModel<ModelTest>()
-            getView<TextView>(R.id.tv_title).text = model?.title
-            getView<TextView>(R.id.tv_subTitle).text = model?.subTitle
-        }
+        val titleText = getView<TextView>(R.id.tv_title)
+        val subTitleText = getView<TextView>(R.id.tv_subTitle)
         itemView.setOnClickListener {
             val vm = getViewModel<LayoutViewModel<ModelTest>>()
             //修改Model数据
@@ -25,15 +22,17 @@ fun createViewModelList(max: Int = 10) = (0..max).map { _ ->
             //用Adapter更新数据
             getAdapter<ListAdapter>()?.set(adapterPosition, vm)
         }
+        onBindViewHolder {
+            val model = getModel<ModelTest>()
+            titleText.text = model?.title
+            subTitleText.text = model?.subTitle
+        }
     }
 }
 
 fun createAnkoViewModelList(max: Int = 10) = (0..max).map { _ ->
     //AnkoViewModel对象
-    ankoViewModelDsl(
-        ModelTest("title", "ankoViewModelDsl"),
-        { AnkoItemView() }
-    ) {
+    ankoViewModelDsl(ModelTest("title", "ankoViewModelDsl"), { AnkoItemView() }) {
         onBindViewHolder { _ ->
             val model = getModel<ModelTest>()
             val ankoView = getAnkoView<AnkoItemView>()
@@ -49,11 +48,7 @@ fun createAnkoViewModelList(max: Int = 10) = (0..max).map { _ ->
 }
 
 fun createBindingViewModelList(max: Int = 10) = (0..max).map {
-    bindingViewModelDsl(
-        R.layout.item_binding_layout,
-        BR.model,
-        ModelTest("title", "bindingViewModelDsl")
-    ) {
+    bindingViewModelDsl(R.layout.item_binding_layout, BR.model, ModelTest("title", "bindingViewModelDsl")) {
         itemView.setOnClickListener {
             val viewModel = getViewModel<BindingViewModel<ModelTest>>()
             viewModel?.model?.title = "${java.util.Random().nextInt(100)}"

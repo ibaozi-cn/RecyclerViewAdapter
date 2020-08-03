@@ -27,21 +27,8 @@ class SelectableActivity : AppCompatActivity() {
                         R.layout.item_test,
                         ModelTest("title", "subTitle")
                     ) {
-                        onBindViewHolder {
-                            val model = getModel<ModelTest>()
-                            val title = getView<TextView>(R.id.tv_title)
-                            val subTitle = getView<TextView>(R.id.tv_subTitle)
-                            title.text = model?.title
-                            subTitle.text = model?.subTitle
-                            val isSelect = isSelected(adapterPosition)
-                            if (isSelect) {
-                                itemView.setBackgroundResource(R.color.cardview_dark_background)
-                                title?.textColorResource = R.color.cardview_light_background
-                            } else {
-                                itemView.setBackgroundResource(R.color.cardview_light_background)
-                                title?.textColorResource = R.color.cardview_dark_background
-                            }
-                        }
+                        val title = getView<TextView>(R.id.tv_title)
+                        val subTitle = getView<TextView>(R.id.tv_subTitle)
                         itemView.setOnClickListener {
                             toggleSelection(adapterPosition) {
                                 if (it) {
@@ -50,11 +37,23 @@ class SelectableActivity : AppCompatActivity() {
                             }
                             Log.d("isMultiSelectable", "isMultiSelectable$isMultiSelect")
                         }
+                        onBindViewHolder {
+                            val model = getModel<ModelTest>()
+                            title.text = model?.title
+                            subTitle.text = model?.subTitle
+                            val isSelect = isSelected(adapterPosition)
+                            if (isSelect) {
+                                itemView.setBackgroundResource(R.color.cardview_dark_background)
+                                title.textColorResource = R.color.cardview_light_background
+                            } else {
+                                itemView.setBackgroundResource(R.color.cardview_light_background)
+                                title.textColorResource = R.color.cardview_dark_background
+                            }
+                        }
                     })
             }
             into(rv_list_selectable)
         }
-
         btn_left.setText("切换单选").setOnClickListener {
             if (!adapter.isMultiSelect) {
                 btn_left.setText("切换单选")
@@ -63,14 +62,11 @@ class SelectableActivity : AppCompatActivity() {
             }
             adapter.setMultiSelectable(!adapter.isMultiSelect)
         }
-
         btn_middle.isVisible = false
-
         btn_right.setText("设置最大可选").setOnClickListener {
             val random = Random().nextInt(6)
             btn_right.setText("设置最大可选$random")
             adapter.setSelectableMaxSize(random)
         }
-
     }
 }

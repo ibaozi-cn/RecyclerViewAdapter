@@ -47,7 +47,7 @@ class SortedItemViewModelTest : LayoutViewModel<SortedModelTest>(R.layout.item_t
         }
     }
     override fun bindVH(viewHolder: DefaultViewHolder, payloads: List<Any>) {
-        viewHolder.getView<TextView>(R.id.tv_title)?.text = model?.title
-        viewHolder.getView<TextView>(R.id.tv_subTitle)?.text = model?.subTitle
+        viewHolder.getView<TextView>(R.id.tv_title).text = model?.title
+        viewHolder.getView<TextView>(R.id.tv_subTitle).text = model?.subTitle
     }
 }
