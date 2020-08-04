@@ -7,7 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.TextView
-import androidx.recyclerview.widget.RecyclerView
+import com.julive.adapter.animators.firstAnimation
+import com.julive.adapter.animators.updateAnimation
 import com.julive.adapter.anko.AnkoViewModel
 import com.julive.adapter.anko.getAnkoView
 import com.julive.adapter.core.DefaultViewHolder
@@ -70,13 +71,17 @@ class AnkoViewModelTest : AnkoViewModel<ModelTest, AnkoItemView>() {
         }
         onCreateViewHolder {
             itemView.setOnClickListener {
-                val viewModel = getAdapter<ListAdapter>()?.getItem(adapterPosition) as AnkoViewModelTest
+                val viewModel =
+                    getAdapter<ListAdapter>()?.getItem(adapterPosition) as AnkoViewModelTest
                 viewModel.model?.title = "${Random.nextInt(1000, 10000)}"
                 getAdapter<ListAdapter>()?.set(adapterPosition, viewModel)
             }
         }
     }
+
     override fun bindVH(viewHolder: DefaultViewHolder, payloads: List<Any>) {
+        firstAnimation(viewHolder)
+        updateAnimation(viewHolder)
         val ankoView = viewHolder.getAnkoView<AnkoItemView>()
         Log.d("AnkoViewModelTest", "ankoView=${ankoView}")
         ankoView?.tvTitle?.text = model?.title

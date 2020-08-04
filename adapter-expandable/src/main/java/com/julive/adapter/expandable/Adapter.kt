@@ -2,11 +2,11 @@ package com.julive.adapter.expandable
 
 import android.util.SparseArray
 import android.util.SparseBooleanArray
-import com.julive.adapter.core.IAdapter
+import androidx.recyclerview.widget.RecyclerView
 import java.lang.ref.WeakReference
 
-private val expandedItemsCache = SparseArray<WeakReference<SparseBooleanArray?>?>()
-private val expandConfigCache = SparseArray<WeakReference<SparseArray<Any>?>?>()
+private val expandedItemsCache = SparseArray<SparseBooleanArray>()
+private val expandConfigCache = SparseArray<SparseArray<Any>>()
 
 private val defaultExpandConfig by lazy {
     SparseArray<Any>().apply {
@@ -15,52 +15,33 @@ private val defaultExpandConfig by lazy {
 }
 
 private fun getExpandedItems(key: Int): SparseBooleanArray {
-    val wr = expandedItemsCache[key]
-    val sba by lazy {
-        SparseBooleanArray()
-    }
-    return if (wr == null) {
-        expandedItemsCache.append(key, WeakReference(sba))
-        sba
-    } else {
-        val expandedItems = wr.get()
-        if (expandedItems == null) {
-            expandedItemsCache.append(key, WeakReference(sba))
-        }
-        expandedItems ?: sba
+    return expandedItemsCache[key] ?: SparseBooleanArray().apply {
+        expandedItemsCache.append(key, this)
     }
 }
 
 private fun getExpandConfig(key: Int): SparseArray<Any> {
-    val wr = expandConfigCache[key]
-    return if (wr == null) {
-        expandConfigCache.append(key, WeakReference(defaultExpandConfig))
-        defaultExpandConfig
-    } else {
-        val expandConfig = wr.get()
-        if (expandConfig == null) {
-            expandConfigCache.append(key, WeakReference(defaultExpandConfig))
-        }
-        expandConfig ?: defaultExpandConfig
+    return expandConfigCache[key] ?: defaultExpandConfig.apply {
+        expandConfigCache.append(key, this)
     }
 }
 
-var IAdapter<*>.isMultiExpand: Boolean
+var RecyclerView.Adapter<*>.isMultiExpand: Boolean
     get() = getExpandConfig(hashCode())[0] as Boolean
     private set(value) {}
 
-var IAdapter<*>.expandedCount: Int
+var RecyclerView.Adapter<*>.expandedCount: Int
     get() = getExpandedItems(hashCode()).size()
     private set(value) {}
 
-fun IAdapter<*>.setMultiExpandable(enable: Boolean) {
+fun RecyclerView.Adapter<*>.setMultiExpandable(enable: Boolean) {
     getExpandConfig(hashCode()).setValueAt(0, enable)
-    if (!enable && expandedCount > 1) {
+    if (!enable && expandedCount >= 1) {
         clearExpanded()
     }
 }
 
-fun IAdapter<*>.getExpandedItems(): List<Int> {
+fun RecyclerView.Adapter<*>.getExpandedItems(): List<Int> {
     val eis = getExpandedItems(hashCode())
     val size = eis.size()
     val items: MutableList<Int> = ArrayList(size)
@@ -70,7 +51,7 @@ fun IAdapter<*>.getExpandedItems(): List<Int> {
     return items
 }
 
-fun IAdapter<*>.clearExpanded() {
+fun RecyclerView.Adapter<*>.clearExpanded() {
     val selection = getExpandedItems()
     getExpandedItems(hashCode()).clear()
     for (i in selection) {
@@ -78,9 +59,9 @@ fun IAdapter<*>.clearExpanded() {
     }
 }
 
-fun IAdapter<*>.isExpanded(position: Int) = getExpandedItems().contains(position)
+fun RecyclerView.Adapter<*>.isExpanded(position: Int) = getExpandedItems().contains(position)
 
-fun IAdapter<*>.toggleExpand(position: Int) {
+fun RecyclerView.Adapter<*>.toggleExpand(position: Int) {
     if (!isMultiExpand) {
         clearExpanded()
     }
@@ -91,4 +72,9 @@ fun IAdapter<*>.toggleExpand(position: Int) {
         eis.put(position, true)
     }
     notifyItemChanged(position)
+}
+
+fun RecyclerView.Adapter<*>.onDestroy() {
+    expandedItemsCache[hashCode()].clear()
+    expandConfigCache[hashCode()].clear()
 }

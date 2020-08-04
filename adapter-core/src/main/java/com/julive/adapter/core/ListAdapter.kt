@@ -2,7 +2,7 @@ package com.julive.adapter.core
 
 import androidx.recyclerview.widget.RecyclerView
 
-class ListAdapter : ViewHolderCacheAdapter<ViewModelType, RecyclerView.ViewHolder>(), IListAdapter<ViewModelType> {
+class ListAdapter : ViewHolderCacheAdapter<ViewModelType, RecyclerView.ViewHolder>(){
 
     var dataList = mutableListOf<ViewModelType>()
 
@@ -14,7 +14,7 @@ class ListAdapter : ViewHolderCacheAdapter<ViewModelType, RecyclerView.ViewHolde
         return dataList.size
     }
 
-    override fun clear() {
+    fun clear() {
         val oldSize = itemCount
         dataList.clear()
         if (oldSize != 0) {
@@ -22,35 +22,35 @@ class ListAdapter : ViewHolderCacheAdapter<ViewModelType, RecyclerView.ViewHolde
         }
     }
 
-    override fun add(vm: ViewModelType): Boolean {
+    fun add(vm: ViewModelType): Boolean {
         val result = dataList.add(vm)
         notifyItemRangeInserted(itemCount - 1, 1)
         return result
     }
 
-    override fun add(index: Int, element: ViewModelType) {
+    fun add(index: Int, element: ViewModelType) {
         dataList.add(index, element)
         notifyItemRangeInserted(index, 1)
     }
 
-    override fun removeAt(index: Int) {
-        val vm = dataList.removeAt(index)
+    fun removeAt(index: Int) {
+        dataList.removeAt(index)
         notifyItemRemoved(index)
     }
 
-    override fun set(index: Int, vm: ViewModelType?) {
+    fun set(index: Int, vm: ViewModelType?) {
         if (vm != null) {
             dataList[index] = vm
             notifyItemChanged(index)
         }
     }
 
-    override fun updatePayload(index: Int, vm: ViewModelType) {
+    fun updatePayload(index: Int, vm: ViewModelType) {
         dataList[index] = vm
         notifyItemChanged(index, vm.model)
     }
 
-    override fun addAll(elements: Collection<ViewModelType>): Boolean {
+    fun addAll(elements: Collection<ViewModelType>): Boolean {
         val oldSize = itemCount
         val added = dataList.addAll(elements)
         if (added) {
@@ -59,7 +59,7 @@ class ListAdapter : ViewHolderCacheAdapter<ViewModelType, RecyclerView.ViewHolde
         return added
     }
 
-    override fun remove(vm: ViewModelType): Boolean {
+    fun remove(vm: ViewModelType): Boolean {
         val index = dataList.indexOf(vm)
         if (index >= 0) {
             removeAt(index)

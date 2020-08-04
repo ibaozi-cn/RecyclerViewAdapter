@@ -1,32 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/cardItem"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:id="@+id/cardItem"
-    android:layout_margin="5dp">
+    android:layout_margin="5dp"
+    android:animation="@anim/item_animation_scale">
 
     <LinearLayout
-        android:background="?attr/selectableItemBackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="25dp"
-        android:orientation="horizontal">
+        android:background="?attr/selectableItemBackground"
+        android:orientation="horizontal"
+        android:padding="25dp">
 
         <TextView
             android:id="@+id/tv_title"
-            android:text="@string/app_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="@string/app_name"
             android:textColor="@color/colorPrimary"
             android:textSize="22sp" />
 
         <TextView
             android:id="@+id/tv_subTitle"
-            android:text="@string/test"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorAccent"
             android:layout_marginStart="10dp"
+            android:text="@string/test"
+            android:textColor="@color/colorAccent"
             android:textSize="18sp" />
 
     </LinearLayout>

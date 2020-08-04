@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
 import androidx.core.view.isVisible
+import com.julive.adapter.animators.intoWithAnimator
 import com.julive.adapter.core.*
 import com.julive.adapter.selectable.*
 import com.julive.adapter_demo.R
@@ -16,11 +17,9 @@ import org.jetbrains.anko.textColorResource
 import java.util.*
 
 class SelectableActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        supportActionBar?.title = "ListAdapter"
-        setContentView(R.layout.activity_selectable)
-        val adapter = listAdapter {
+
+    private val mListAdapter =
+        listAdapter {
             (0..10).forEach { _ ->
                 add(
                     layoutViewModelDsl(
@@ -52,21 +51,31 @@ class SelectableActivity : AppCompatActivity() {
                         }
                     })
             }
-            into(rv_list_selectable)
         }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        supportActionBar?.title = "ListAdapter"
+        setContentView(R.layout.activity_selectable)
+        mListAdapter.intoWithAnimator(rv_list_selectable)
         btn_left.setText("切换单选").setOnClickListener {
-            if (!adapter.isMultiSelect) {
+            if (!mListAdapter.isMultiSelect) {
                 btn_left.setText("切换单选")
             } else {
                 btn_left.setText("切换多选")
             }
-            adapter.setMultiSelectable(!adapter.isMultiSelect)
+            mListAdapter.setMultiSelectable(!mListAdapter.isMultiSelect)
         }
         btn_middle.isVisible = false
         btn_right.setText("设置最大可选").setOnClickListener {
             val random = Random().nextInt(6)
             btn_right.setText("设置最大可选$random")
-            adapter.setSelectableMaxSize(random)
+            mListAdapter.setSelectableMaxSize(random)
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mListAdapter.onDestroy()
     }
 }

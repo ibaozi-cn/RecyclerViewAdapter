@@ -1,6 +1,8 @@
 package com.julive.adapter_demo
 
 import android.widget.TextView
+import com.julive.adapter.animators.firstAnimation
+import com.julive.adapter.animators.updateAnimation
 import com.julive.adapter.anko.AnkoViewModel
 import com.julive.adapter.anko.ankoViewModelDsl
 import com.julive.adapter.anko.getAnkoView
@@ -23,6 +25,8 @@ fun createViewModelList(max: Int = 10, subTitle: String = "subTitle") = (0..max)
             getAdapter<ListAdapter>()?.set(adapterPosition, vm)
         }
         onBindViewHolder {
+            firstAnimation()
+            updateAnimation()
             val model = getModel<ModelTest>()
             titleText.text = model?.title
             subTitleText.text = model?.subTitle

@@ -1,14 +1,14 @@
 package com.julive.adapter.animators
 
-import android.view.View
-import androidx.core.view.ViewPropertyAnimatorCompat
+import androidx.annotation.AnimRes
 import androidx.recyclerview.widget.RecyclerView
-import com.julive.adapter.core.DefaultViewHolder
+import com.julive.adapter.core.ViewModelType
+import com.julive.adapter.core.getViewModel
 
-class AnimatorViewHolder(
-    itemView: View,
-    val addAnimation: (holder: RecyclerView.ViewHolder) -> ViewPropertyAnimatorCompat,
-    val preAddAnimation: (holder: RecyclerView.ViewHolder) -> Unit,
-    val removeAnimation: (holder: RecyclerView.ViewHolder) -> ViewPropertyAnimatorCompat,
-    val preRemoveAnimation: (holder: RecyclerView.ViewHolder) -> Unit
-) : DefaultViewHolder(itemView)
+fun RecyclerView.ViewHolder.firstAnimation(
+    @AnimRes itemAnimationRes: Int = R.anim.item_animation_from_right
+) = add(getViewModel<ViewModelType>()?.isFirstInit ?: false, this, itemAnimationRes)
+
+fun RecyclerView.ViewHolder.updateAnimation(
+    @AnimRes itemAnimationRes: Int = R.anim.item_animation_scale
+) = update(getViewModel<ViewModelType>()?.isFirstInit ?: false, this, itemAnimationRes)

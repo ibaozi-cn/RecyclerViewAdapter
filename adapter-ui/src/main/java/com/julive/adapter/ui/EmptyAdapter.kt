@@ -14,7 +14,6 @@ class DefaultEmptyViewModel : LayoutViewModel<EmptyState>(R.layout.item_empty_la
     init {
         model = EmptyState.NotLoading
     }
-
     override fun bindVH(viewHolder: DefaultViewHolder, payloads: List<Any>) {
         val text = viewHolder.getView<TextView>(R.id.item_empty_text)
         val progress = viewHolder.getView<ProgressBar>(R.id.item_empty_progress)

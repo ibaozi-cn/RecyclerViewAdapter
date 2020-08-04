@@ -2,6 +2,8 @@ package com.julive.adapter_demo.dsl
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.julive.adapter.animators.intoWithAnimator
+import com.julive.adapter.animators.runLayoutAnimation
 import com.julive.adapter.core.*
 import com.julive.adapter_demo.*
 import kotlinx.android.synthetic.main.activity_adapter_dsl.*
@@ -16,7 +18,7 @@ class AdapterDslActivity : AppCompatActivity() {
             addAll(createAnkoViewModelList(3))
             addAll(createBindingViewModelList(3))
             // 绑定 RecyclerView
-            into(rv_list_dsl)
+            intoWithAnimator(rv_list_dsl)
         }
     }
 }

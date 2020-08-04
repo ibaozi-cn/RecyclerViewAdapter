@@ -3,6 +3,7 @@ package com.julive.adapter_demo.diff
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.view.isVisible
+import com.julive.adapter.animators.intoWithAnimator
 import com.julive.adapter.core.*
 import com.julive.adapter.diff.calculateDiff
 import com.julive.adapter_demo.R

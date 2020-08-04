@@ -27,5 +27,4 @@ android {
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "androidx.recyclerview:recyclerview:$recyclerview_version"
-    implementation project(path: ':adapter-core')
 }

@@ -2,6 +2,8 @@ package com.julive.adapter_demo.sorted
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.recyclerview.widget.GridLayoutManager
+import com.julive.adapter.animators.intoWithAnimator
 import com.julive.adapter.core.into
 import com.julive.adapter.sorted.SortedListAdapter
 import com.julive.adapter_demo.R
@@ -19,7 +21,11 @@ class SortedActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         supportActionBar?.title = "SortedListAdapter"
         setContentView(R.layout.activity_array_list)
-        mSortedListAdapter.into(rv_list)
+        mSortedListAdapter.intoWithAnimator(
+            rv_list,
+            GridLayoutManager(this, 2),
+            R.anim.grid_layout_animation_from_bottom
+        )
         (0..10).map {
             mSortedListAdapter.add(SortedItemViewModelTest().apply {
                 model = SortedModelTest(it, "标题$it", "副标题$it")

@@ -30,11 +30,11 @@ open class DefaultViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
     private var bindView: BindView? = null
     private var unBindView: UnBindView? = null
 
-    fun onBindViewHolder(f: DefaultViewHolder.(payloads: List<Any>) -> Unit) {
+    fun onBindViewHolder(f: BindView) {
         bindView = f
     }
 
-    fun onUnBindViewHolder(f: DefaultViewHolder.() -> Unit) {
+    fun onUnBindViewHolder(f: UnBindView) {
         unBindView = f
     }
 

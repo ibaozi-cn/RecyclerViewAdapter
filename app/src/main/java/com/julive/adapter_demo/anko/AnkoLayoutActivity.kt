@@ -15,7 +15,7 @@ import kotlin.random.Random
 
 class AnkoLayoutActivity : AppCompatActivity() {
 
-    private val arrayListAdapter by lazy {
+    private val mListAdapter by lazy {
         ListAdapter()
     }
 
@@ -23,17 +23,17 @@ class AnkoLayoutActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         supportActionBar?.title = "ListAdapter"
         var index = 0
-        AnkoLayoutComponent(arrayListAdapter).setContentView(this).apply {
+        AnkoLayoutComponent(mListAdapter).setContentView(this).apply {
             // 新增一个
             btn_left.setText("新增").setOnClickListener {
-                arrayListAdapter.add(AnkoViewModelTest().apply {
+                mListAdapter.add(AnkoViewModelTest().apply {
                     model = ModelTest("标题${++index}", "副标题")
                 })
             }
             // 删除第一个
             btn_middle.setText("删除").setOnClickListener {
-                if (arrayListAdapter.itemCount > 0)
-                    arrayListAdapter.removeAt(0)
+                if (mListAdapter.itemCount > 0)
+                    mListAdapter.removeAt(0)
                 else
                     toast("请添加新用例后再试")
             }
@@ -41,9 +41,9 @@ class AnkoLayoutActivity : AppCompatActivity() {
             var updateSize = 0
             btn_right.setText("更新").setOnClickListener {
                 updateSize++
-                if (arrayListAdapter.itemCount > 0) {
-                    val randomInt = Random.nextInt(0, arrayListAdapter.itemCount)
-                    arrayListAdapter.set(randomInt, arrayListAdapter.getItem(randomInt).apply {
+                if (mListAdapter.itemCount > 0) {
+                    val randomInt = Random.nextInt(0, mListAdapter.itemCount)
+                    mListAdapter.set(randomInt, mListAdapter.getItem(randomInt).apply {
                         model.also {
                             it as ModelTest
                             it.title = "$updateSize"

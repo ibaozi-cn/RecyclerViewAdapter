@@ -10,6 +10,7 @@ interface ViewModel<M, VH : RecyclerView.ViewHolder> :
         get() = layoutRes
     @get:LayoutRes
     val layoutRes: Int
+    var isFirstInit: Boolean
     fun bindVH(
         viewHolder: VH,
         payloads: List<Any>

@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadState
-import com.julive.adapter.core.into
+import com.julive.adapter.animators.intoWithAnimator
 import com.julive.adapter.paging.PagingListAdapter
 import com.julive.adapter.paging.PagingLoadStateAdapter
 import com.julive.adapter_demo.R
@@ -19,7 +19,7 @@ import kotlinx.coroutines.launch
 
 class Paging3Activity : AppCompatActivity() {
 
-    private val pagingListAdapter by lazy {
+    private val mPagingListAdapter by lazy {
         PagingListAdapter()
     }
 
@@ -35,13 +35,13 @@ class Paging3Activity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         supportActionBar?.title = "PagingListAdapter"
         setContentView(R.layout.activity_paging3)
-        pagingListAdapter.withLoadStateFooter(PagingLoadStateAdapter()).into(rv_paging_list)
+        mPagingListAdapter.withLoadStateFooter(PagingLoadStateAdapter()).intoWithAnimator(rv_paging_list)
         lifecycleScope.launch {
             viewModel.pager.collect {
-                pagingListAdapter.submitData(it)
+                mPagingListAdapter.submitData(it)
             }
         }
-        pagingListAdapter.addLoadStateListener { loadStates ->
+        mPagingListAdapter.addLoadStateListener { loadStates ->
             btn_right.isVisible = loadStates.append is LoadState.Error
             refresh_paging_layout.isRefreshing = loadStates.refresh is LoadState.Loading
         }
@@ -49,7 +49,7 @@ class Paging3Activity : AppCompatActivity() {
         btn_left.setText("新增")
         btn_middle.setText("删除")
         btn_right.setText("更新").setOnClickListener {
-                pagingListAdapter.refresh()
+                mPagingListAdapter.refresh()
         }
 
     }

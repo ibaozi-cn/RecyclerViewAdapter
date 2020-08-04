@@ -1,6 +1,8 @@
 package com.julive.adapter_demo.core
 
 import android.widget.TextView
+import com.julive.adapter.animators.firstAnimation
+import com.julive.adapter.animators.updateAnimation
 import com.julive.adapter.core.*
 import com.julive.adapter_demo.R
 import com.julive.adapter_demo.sorted.ModelTest
@@ -16,7 +18,10 @@ class ArrayViewModelTest : LayoutViewModel<ModelTest>(R.layout.item_test_2) {
             }
         }
     }
+
     override fun bindVH(viewHolder: DefaultViewHolder, payloads: List<Any>) {
+        firstAnimation(viewHolder)
+        updateAnimation(viewHolder)
         viewHolder.getView<TextView>(R.id.tv_title).text = model?.title
         viewHolder.getView<TextView>(R.id.tv_subTitle).text = model?.subTitle
     }

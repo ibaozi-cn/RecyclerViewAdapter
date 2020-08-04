@@ -3,6 +3,7 @@ package com.julive.adapter_demo.empty
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import com.julive.adapter.animators.intoWithAnimator
 import com.julive.adapter.core.into
 import com.julive.adapter.core.listAdapter
 import com.julive.adapter.ui.EmptyAdapter
@@ -22,7 +23,7 @@ class EmptyActivity : AppCompatActivity() {
                 addAll(createViewModelList())
             }
         ).apply {
-            into(rv_list_empty)
+            intoWithAnimator(rv_list_empty)
         }
         btn_left.setText("空布局").setOnClickListener {
             emptyAdapter.emptyState = EmptyState.NotLoading

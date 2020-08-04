@@ -8,8 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.julive.adapter.animators.intoWithAnimator
 import com.julive.adapter.core.ListAdapter
-import com.julive.adapter.core.into
 import com.julive.adapter_demo.R
 import com.julive.adapter_demo.sorted.ModelTest
 import kotlinx.android.synthetic.main.activity_array_list.*
@@ -27,7 +27,7 @@ class ArrayListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         supportActionBar?.title = "ListAdapter"
         setContentView(R.layout.activity_array_list)
-        mArrayListAdapter.into(rv_list)
+        mArrayListAdapter.intoWithAnimator(rv_list)
         // 新增一个
         btn_left.setText("新增").setOnClickListener {
             mArrayListAdapter.add(ArrayViewModelTest().apply {
