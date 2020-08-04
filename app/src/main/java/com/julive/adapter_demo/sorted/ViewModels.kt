@@ -2,6 +2,7 @@ package com.julive.adapter_demo.sorted
 
 import android.widget.TextView
 import com.julive.adapter.animators.firstAnimation
+import com.julive.adapter.animators.updateAnimation
 import com.julive.adapter.core.*
 import com.julive.adapter.sorted.SortedListAdapter
 import com.julive.adapter.sorted.SortedModel
@@ -16,6 +17,7 @@ data class ModelTest(var title: String, var subTitle: String) : SameModel {
     override fun <T : SameModel> getChangePayload(newItem: T): Any? {
         return null
     }
+
     override var uniqueId: String = title
 }
 
@@ -46,8 +48,10 @@ class SortedItemViewModelTest : LayoutViewModel<SortedModelTest>(R.layout.item_t
             }
         }
     }
+
     override fun bindVH(viewHolder: DefaultViewHolder, payloads: List<Any>) {
-        firstAnimation(viewHolder)
+        firstAnimation(viewHolder, R.anim.item_animation_from_bottom)
+        updateAnimation(viewHolder)
         viewHolder.getView<TextView>(R.id.tv_title).text = model?.title
         viewHolder.getView<TextView>(R.id.tv_subTitle).text = model?.subTitle
     }

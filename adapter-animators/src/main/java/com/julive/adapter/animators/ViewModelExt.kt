@@ -1,15 +1,16 @@
 package com.julive.adapter.animators
 
 import androidx.annotation.AnimRes
-import androidx.recyclerview.widget.RecyclerView
+import com.julive.adapter.core.DefaultViewHolder
 import com.julive.adapter.core.ViewModelType
 
 fun ViewModelType.firstAnimation(
-    viewHolder: RecyclerView.ViewHolder,
-    @AnimRes itemAnimationRes: Int = R.anim.item_animation_from_right
-) = add(isFirstInit, viewHolder, itemAnimationRes)
+    viewHolder: DefaultViewHolder,
+    @AnimRes itemAnimationRes: Int = R.anim.item_animation_from_right,
+    delayOffset: Int = 200
+) = viewHolder.animationWithDelayOffset(isFirstInit, itemAnimationRes, delayOffset)
 
 fun ViewModelType.updateAnimation(
-    viewHolder: RecyclerView.ViewHolder,
+    viewHolder: DefaultViewHolder,
     @AnimRes itemAnimationRes: Int = R.anim.item_animation_scale
-) = update(isFirstInit, viewHolder, itemAnimationRes)
+) = viewHolder.animation(!isFirstInit, itemAnimationRes)

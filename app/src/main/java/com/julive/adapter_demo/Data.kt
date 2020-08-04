@@ -38,6 +38,8 @@ fun createAnkoViewModelList(max: Int = 10) = (0..max).map { _ ->
     //AnkoViewModel对象
     ankoViewModelDsl(ModelTest("title", "ankoViewModelDsl"), { AnkoItemView() }) {
         onBindViewHolder { _ ->
+            firstAnimation()
+            updateAnimation()
             val model = getModel<ModelTest>()
             val ankoView = getAnkoView<AnkoItemView>()
             ankoView?.tvTitle?.text = model?.title
@@ -57,6 +59,10 @@ fun createBindingViewModelList(max: Int = 10) = (0..max).map {
         BR.model,
         ModelTest("title", "bindingViewModelDsl")
     ) {
+        onBindViewHolder {
+//            firstAnimation()
+//            updateAnimation()
+        }
         itemView.setOnClickListener {
             val viewModel = getViewModel<BindingViewModel<ModelTest>>()
             viewModel?.model?.title = "${java.util.Random().nextInt(100)}"

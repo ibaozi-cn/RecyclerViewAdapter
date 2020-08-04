@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
 import androidx.core.view.isVisible
-import com.julive.adapter.animators.intoWithAnimator
+import com.julive.adapter.animators.firstAnimation
 import com.julive.adapter.core.*
 import com.julive.adapter.expandable.*
 import com.julive.adapter_demo.R
@@ -23,6 +23,7 @@ class ExpandableActivity : AppCompatActivity() {
                         ModelTest("title", "subTitle")
                     ) {
                         onBindViewHolder {
+                            firstAnimation()
                             val model = getModel<ModelTest>()
                             getView<TextView>(R.id.tv_title).text = model?.title
                             getView<TextView>(R.id.tv_subTitle).text = model?.subTitle
@@ -40,7 +41,7 @@ class ExpandableActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         supportActionBar?.title = "ListAdapter"
         setContentView(R.layout.activity_expandable)
-        mListAdapter.intoWithAnimator(rv_list_expandable)
+        mListAdapter.into(rv_list_expandable)
         btn_left.setText("切换单开").setOnClickListener {
             if (!mListAdapter.isMultiExpand) {
                 btn_left.setText("切换单开")

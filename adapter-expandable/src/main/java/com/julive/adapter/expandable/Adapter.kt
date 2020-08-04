@@ -75,6 +75,7 @@ fun RecyclerView.Adapter<*>.toggleExpand(position: Int) {
 }
 
 fun RecyclerView.Adapter<*>.onDestroy() {
-    expandedItemsCache[hashCode()].clear()
-    expandConfigCache[hashCode()].clear()
+    val key = hashCode()
+    expandedItemsCache[key]?.clear()
+    expandConfigCache[key]?.clear()
 }

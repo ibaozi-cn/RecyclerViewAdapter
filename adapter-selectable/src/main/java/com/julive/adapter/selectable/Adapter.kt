@@ -96,6 +96,6 @@ fun RecyclerView.Adapter<*>.toggleSelection(
 
 fun RecyclerView.Adapter<*>.onDestroy(){
     val key = hashCode()
-    selectedItemsCache[key].clear()
-    selectConfigCache[key].clear()
+    selectedItemsCache[key]?.clear()
+    selectConfigCache[key]?.clear()
 }

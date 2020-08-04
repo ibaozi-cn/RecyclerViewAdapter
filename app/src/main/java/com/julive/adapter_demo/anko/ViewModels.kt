@@ -81,7 +81,6 @@ class AnkoViewModelTest : AnkoViewModel<ModelTest, AnkoItemView>() {
 
     override fun bindVH(viewHolder: DefaultViewHolder, payloads: List<Any>) {
         firstAnimation(viewHolder)
-        updateAnimation(viewHolder)
         val ankoView = viewHolder.getAnkoView<AnkoItemView>()
         Log.d("AnkoViewModelTest", "ankoView=${ankoView}")
         ankoView?.tvTitle?.text = model?.title

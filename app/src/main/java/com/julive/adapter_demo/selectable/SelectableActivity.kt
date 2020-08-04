@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
 import androidx.core.view.isVisible
-import com.julive.adapter.animators.intoWithAnimator
+import com.julive.adapter.animators.firstAnimation
 import com.julive.adapter.core.*
 import com.julive.adapter.selectable.*
 import com.julive.adapter_demo.R
@@ -37,6 +37,7 @@ class SelectableActivity : AppCompatActivity() {
                             Log.d("isMultiSelectable", "isMultiSelectable$isMultiSelect")
                         }
                         onBindViewHolder {
+                            firstAnimation()
                             val model = getModel<ModelTest>()
                             title.text = model?.title
                             subTitle.text = model?.subTitle
@@ -57,7 +58,7 @@ class SelectableActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         supportActionBar?.title = "ListAdapter"
         setContentView(R.layout.activity_selectable)
-        mListAdapter.intoWithAnimator(rv_list_selectable)
+        mListAdapter.into(rv_list_selectable)
         btn_left.setText("切换单选").setOnClickListener {
             if (!mListAdapter.isMultiSelect) {
                 btn_left.setText("切换单选")
