@@ -5,6 +5,7 @@ import android.util.SparseArray
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import androidx.annotation.AnimRes
+import androidx.recyclerview.widget.RecyclerView
 import com.julive.adapter.core.DefaultViewHolder
 import com.julive.adapter.core.ViewModelType
 import com.julive.adapter.core.getViewModel
@@ -18,7 +19,11 @@ private fun loadAnimation(context: Context, @AnimRes itemAnimationRes: Int, key:
     }
 }
 
-fun DefaultViewHolder.animationWithDelayOffset(
+fun RecyclerView.onDestroy(){
+    animationArray.clear()
+}
+
+fun RecyclerView.ViewHolder.animationWithDelayOffset(
     isEnableAnimation: Boolean,
     @AnimRes itemAnimationRes: Int,
     delayOffset: Int
@@ -46,7 +51,7 @@ fun DefaultViewHolder.animationWithDelayOffset(
     }
 }
 
-fun DefaultViewHolder.animation(
+fun RecyclerView.ViewHolder.animation(
     isEnableAnimation: Boolean,
     @AnimRes itemAnimationRes: Int
 ) {

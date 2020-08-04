@@ -28,14 +28,14 @@ typealias InitView = DefaultViewHolder.() -> Unit
 open class DefaultViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), Subscriber {
 
     private var bindView: BindView? = null
-    private val unBindViewList = mutableListOf<UnBindView>()
+    private var unBindView: UnBindView? = null
 
     fun onBindViewHolder(f: BindView) {
         bindView = f
     }
 
     fun onUnBindViewHolder(f: UnBindView) {
-        unBindViewList.add(f)
+        unBindView = f
     }
 
     override fun onBindViewHolder(
@@ -46,9 +46,7 @@ open class DefaultViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
     }
 
     override fun unBindViewHolder(position: Int) {
-        unBindViewList.forEach {
-            it.invoke(this)
-        }
+        unBindView?.invoke(this)
     }
 
 }
