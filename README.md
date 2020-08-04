@@ -29,13 +29,14 @@ https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d7c6aa9fb9ba4356865c9f1087ba81
 - ~~可选择Selectable 扩展~~
 - ~~可展开expandable 扩展~~
 - ~~UI扩展：空布局~~、滚动底部或头部回调、获取可见项等
+- ~~Animators扩展，使用更加简洁易扩展的LayoutAnimation实现~~
 - 等等.. 未来有好的想法继续扩展
 
 ## 库大小
 
 |  名字   | release aar size  | 其他 |
 |  ----  | ----  | ----  | 
-| Core | 28kb | 核心库目前包含ListAdapter的实现，最基础且最实用的扩展 |
+| Core | 26kb | 核心库目前包含ListAdapter的实现，最基础且最实用的扩展 |
 | Anko | 13kb | 适用本项目所有Adapter扩展 |
 | DataBinding | 20kb | 适配DataBinding布局，适用本项目所有Adapter扩展 |
 | Sorted | 10kb | SortedListAdapter扩展实现 |
@@ -45,6 +46,7 @@ https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d7c6aa9fb9ba4356865c9f1087ba81
 | Selectable | 8kb | 动态扩展单选、多选、最大可选项功能 |
 | Expandable | 8kb | 动态扩展可展开功能，支持仅单展开或多展开配置 |
 | UI | 17kb | 扩展空布局 |
+| Animators | 13kb | 扩展动画，包括布局初加载动画，添加Item动画，更新Item动画等 |
 
 ## 各个Adapter的优势在哪，如何选择？
 
@@ -80,7 +82,7 @@ allprojects {
     }
 }
 
-def adapterVersion = 'v1.2.0'
+def adapterVersion = 'v1.2.1'
 
 //核心库
 implementation "com.github.ibaozi-cn.RecyclerViewAdapter:adapter-core:$adapterVersion"
@@ -105,7 +107,8 @@ implementation "com.github.ibaozi-cn.RecyclerViewAdapter:adapter-ui:$adapterVers
 implementation "com.github.ibaozi-cn.RecyclerViewAdapter:adapter-selectable:$adapterVersion"
 // Expandable 扩展
 implementation "com.github.ibaozi-cn.RecyclerViewAdapter:adapter-expandable:$adapterVersion"
-
+// Animators 扩展
+implementation "com.github.ibaozi-cn.RecyclerViewAdapter:adapter-animators:$adapterVersion"
 ```
 
 ## 环境需要
