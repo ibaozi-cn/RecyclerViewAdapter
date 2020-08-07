@@ -3,6 +3,7 @@ package com.julive.adapter.core
 import android.util.SparseArray
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 import com.julive.adapter_core.R
 import java.lang.ref.WeakReference
@@ -10,8 +11,7 @@ import java.lang.ref.WeakReference
 abstract class ViewHolderCacheAdapter<VM : ViewModelType, VH : RecyclerView.ViewHolder> :
     RecyclerView.Adapter<VH>(), IAdapter<VM> {
 
-    private val defaultViewHolderFactoryCache =
-        DefaultViewHolderFactoryCache<ViewHolderFactory<RecyclerView.ViewHolder>>()
+    private val defaultViewHolderFactoryCache = DefaultViewHolderFactoryCache<ViewHolderFactory<RecyclerView.ViewHolder>>()
     private val sparseArrayLayoutInflater = SparseArray<WeakReference<LayoutInflater>>(1)
     private var recyclerView: RecyclerView? = null
 
@@ -89,4 +89,9 @@ abstract class ViewHolderCacheAdapter<VM : ViewModelType, VH : RecyclerView.View
             holder.onViewDetachedFromWindow(holder, holder.adapterPosition)
         }
     }
+
+    override fun onDestroy(source: LifecycleOwner) {
+        this.recyclerView?.adapter = null
+    }
+
 }

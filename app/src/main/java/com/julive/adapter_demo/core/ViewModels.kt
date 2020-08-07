@@ -18,7 +18,7 @@ class ArrayViewModelTest : LayoutViewModel<ModelTest>(R.layout.item_test_2) {
             }
             onViewAttachedToWindow {
                 firstAnimation()
-                updateAnimation()
+//                updateAnimation()
             }
         }
     }

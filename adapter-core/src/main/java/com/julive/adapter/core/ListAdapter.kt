@@ -1,8 +1,10 @@
 package com.julive.adapter.core
 
+import android.util.Log
+import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 
-class ListAdapter : ViewHolderCacheAdapter<ViewModelType, RecyclerView.ViewHolder>(){
+class ListAdapter : ViewHolderCacheAdapter<ViewModelType, RecyclerView.ViewHolder>() {
 
     var dataList = mutableListOf<ViewModelType>()
 
@@ -71,6 +73,15 @@ class ListAdapter : ViewHolderCacheAdapter<ViewModelType, RecyclerView.ViewHolde
     fun replayAll(list: List<ViewModelType>) {
         dataList.clear()
         dataList.addAll(list)
+    }
+
+    override fun onDestroy(source: LifecycleOwner) {
+        dataList.forEach {
+            Log.d("onDestroy","${it.model}")
+            it.onDestroy(source)
+        }
+        dataList.clear()
+        super.onDestroy(source)
     }
 
 }

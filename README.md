@@ -46,7 +46,7 @@ https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d7c6aa9fb9ba4356865c9f1087ba81
 | Selectable | 8kb | 动态扩展单选、多选、最大可选项功能 |
 | Expandable | 8kb | 动态扩展可展开功能，支持仅单展开或多展开配置 |
 | UI | 17kb | 扩展空布局 |
-| Animators | 13kb | 扩展动画，包括布局初加载动画，添加Item动画，更新Item动画等 |
+| Animators | 10kb | 扩展动画，包括布局初加载动画，添加Item动画，更新Item动画等 |
 
 ## 各个Adapter的优势在哪，如何选择？
 

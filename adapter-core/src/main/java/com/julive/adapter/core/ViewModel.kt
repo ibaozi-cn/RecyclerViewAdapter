@@ -1,6 +1,7 @@
 package com.julive.adapter.core
 
 import androidx.annotation.LayoutRes
+import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 
 interface ViewModel<M, VH : RecyclerView.ViewHolder> :
@@ -17,6 +18,6 @@ interface ViewModel<M, VH : RecyclerView.ViewHolder> :
         payloads: List<Any>
     ) {
     }
-
     fun unBindVH(viewHolder: VH) {}
+    fun onDestroy(source: LifecycleOwner){}
 }

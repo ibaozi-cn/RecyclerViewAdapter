@@ -1,9 +1,7 @@
 package com.julive.adapter.animators
 
 import androidx.recyclerview.widget.RecyclerView
-import com.julive.adapter.core.findFirstCompletelyVisibleItemPosition
-import com.julive.adapter.core.findLastCompletelyVisibleItemPosition
-import com.julive.adapter.core.getSpanCount
+import com.julive.adapter.core.*
 
 fun RecyclerView.calculateAnimationDelay(
     position: Int,
@@ -31,7 +29,7 @@ fun RecyclerView.calculateAnimationDelay(
         val n = position % numColumns
         delay += delayOffset * n
     } else {
-        delay = position * delayOffset
+        delay = position * delayOffset / 2
     }
 
     return delay

@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.TextView
+import androidx.lifecycle.LifecycleOwner
 import com.julive.adapter.animators.firstAnimation
 import com.julive.adapter.animators.updateAnimation
 import com.julive.adapter.anko.AnkoViewModel
@@ -65,6 +66,7 @@ class AnkoItemView : AnkoComponent<ViewGroup> {
 }
 
 class AnkoViewModelTest : AnkoViewModel<ModelTest, AnkoItemView>() {
+
     init {
         onCreateView {
             AnkoItemView()
@@ -84,8 +86,12 @@ class AnkoViewModelTest : AnkoViewModel<ModelTest, AnkoItemView>() {
 
     override fun bindVH(viewHolder: DefaultViewHolder, payloads: List<Any>) {
         val ankoView = viewHolder.getAnkoView<AnkoItemView>()
-        Log.d("AnkoViewModelTest", "ankoView=${ankoView}")
         ankoView?.tvTitle?.text = model?.title
         ankoView?.tvSubTitle?.text = model?.subTitle
     }
+
+    override fun onDestroy(source: LifecycleOwner) {
+        Log.d("onDestroy","LifecycleOwner onDestroy============================${model}")
+    }
+
 }
