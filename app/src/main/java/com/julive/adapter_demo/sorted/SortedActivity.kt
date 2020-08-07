@@ -2,6 +2,7 @@ package com.julive.adapter_demo.sorted
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.julive.adapter.core.into
 import com.julive.adapter.sorted.SortedListAdapter

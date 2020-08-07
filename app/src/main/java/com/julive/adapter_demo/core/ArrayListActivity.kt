@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.julive.adapter.core.ListAdapter
 import com.julive.adapter.core.into
 import com.julive.adapter_demo.R
+import com.julive.adapter_demo.createViewModelList
 import com.julive.adapter_demo.sorted.ModelTest
 import kotlinx.android.synthetic.main.activity_array_list.*
 import kotlinx.android.synthetic.main.include_button_bottom.*

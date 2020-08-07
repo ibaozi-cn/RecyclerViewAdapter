@@ -6,14 +6,17 @@ import androidx.recyclerview.widget.RecyclerView
 interface ViewModel<M, VH : RecyclerView.ViewHolder> :
     ViewHolderFactory<VH> {
     var model: M?
-    val itemViewType: Int
+    var itemViewType: Int
         get() = layoutRes
+        set(value) {}
     @get:LayoutRes
     val layoutRes: Int
     var isFirstInit: Boolean
     fun bindVH(
         viewHolder: VH,
         payloads: List<Any>
-    ){}
-    fun unBindVH(viewHolder: VH){}
+    ) {
+    }
+
+    fun unBindVH(viewHolder: VH) {}
 }

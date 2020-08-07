@@ -3,7 +3,6 @@ package com.julive.adapter.anko
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
 import com.julive.adapter.core.DefaultViewModel
 import com.julive.adapter_anko.R
 import org.jetbrains.anko.AnkoComponent
@@ -37,8 +36,7 @@ open class AnkoViewModel<M, AnkoView : AnkoComponent<ViewGroup>> : DefaultViewMo
     override val layoutRes: Int
         get() = 0
 
-    override val itemViewType: Int
-        get() = view.hashCode()
+    override var itemViewType: Int = view.hashCode()
 
 }
 

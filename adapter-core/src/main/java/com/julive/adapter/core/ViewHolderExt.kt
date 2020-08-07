@@ -26,20 +26,29 @@ fun <T : View> RecyclerView.ViewHolder.getView(@IdRes viewId: Int): T {
 }
 
 typealias BindView = DefaultViewHolder.(payloads: List<Any>) -> Unit
-typealias UnBindView = DefaultViewHolder.() -> Unit
-typealias InitView = DefaultViewHolder.() -> Unit
+typealias ViewHolderType = DefaultViewHolder.() -> Unit
 
 open class DefaultViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), Subscriber {
 
     private var bindView: BindView? = null
-    private var unBindView: UnBindView? = null
+    private var unBindView: ViewHolderType? = null
+    private var onViewAttached: ViewHolderType? = null
+    private var onViewDetached: ViewHolderType? = null
 
     fun onBindViewHolder(f: BindView) {
         bindView = f
     }
 
-    fun onUnBindViewHolder(f: UnBindView) {
+    fun onUnBindViewHolder(f: ViewHolderType) {
         unBindView = f
+    }
+
+    fun onViewAttachedToWindow(f: ViewHolderType) {
+        onViewAttached = f
+    }
+
+    fun onViewDetachedFromWindow(f: ViewHolderType) {
+        onViewAttached = f
     }
 
     override fun onBindViewHolder(
@@ -51,6 +60,14 @@ open class DefaultViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
     override fun unBindViewHolder(position: Int) {
         unBindView?.invoke(this)
+    }
+
+    override fun onViewAttachedToWindow(holder: RecyclerView.ViewHolder, position: Int) {
+        onViewAttached?.invoke(holder as DefaultViewHolder)
+    }
+
+    override fun onViewDetachedFromWindow(holder: RecyclerView.ViewHolder, position: Int) {
+        onViewDetached?.invoke(holder as DefaultViewHolder)
     }
 
 }

@@ -6,11 +6,11 @@ import android.view.ViewGroup
 
 typealias ViewModelType = ViewModel<*, *>
 
-abstract class DefaultViewModel<M> : ViewModel<M, DefaultViewHolder> {
+abstract class DefaultViewModel<M>(): ViewModel<M, DefaultViewHolder> {
     override var model: M? = null
-    private var initView: InitView? = null
+    private var initView: ViewHolderType? = null
     override var isFirstInit: Boolean = true
-    open fun onCreateViewHolder(f: InitView) {
+    open fun onCreateViewHolder(f: ViewHolderType) {
         initView = f
     }
     abstract

@@ -80,13 +80,13 @@ abstract class ViewHolderCacheAdapter<VM : ViewModelType, VH : RecyclerView.View
 
     override fun onViewAttachedToWindow(holder: VH) {
         if (holder is Subscriber) {
-            holder.onViewAttachedToWindow(holder.adapterPosition)
+            holder.onViewAttachedToWindow(holder, holder.adapterPosition)
         }
     }
 
     override fun onViewDetachedFromWindow(holder: VH) {
         if (holder is Subscriber) {
-            holder.onViewDetachedFromWindow(holder.adapterPosition)
+            holder.onViewDetachedFromWindow(holder, holder.adapterPosition)
         }
     }
 }

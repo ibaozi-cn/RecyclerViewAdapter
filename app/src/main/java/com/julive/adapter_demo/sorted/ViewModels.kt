@@ -46,12 +46,13 @@ class SortedItemViewModelTest : LayoutViewModel<SortedModelTest>(R.layout.item_t
                 vm.model?.subTitle = "刷新自己${Random.nextInt(100)}"
                 getAdapter<SortedListAdapter>()?.set(adapterPosition, vm)
             }
+            onViewAttachedToWindow {
+                firstAnimation(R.anim.item_animation_from_bottom)
+            }
         }
     }
-
     override fun bindVH(viewHolder: DefaultViewHolder, payloads: List<Any>) {
-        firstAnimation(viewHolder, R.anim.item_animation_from_bottom)
-        updateAnimation(viewHolder)
+//        updateAnimation(viewHolder)
         viewHolder.getView<TextView>(R.id.tv_title).text = model?.title
         viewHolder.getView<TextView>(R.id.tv_subTitle).text = model?.subTitle
     }

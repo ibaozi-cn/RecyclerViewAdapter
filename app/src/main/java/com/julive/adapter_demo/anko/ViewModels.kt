@@ -76,11 +76,13 @@ class AnkoViewModelTest : AnkoViewModel<ModelTest, AnkoItemView>() {
                 viewModel.model?.title = "${Random.nextInt(1000, 10000)}"
                 getAdapter<ListAdapter>()?.set(adapterPosition, viewModel)
             }
+            onViewAttachedToWindow {
+                firstAnimation()
+            }
         }
     }
 
     override fun bindVH(viewHolder: DefaultViewHolder, payloads: List<Any>) {
-        firstAnimation(viewHolder)
         val ankoView = viewHolder.getAnkoView<AnkoItemView>()
         Log.d("AnkoViewModelTest", "ankoView=${ankoView}")
         ankoView?.tvTitle?.text = model?.title

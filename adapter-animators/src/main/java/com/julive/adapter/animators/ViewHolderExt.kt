@@ -2,25 +2,21 @@ package com.julive.adapter.animators
 
 import android.content.Context
 import android.util.Log
-import android.util.SparseArray
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import androidx.annotation.AnimRes
 import androidx.recyclerview.widget.RecyclerView
 import com.julive.adapter.core.*
+import java.util.*
 
-private val animationArray by lazy {
-    SparseArray<Animation>()
+internal val animationArray by lazy {
+    WeakHashMap<Int, Animation>()
 }
 
 private fun loadAnimation(context: Context, @AnimRes itemAnimationRes: Int, key: Int): Animation {
     return animationArray[key] ?: AnimationUtils.loadAnimation(context, itemAnimationRes).apply {
-        animationArray.append(key, this)
+        animationArray[key] = this
     }
-}
-
-fun RecyclerView.onDestroy() {
-    animationArray.clear()
 }
 
 fun RecyclerView.ViewHolder.animationWithDelayOffset(
@@ -32,58 +28,16 @@ fun RecyclerView.ViewHolder.animationWithDelayOffset(
     if (isEnableAnimation) {
         itemView.clearAnimation()
         val key = itemView.hashCode()
-        val delay = calculateAnimationDelay(adapterPosition, delayOffset, recyclerView)
+        val delay = recyclerView?.calculateAnimationDelay(adapterPosition, delayOffset)
         itemView.animation =
             loadAnimation(itemView.context, itemAnimationRes, key).apply {
-                startOffset = delay.toLong()
-                setAnimationListener(object :Animation.AnimationListener{
-                    override fun onAnimationRepeat(p0: Animation?) {
-                    }
-                    override fun onAnimationEnd(p0: Animation?) {
-                        itemView.clearAnimation()
-                    }
-                    override fun onAnimationStart(p0: Animation?) {
-                        Log.d("onAnimationStart","adapterPosition:$adapterPosition")
-                    }
-                })
-                if (this.hasEnded()) {
-                    this.start()
+                startOffset = delay?.toLong() ?: 0L
+                if (hasEnded()) {
+                    start()
                 }
             }
+        recyclerView?.setTag(R.id.last_delay_animation_position, adapterPosition)
     }
-}
-
-fun calculateAnimationDelay(
-    position: Int,
-    delayOffset: Int,
-    recyclerView: RecyclerView?
-): Int {
-
-    var delay = delayOffset
-
-    var firstVisiblePosition = recyclerView?.findFirstCompletelyVisibleItemPosition() ?: RecyclerView.NO_POSITION
-    var lastVisiblePosition = recyclerView?.findLastCompletelyVisibleItemPosition() ?: RecyclerView.NO_POSITION
-
-    if (firstVisiblePosition < 0 && position >= 0) {
-        firstVisiblePosition = position - 1
-    }
-
-    if (position - 1 > lastVisiblePosition) {
-        lastVisiblePosition = position - 1
-    }
-
-    val visibleItems = lastVisiblePosition - firstVisiblePosition
-    val numberOfAnimatedItems = position - 1
-
-    if (visibleItems < numberOfAnimatedItems) {
-        val numColumns = recyclerView?.getSpanCount()!!
-        val n = position % numColumns
-        delay += delayOffset * n
-    } else {
-        delay = position * delayOffset
-    }
-
-    return delay
 }
 
 fun RecyclerView.ViewHolder.animation(
@@ -104,12 +58,23 @@ fun RecyclerView.ViewHolder.animation(
 fun DefaultViewHolder.firstAnimation(
     @AnimRes itemAnimationRes: Int = R.anim.item_animation_from_right,
     delayOffset: Int = 100
-) = animationWithDelayOffset(
-    getViewModel<ViewModelType>()?.isFirstInit ?: false,
-    itemAnimationRes,
-    delayOffset,
-    getRecyclerView()
-)
+) {
+    var isEnableAnimation = true
+    val lastDelayAnimationPosition = getRecyclerView()?.getTag(R.id.last_delay_animation_position)
+    lastDelayAnimationPosition?.let {
+        it as Int
+        if (adapterPosition <= it) {
+            isEnableAnimation = false
+        }
+    }
+    animationWithDelayOffset(
+        isEnableAnimation,
+        itemAnimationRes,
+        delayOffset,
+        getRecyclerView()
+    )
+}
+
 
 fun DefaultViewHolder.updateAnimation(
     @AnimRes itemAnimationRes: Int = R.anim.item_animation_scale
