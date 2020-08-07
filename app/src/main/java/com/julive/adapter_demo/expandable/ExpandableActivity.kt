@@ -16,7 +16,7 @@ class ExpandableActivity : AppCompatActivity() {
 
     private val mListAdapter =
         listAdapter {
-            (0..10).forEach { _ ->
+            (0..100).forEach { _ ->
                 add(
                     layoutViewModelDsl(
                         R.layout.item_test_2,

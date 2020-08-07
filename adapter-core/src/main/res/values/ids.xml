@@ -2,4 +2,5 @@
 <resources>
     <item type="id" name="adapter_item" />
     <item type="id" name="adapter" />
+    <item type="id" name="adapter_recyclerView" />
 </resources>

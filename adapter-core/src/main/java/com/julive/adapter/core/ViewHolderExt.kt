@@ -9,6 +9,10 @@ fun <Adapter : IAdapter<*>> RecyclerView.ViewHolder.getAdapter(): Adapter? {
     return this.itemView.getTag(R.id.adapter) as? Adapter
 }
 
+fun RecyclerView.ViewHolder.getRecyclerView(): RecyclerView? {
+    return this.itemView.getTag(R.id.adapter_recyclerView) as? RecyclerView
+}
+
 fun <VM : ViewModelType> RecyclerView.ViewHolder.getViewModel(): VM? {
     return this.itemView.getTag(R.id.adapter_item) as? VM
 }

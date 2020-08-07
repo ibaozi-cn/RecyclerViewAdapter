@@ -22,10 +22,10 @@ class SortedActivity : AppCompatActivity() {
         setContentView(R.layout.activity_array_list)
         mSortedListAdapter.into(
             rv_list,
-            GridLayoutManager(this, 2)
+            GridLayoutManager(this, 3)
         )
         rv_list.setItemViewCacheSize(0)
-        (0..10).map {
+        (0..1000).map {
             mSortedListAdapter.add(SortedItemViewModelTest().apply {
                 model = SortedModelTest(it, "标题$it", "副标题$it")
             })
