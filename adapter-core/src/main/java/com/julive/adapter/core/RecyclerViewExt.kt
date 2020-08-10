@@ -12,7 +12,7 @@ fun RecyclerView.Adapter<*>.into(
 ) = apply {
     recyclerView.layoutManager = layoutManager ?: LinearLayoutManager(recyclerView.context)
     recyclerView.adapter = this
-    if (this is IAdapter<*>) {
+    if (this is ILifecycleAdapter) {
         val context = recyclerView.context
         if (context is LifecycleOwner) {
             context.lifecycle.addObserver(this)

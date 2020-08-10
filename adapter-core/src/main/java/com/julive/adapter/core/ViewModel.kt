@@ -5,7 +5,7 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 
 interface ViewModel<M, VH : RecyclerView.ViewHolder> :
-    ViewHolderFactory<VH> {
+    ViewHolderFactory<VH>,ILifecycleAdapter {
     var model: M?
     var itemViewType: Int
         get() = layoutRes
@@ -19,5 +19,4 @@ interface ViewModel<M, VH : RecyclerView.ViewHolder> :
     ) {
     }
     fun unBindVH(viewHolder: VH) {}
-    fun onDestroy(source: LifecycleOwner){}
 }

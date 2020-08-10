@@ -9,7 +9,7 @@ import com.julive.adapter_core.R
 import java.lang.ref.WeakReference
 
 abstract class ViewHolderCacheAdapter<VM : ViewModelType, VH : RecyclerView.ViewHolder> :
-    RecyclerView.Adapter<VH>(), IAdapter<VM> {
+    RecyclerView.Adapter<VH>(), IAdapter<VM>, ILifecycleAdapter {
 
     private val defaultViewHolderFactoryCache = DefaultViewHolderFactoryCache<ViewHolderFactory<RecyclerView.ViewHolder>>()
     private val sparseArrayLayoutInflater = SparseArray<WeakReference<LayoutInflater>>(1)
