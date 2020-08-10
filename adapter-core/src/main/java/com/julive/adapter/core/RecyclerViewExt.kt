@@ -12,7 +12,7 @@ fun RecyclerView.Adapter<*>.into(
 ) = apply {
     recyclerView.layoutManager = layoutManager ?: LinearLayoutManager(recyclerView.context)
     recyclerView.adapter = this
-    if (this is ILifecycleAdapter) {
+    if (this is LifecycleAdapter) {
         val context = recyclerView.context
         if (context is LifecycleOwner) {
             context.lifecycle.addObserver(this)
@@ -41,20 +41,6 @@ fun RecyclerView.findFirstVisibleItemPosition(): Int {
     }
 }
 
-fun RecyclerView.getSpanCount(): Int {
-    return when (val manager = layoutManager) {
-        is GridLayoutManager -> {
-            manager.spanCount
-        }
-        is StaggeredGridLayoutManager -> {
-            manager.spanCount
-        }
-        else -> {
-           return 1
-        }
-    }
-}
-
 fun RecyclerView.findLastVisibleItemPosition(): Int {
     when (val manager = layoutManager) {
         is StaggeredGridLayoutManager -> {
@@ -72,6 +58,20 @@ fun RecyclerView.findLastVisibleItemPosition(): Int {
         }
         else -> {
             throw IllegalArgumentException("Not supported this :${manager?.javaClass?.name}")
+        }
+    }
+}
+
+fun RecyclerView.getSpanCount(): Int {
+    return when (val manager = layoutManager) {
+        is GridLayoutManager -> {
+            manager.spanCount
+        }
+        is StaggeredGridLayoutManager -> {
+            manager.spanCount
+        }
+        else -> {
+           return 1
         }
     }
 }

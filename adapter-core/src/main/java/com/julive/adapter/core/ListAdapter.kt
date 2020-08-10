@@ -1,6 +1,6 @@
 package com.julive.adapter.core
 
-import android.util.Log
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 
@@ -75,13 +75,14 @@ class ListAdapter : ViewHolderCacheAdapter<ViewModelType, RecyclerView.ViewHolde
         dataList.addAll(list)
     }
 
-    override fun onDestroy(source: LifecycleOwner) {
+    override fun onStateChanged(source: LifecycleOwner, event: Lifecycle.Event) {
         dataList.forEach {
-            Log.d("onDestroy","${it.model}")
-            it.onDestroy(source)
+            if (it is LifecycleViewModel)
+                it.onStateChanged(source, event)
         }
-        dataList.clear()
-        super.onDestroy(source)
+        if (event == Lifecycle.Event.ON_DESTROY)
+            dataList.clear()
+        super.onStateChanged(source, event)
     }
 
 }

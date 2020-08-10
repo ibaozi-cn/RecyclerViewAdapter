@@ -5,12 +5,23 @@ import android.util.Log
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import androidx.annotation.AnimRes
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 import com.julive.adapter.core.*
 import java.util.*
 
-internal val animationArray by lazy {
+private val animationArray by lazy {
     WeakHashMap<Int, Animation>()
+}
+
+private val lifecycleObserver by lazy {
+    { _: LifecycleOwner, event: Lifecycle.Event ->
+        if (event == Lifecycle.Event.ON_DESTROY) {
+            animationArray.clear()
+        }
+        true
+    }
 }
 
 private fun loadAnimation(context: Context, @AnimRes itemAnimationRes: Int, key: Int): Animation {
@@ -37,6 +48,9 @@ fun RecyclerView.ViewHolder.animationWithDelayOffset(
                 }
             }
         recyclerView?.setTag(R.id.last_delay_animation_position, adapterPosition)
+        with(getAdapter<LifecycleAdapter>()) {
+            this?.registerLifeObserver(this.hashCode(), lifecycleObserver)
+        }
     }
 }
 
@@ -51,6 +65,9 @@ fun RecyclerView.ViewHolder.animation(
             if (this.hasEnded()) {
                 this.start()
             }
+        }
+        with(getAdapter<LifecycleAdapter>()) {
+            this?.registerLifeObserver(this.hashCode(), lifecycleObserver)
         }
     }
 }
@@ -74,7 +91,6 @@ fun DefaultViewHolder.firstAnimation(
         getRecyclerView()
     )
 }
-
 
 fun DefaultViewHolder.updateAnimation(
     @AnimRes itemAnimationRes: Int = R.anim.item_animation_scale

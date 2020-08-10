@@ -6,7 +6,7 @@ import android.view.ViewGroup
 
 typealias ViewModelType = ViewModel<*, *>
 
-abstract class DefaultViewModel<M>: ViewModel<M, DefaultViewHolder> {
+abstract class DefaultViewModel<M> : ViewModel<M, DefaultViewHolder>, LifecycleViewModel {
     override var model: M? = null
     private var initView: ViewHolderType? = null
     override var isFirstInit: Boolean = true
@@ -28,6 +28,7 @@ abstract class DefaultViewModel<M>: ViewModel<M, DefaultViewHolder> {
         }
     }
 }
+
 open class LayoutViewModel<M>(override val layoutRes: Int) : DefaultViewModel<M>() {
     override fun getHolderItemView(parent: ViewGroup, layoutInflater: LayoutInflater): View {
         return layoutInflater.inflate(layoutRes, parent, false)

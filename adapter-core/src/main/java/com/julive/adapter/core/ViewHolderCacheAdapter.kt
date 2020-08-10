@@ -3,13 +3,14 @@ package com.julive.adapter.core
 import android.util.SparseArray
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 import com.julive.adapter_core.R
 import java.lang.ref.WeakReference
 
 abstract class ViewHolderCacheAdapter<VM : ViewModelType, VH : RecyclerView.ViewHolder> :
-    RecyclerView.Adapter<VH>(), IAdapter<VM>, ILifecycleAdapter {
+    RecyclerView.Adapter<VH>(), IAdapter<VM>, LifecycleAdapter {
 
     private val defaultViewHolderFactoryCache = DefaultViewHolderFactoryCache<ViewHolderFactory<RecyclerView.ViewHolder>>()
     private val sparseArrayLayoutInflater = SparseArray<WeakReference<LayoutInflater>>(1)
@@ -90,8 +91,10 @@ abstract class ViewHolderCacheAdapter<VM : ViewModelType, VH : RecyclerView.View
         }
     }
 
-    override fun onDestroy(source: LifecycleOwner) {
-        this.recyclerView?.adapter = null
+    override fun onStateChanged(source: LifecycleOwner, event: Lifecycle.Event) {
+        if(event == Lifecycle.Event.ON_DESTROY){
+            this.recyclerView?.adapter = null
+        }
+        super.onStateChanged(source, event)
     }
-
 }

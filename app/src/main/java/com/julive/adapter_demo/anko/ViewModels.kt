@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.TextView
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import com.julive.adapter.animators.firstAnimation
 import com.julive.adapter.animators.updateAnimation
@@ -90,8 +91,8 @@ class AnkoViewModelTest : AnkoViewModel<ModelTest, AnkoItemView>() {
         ankoView?.tvSubTitle?.text = model?.subTitle
     }
 
-    override fun onDestroy(source: LifecycleOwner) {
-        Log.d("onDestroy","LifecycleOwner onDestroy============================${model}")
+    override fun onStateChanged(source: LifecycleOwner, event: Lifecycle.Event) {
+        Log.d("onStateChanged","LifecycleOwner onStateChanged============================${event}")
     }
 
 }

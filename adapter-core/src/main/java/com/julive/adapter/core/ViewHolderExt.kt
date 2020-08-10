@@ -5,7 +5,7 @@ import androidx.annotation.IdRes
 import androidx.recyclerview.widget.RecyclerView
 import com.julive.adapter_core.R
 
-inline fun <Adapter : IAdapter<*>> RecyclerView.ViewHolder.getAdapter(): Adapter? {
+inline fun <Adapter> RecyclerView.ViewHolder.getAdapter(): Adapter? {
     return this.itemView.getTag(R.id.adapter) as? Adapter
 }
 
@@ -35,37 +35,16 @@ open class DefaultViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
     private var onViewAttached: ViewHolderType? = null
     private var onViewDetached: ViewHolderType? = null
 
-    fun onBindViewHolder(f: BindView) {
-        bindView = f
-    }
+    fun onBindViewHolder(f: BindView) { bindView = f }
+    fun onUnBindViewHolder(f: ViewHolderType) { unBindView = f }
+    fun onViewAttachedToWindow(f: ViewHolderType) { onViewAttached = f }
+    fun onViewDetachedFromWindow(f: ViewHolderType) { onViewAttached = f }
 
-    fun onUnBindViewHolder(f: ViewHolderType) {
-        unBindView = f
-    }
-
-    fun onViewAttachedToWindow(f: ViewHolderType) {
-        onViewAttached = f
-    }
-
-    fun onViewDetachedFromWindow(f: ViewHolderType) {
-        onViewAttached = f
-    }
-
-    override fun onBindViewHolder(
-        position: Int,
-        payloads: List<Any>
-    ) {
-        bindView?.invoke(this, payloads)
-    }
-
-    override fun unBindViewHolder(position: Int) {
-        unBindView?.invoke(this)
-    }
-
+    override fun onBindViewHolder(position: Int, payloads: List<Any>) { bindView?.invoke(this, payloads) }
+    override fun unBindViewHolder(position: Int) { unBindView?.invoke(this) }
     override fun onViewAttachedToWindow(holder: RecyclerView.ViewHolder, position: Int) {
         onViewAttached?.invoke(holder as DefaultViewHolder)
     }
-
     override fun onViewDetachedFromWindow(holder: RecyclerView.ViewHolder, position: Int) {
         onViewDetached?.invoke(holder as DefaultViewHolder)
     }
