@@ -4,8 +4,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
-typealias ViewModelType = ViewModel<*, *>
-
 abstract class DefaultViewModel<M> : ViewModel<M, DefaultViewHolder>, LifecycleViewModel {
     override var model: M? = null
     private var initView: ViewHolderType? = null

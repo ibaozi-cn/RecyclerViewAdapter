@@ -2,9 +2,8 @@ package com.julive.adapter.core
 
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
-import androidx.recyclerview.widget.RecyclerView
 
-class ListAdapter : ViewHolderCacheAdapter<ViewModelType, RecyclerView.ViewHolder>() {
+class ListAdapter : BaseAdapter<ViewModelType>() {
 
     var dataList = mutableListOf<ViewModelType>()
 

@@ -9,8 +9,8 @@ import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
+import androidx.recyclerview.widget.RecyclerView
 import com.julive.adapter.animators.firstAnimation
-import com.julive.adapter.animators.updateAnimation
 import com.julive.adapter.anko.AnkoViewModel
 import com.julive.adapter.anko.getAnkoView
 import com.julive.adapter.core.DefaultViewHolder

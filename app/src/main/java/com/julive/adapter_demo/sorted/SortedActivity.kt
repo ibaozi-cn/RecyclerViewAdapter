@@ -39,15 +39,15 @@ class SortedActivity : AppCompatActivity() {
             })
         }
         btn_middle.setText("删除").setOnClickListener {
-            if (mSortedListAdapter.size > 0) {
-                val randomInt = Random.nextInt(0, mSortedListAdapter.size)
+            if (mSortedListAdapter.itemCount > 0) {
+                val randomInt = Random.nextInt(0, mSortedListAdapter.itemCount)
                 mSortedListAdapter.removeAt(randomInt)
             }
         }
         btn_right.setText("替换").setOnClickListener {
             // 根据uniqueId替换 如果sortId不一样就会触发排序
-            if (mSortedListAdapter.size > 0) {
-                val randomInt = Random.nextInt(0, mSortedListAdapter.size)
+            if (mSortedListAdapter.itemCount > 0) {
+                val randomInt = Random.nextInt(0, mSortedListAdapter.itemCount)
                 mSortedListAdapter.set(randomInt, mSortedListAdapter.getItem(randomInt).also {
                     it as SortedItemViewModelTest
                     it.model?.subTitle = "替换副标题"

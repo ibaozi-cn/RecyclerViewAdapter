@@ -59,14 +59,13 @@ fun createBindingViewModelList(max: Int = 10) = (0..max).map {
         BR.model,
         ModelTest("title", "bindingViewModelDsl")
     ) {
-        onBindViewHolder {
-//            firstAnimation()
-//            updateAnimation()
-        }
         itemView.setOnClickListener {
             val viewModel = getViewModel<BindingViewModel<ModelTest>>()
             viewModel?.model?.title = "${java.util.Random().nextInt(100)}"
             getAdapter<ListAdapter>()?.set(adapterPosition, viewModel)
+        }
+        onViewAttachedToWindow {
+            firstAnimation()
         }
     }
 }

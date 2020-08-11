@@ -1,8 +1,8 @@
 package com.julive.adapter_demo.sorted
 
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import com.julive.adapter.animators.firstAnimation
-import com.julive.adapter.animators.updateAnimation
 import com.julive.adapter.core.*
 import com.julive.adapter.sorted.SortedListAdapter
 import com.julive.adapter.sorted.SortedModel

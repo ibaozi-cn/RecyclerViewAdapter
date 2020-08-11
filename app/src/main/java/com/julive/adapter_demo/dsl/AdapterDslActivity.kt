@@ -13,9 +13,9 @@ class AdapterDslActivity : AppCompatActivity() {
         supportActionBar?.title = "ListAdapter DSL"
         setContentView(R.layout.activity_adapter_dsl)
         listAdapter {
-            addAll(createViewModelList(100))
-            addAll(createAnkoViewModelList(100))
-            addAll(createBindingViewModelList(100))
+            addAll(createViewModelList(10))
+            addAll(createAnkoViewModelList(10))
+            addAll(createBindingViewModelList(10))
             // 绑定 RecyclerView
             into(rv_list_dsl)
             rv_list_dsl.layoutAnimation
