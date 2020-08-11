@@ -11,10 +11,7 @@ https://user-gold-cdn.xitu.io/2020/7/4/173187052f0c9ddf?w=1432&h=1098&f=png&s=13
 
 实现图
 
-![实现图](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d7c6aa9fb9ba4356865c9f1087ba8116~tplv-k3u1fbpfcp-zoom-1.image?imageslim)
-看不见图？
-点该链接
-https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d7c6aa9fb9ba4356865c9f1087ba8116~tplv-k3u1fbpfcp-zoom-1.image
+![实现图](http://file.ibaozi.cn/ftp/JuliveAdapter.jpg)
 
 ## 规划
 
