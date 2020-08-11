@@ -27,8 +27,7 @@ class ExpandableActivity : AppCompatActivity() {
                             val model = getModel<ModelTest>()
                             getView<TextView>(R.id.tv_title).text = model?.title
                             getView<TextView>(R.id.tv_subTitle).text = model?.subTitle
-                            getView<TextView>(R.id.tv_subTitle).isVisible =
-                                isExpanded(adapterPosition)
+                            getView<TextView>(R.id.tv_subTitle).isVisible = isExpanded(adapterPosition)
                         }
                         itemView.setOnClickListener {
                             toggleExpand(adapterPosition)

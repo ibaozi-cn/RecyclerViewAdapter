@@ -1,7 +1,7 @@
 package com.julive.adapter.animators
 
 import android.content.Context
-import android.util.Log
+import android.util.SparseArray
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import androidx.annotation.AnimRes
@@ -11,8 +11,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.julive.adapter.core.*
 import java.util.*
 
-private val animationArray by lazy {
-    WeakHashMap<Int, Animation>()
+private val animationArray by lazy { SparseArray<Animation>() }
+
+private val animationArrayKey by lazy {
+    animationArray.hashCode()
 }
 
 private val lifecycleObserver by lazy {
@@ -26,7 +28,7 @@ private val lifecycleObserver by lazy {
 
 private fun loadAnimation(context: Context, @AnimRes itemAnimationRes: Int, key: Int): Animation {
     return animationArray[key] ?: AnimationUtils.loadAnimation(context, itemAnimationRes).apply {
-        animationArray[key] = this
+        animationArray.put(key, this)
     }
 }
 
@@ -49,7 +51,7 @@ fun RecyclerView.ViewHolder.animationWithDelayOffset(
             }
         recyclerView?.setTag(R.id.last_delay_animation_position, adapterPosition)
         with(getAdapter<LifecycleAdapter>()) {
-            this?.registerLifeObserver(this.hashCode(), lifecycleObserver)
+            this?.registerLifeObserver(animationArrayKey, lifecycleObserver)
         }
     }
 }
@@ -67,7 +69,7 @@ fun RecyclerView.ViewHolder.animation(
             }
         }
         with(getAdapter<LifecycleAdapter>()) {
-            this?.registerLifeObserver(this.hashCode(), lifecycleObserver)
+            this?.registerLifeObserver(animationArrayKey, lifecycleObserver)
         }
     }
 }

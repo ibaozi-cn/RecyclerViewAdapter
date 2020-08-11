@@ -14,7 +14,8 @@ interface IAdapter<VM> {
 interface LifecycleAdapter : GenericLifecycleObserver {
     val arrayLifeObservers: SparseArray<(source: LifecycleOwner, event: Lifecycle.Event) -> Boolean>
     fun registerLifeObserver(key: Int, observer: (LifecycleOwner, Lifecycle.Event) -> Boolean) {
-        arrayLifeObservers.put(key, observer)
+        if (arrayLifeObservers.indexOfKey(key) < 0)
+            arrayLifeObservers.put(key, observer)
     }
     override fun onStateChanged(source: LifecycleOwner, event: Lifecycle.Event) {
         (0 until arrayLifeObservers.size()).forEach {

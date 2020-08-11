@@ -1,9 +1,10 @@
+@file:Suppress("UNUSED_PARAMETER")
+
 package com.julive.adapter.expandable
 
 import android.util.SparseArray
 import android.util.SparseBooleanArray
 import androidx.recyclerview.widget.RecyclerView
-import java.lang.ref.WeakReference
 
 private val expandedItemsCache = SparseArray<SparseBooleanArray>()
 private val expandConfigCache = SparseArray<SparseArray<Any>>()
@@ -26,13 +27,11 @@ private fun getExpandConfig(key: Int): SparseArray<Any> {
     }
 }
 
-var RecyclerView.Adapter<*>.isMultiExpand: Boolean
+val RecyclerView.Adapter<*>.isMultiExpand: Boolean
     get() = getExpandConfig(hashCode())[0] as Boolean
-    private set(value) {}
 
-var RecyclerView.Adapter<*>.expandedCount: Int
+val RecyclerView.Adapter<*>.expandedCount: Int
     get() = getExpandedItems(hashCode()).size()
-    private set(value) {}
 
 fun RecyclerView.Adapter<*>.setMultiExpandable(enable: Boolean) {
     getExpandConfig(hashCode()).setValueAt(0, enable)
