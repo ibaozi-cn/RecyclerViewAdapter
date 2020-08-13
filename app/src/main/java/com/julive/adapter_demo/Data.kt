@@ -24,8 +24,10 @@ fun createViewModelList(max: Int = 10, subTitle: String = "subTitle") = (0..max)
             //用Adapter更新数据
             getAdapter<ListAdapter>()?.set(adapterPosition, vm)
         }
-        onBindViewHolder {
+        onViewAttachedToWindow {
             firstAnimation()
+        }
+        onBindViewHolder {
             updateAnimation()
             val model = getModel<ModelTest>()
             titleText.text = model?.title
@@ -37,18 +39,20 @@ fun createViewModelList(max: Int = 10, subTitle: String = "subTitle") = (0..max)
 fun createAnkoViewModelList(max: Int = 10) = (0..max).map { _ ->
     //AnkoViewModel对象
     ankoViewModelDsl(ModelTest("title", "ankoViewModelDsl"), { AnkoItemView() }) {
-        onBindViewHolder { _ ->
+        itemView.setOnClickListener {
+            val viewModel = getViewModel<AnkoViewModel<ModelTest, AnkoItemView>>()
+            viewModel?.model?.title = "点击更新${Random.nextInt(10000)}"
+            getAdapter<ListAdapter>()?.set(adapterPosition, viewModel)
+        }
+        onViewAttachedToWindow {
             firstAnimation()
+        }
+        onBindViewHolder { _ ->
             updateAnimation()
             val model = getModel<ModelTest>()
             val ankoView = getAnkoView<AnkoItemView>()
             ankoView?.tvTitle?.text = model?.title
             ankoView?.tvSubTitle?.text = model?.subTitle
-        }
-        itemView.setOnClickListener {
-            val viewModel = getViewModel<AnkoViewModel<ModelTest, AnkoItemView>>()
-            viewModel?.model?.title = "点击更新${Random.nextInt(10000)}"
-            getAdapter<ListAdapter>()?.set(adapterPosition, viewModel)
         }
     }
 }
@@ -66,6 +70,7 @@ fun createBindingViewModelList(max: Int = 10) = (0..max).map {
         }
         onViewAttachedToWindow {
             firstAnimation()
+            updateAnimation()
         }
     }
 }

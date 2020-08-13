@@ -93,6 +93,9 @@ class AnkoViewModelTest : AnkoViewModel<ModelTest, AnkoItemView>() {
 
     override fun onStateChanged(source: LifecycleOwner, event: Lifecycle.Event) {
         Log.d("onStateChanged","LifecycleOwner onStateChanged============================${event}")
+        if (event == Lifecycle.Event.ON_DESTROY) {
+            model = null
+        }
     }
 
 }

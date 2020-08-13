@@ -4,10 +4,10 @@ import android.view.ViewGroup
 import com.julive.adapter.core.DefaultViewHolder
 import org.jetbrains.anko.AnkoComponent
 
-fun <M, AnkoView : AnkoComponent<ViewGroup>> ankoViewModelDsl(
+inline fun <M,AnkoView : AnkoComponent<ViewGroup>> ankoViewModelDsl(
     model: M,
-    ankoView: () -> AnkoView,
-    init: DefaultViewHolder.() -> Unit
+    crossinline ankoView: () -> AnkoView,
+    crossinline init: DefaultViewHolder.() -> Unit
 ): AnkoViewModel<M, AnkoView> {
     return AnkoViewModel<M, AnkoView>().apply {
         onCreateView {

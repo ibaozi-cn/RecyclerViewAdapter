@@ -3,6 +3,7 @@ package com.julive.adapter_demo.sorted
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.julive.adapter.animators.firstAnimation
+import com.julive.adapter.animators.updateAnimation
 import com.julive.adapter.core.*
 import com.julive.adapter.sorted.SortedListAdapter
 import com.julive.adapter.sorted.SortedModel
@@ -41,18 +42,18 @@ class SortedItemViewModelTest : LayoutViewModel<SortedModelTest>(R.layout.item_t
     init {
         onCreateViewHolder {
             itemView.setOnClickListener {
-                val vm =
-                    getAdapter<SortedListAdapter>()?.getItem(adapterPosition) as SortedItemViewModelTest
-                vm.model?.subTitle = "刷新自己${Random.nextInt(100)}"
+                val vm = getViewModel<SortedItemViewModelTest>()
+                vm?.model?.subTitle = "刷新自己${Random.nextInt(100)}"
                 getAdapter<SortedListAdapter>()?.set(adapterPosition, vm)
             }
             onViewAttachedToWindow {
                 firstAnimation(R.anim.item_animation_from_bottom)
+                updateAnimation()
             }
         }
     }
+
     override fun bindVH(viewHolder: DefaultViewHolder, payloads: List<Any>) {
-//        updateAnimation(viewHolder)
         viewHolder.getView<TextView>(R.id.tv_title).text = model?.title
         viewHolder.getView<TextView>(R.id.tv_subTitle).text = model?.subTitle
     }

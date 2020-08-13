@@ -6,10 +6,7 @@ import com.julive.adapter.core.DefaultViewModel
 import com.julive.adapter.core.SameModel
 import com.julive.adapter.core.ViewModelType
 
-class SortedCallBack(adapter: RecyclerView.Adapter<*>) :
-    SortedListAdapterCallback<ViewModelType>(
-        adapter
-    ) {
+class SortedCallBack(adapter: RecyclerView.Adapter<*>) : SortedListAdapterCallback<ViewModelType>(adapter) {
 
     override fun areItemsTheSame(
         item1: ViewModelType,

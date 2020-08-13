@@ -5,18 +5,17 @@ import android.view.View
 import android.view.ViewGroup
 
 abstract class DefaultViewModel<M> : ViewModel<M, DefaultViewHolder>, LifecycleViewModel {
+
     override var model: M? = null
     private var initView: ViewHolderType? = null
     override var isFirstInit: Boolean = true
-    open fun onCreateViewHolder(f: ViewHolderType) {
-        initView = f
-    }
-    abstract
-    fun getHolderItemView(
-        parent: ViewGroup,
-        layoutInflater: LayoutInflater
-    ): View
+
+    open fun onCreateViewHolder(f: ViewHolderType) { initView = f }
+
+    abstract fun getHolderItemView(parent: ViewGroup, layoutInflater: LayoutInflater): View
+
     open fun getViewHolder(v: View) = DefaultViewHolder(v)
+
     override fun getViewHolder(
         parent: ViewGroup,
         layoutInflater: LayoutInflater
@@ -25,6 +24,7 @@ abstract class DefaultViewModel<M> : ViewModel<M, DefaultViewHolder>, LifecycleV
             initView?.invoke(this)
         }
     }
+
 }
 
 open class LayoutViewModel<M>(override val layoutRes: Int) : DefaultViewModel<M>() {

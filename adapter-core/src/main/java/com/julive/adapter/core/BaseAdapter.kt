@@ -15,7 +15,8 @@ abstract class BaseAdapter<VM : ViewModelType> : RecyclerView.Adapter<RecyclerVi
     private val defaultViewHolderFactoryCache = DefaultViewHolderFactoryCache()
     private val sparseArrayLayoutInflater = SparseArray<WeakReference<LayoutInflater>>(1)
     private var recyclerView: RecyclerView? = null
-    override val arrayLifeObservers: SparseArray<(source: LifecycleOwner, event: Lifecycle.Event) -> Boolean> = SparseArray()
+    override val arrayLifeObservers: SparseArray<(source: LifecycleOwner, event: Lifecycle.Event) -> Boolean> =
+        SparseArray()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val defaultViewHolder = defaultViewHolderFactoryCache[viewType].getViewHolder(
@@ -29,7 +30,11 @@ abstract class BaseAdapter<VM : ViewModelType> : RecyclerView.Adapter<RecyclerVi
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int, payloads: MutableList<Any>) {
+    override fun onBindViewHolder(
+        holder: RecyclerView.ViewHolder,
+        position: Int,
+        payloads: MutableList<Any>
+    ) {
         if (position != RecyclerView.NO_POSITION) {
             // Do your binding here
             holder.itemView.setTag(R.id.adapter, this)
@@ -41,7 +46,6 @@ abstract class BaseAdapter<VM : ViewModelType> : RecyclerView.Adapter<RecyclerVi
                     holder.onBindViewHolder(position, payloads)
                 }
                 bindVH(holder, payloads)
-                isFirstInit = false
             }
         }
     }
@@ -65,10 +69,7 @@ abstract class BaseAdapter<VM : ViewModelType> : RecyclerView.Adapter<RecyclerVi
     }
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
-        sparseArrayLayoutInflater.append(
-            0,
-            WeakReference(LayoutInflater.from(recyclerView.context))
-        )
+        sparseArrayLayoutInflater.append(0, WeakReference(LayoutInflater.from(recyclerView.context)))
         this.recyclerView = recyclerView
     }
 
@@ -81,6 +82,7 @@ abstract class BaseAdapter<VM : ViewModelType> : RecyclerView.Adapter<RecyclerVi
     override fun onViewAttachedToWindow(holder: RecyclerView.ViewHolder) {
         if (holder is Subscriber) {
             holder.onViewAttachedToWindow(holder, holder.adapterPosition)
+            holder.getViewModel<ViewModelType>()?.isFirstInit = false
         }
     }
 
@@ -93,6 +95,7 @@ abstract class BaseAdapter<VM : ViewModelType> : RecyclerView.Adapter<RecyclerVi
     override fun onStateChanged(source: LifecycleOwner, event: Lifecycle.Event) {
         if (event == Lifecycle.Event.ON_DESTROY) {
             this.recyclerView?.adapter = null
+            source.lifecycle.removeObserver(this)
         }
         super.onStateChanged(source, event)
     }

@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 typealias ViewModelType = ViewModel<*,*>
 
-interface ViewModel<M, VH : RecyclerView.ViewHolder> : ViewHolderFactory<VH> {
+interface ViewModel< M, VH : RecyclerView.ViewHolder> : ViewHolderFactory<VH> {
     var model: M?
     var itemViewType: Int
         get() = layoutRes

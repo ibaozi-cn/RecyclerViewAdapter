@@ -7,28 +7,28 @@ import androidx.annotation.IdRes
 import androidx.recyclerview.widget.RecyclerView
 import com.julive.adapter_core.R
 
-fun <Adapter> RecyclerView.ViewHolder.getAdapter(): Adapter? {
-    return this.itemView.getTag(R.id.adapter) as? Adapter
+inline fun <reified Adapter> RecyclerView.ViewHolder.getAdapter(): Adapter? {
+    return itemView.getTag(R.id.adapter) as? Adapter
 }
 
 fun RecyclerView.ViewHolder.getRecyclerView(): RecyclerView? {
-    return this.itemView.getTag(R.id.adapter_recyclerView) as? RecyclerView
+    return itemView.getTag(R.id.adapter_recyclerView) as? RecyclerView
 }
 
-fun <VM : ViewModel<*, *>> RecyclerView.ViewHolder.getViewModel(): VM? {
-    return this.itemView.getTag(R.id.adapter_item) as? VM
+inline fun <reified VM : ViewModel<*, *>> RecyclerView.ViewHolder.getViewModel(): VM? {
+    return itemView.getTag(R.id.adapter_item) as? VM
 }
 
-fun <M> RecyclerView.ViewHolder.getModel(): M? {
-    return (this.itemView.getTag(R.id.adapter_item) as? ViewModel<*, *>)?.model as? M
+inline fun <reified M> RecyclerView.ViewHolder.getModel(): M? {
+    return (itemView.getTag(R.id.adapter_item) as? ViewModel<M, *>)?.model
 }
 
-fun <T : View> RecyclerView.ViewHolder.getView(@IdRes viewId: Int): T {
+inline fun <reified T : View> RecyclerView.ViewHolder.getView(@IdRes viewId: Int): T {
     return itemView.findViewById(viewId) as T
 }
 
-typealias BindView = DefaultViewHolder.(payloads: List<Any>) -> Unit
-typealias ViewHolderType = DefaultViewHolder.() -> Unit
+internal typealias BindView = DefaultViewHolder.(payloads: List<Any>) -> Unit
+internal typealias ViewHolderType = DefaultViewHolder.() -> Unit
 
 open class DefaultViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), Subscriber {
 

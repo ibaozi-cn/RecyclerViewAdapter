@@ -25,7 +25,7 @@ class PagingListAdapter : BaseAdapter<ViewModelType>() {
         return differ.getItem(position)
     }
 
-    suspend fun submitData(pagingData: PagingData<*>) {
+    suspend fun <VM : ViewModelType> submitData(pagingData: PagingData<VM>) {
         differ.submitData(pagingData as PagingData<ViewModelType>)
     }
 

@@ -3,7 +3,7 @@ package com.julive.adapter.sorted
 import androidx.recyclerview.widget.SortedList
 import com.julive.adapter.core.*
 
-class SortedListAdapter : BaseAdapter<ViewModelType>(){
+class SortedListAdapter : BaseAdapter<ViewModelType>() {
 
     private val sortedList by lazy {
         SortedList(
@@ -33,8 +33,11 @@ class SortedListAdapter : BaseAdapter<ViewModelType>(){
         sortedList.clear()
     }
 
-    fun remove(vm: ViewModelType): Boolean {
-        return sortedList.remove(vm)
+    fun remove(vm: ViewModelType?): Boolean {
+        vm?.let {
+            return sortedList.remove(it)
+        }
+        return false
     }
 
     fun removeAll(elements: Collection<ViewModelType>): Boolean {
@@ -54,8 +57,10 @@ class SortedListAdapter : BaseAdapter<ViewModelType>(){
         return sortedList.get(position)
     }
 
-    fun set(index: Int, vm: ViewModelType) {
-        sortedList.updateItemAt(index, vm)
+    fun set(index: Int, vm: ViewModelType?) {
+        vm?.let {
+            sortedList.updateItemAt(index, vm)
+        }
     }
 
     fun removeAt(index: Int) {
