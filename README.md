@@ -71,6 +71,8 @@ https://user-gold-cdn.xitu.io/2020/7/4/173187052f0c9ddf?w=1432&h=1098&f=png&s=13
 
 ## 如何依赖？
 
+**提示：按需依赖哦，没必要全部依赖哦**
+
 ```
 allprojects {
     repositories {
@@ -187,6 +189,10 @@ fun createBindingViewModelList(max: Int = 10) = (0..max).map {
 ```
 
 #### 博客相关介绍
+
+- [RecyclerView Adapter系列之集成Lifecycle](https://www.jianshu.com/p/a8d7576ac34a)
+
+- [这可能是你见过的迄今为止最简单的RecyclerView Item加载动画](https://www.jianshu.com/p/f6f8a321bccb)
 
 - 最新 [后现在化RecyclerView Adapter稳定版本终于来了](https://juejin.im/post/6856283564649283597)
 
