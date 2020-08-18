@@ -25,8 +25,9 @@ https://user-gold-cdn.xitu.io/2020/7/4/173187052f0c9ddf?w=1432&h=1098&f=png&s=13
 - ~~DataBinding 扩展~~
 - ~~可选择Selectable 扩展~~
 - ~~可展开expandable 扩展~~
-- ~~UI扩展：空布局~~、滚动底部或头部回调、获取可见项等
+- ~~UI扩展：空布局~~、滚动底部或头部回调、~~获取可见项等~~
 - ~~Animators扩展~~
+- ~~filter扩展，支持按照一定的条件筛选Item项~~
 - 等等.. 未来有好的想法继续扩展
 
 ## 库大小
@@ -44,6 +45,7 @@ https://user-gold-cdn.xitu.io/2020/7/4/173187052f0c9ddf?w=1432&h=1098&f=png&s=13
 | Expandable | 8kb | 动态扩展可展开功能，支持仅单展开或多展开配置 |
 | UI | 17kb | 扩展空布局 |
 | Animators | 14kb | 扩展动画，包括布局初加载动画，添加Item动画，更新Item动画等 |
+| Filter | 9kb | 按照条件过滤列表子项 |
 
 ## 各个Adapter的优势在哪，如何选择？
 
