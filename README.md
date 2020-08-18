@@ -71,6 +71,8 @@ https://user-gold-cdn.xitu.io/2020/7/4/173187052f0c9ddf?w=1432&h=1098&f=png&s=13
 
 ## 如何依赖？
 
+**提示：按需依赖哦，没必要全部依赖哦**
+
 ```
 allprojects {
     repositories {
