@@ -1,6 +1,6 @@
 package com.julive.adapter.core
 
-inline fun listAdapter(block: ListAdapter.() -> Unit) = ListAdapter().apply {
+inline fun listAdapter(block: ListAdapter.() -> Unit): ListAdapter = ListAdapter().apply {
     block()
 }
 

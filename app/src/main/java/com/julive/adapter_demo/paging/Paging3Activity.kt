@@ -35,12 +35,15 @@ class Paging3Activity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         supportActionBar?.title = "PagingListAdapter"
         setContentView(R.layout.activity_paging3)
+
         mPagingListAdapter.withLoadStateFooter(PagingLoadStateAdapter()).into(rv_paging_list)
+
         lifecycleScope.launch {
             viewModel.pager.collect {
                 mPagingListAdapter.submitData(it)
             }
         }
+
         mPagingListAdapter.addLoadStateListener { loadStates ->
             btn_right.isVisible = loadStates.append is LoadState.Error
             refresh_paging_layout.isRefreshing = loadStates.refresh is LoadState.Loading

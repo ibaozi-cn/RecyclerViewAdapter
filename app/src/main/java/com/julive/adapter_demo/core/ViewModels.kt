@@ -11,20 +11,22 @@ import java.util.*
 class ArrayViewModelTest : LayoutViewModel<ModelTest>(R.layout.item_test_2) {
     init {
         onCreateViewHolder {
+            val titleText = getView<TextView>(R.id.tv_title)
+            val subTitleText = getView<TextView>(R.id.tv_subTitle)
             itemView.setOnClickListener {
-                val vm = getAdapter<ListAdapter>()?.getItem(adapterPosition) as ArrayViewModelTest
-                vm.model?.title = "${Random().nextInt(100)}"
+                val vm = getViewModel<ArrayViewModelTest>()
+                vm?.model?.title = "${Random().nextInt(100)}"
                 getAdapter<ListAdapter>()?.set(adapterPosition, vm)
             }
             onViewAttachedToWindow {
                 firstAnimation()
 //                updateAnimation()
             }
+            onBindViewHolder {
+                val model = getModel<ModelTest>()
+                titleText.text = model?.title
+                subTitleText.text = model?.subTitle
+            }
         }
-    }
-
-    override fun bindVH(viewHolder: DefaultViewHolder, payloads: List<Any>) {
-        viewHolder.getView<TextView>(R.id.tv_title).text = model?.title
-        viewHolder.getView<TextView>(R.id.tv_subTitle).text = model?.subTitle
     }
 }

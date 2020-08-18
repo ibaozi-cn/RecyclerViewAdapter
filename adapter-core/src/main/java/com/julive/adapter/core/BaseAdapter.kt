@@ -15,8 +15,7 @@ abstract class BaseAdapter<VM : ViewModelType> : RecyclerView.Adapter<RecyclerVi
     private val defaultViewHolderFactoryCache = DefaultViewHolderFactoryCache()
     private val sparseArrayLayoutInflater = SparseArray<WeakReference<LayoutInflater>>(1)
     private var recyclerView: RecyclerView? = null
-    override val arrayLifeObservers: SparseArray<(source: LifecycleOwner, event: Lifecycle.Event) -> Boolean> =
-        SparseArray()
+    override val arrayLifeObservers: SparseArray<(source: LifecycleOwner, event: Lifecycle.Event) -> Boolean> = SparseArray()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val defaultViewHolder = defaultViewHolderFactoryCache[viewType].getViewHolder(

@@ -33,6 +33,9 @@ fun createViewModelList(max: Int = 10, subTitle: String = "subTitle") = (0..max)
             titleText.text = model?.title
             subTitleText.text = model?.subTitle
         }
+        onViewDetachedFromWindow {
+
+        }
     }
 }
 
@@ -71,6 +74,52 @@ fun createBindingViewModelList(max: Int = 10) = (0..max).map {
         onViewAttachedToWindow {
             firstAnimation()
             updateAnimation()
+        }
+    }
+}
+
+fun mapData() =
+    listOf<ModelTest>(
+        ModelTest("张三" , "男"),
+        ModelTest("张三" , "4-25"),
+        ModelTest("张三" , "1990"),
+        ModelTest("李四" , "女"),
+        ModelTest("李四" , "8-9"),
+        ModelTest("李四" , "1991"),
+        ModelTest("王五" , "不男"),
+        ModelTest("王五" , "2-3"),
+        ModelTest("王五" , "1880"),
+        ModelTest("猴哥" , "未知"),
+        ModelTest("猴哥" , "9-0"),
+        ModelTest("猴哥" , "2000"),
+        ModelTest("无能" , "男"),
+        ModelTest("无能" , "5-30"),
+        ModelTest("无能" , "1990"),
+        ModelTest("爱贝" , "1991")
+    )
+
+fun createMapDataViewModel() = mapData().map {
+    layoutViewModelDsl(R.layout.item_test, ModelTest(it.title, it.subTitle)) {
+        val titleText = getView<TextView>(R.id.tv_title)
+        val subTitleText = getView<TextView>(R.id.tv_subTitle)
+        itemView.setOnClickListener {
+            val vm = getViewModel<LayoutViewModel<ModelTest>>()
+            //修改Model数据
+            vm?.model?.title = "测试更新${Random.nextInt(10000)}"
+            //用Adapter更新数据
+            getAdapter<ListAdapter>()?.set(adapterPosition, vm)
+        }
+        onViewAttachedToWindow {
+            firstAnimation()
+        }
+        onBindViewHolder {
+            updateAnimation()
+            val model = getModel<ModelTest>()
+            titleText.text = model?.title
+            subTitleText.text = model?.subTitle
+        }
+        onViewDetachedFromWindow {
+
         }
     }
 }

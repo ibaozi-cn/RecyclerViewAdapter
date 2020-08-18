@@ -33,9 +33,9 @@ https://user-gold-cdn.xitu.io/2020/7/4/173187052f0c9ddf?w=1432&h=1098&f=png&s=13
 
 |  名字   | release aar size  | 其他 |
 |  ----  | ----  | ----  | 
-| Core | 31kb | 核心库目前包含ListAdapter的实现，最基础且最实用的扩展 |
+| Core | 32kb | 核心库目前包含ListAdapter的实现，最基础且最实用的扩展 |
 | Anko | 13kb | 适用本项目所有Adapter扩展 |
-| DataBinding | 20kb | 适配DataBinding布局，适用本项目所有Adapter扩展 |
+| DataBinding | 22kb | 适配DataBinding布局，适用本项目所有Adapter扩展 |
 | Sorted | 10kb | SortedListAdapter扩展实现 |
 | Paging | 13kb | PagingListAdapter扩展适配 |
 | Diff | 6kb | 适配DiffUtil，目前适用ListAdapter |

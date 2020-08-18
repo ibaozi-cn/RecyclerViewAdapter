@@ -11,6 +11,7 @@ import com.julive.adapter_demo.dsl.AdapterDslActivity
 import com.julive.adapter_demo.empty.EmptyActivity
 import com.julive.adapter_demo.expandable.ExpandableActivity
 import com.julive.adapter_demo.ext.startActivity
+import com.julive.adapter_demo.filter.FilterActivity
 import com.julive.adapter_demo.paging.Paging3Activity
 import com.julive.adapter_demo.selectable.SelectableActivity
 import com.julive.adapter_demo.sorted.SortedActivity
@@ -61,6 +62,10 @@ class MainActivity : AppCompatActivity() {
 
         btn_empty.setText("EmptyActivity").setOnClickListener {
             startActivity<EmptyActivity>()
+        }
+
+        btn_filter.setText("FilterActivity").setOnClickListener {
+            startActivity<FilterActivity>()
         }
 
     }

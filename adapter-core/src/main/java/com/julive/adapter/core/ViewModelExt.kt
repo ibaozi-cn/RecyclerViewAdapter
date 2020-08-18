@@ -24,7 +24,6 @@ abstract class DefaultViewModel<M> : ViewModel<M, DefaultViewHolder>, LifecycleV
             initView?.invoke(this)
         }
     }
-
 }
 
 open class LayoutViewModel<M>(override val layoutRes: Int) : DefaultViewModel<M>() {
