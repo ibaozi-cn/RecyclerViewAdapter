@@ -7,11 +7,14 @@ It has been written **100% in Kotlin**. ❤️
 ![设计图](https://user-gold-cdn.xitu.io/2020/7/4/173187052f0c9ddf?w=1432&h=1098&f=png&s=132306)
 看不见图？
 点该链接
-https://user-gold-cdn.xitu.io/2020/7/4/173187052f0c9ddf?w=1432&h=1098&f=png&s=132306
+http://file.ibaozi.cn/ftp/adapter.png
 
 实现图
 
 ![实现图](http://file.ibaozi.cn/ftp/JuliveAdapter.jpg)
+看不见图？
+点该链接
+http://file.ibaozi.cn/ftp/JuliveAdapter.jpg
 
 ## 规划
 
