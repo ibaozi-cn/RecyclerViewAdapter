@@ -9,7 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".filter.FilterActivity"></activity>
+        <activity
+            android:name=".video.VideoListActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".filter.FilterActivity" />
         <activity android:name=".empty.EmptyActivity" />
         <activity android:name=".expandable.ExpandableActivity" />
         <activity android:name=".selectable.SelectableActivity" />

@@ -15,6 +15,6 @@
         android:layout_weight="1"
         tools:ignore="MissingConstraints" />
 
-    <include layout="@layout/include_button_bottom"/>
+<!--    <include layout="@layout/include_button_bottom"/>-->
 
 </LinearLayout>

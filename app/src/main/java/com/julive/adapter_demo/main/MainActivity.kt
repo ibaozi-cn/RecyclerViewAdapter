@@ -15,6 +15,7 @@ import com.julive.adapter_demo.filter.FilterActivity
 import com.julive.adapter_demo.paging.Paging3Activity
 import com.julive.adapter_demo.selectable.SelectableActivity
 import com.julive.adapter_demo.sorted.SortedActivity
+import com.julive.adapter_demo.video.VideoListActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -66,6 +67,10 @@ class MainActivity : AppCompatActivity() {
 
         btn_filter.setText("FilterActivity").setOnClickListener {
             startActivity<FilterActivity>()
+        }
+
+        btn_video.setText("VideoActivity").setOnClickListener {
+            startActivity<VideoListActivity>()
         }
 
     }

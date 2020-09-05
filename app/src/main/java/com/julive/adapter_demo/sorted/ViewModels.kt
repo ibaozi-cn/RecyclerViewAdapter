@@ -22,6 +22,8 @@ data class ModelTest(var title: String, var subTitle: String) : SameModel {
     override var uniqueId: String = title
 }
 
+data class ModelVideoTest(val url:String,val url2:String,var seekOnStart:Long)
+
 /**
  * sortedId 排序用
  * title 作为uniqueId ，RecyclerView ItemView 更新的时候，唯一值，注意列表是可以出现一样的uniqueId的，

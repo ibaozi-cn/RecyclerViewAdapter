@@ -81,6 +81,7 @@ dependencies {
     implementation 'androidx.cardview:cardview:1.0.0'
 
     implementation "androidx.paging:paging-runtime:$paging_version"
+    implementation 'com.shuyu:GSYVideoPlayer:7.1.5'
 
 //    implementation 'com.github.ibaozi-cn.RecyclerViewAdapter:adapter-core:V1.0.0'
 //    implementation 'com.github.Colaman0:StatusLayout:1.0.8'
