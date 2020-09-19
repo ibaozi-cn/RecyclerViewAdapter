@@ -55,31 +55,4 @@ dependencies {
     api project(path: ':adapter-ui')
     api project(path: ':adapter-animators')
     api project(path: ':adapter-filter')
-
-    def adapterVersion = 'v1.2.2'
-
-//    //核心库
-//    api "com.github.ibaozi-cn.RecyclerViewAdapter:adapter-core:$adapterVersion"
-//
-//    //下面都是可选项
-//    //anko layout 扩展
-//    api "com.github.ibaozi-cn.RecyclerViewAdapter:adapter-anko:$adapterVersion"
-//    //diffutil 扩展
-//    api "com.github.ibaozi-cn.RecyclerViewAdapter:adapter-diff:$adapterVersion"
-//    //data binding扩展
-//    api "com.github.ibaozi-cn.RecyclerViewAdapter:adapter-binding:$adapterVersion"
-//    // paging3 扩展
-//    api "com.github.ibaozi-cn.RecyclerViewAdapter:adapter-paging:$adapterVersion"
-//    // sortedlist 扩展
-//    api "com.github.ibaozi-cn.RecyclerViewAdapter:adapter-sorted:$adapterVersion"
-//    // flexbox 扩展
-//    api "com.github.ibaozi-cn.RecyclerViewAdapter:adapter-flex:$adapterVersion"
-//    // UI 扩展
-//    api "com.github.ibaozi-cn.RecyclerViewAdapter:adapter-ui:$adapterVersion"
-//    // Selectable 扩展
-//    api "com.github.ibaozi-cn.RecyclerViewAdapter:adapter-selectable:$adapterVersion"
-//    // Expandable 扩展
-//    api "com.github.ibaozi-cn.RecyclerViewAdapter:adapter-expandable:$adapterVersion"
-//    // Animators 扩展
-//    api "com.github.ibaozi-cn.RecyclerViewAdapter:adapter-animators:$adapterVersion"
 }

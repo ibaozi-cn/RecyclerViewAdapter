@@ -18,6 +18,7 @@ val filterAdapterCache by lazy { SparseArray<RecyclerView.Adapter<*>>() }
 val filterAdapterCacheKey by lazy {
     filterAdapterCache.hashCode()
 }
+
 val lifecycleObserver by lazy {
     { _: LifecycleOwner, event: Lifecycle.Event ->
         if (event == Lifecycle.Event.ON_DESTROY) {
