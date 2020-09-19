@@ -4,19 +4,21 @@ It has been written **100% in Kotlin**. ❤️
 
 设计图
 
-<p align="center"><img src="http://file.ibaozi.cn/ftp/adapter.png" alt="1600" width="25%"/></p>
+<p align="center"><img src="http://file.ibaozi.cn/ftp/adapter.png" alt="1600" width="100%"/></p>
 
 实现图
 
-<p align="center"><img src="http://file.ibaozi.cn/ftp/JuliveAdapter.jpg" alt="1600" width="25%"/></p>
+<p align="center"><img src="http://file.ibaozi.cn/ftp/JuliveAdapter.jpg" alt="1600" width="100%"/></p>
 
 ## 特点
 
-- DSL写法
-- 简单易用
-- 抽象合理
-- 分包依赖
-- 高扩展性
+- DSL写法，简单易用
+- 充分考虑ViewHolder复用逻辑，科学防止触碰事件抖动问题
+- 抽象合理，高可复用
+- 分包依赖，也可以一次性依赖
+- 自带Lifecycle生命周期管理
+- 动态扩展，耦合降低到了极致
+- 部分真泛型，优化泛型问题
 
 ## 库大小
 
@@ -71,7 +73,11 @@ allprojects {
     }
 }
 
-def adapterVersion = 'v1.2.2'
+//一次性依赖，会自动引入全部AAR
+implementation 'com.github.ibaozi-cn.RecyclerViewAdapter:adapter:v1.2.3'
+
+//以下为分包依赖
+def adapterVersion = 'v1.2.3'
 
 //核心库
 implementation "com.github.ibaozi-cn.RecyclerViewAdapter:adapter-core:$adapterVersion"
@@ -98,6 +104,8 @@ implementation "com.github.ibaozi-cn.RecyclerViewAdapter:adapter-selectable:$ada
 implementation "com.github.ibaozi-cn.RecyclerViewAdapter:adapter-expandable:$adapterVersion"
 // Animators 扩展
 implementation "com.github.ibaozi-cn.RecyclerViewAdapter:adapter-animators:$adapterVersion"
+// Filter 扩展
+implementation "com.github.ibaozi-cn.RecyclerViewAdapter:adapter-filter:$adapterVersion"
 ```
 
 ## 环境需要
