@@ -4,11 +4,11 @@ It has been written **100% in Kotlin**. ❤️
 
 设计图
 
-<p align="center"><img src="http://file.ibaozi.cn/ftp/adapter.png" alt="1600" width="25%"/></p>
+<p align="center"><img src="http://file.ibaozi.cn/ftp/adapter.png" alt="1600" width="100%"/></p>
 
 实现图
 
-<p align="center"><img src="http://file.ibaozi.cn/ftp/JuliveAdapter.jpg" alt="1600" width="25%"/></p>
+<p align="center"><img src="http://file.ibaozi.cn/ftp/JuliveAdapter.jpg" alt="1600" width="100%"/></p>
 
 ## 特点
 
