@@ -4,34 +4,19 @@ It has been written **100% in Kotlin**. ❤️
 
 设计图
 
-![设计图](https://user-gold-cdn.xitu.io/2020/7/4/173187052f0c9ddf?w=1432&h=1098&f=png&s=132306)
-看不见图？
-点该链接
-http://file.ibaozi.cn/ftp/adapter.png
+<p align="center"><img src="http://file.ibaozi.cn/ftp/adapter.png" alt="1600" width="25%"/></p>
 
 实现图
 
-![实现图](http://file.ibaozi.cn/ftp/JuliveAdapter.jpg)
-看不见图？
-点该链接
-http://file.ibaozi.cn/ftp/JuliveAdapter.jpg
+<p align="center"><img src="http://file.ibaozi.cn/ftp/JuliveAdapter.jpg" alt="1600" width="25%"/></p>
 
-## 规划
+## 特点
 
-- ~~核心库Core的完善~~
-- ~~Anko扩展~~
-- ~~FlexboxLayout 扩展~~
-- ~~SortedList 扩展~~
-- ~~Kotlin DSL扩展支持~~
-- ~~paging 3 扩展~~
-- ~~DiffUtil 扩展~~
-- ~~DataBinding 扩展~~
-- ~~可选择Selectable 扩展~~
-- ~~可展开expandable 扩展~~
-- ~~UI扩展：空布局~~、滚动底部或头部回调、~~获取可见项等~~
-- ~~Animators扩展~~
-- ~~filter扩展，支持按照一定的条件筛选Item项~~
-- 等等.. 未来有好的想法继续扩展
+- DSL写法
+- 简单易用
+- 抽象合理
+- 分包依赖
+- 高扩展性
 
 ## 库大小
 

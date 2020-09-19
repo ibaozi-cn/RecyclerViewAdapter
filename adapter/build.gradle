@@ -1,0 +1,85 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion compile_sdk_ersion
+    buildToolsVersion build_tools_version
+
+    defaultConfig {
+        minSdkVersion min_sdk_version
+        targetSdkVersion target_sdk_version
+        versionCode adapter_version_code
+        versionName adapter_version
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            zipAlignEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+    buildFeatures{
+        dataBinding = true
+        // for view binding :
+        // viewBinding = true
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation 'androidx.core:core-ktx:1.3.1'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+
+    api project(path: ':adapter-anko')
+    api project(path: ':adapter-core')
+    api project(path: ':adapter-sorted')
+    api project(path: ':adapter-flex')
+    api project(path: ':adapter-paging')
+    api project(path: ':adapter-diff')
+    api project(path: ':adapter-binding')
+    api project(path: ':adapter-selectable')
+    api project(path: ':adapter-expandable')
+    api project(path: ':adapter-ui')
+    api project(path: ':adapter-animators')
+    api project(path: ':adapter-filter')
+
+    def adapterVersion = 'v1.2.2'
+
+//    //核心库
+//    api "com.github.ibaozi-cn.RecyclerViewAdapter:adapter-core:$adapterVersion"
+//
+//    //下面都是可选项
+//    //anko layout 扩展
+//    api "com.github.ibaozi-cn.RecyclerViewAdapter:adapter-anko:$adapterVersion"
+//    //diffutil 扩展
+//    api "com.github.ibaozi-cn.RecyclerViewAdapter:adapter-diff:$adapterVersion"
+//    //data binding扩展
+//    api "com.github.ibaozi-cn.RecyclerViewAdapter:adapter-binding:$adapterVersion"
+//    // paging3 扩展
+//    api "com.github.ibaozi-cn.RecyclerViewAdapter:adapter-paging:$adapterVersion"
+//    // sortedlist 扩展
+//    api "com.github.ibaozi-cn.RecyclerViewAdapter:adapter-sorted:$adapterVersion"
+//    // flexbox 扩展
+//    api "com.github.ibaozi-cn.RecyclerViewAdapter:adapter-flex:$adapterVersion"
+//    // UI 扩展
+//    api "com.github.ibaozi-cn.RecyclerViewAdapter:adapter-ui:$adapterVersion"
+//    // Selectable 扩展
+//    api "com.github.ibaozi-cn.RecyclerViewAdapter:adapter-selectable:$adapterVersion"
+//    // Expandable 扩展
+//    api "com.github.ibaozi-cn.RecyclerViewAdapter:adapter-expandable:$adapterVersion"
+//    // Animators 扩展
+//    api "com.github.ibaozi-cn.RecyclerViewAdapter:adapter-animators:$adapterVersion"
+}

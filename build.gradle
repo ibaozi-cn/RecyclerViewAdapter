@@ -7,12 +7,11 @@ buildscript {
     ext.build_tools_version='30.0.0'
     ext.min_sdk_version=19
     ext.target_sdk_version=30
-    ext.paging_version = "3.0.0-alpha02"
+    ext.paging_version = "3.0.0-alpha06"
     ext.activity_version = "1.1.0"
-//    ext.recyclerview_version = "1.2.0-alpha03"
-    ext.recyclerview_version = "1.1.0"
+    ext.recyclerview_version = "1.2.0-alpha05"
     // library config
-    ext.adapter_version = "1.2.1"
+    ext.adapter_version = "1.2.3"
     ext.adapter_version_code = 13
 
     repositories {

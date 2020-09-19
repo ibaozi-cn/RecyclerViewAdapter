@@ -1,3 +1,4 @@
+include ':adapter'
 include ':adapter-filter'
 include ':adapter-animators'
 include ':adapter-expandable'
