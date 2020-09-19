@@ -71,7 +71,7 @@ allprojects {
     }
 }
 
-def adapterVersion = 'v1.2.2'
+def adapterVersion = 'v1.2.3'
 
 //核心库
 implementation "com.github.ibaozi-cn.RecyclerViewAdapter:adapter-core:$adapterVersion"
@@ -98,6 +98,8 @@ implementation "com.github.ibaozi-cn.RecyclerViewAdapter:adapter-selectable:$ada
 implementation "com.github.ibaozi-cn.RecyclerViewAdapter:adapter-expandable:$adapterVersion"
 // Animators 扩展
 implementation "com.github.ibaozi-cn.RecyclerViewAdapter:adapter-animators:$adapterVersion"
+// Filter 扩展
+implementation "com.github.ibaozi-cn.RecyclerViewAdapter:adapter-filter:$adapterVersion"
 ```
 
 ## 环境需要
