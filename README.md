@@ -71,6 +71,10 @@ allprojects {
     }
 }
 
+//一次性依赖，会自动引入全部AAR
+implementation 'com.github.ibaozi-cn.RecyclerViewAdapter:adapter:v1.2.3'
+
+//以下为分包依赖
 def adapterVersion = 'v1.2.3'
 
 //核心库
