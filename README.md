@@ -119,21 +119,9 @@ implementation "com.github.ibaozi-cn.RecyclerViewAdapter:adapter-filter:$adapter
 
 ### 看一个最简单的例子 DSL的支持
 
-```
-class AdapterDslActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        supportActionBar?.title = "ListAdapter DSL"
-        setContentView(R.layout.activity_adapter_dsl)
-        listAdapter {
-            addAll(createViewModelList(3))
-            addAll(createAnkoViewModelList(3))
-            addAll(createBindingViewModelList(3))
-            // 绑定 RecyclerView
-            into(rv_list_dsl)
-        }
-    }
-}
+```kotlin
+
+//xml布局加载示例
 fun createViewModelList(max: Int = 10) = (0..max).map { _ ->
     layoutViewModelDsl(R.layout.item_test, ModelTest("title", "subTitle")) {
         onBindViewHolder {
@@ -150,7 +138,7 @@ fun createViewModelList(max: Int = 10) = (0..max).map { _ ->
         }
     }
 }
-
+//anko layout布局加载示例
 fun createAnkoViewModelList(max: Int = 10) = (0..max).map { _ ->
     //AnkoViewModel对象
     ankoViewModelDsl(
@@ -170,7 +158,7 @@ fun createAnkoViewModelList(max: Int = 10) = (0..max).map { _ ->
         }
     }
 }
-
+//binding layout布局加载示例
 fun createBindingViewModelList(max: Int = 10) = (0..max).map {
     bindingViewModelDsl(
         R.layout.item_binding_layout,
@@ -183,6 +171,15 @@ fun createBindingViewModelList(max: Int = 10) = (0..max).map {
             getAdapter<ListAdapter>()?.set(adapterPosition, viewModel)
         }
     }
+}
+
+//添加到Adapter中，并绑定RecyclerView
+listAdapter {
+   addAll(createViewModelList(3))
+   addAll(createAnkoViewModelList(3))
+   addAll(createBindingViewModelList(3))
+   // 绑定 RecyclerView
+   into(rv_list_dsl)
 }
 ```
 
