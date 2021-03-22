@@ -50,7 +50,7 @@ open class DefaultViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
     }
 
     fun onViewDetachedFromWindow(f: ViewHolderType) {
-        onViewAttached = f
+        onViewDetached = f
     }
 
     override fun onBindViewHolder(position: Int, payloads: List<Any>) {
