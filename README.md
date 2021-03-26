@@ -196,7 +196,7 @@ listAdapter {
 
 - [这可能是你见过的迄今为止最简单的RecyclerView Item加载动画](https://www.jianshu.com/p/f6f8a321bccb)
 
-- 最新 [后现在化RecyclerView Adapter稳定版本终于来了](https://juejin.im/post/6856283564649283597)
+- 最新 [后现代化RecyclerView Adapter稳定版本终于来了](https://juejin.im/post/6856283564649283597)
 
 - [重学RecyclerView Adapter封装的深度思考和实现](https://juejin.im/post/5f09cbdce51d45349d6c1384)
 
