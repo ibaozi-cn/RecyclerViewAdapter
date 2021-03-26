@@ -84,7 +84,7 @@ allprojects {
 implementation 'com.github.ibaozi-cn.RecyclerViewAdapter:adapter:v1.2.3'
 
 //以下为分包依赖
-def adapterVersion = 'v1.2.3'
+def adapterVersion = '1.2.4'
 
 //核心库
 implementation "com.github.ibaozi-cn.RecyclerViewAdapter:adapter-core:$adapterVersion"
