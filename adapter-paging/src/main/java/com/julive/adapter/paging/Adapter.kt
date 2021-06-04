@@ -83,18 +83,18 @@ class PagingListAdapter : BaseAdapter<ViewModelType>() {
         return ConcatAdapter(header, this, footer)
     }
 
-    @ExperimentalPagingApi
-    val dataRefreshFlow: Flow<Boolean> = differ.dataRefreshFlow
-
-    @ExperimentalPagingApi
-    fun addDataRefreshListener(listener: (isEmpty: Boolean) -> Unit) {
-        differ.addDataRefreshListener(listener)
-    }
-
-    @ExperimentalPagingApi
-    fun removeDataRefreshListener(listener: (isEmpty: Boolean) -> Unit) {
-        differ.removeDataRefreshListener(listener)
-    }
+//    @ExperimentalPagingApi
+//    val dataRefreshFlow: Flow<Boolean> = differ.dataRefreshFlow
+//
+//    @ExperimentalPagingApi
+//    fun addDataRefreshListener(listener: (isEmpty: Boolean) -> Unit) {
+//        differ.addDataRefreshListener(listener)
+//    }
+//
+//    @ExperimentalPagingApi
+//    fun removeDataRefreshListener(listener: (isEmpty: Boolean) -> Unit) {
+//        differ.removeDataRefreshListener(listener)
+//    }
 }
 
 class PagingLoadStateAdapter : LoadStateAdapter<RecyclerView.ViewHolder>() {

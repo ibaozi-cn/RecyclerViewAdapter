@@ -39,9 +39,9 @@ class Paging3Activity : AppCompatActivity() {
         mPagingListAdapter.withLoadStateFooter(PagingLoadStateAdapter()).into(rv_paging_list)
 
         lifecycleScope.launch {
-            viewModel.pager.collect {
-                mPagingListAdapter.submitData(it)
-            }
+//            viewModel.pager.collect {
+//                mPagingListAdapter.submitData(it)
+//            }
         }
 
         mPagingListAdapter.addLoadStateListener { loadStates ->
