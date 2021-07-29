@@ -190,20 +190,6 @@ listAdapter {
 }
 ```
 
-#### 博客相关介绍
-
-- [RecyclerView Adapter系列之集成Lifecycle](https://www.jianshu.com/p/a8d7576ac34a)
-
-- [这可能是你见过的迄今为止最简单的RecyclerView Item加载动画](https://www.jianshu.com/p/f6f8a321bccb)
-
-- 最新 [后现代化RecyclerView Adapter稳定版本终于来了](https://juejin.im/post/6856283564649283597)
-
-- [重学RecyclerView Adapter封装的深度思考和实现](https://juejin.im/post/5f09cbdce51d45349d6c1384)
-
-- [一个全新的RecyclerView Adapter框架源码开源](https://juejin.im/post/5f001c6b5188252e703ab676)
-
-- [一个资深的Android是不是应该学会自己做一个超级的RecyclerView.Adapter](https://juejin.im/post/5ee640116fb9a047967349c7)
-
 ## 开发者
 
 * i校长
