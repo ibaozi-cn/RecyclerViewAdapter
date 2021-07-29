@@ -3,18 +3,17 @@
     package="com.julive.adapter_demo">
 
     <application
-        android:allowBackup="true"
+        android:name=".MyApp"
+        android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:name=".MyApp"
         android:theme="@style/AppTheme">
         <activity
             android:name=".video.VideoListActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
-            android:screenOrientation="portrait"
-            />
+            android:screenOrientation="fullSensor" />
         <activity android:name=".filter.FilterActivity" />
         <activity android:name=".empty.EmptyActivity" />
         <activity android:name=".expandable.ExpandableActivity" />
@@ -26,7 +25,9 @@
         <activity android:name=".sorted.SortedActivity" />
         <activity android:name=".anko.AnkoLayoutActivity" />
         <activity android:name=".core.ArrayListActivity" />
-        <activity android:name=".main.MainActivity">
+        <activity
+            android:name=".main.MainActivity"
+            android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
