@@ -9,7 +9,6 @@ include ':adapter-binding'
 include ':adapter-flex'
 include ':adapter-paging'
 include ':adapter-diff'
-include ':adapter-anko'
 include ':adapter-core'
 include ':app'
 rootProject.name = "JuliveAdapter"

@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.julive.adapter.core.into
 import com.julive.adapter.sorted.SortedListAdapter
 import com.julive.adapter_demo.R
+import com.julive.adapter_demo.main.setBtnText
 import kotlinx.android.synthetic.main.activity_array_list.*
 import kotlinx.android.synthetic.main.include_button_bottom.*
 import kotlin.random.Random
@@ -32,19 +33,19 @@ class SortedActivity : AppCompatActivity() {
             })
         }
         var index = 100
-        btn_left.setText("新增").setOnClickListener {
+        btn_left.setBtnText("新增").setOnClickListener {
             // 要想根据uniqueId更新数据，需要调用updateItem方法
             mSortedListAdapter.add(SortedItemViewModelTest().apply {
                 model = SortedModelTest(index++, "标题$index", "新增$index")
             })
         }
-        btn_middle.setText("删除").setOnClickListener {
+        btn_middle.setBtnText("删除").setOnClickListener {
             if (mSortedListAdapter.itemCount > 0) {
                 val randomInt = Random.nextInt(0, mSortedListAdapter.itemCount)
                 mSortedListAdapter.removeAt(randomInt)
             }
         }
-        btn_right.setText("替换").setOnClickListener {
+        btn_right.setBtnText("替换").setOnClickListener {
             // 根据uniqueId替换 如果sortId不一样就会触发排序
             if (mSortedListAdapter.itemCount > 0) {
                 val randomInt = Random.nextInt(0, mSortedListAdapter.itemCount)

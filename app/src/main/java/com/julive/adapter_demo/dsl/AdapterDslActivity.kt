@@ -14,7 +14,6 @@ class AdapterDslActivity : AppCompatActivity() {
         setContentView(R.layout.activity_adapter_dsl)
         listAdapter {
             addAll(createViewModelList(10))
-            addAll(createAnkoViewModelList(10))
             addAll(createBindingViewModelList(10))
             // 绑定 RecyclerView
             into(rv_list_dsl)

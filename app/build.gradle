@@ -8,7 +8,7 @@ android {
     buildToolsVersion build_tools_version
 
     defaultConfig {
-        applicationId "com.julive.adapter.demo"
+        applicationId "com.zzy.adapter.demo"
         minSdkVersion min_sdk_version
         targetSdkVersion target_sdk_version
         versionCode 1
@@ -54,15 +54,6 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
 
     implementation project(path: ':adapter')
-
-    // Anko Commons
-    implementation "org.jetbrains.anko:anko-commons:$anko_version"
-    // Anko Layouts
-    implementation "org.jetbrains.anko:anko-sdk25:$anko_version"
-    implementation "org.jetbrains.anko:anko-appcompat-v7:$anko_version"
-    // Coroutine listeners for Anko Layouts
-    implementation "org.jetbrains.anko:anko-sdk25-coroutines:$anko_version"
-    implementation "org.jetbrains.anko:anko-appcompat-v7-coroutines:$anko_version"
 
     implementation 'com.google.android.flexbox:flexbox:3.0.0'
     implementation 'androidx.cardview:cardview:1.0.0'

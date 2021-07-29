@@ -9,6 +9,7 @@ import com.julive.adapter.ui.EmptyAdapter
 import com.julive.adapter.ui.EmptyState
 import com.julive.adapter_demo.R
 import com.julive.adapter_demo.createViewModelList
+import com.julive.adapter_demo.main.setBtnText
 import kotlinx.android.synthetic.main.activity_empty.*
 import kotlinx.android.synthetic.main.include_button_bottom.*
 
@@ -24,16 +25,16 @@ class EmptyActivity : AppCompatActivity() {
         ).apply {
             into(rv_list_empty)
         }
-        btn_left.setText("空布局").setOnClickListener {
+        btn_left.setBtnText("空布局").setOnClickListener {
             emptyAdapter.emptyState = EmptyState.NotLoading
         }
-        btn_middle.setText("加载中").setOnClickListener {
+        btn_middle.setBtnText("加载中").setOnClickListener {
             emptyAdapter.emptyState = EmptyState.Loading
             Handler().postDelayed({
                 emptyAdapter.emptyState = EmptyState.Loaded
             },2000)
         }
-        btn_right.setText("加载失败").setOnClickListener {
+        btn_right.setBtnText("加载失败").setOnClickListener {
             emptyAdapter.emptyState = EmptyState.Error
         }
     }

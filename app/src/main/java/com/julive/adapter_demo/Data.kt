@@ -3,13 +3,9 @@ package com.julive.adapter_demo
 import android.widget.TextView
 import com.julive.adapter.animators.firstAnimation
 import com.julive.adapter.animators.updateAnimation
-import com.julive.adapter.anko.AnkoViewModel
-import com.julive.adapter.anko.ankoViewModelDsl
-import com.julive.adapter.anko.getAnkoView
 import com.julive.adapter.binding.BindingViewModel
 import com.julive.adapter.binding.bindingViewModelDsl
 import com.julive.adapter.core.*
-import com.julive.adapter_demo.anko.AnkoItemView
 import com.julive.adapter_demo.sorted.ModelTest
 import kotlin.random.Random
 
@@ -35,27 +31,6 @@ fun createViewModelList(max: Int = 10, subTitle: String = "subTitle") = (0..max)
         }
         onViewDetachedFromWindow {
 
-        }
-    }
-}
-
-fun createAnkoViewModelList(max: Int = 10) = (0..max).map { _ ->
-    //AnkoViewModel对象
-    ankoViewModelDsl(ModelTest("title", "ankoViewModelDsl"), { AnkoItemView() }) {
-        itemView.setOnClickListener {
-            val viewModel = getViewModel<AnkoViewModel<ModelTest, AnkoItemView>>()
-            viewModel?.model?.title = "点击更新${Random.nextInt(10000)}"
-            getAdapter<ListAdapter>()?.set(adapterPosition, viewModel)
-        }
-        onViewAttachedToWindow {
-            firstAnimation()
-        }
-        onBindViewHolder { _ ->
-            updateAnimation()
-            val model = getModel<ModelTest>()
-            val ankoView = getAnkoView<AnkoItemView>()
-            ankoView?.tvTitle?.text = model?.title
-            ankoView?.tvSubTitle?.text = model?.subTitle
         }
     }
 }

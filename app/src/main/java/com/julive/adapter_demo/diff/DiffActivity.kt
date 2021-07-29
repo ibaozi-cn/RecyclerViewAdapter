@@ -8,6 +8,7 @@ import com.julive.adapter.core.listAdapter
 import com.julive.adapter.diff.calculateDiff
 import com.julive.adapter_demo.R
 import com.julive.adapter_demo.createViewModelList
+import com.julive.adapter_demo.main.setBtnText
 import kotlinx.android.synthetic.main.activity_diff.*
 import kotlinx.android.synthetic.main.include_button_bottom.*
 
@@ -24,7 +25,7 @@ class DiffActivity : AppCompatActivity() {
         }
         btn_left.isVisible = false
         btn_middle.isVisible = false
-        btn_right.setText("更新").setOnClickListener {
+        btn_right.setBtnText("更新").setOnClickListener {
             val list = createViewModelList(3, "Diff更新")
             adapter.calculateDiff(list)
         }

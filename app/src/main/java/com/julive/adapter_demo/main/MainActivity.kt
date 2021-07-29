@@ -2,8 +2,8 @@ package com.julive.adapter_demo.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.widget.AppCompatButton
 import com.julive.adapter_demo.R
-import com.julive.adapter_demo.anko.AnkoLayoutActivity
 import com.julive.adapter_demo.binding.DataBindingActivity
 import com.julive.adapter_demo.core.ArrayListActivity
 import com.julive.adapter_demo.diff.DiffActivity
@@ -25,54 +25,55 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_main)
 
-        btn_anko.setText("AnkoLayoutActivity").setOnClickListener {
-            startActivity<AnkoLayoutActivity>()
-        }
-
-        btn_array.setText("ArrayListActivity").setOnClickListener {
+        btn_array.setBtnText("ArrayListActivity").setOnClickListener {
             startActivity<ArrayListActivity>()
         }
 
-        btn_sorted.setText("SortedActivity").setOnClickListener {
+        btn_sorted.setBtnText("SortedActivity").setOnClickListener {
             startActivity<SortedActivity>()
         }
 
-        btn_paging.setText("Paging3Activity").setOnClickListener {
+        btn_paging.setBtnText("Paging3Activity").setOnClickListener {
             startActivity<Paging3Activity>()
         }
 
-        btn_dsl.setText("AdapterDslActivity").setOnClickListener {
+        btn_dsl.setBtnText("AdapterDslActivity").setOnClickListener {
             startActivity<AdapterDslActivity>()
         }
 
-        btn_diff.setText("DiffActivity").setOnClickListener {
+        btn_diff.setBtnText("DiffActivity").setOnClickListener {
             startActivity<DiffActivity>()
         }
 
-        btn_binding.setText("DataBindingActivity").setOnClickListener {
+        btn_binding.setBtnText("DataBindingActivity").setOnClickListener {
             startActivity<DataBindingActivity>()
         }
 
-        btn_selectable.setText("SelectableActivity").setOnClickListener {
+        btn_selectable.setBtnText("SelectableActivity").setOnClickListener {
             startActivity<SelectableActivity>()
         }
 
-        btn_expandable.setText("ExpandableActivity").setOnClickListener {
+        btn_expandable.setBtnText("ExpandableActivity").setOnClickListener {
             startActivity<ExpandableActivity>()
         }
 
-        btn_empty.setText("EmptyActivity").setOnClickListener {
+        btn_empty.setBtnText("EmptyActivity").setOnClickListener {
             startActivity<EmptyActivity>()
         }
 
-        btn_filter.setText("FilterActivity").setOnClickListener {
+        btn_filter.setBtnText("FilterActivity").setOnClickListener {
             startActivity<FilterActivity>()
         }
 
-        btn_video.setText("VideoActivity").setOnClickListener {
+        btn_video.setBtnText("VideoActivity").setOnClickListener {
             startActivity<VideoListActivity>()
         }
 
     }
 
+}
+
+fun AppCompatButton.setBtnText(content: String): AppCompatButton {
+    text = content
+    return this
 }

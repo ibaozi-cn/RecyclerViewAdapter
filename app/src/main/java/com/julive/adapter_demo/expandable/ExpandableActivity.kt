@@ -8,6 +8,7 @@ import com.julive.adapter.animators.firstAnimation
 import com.julive.adapter.core.*
 import com.julive.adapter.expandable.*
 import com.julive.adapter_demo.R
+import com.julive.adapter_demo.main.setBtnText
 import com.julive.adapter_demo.sorted.ModelTest
 import kotlinx.android.synthetic.main.activity_expandable.*
 import kotlinx.android.synthetic.main.include_button_bottom.*
@@ -41,7 +42,7 @@ class ExpandableActivity : AppCompatActivity() {
         supportActionBar?.title = "ListAdapter"
         setContentView(R.layout.activity_expandable)
         mListAdapter.into(rv_list_expandable)
-        btn_left.setText("切换单开").setOnClickListener {
+        btn_left.setBtnText("切换单开").setOnClickListener {
             if (!mListAdapter.isMultiExpand) {
                 btn_left.setText("切换单开")
             } else {

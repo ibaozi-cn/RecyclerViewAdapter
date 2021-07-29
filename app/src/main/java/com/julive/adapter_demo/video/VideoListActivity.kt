@@ -8,7 +8,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.*
 import com.julive.adapter.animators.findFirstCompletelyVisibleItemPosition
@@ -18,11 +17,8 @@ import com.julive.adapter_demo.R
 import com.julive.adapter_demo.sorted.ModelVideoTest
 import com.shuyu.gsyvideoplayer.GSYVideoManager
 import com.shuyu.gsyvideoplayer.builder.GSYVideoOptionBuilder
-import com.shuyu.gsyvideoplayer.listener.GSYSampleCallBack
 import com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer
 import kotlinx.android.synthetic.main.activity_video_list.*
-import kotlinx.android.synthetic.main.item_test_video_view.view.*
-import org.jetbrains.anko.backgroundColorResource
 
 
 class VideoListActivity : AppCompatActivity() {
@@ -88,7 +84,7 @@ class VideoListActivity : AppCompatActivity() {
                                         model?.seekOnStart = currentPosition.toLong()
                                     }
                                     setThumbImageView(ImageView(itemView.context).apply {
-                                        backgroundColorResource = R.color.colorAccent
+//                                        backgroundColorResource = R.color.colorAccent
                                         layoutParams = player.layoutParams
                                     })
 

@@ -10,57 +10,57 @@
     app:showDivider="beginning|middle"
     tools:context=".main.MainActivity">
 
-    <com.julive.adapter_demo.ext.CardButtonView
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_anko"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <com.julive.adapter_demo.ext.CardButtonView
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_array"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <com.julive.adapter_demo.ext.CardButtonView
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_sorted"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <com.julive.adapter_demo.ext.CardButtonView
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_paging"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <com.julive.adapter_demo.ext.CardButtonView
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_dsl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <com.julive.adapter_demo.ext.CardButtonView
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_diff"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
-    <com.julive.adapter_demo.ext.CardButtonView
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_binding"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <com.julive.adapter_demo.ext.CardButtonView
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_selectable"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
-    <com.julive.adapter_demo.ext.CardButtonView
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_expandable"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
-    <com.julive.adapter_demo.ext.CardButtonView
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_empty"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
-    <com.julive.adapter_demo.ext.CardButtonView
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_filter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
-    <com.julive.adapter_demo.ext.CardButtonView
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_video"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
