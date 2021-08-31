@@ -27,7 +27,7 @@
         <activity android:name=".core.ArrayListActivity" />
         <activity
             android:name=".main.MainActivity"
-            android:exported="false">
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

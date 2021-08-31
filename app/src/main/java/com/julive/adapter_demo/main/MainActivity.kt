@@ -10,6 +10,7 @@ import com.julive.adapter_demo.diff.DiffActivity
 import com.julive.adapter_demo.dsl.AdapterDslActivity
 import com.julive.adapter_demo.empty.EmptyActivity
 import com.julive.adapter_demo.expandable.ExpandableActivity
+import com.julive.adapter_demo.ext.launchActivity
 import com.julive.adapter_demo.ext.startActivity
 import com.julive.adapter_demo.filter.FilterActivity
 import com.julive.adapter_demo.paging.Paging3Activity
@@ -26,7 +27,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         btn_array.setBtnText("ArrayListActivity").setOnClickListener {
-            startActivity<ArrayListActivity>()
+            launchActivity<ArrayListActivity> {
+
+            }
         }
 
         btn_sorted.setBtnText("SortedActivity").setOnClickListener {
