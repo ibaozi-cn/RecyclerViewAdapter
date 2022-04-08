@@ -4,18 +4,6 @@ It has been written **100% in Kotlin**. ❤️
 
 设计图
 
-<p align="center"><img src="http://file.ibaozi.cn/ftp/adapter.png" alt="1600" width="100%"/></p>
-
-实现图
-
-**Adapter抽象及实现**
-<p align="center"><img src="http://file.ibaozi.cn/ftp/adapter_ext.png" alt="1600" width="100%"/></p>
-
-**ViewModel抽象及实现**
-<p align="center"><img src="http://file.ibaozi.cn/ftp/vm_ext.png" alt="1600" width="100%"/></p>
-
-**RecyclerView动态扩展实现**
-<p align="center"><img src="http://file.ibaozi.cn/ftp/rx_ext.png" alt="1600" width="100%"/></p>
 
 ## 特点
 
