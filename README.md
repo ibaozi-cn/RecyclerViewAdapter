@@ -32,7 +32,6 @@ It has been written **100% in Kotlin**. ❤️
 |  名字   | release aar size  | 其他 |
 |  ----  | ----  | ----  | 
 | Core | 32kb | 核心库目前包含ListAdapter的实现，最基础且最实用的扩展 |
-| Anko | 13kb | 适用本项目所有Adapter扩展 |
 | DataBinding | 22kb | 适配DataBinding布局，适用本项目所有Adapter扩展 |
 | Sorted | 10kb | SortedListAdapter扩展实现 |
 | Paging | 13kb | PagingListAdapter扩展适配 |
@@ -58,14 +57,12 @@ It has been written **100% in Kotlin**. ❤️
 |  名字   | ListAdapter | SortedListAdapter | PagingListAdapter | 
 |  ----  | ----  | ----  | ----  | 
 |  LayoutViewModel  | 支持  | 支持  | 支持  | 
-|  AnkoViewModel  | 支持  | 支持  | 支持  | 
 |  BindingViewModel  | 支持  | 支持  | 支持  | 
 
 如何选择
 |  名字   | 功能 | 优势 | 其他 | 
 |  ----  | ----  | ----  | ----  | 
 |  LayoutViewModel  | 加载XML布局  | 灵活，易懂，易用 |  | 
-|  AnkoViewModel  | 加载Anko Layout  | 免去XML加载，布局加载效率提升明显 | 目前官方不维护，需要自己扩展 | 
 |  BindingViewModel  | 加载DataBinding布局  | 省去绑定View的过程，代码逻辑简洁 |  | 
 
 ## 如何依赖？
@@ -91,8 +88,6 @@ implementation "com.github.ibaozi-cn.RecyclerViewAdapter:adapter-core:$adapterVe
 
 //下面都是可选项
 
-//anko layout 扩展
-implementation "com.github.ibaozi-cn.RecyclerViewAdapter:adapter-anko:$adapterVersion"
 //diffutil 扩展
 implementation "com.github.ibaozi-cn.RecyclerViewAdapter:adapter-diff:$adapterVersion"
 //data binding扩展
@@ -145,26 +140,6 @@ fun createViewModelList(max: Int = 10) = (0..max).map { _ ->
         }
     }
 }
-//anko layout布局加载示例
-fun createAnkoViewModelList(max: Int = 10) = (0..max).map { _ ->
-    //AnkoViewModel对象
-    ankoViewModelDsl(
-        ModelTest("title", "ankoViewModelDsl"),
-        { AnkoItemView() }
-    ) {
-        onBindViewHolder { _ ->
-            val model = getModel<ModelTest>()
-            val ankoView = getAnkoView<AnkoItemView>()
-            ankoView?.tvTitle?.text = model?.title
-            ankoView?.tvSubTitle?.text = model?.subTitle
-        }
-        itemView.setOnClickListener {
-            val viewModel = getViewModel<AnkoViewModel<ModelTest, AnkoItemView>>()
-            viewModel?.model?.title = "点击更新${Random.nextInt(10000)}"
-            getAdapter<ListAdapter>()?.set(adapterPosition, viewModel)
-        }
-    }
-}
 //binding layout布局加载示例
 fun createBindingViewModelList(max: Int = 10) = (0..max).map {
     bindingViewModelDsl(
@@ -183,7 +158,6 @@ fun createBindingViewModelList(max: Int = 10) = (0..max).map {
 //添加到Adapter中，并绑定RecyclerView
 listAdapter {
    addAll(createViewModelList(3))
-   addAll(createAnkoViewModelList(3))
    addAll(createBindingViewModelList(3))
    // 绑定 RecyclerView
    into(rv_list_dsl)
