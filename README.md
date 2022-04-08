@@ -4,7 +4,7 @@ It has been written **100% in Kotlin**. ❤️
 
 设计图
 
-![adapter.png](https://github.com/ibaozi-cn/RecyclerViewAdapter/blob/dev/png/Adapter.jpeg)
+![Adapter.jpeg](https://cdn.nlark.com/yuque/0/2022/jpeg/1075890/1649434198433-6a3447d9-e7c4-4cf2-be4c-03217bf10ca3.jpeg#clientId=uf7b58c5d-f693-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=674&id=u4109f36c&margin=%5Bobject%20Object%5D&name=Adapter.jpeg&originHeight=1348&originWidth=2175&originalType=binary&ratio=1&rotation=0&showTitle=false&size=135927&status=done&style=none&taskId=ub91bafee-071a-48e8-a14b-4acb3b66541&title=&width=1087.5)
 
 ## 特点
 
