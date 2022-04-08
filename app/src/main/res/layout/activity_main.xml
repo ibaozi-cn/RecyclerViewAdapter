@@ -11,11 +11,6 @@
     tools:context=".main.MainActivity">
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_anko"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_array"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
