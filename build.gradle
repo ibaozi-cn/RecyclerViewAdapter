@@ -2,11 +2,10 @@
 buildscript {
 
     ext.kotlin_version = "1.5.21"
-    ext.anko_version='0.10.8'
-    ext.compile_sdk_ersion=30
+    ext.compile_sdk_ersion=31
     ext.build_tools_version='30.0.0'
     ext.min_sdk_version=19
-    ext.target_sdk_version=30
+    ext.target_sdk_version=31
     ext.paging_version = "3.0.0"
     ext.activity_version = "1.2.3"
     ext.recyclerview_version = "1.2.1"
