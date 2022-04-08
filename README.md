@@ -4,6 +4,7 @@ It has been written **100% in Kotlin**. ❤️
 
 设计图
 
+![adapter.png](https://github.com/ibaozi-cn/RecyclerViewAdapter/blob/dev/png/Adapter.jpeg)
 
 ## 特点
 
