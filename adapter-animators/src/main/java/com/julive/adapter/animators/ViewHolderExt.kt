@@ -82,7 +82,7 @@ fun DefaultViewHolder.firstAnimation(
     val lastDelayAnimationPosition = getRecyclerView()?.getTag(R.id.last_delay_animation_position)
     lastDelayAnimationPosition?.let {
         it as Int
-        if (adapterPosition <= it) {
+        if (bindingAdapterPosition <= it) {
             isEnableAnimation = false
         }
     }

@@ -60,7 +60,6 @@ class VideoListActivity : AppCompatActivity() {
                         val player = getView<StandardGSYVideoPlayer>(R.id.player)
                         val title = getView<TextView>(R.id.tv_title)
                         val subTitle = getView<TextView>(R.id.tv_subTitle)
-
                         player.fullscreenButton.setOnClickListener {
                             player.startWindowFullscreen(itemView.context, false, true)
                         }
