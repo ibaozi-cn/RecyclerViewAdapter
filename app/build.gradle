@@ -49,9 +49,9 @@ dependencies {
 
     implementation fileTree(dir: "libs", include: ["*.jar", '*.aar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.core:core-ktx:1.5.0'
     implementation 'androidx.appcompat:appcompat:1.4.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 
     implementation project(path: ':adapter')
 
@@ -59,17 +59,21 @@ dependencies {
     implementation 'androidx.cardview:cardview:1.0.0'
 
     implementation "androidx.recyclerview:recyclerview:$recyclerview_version"
-    implementation "androidx.paging:paging-runtime-ktx:$paging_version"
-    //完整版引入
-    implementation 'com.github.CarGuo.GSYVideoPlayer:GSYVideoPlayer:v8.1.9-release-jitpack'
+    implementation "androidx.paging:paging-runtime:$paging_version"
 
+    // ktx
+    implementation 'androidx.core:core-ktx:1.7.0'
     // ViewModel ktx
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
     // activity ktx
-    implementation "androidx.activity:activity-ktx:$activity_version"
+    implementation "androidx.activity:activity-ktx:$activity_ktx_version"
+    // paging ktx
+    implementation "androidx.paging:paging-runtime-ktx:$paging_version"
 
     def multidex_version = "2.0.1"
     implementation "androidx.multidex:multidex:$multidex_version"
 
-    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
+    //完整版引入
+    implementation 'com.github.CarGuo.GSYVideoPlayer:GSYVideoPlayer:v8.1.9-release-jitpack'
+
 }

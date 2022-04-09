@@ -28,6 +28,7 @@ android {
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation project(path: ':adapter-core')
+    implementation "androidx.paging:paging-runtime:$paging_version"
     implementation "androidx.paging:paging-runtime-ktx:$paging_version"
     implementation "androidx.recyclerview:recyclerview:$recyclerview_version"
 }
