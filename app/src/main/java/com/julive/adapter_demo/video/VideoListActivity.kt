@@ -19,15 +19,26 @@ import com.shuyu.gsyvideoplayer.GSYVideoManager
 import com.shuyu.gsyvideoplayer.builder.GSYVideoOptionBuilder
 import com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer
 import kotlinx.android.synthetic.main.activity_video_list.*
+import kotlin.random.Random
 
 
 class VideoListActivity : AppCompatActivity() {
 
-    private val mp4_a = "http://vfx.mtime.cn/Video/2019/03/19/mp4/190319212559089721.mp4";
-    private val mp4_b = "http://vfx.mtime.cn/Video/2019/03/13/mp4/190313094901111138.mp4";
+
+    private val mp4Array = arrayListOf(
+        "http://vjs.zencdn.net/v/oceans.mp4",
+        "http://vfx.mtime.cn/Video/2019/03/19/mp4/190319222227698228.mp4",
+        "http://vfx.mtime.cn/Video/2019/03/21/mp4/190321153853126488.mp4",
+        "http://vfx.mtime.cn/Video/2019/03/19/mp4/190319212559089721.mp4",
+        "http://vfx.mtime.cn/Video/2019/03/18/mp4/190318231014076505.mp4",
+        "http://vfx.mtime.cn/Video/2019/03/18/mp4/190318214226685784.mp4",
+        "http://vfx.mtime.cn/Video/2019/03/19/mp4/190319104618910544.mp4",
+        "http://vfx.mtime.cn/Video/2019/03/19/mp4/190319125415785691.mp4",
+        "http://vfx.mtime.cn/Video/2019/03/17/mp4/190317150237409904.mp4",
+        "http://vfx.mtime.cn/Video/2019/03/14/mp4/190314223540373995.mp4"
+    )
 
     private val gsyVideoOptionBuilder = GSYVideoOptionBuilder().apply {
-
         setIsTouchWiget(false)
         setVideoTitle("title")
         setCacheWithPlay(true)
@@ -35,7 +46,6 @@ class VideoListActivity : AppCompatActivity() {
         setLockLand(false)
         setShowFullAnimation(true)
         setReleaseWhenLossAudio(false)
-
     }
 
     @SuppressLint("NewApi")
@@ -43,12 +53,10 @@ class VideoListActivity : AppCompatActivity() {
         listAdapter {
             (0..100).forEach { _ ->
                 add(
-
                     layoutViewModelDsl(
                         R.layout.item_test_video_view,
-                        ModelVideoTest(mp4_b, mp4_a, -1)
+                        ModelVideoTest(mp4Array[Random.nextInt(mp4Array.size)], -1)
                     ) {
-
                         val player = getView<StandardGSYVideoPlayer>(R.id.player)
                         val title = getView<TextView>(R.id.tv_title)
                         val subTitle = getView<TextView>(R.id.tv_subTitle)
@@ -56,28 +64,17 @@ class VideoListActivity : AppCompatActivity() {
                         player.fullscreenButton.setOnClickListener {
                             player.startWindowFullscreen(itemView.context, false, true)
                         }
-
                         player.isAutoFullWithSize = true
-
                         onViewAttachedToWindow {
                             firstAnimation()
                         }
-
                         onBindViewHolder {
-
                             val model = getModel<ModelVideoTest>()
-
                             if (it.isEmpty()) {
-
                                 title.text = "title$adapterPosition"
                                 subTitle.text = "sutTitle"
-
                                 gsyVideoOptionBuilder.apply {
-                                    if (adapterPosition % 2 == 0) {
-                                        setUrl(model?.url)
-                                    } else {
-                                        setUrl(model?.url2)
-                                    }
+                                    setUrl(model?.url)
                                     setPlayPosition(adapterPosition)
                                     setPlayTag(adapterPosition.toString())
                                     setGSYVideoProgressListener { progress, secProgress, currentPosition, duration ->
@@ -89,9 +86,7 @@ class VideoListActivity : AppCompatActivity() {
                                     })
 
                                 }.build(player)
-
                             }
-
                             it.takeIf {
                                 it.isNotEmpty() && it[0] == 1
                             }?.also {

@@ -22,7 +22,7 @@ data class ModelTest(var title: String, var subTitle: String) : SameModel {
     override var uniqueId: String = title
 }
 
-data class ModelVideoTest(val url:String,val url2:String,var seekOnStart:Long)
+data class ModelVideoTest(val url:String,var seekOnStart:Long)
 
 /**
  * sortedId 排序用
