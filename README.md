@@ -1,3 +1,5 @@
+[![](https://jitpack.io/v/ibaozi-cn/RecyclerViewAdapter.svg)](https://jitpack.io/#ibaozi-cn/RecyclerViewAdapter)
+
 ## RecyclerViewAdapter
 It has been written **100% in Kotlin**. ❤️
 重新定义RecyclerView Adapter的封装，追求既简单又实用，结合Kotlin的高级特性，优化代码书写方式，真正做到高内聚低耦合
@@ -67,10 +69,10 @@ allprojects {
 }
 
 //一次性依赖，会自动引入全部AAR
-implementation 'com.github.ibaozi-cn.RecyclerViewAdapter:adapter:v1.2.3'
+implementation 'com.github.ibaozi-cn.RecyclerViewAdapter:1.2.5'
 
 //以下为分包依赖
-def adapterVersion = '1.2.4'
+def adapterVersion = '1.2.5'
 
 //核心库
 implementation "com.github.ibaozi-cn.RecyclerViewAdapter:adapter-core:$adapterVersion"
