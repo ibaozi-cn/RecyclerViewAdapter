@@ -10,8 +10,8 @@ buildscript {
     ext.activity_ktx_version = "1.4.0"
     ext.recyclerview_version = "1.2.1"
     // library config
-    ext.adapter_version = "1.2.4"
-    ext.adapter_version_code = 14
+    ext.adapter_version = "1.2.5"
+    ext.adapter_version_code = 15
 
     repositories {
         maven { url 'https://maven.aliyun.com/repository/public' }
